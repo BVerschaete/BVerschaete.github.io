@@ -20,6 +20,7 @@ function makeAnimation(){
     var health = new createjs.Shape();
     health.graphics.beginFill("Green").drawRect(0, 20, 100, 10);
     var monster = new createjs.Bitmap('./img/monsterSprite.png');
+    var test;
     monster.x = 0;
     monster.y = 50;
     stage.addChild(monster);
