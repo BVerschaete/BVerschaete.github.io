@@ -9,6 +9,9 @@ var disqus_config = function () {
 
 function setup() {
     makeAnimation();
+    var canvas = $("#demoCanvas")[0];
+    canvas.width = window.innerWidth;
+    canvas.height = 800;
     useDisqus();
 }
 
@@ -24,11 +27,11 @@ function makeAnimation(){
     createjs.Tween.get(monster, {loop: true})
         .to({x: 400}, 1000)
         .to({y: 450}, 1250)
-        .to({x: 0}, 1000);
+        .to({alpha: 0, x: 800}, 1000);
     createjs.Tween.get(health, {loop: true})
         .to({x: 400}, 1000)
         .to({y: 400}, 1250)
-        .to({x: 0}, 1000);
+        .to({alpha: 0, x: 800}, 1000);
     createjs.Ticker.setFPS(60);
     createjs.Ticker.addEventListener("tick", stage);
 }
