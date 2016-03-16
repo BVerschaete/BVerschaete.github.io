@@ -8,11 +8,8 @@ var disqus_config = function () {
 };
 
 function setup() {
-    makeAnimation();
-    var canvas = $("#demoCanvas")[0];
-    canvas.width = window.innerWidth;
-    canvas.height = 800;
-    useDisqus();
+    drawGrid();
+    //useDisqus();
     console.log(board);
     document.getElementById("moveIets").addEventListener("click", displayMove);
 }
@@ -35,25 +32,38 @@ var displayMove = function(){
     move();
 };
 
-function makeAnimation(){
-    var stage = new createjs.Stage("demoCanvas");
-    var health = new createjs.Shape();
-    health.graphics.beginFill("Green").drawRect(0, 20, 100, 10);
-    var monster = new createjs.Bitmap('./img/sonic.gif');
-    monster.x = 0;
-    monster.y = 50;
-    stage.addChild(monster);
-    stage.addChild(health);
-    createjs.Tween.get(monster, {loop: true})
-        .to({x: 400}, 1000)
-        .to({y: 450}, 1250)
-        .to({alpha: 0, x: 800}, 1000);
-    createjs.Tween.get(health, {loop: true})
-        .to({x: 400}, 1000)
-        .to({y: 400}, 1250)
-        .to({alpha: 0, x: 800}, 1000);
-    createjs.Ticker.setFPS(60);
-    createjs.Ticker.addEventListener("tick", stage);
+function drawGrid(){
+    //grid width and height
+    var bw = 400;
+    var bh = 400;
+    //padding around grid
+    var p = 10;
+    //size of canvas
+    var cw = bw + (p*2) + 1;
+    var ch = bh + (p*2) + 1;
+
+    var canvas = $('<canvas/>').attr({width: cw, height: ch}).appendTo('body');
+
+    var context = canvas.get(0).getContext("2d");
+
+    function drawBoard(){
+        for (var x = 0; x <= bw; x += 40) {
+            context.moveTo(0.5 + x + p, p);
+            context.lineTo(0.5 + x + p, bh + p);
+        }
+
+
+        for (var x = 0; x <= bh; x += 40) {
+            context.moveTo(p, 0.5 + x + p);
+            context.lineTo(bw + p, 0.5 + x + p);
+        }
+
+        context.strokeStyle = "black";
+        context.stroke();
+    }
+
+    drawBoard();
+
 }
 
 function useDisqus() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW

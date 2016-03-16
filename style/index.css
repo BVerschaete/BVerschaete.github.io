@@ -1,3 +1,8 @@
 body {
-    background-color: gray !important;
+    background: lightblue !important;
+}
+
+canvas {
+    background: #fff;
+    margin: 20px;
 }
