@@ -53,7 +53,7 @@ function drawGrid(){
         }
 
 
-        for (var x = 0; x <= bh; x += 40) {
+        for (x = 0; x <= bh; x += 40) {
             context.moveTo(p, 0.5 + x + p);
             context.lineTo(bw + p, 0.5 + x + p);
         }
@@ -62,7 +62,17 @@ function drawGrid(){
         context.stroke();
     }
 
+    function fillBoard(){
+        context.font = "20px serif";
+        for(var i = 0; i < board.length; i++){
+            for(var j = 0; j < board[i].length; j++){
+                context.fillText(board[i][j], 27 + j*40, 35 + i*40);
+            }
+        }
+    }
+
     drawBoard();
+    fillBoard();
 
 }
 
