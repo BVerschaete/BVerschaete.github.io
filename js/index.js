@@ -2,11 +2,6 @@
  * Created by Bastien on 3/12/2015.
  */
 
-var disqus_config = function () {
-    this.page.url = "http://bverschaete.github.io/";  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = ""; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-
 function setup() {
     drawGrid();
     //useDisqus();
@@ -100,6 +95,12 @@ function getRotation(row, column){
         return 90;
     }
 }
+
+var disqus_config = function () {
+    this.page.url = "http://bverschaete.github.io/";  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = ""; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
 function useDisqus() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
     var d = document, s = d.createElement('script');
 
