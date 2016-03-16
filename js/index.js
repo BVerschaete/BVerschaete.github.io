@@ -13,7 +13,27 @@ function setup() {
     canvas.width = window.innerWidth;
     canvas.height = 800;
     useDisqus();
+    console.log(board);
+    document.getElementById("moveIets").addEventListener("click", displayMove);
 }
+
+var displayMove = function(){
+    document.getElementById("outputMove").innerHTML = "";
+
+    for(var i = 0; i < board.length; i++) {
+        var s = "";
+        for (var j = 0; j < board[i].length; j++) {
+            if(posY == i && posX == j){
+                s += "X\t";
+            }else{
+                s += board[i][j] + "\t";
+            }
+        }
+        document.getElementById("outputMove").innerHTML += s + "<br />";
+    }
+
+    move();
+};
 
 function makeAnimation(){
     var stage = new createjs.Stage("demoCanvas");
