@@ -85,7 +85,6 @@ function drawGrid(){
     };
 
     drawBoard();
-
 }
 
 var disqus_config = function () {
