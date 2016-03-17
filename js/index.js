@@ -88,14 +88,6 @@ function drawGrid(){
 
 }
 
-function getRotation(row, column){
-    if((row == 0 && board[row+1][column] == 1) || (row == board.length && board[row-1][column] == 1)){
-        return 90;
-    } else if(board[row-1][column] == 1 && board[row+1][column] == 1){
-        return 90;
-    }
-}
-
 var disqus_config = function () {
     this.page.url = "http://bverschaete.github.io/";  // Replace PAGE_URL with your page's canonical URL variable
     this.page.identifier = ""; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
@@ -108,6 +100,19 @@ function useDisqus() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME B
 
     s.setAttribute('data-timestamp', +new Date());
     (d.head || d.body).appendChild(s);
+}
+
+//vanaf hier code voor game
+function startGame(){
+    $("#createAttacker")[0].addEventListener('click', createAttacker);
+}
+
+function createAttacker(){
+    addAttacker("Bob");
+    var attackerDisplay = $('<div></div>').append([ $('<p></p>').text(attackers[attackers.length - 1].naam),
+                                                    $('<span></span>').text(attackers[attackers.length - 1].life)]
+                                                );
+    $("#demo").append(attackerDisplay)
 }
 
 

@@ -22,3 +22,7 @@ function checkDead(){
 function addEnemy(){
     attackers.push(new Attacker("Bob"));
 }
+
+function addAttacker(name){
+    attackers.push(new Attacker(name));
+}
