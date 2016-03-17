@@ -10,7 +10,6 @@ var disqus_config = function () {
 function setup() {
     drawGrid();
     //useDisqus();
-    console.log(board);
     document.getElementById("moveIets").addEventListener("click", displayMove);
 }
 
@@ -62,24 +61,45 @@ function drawGrid(){
         context.stroke();
     }
 
-    function fillBoard(){
+    var path = new Image();
+    path.src = "img/grasstile.png";
+    path.onload = function (){
         for(var i = 0; i < board.length; i++){
             for(var j = 0; j < board[i].length; j++){
-                if(board[i][j] == 1){
-                    context.fillStyle = "red";
+                if(board[i][j] == 1) {
+                    context.drawImage(path, 11 + j * 40, 11 + i * 40, 40, 40);
                 } else {
-                    context.fillStyle = "green";
+
                 }
-                context.fillRect(11 + i*40, 11 + j*40, 39, 39)
             }
         }
-    }
+    };
+
+    var build = new Image();
+    build.src = "img/background.png";
+    build.onload = function (){
+        for(var i = 0; i < board.length; i++){
+            for(var j = 0; j < board[i].length; j++){
+                if(board[i][j] == 0) {
+                    context.drawImage(build, 11 + j * 40, 11 + i * 40, 40, 40);
+                } else {
+
+                }
+            }
+        }
+    };
 
     drawBoard();
-    fillBoard();
 
 }
 
+function getRotation(row, column){
+    if((row == 0 && board[row+1][column] == 1) || (row == board.length && board[row-1][column] == 1)){
+        return 90;
+    } else if(board[row-1][column] == 1 && board[row+1][column] == 1){
+        return 90;
+    }
+}
 function useDisqus() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
     var d = document, s = d.createElement('script');
 

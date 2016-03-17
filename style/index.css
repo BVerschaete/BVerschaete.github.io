@@ -6,3 +6,12 @@ canvas {
     background: #fff;
     margin: 20px;
 }
+
+.nav > li > a:hover{
+    box-shadow: inset 0 0 0 5px #718991;
+}
+
+.nav > li > a{
+    transition: all 0.3s ease-in-out 0s;
+    width: 100%;
+}
