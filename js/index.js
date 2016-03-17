@@ -63,10 +63,14 @@ function drawGrid(){
     }
 
     function fillBoard(){
-        context.font = "20px serif";
         for(var i = 0; i < board.length; i++){
             for(var j = 0; j < board[i].length; j++){
-                context.fillText(board[i][j], 27 + j*40, 35 + i*40);
+                if(board[i][j] == 1){
+                    context.fillStyle = "red";
+                } else {
+                    context.fillStyle = "green";
+                }
+                context.fillRect(11 + i*40, 11 + j*40, 39, 39)
             }
         }
     }
