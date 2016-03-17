@@ -1,11 +1,17 @@
 /**
  * Created by Bastien on 3/12/2015.
  */
-
 function setup() {
     drawGrid();
     //useDisqus();
     document.getElementById("moveIets").addEventListener("click", displayMove);
+    window.addEventListener('mousemove', getMousePosition, false);
+    setInterval(gameLoop, 1000/60);
+}
+
+function gameLoop(){
+    drawGrid();
+    drawRadius();
 }
 
 var displayMove = function(){
@@ -35,12 +41,17 @@ function drawGrid(){
     //size of canvas
     var cw = bw + (p*2) + 1;
     var ch = bh + (p*2) + 1;
+    var canvas;
 
-    var canvas = $('<canvas/>').attr({width: cw, height: ch}).appendTo('body');
+    if(document.getElementById("canvas") === null){
+        canvas = $('<canvas/>').attr({width: cw, height: ch, id: 'canvas'}).appendTo('body');
+    }
+    canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+    context.fillStyle = 'white';
+    context.fillRect(0,0,canvas.width, canvas.height);
 
-    var context = canvas.get(0).getContext("2d");
-
-    function drawBoard(){
+    /*function drawBoard(){
         for (var x = 0; x <= bw; x += 40) {
             context.moveTo(0.5 + x + p, p);
             context.lineTo(0.5 + x + p, bh + p);
@@ -84,7 +95,7 @@ function drawGrid(){
         }
     };
 
-    drawBoard();
+    drawBoard();*/
 }
 
 var disqus_config = function () {
