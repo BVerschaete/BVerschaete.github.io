@@ -10,50 +10,24 @@ function setup() {
     addCanvas();
     //useDisqus();
     game = {
-        oldNow: Date.now(),
         canvas: document.getElementById("canvas"),
-        context: canvas.getContext("2d"),
+        context: this.canvas.getContext("2d")
     };
-    drawGrid();
-
-    document.getElementById("moveAttacker").addEventListener("click", moveAttacker);
+    
     game.canvas.addEventListener('mouseover', toggleMouseInCanvas, false);
     game.canvas.addEventListener('mouseout', toggleMouseInCanvas, false);
     game.canvas.addEventListener('mousemove', getMousePosition, false);
 
+    var loop = setInterval(addAttacker, 3000);
+    var aantalMonsters = 10;
+    setTimeout(function( ) { clearInterval(loop); }, aantalMonsters * 3000);
+
     gameLoop();
+    //drawGrid(); //toont lijnen voor visualisatie
 }
 
 function addCanvas(){
     var canvas = $('<canvas/>').attr({width: bw, height: bh, id: 'canvas'}).appendTo('body');
-}
-
-function moveAttacker(){
-    move(attacker);
-}
-
-function displayMove(){
-    document.getElementById("outputMove").innerHTML = "";
-
-    for(var i = 0; i < board.length; i++) {
-        var s = "";
-        for (var j = 0; j < board[i].length; j++) {
-            if(posY == i && posX == j){
-                s += "X\t";
-            }else{
-                s += board[i][j] + "\t";
-            }
-        }
-        document.getElementById("outputMove").innerHTML += s + "<br />";
-    }
-
-    move();
-}
-
-function drawAttackers(){
-    var sprite = new Image();
-    sprite.src = "img/" + attacker.image;
-    game.context.drawImage(sprite, attacker.locX, attacker.locY, 40, 40);
 }
 
 function drawMap(){
@@ -99,6 +73,7 @@ function drawGrid(){
     game.context.stroke();
 }
 
+//alles voor disqus staat hier
 var disqus_config = function () {
     this.page.url = "http://bverschaete.github.io/";  // Replace PAGE_URL with your page's canonical URL variable
     this.page.identifier = ""; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
@@ -112,19 +87,5 @@ function useDisqus() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME B
     s.setAttribute('data-timestamp', +new Date());
     (d.head || d.body).appendChild(s);
 }
-
-//vanaf hier code voor game
-function startGame(){
-    $("#createAttacker")[0].addEventListener('click', createAttacker);
-}
-
-function createAttacker(){
-    addAttacker("Bob");
-    var attackerDisplay = $('<div></div>').append([ $('<p></p>').text(attackers[attackers.length - 1].naam),
-                                                    $('<span></span>').text(attackers[attackers.length - 1].life)]
-                                                );
-    $("#demo").append(attackerDisplay)
-}
-
 
 window.addEventListener("load", setup);

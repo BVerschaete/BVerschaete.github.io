@@ -37,9 +37,5 @@ function drawRadius(){
 }
 
 function toggleMouseInCanvas(){
-    if(!mouseInCanvas){
-        mouseInCanvas = true;
-    }else{
-        mouseInCanvas = false;
-    }
+    mouseInCanvas = !mouseInCanvas;
 }
