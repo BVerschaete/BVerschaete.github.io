@@ -5,22 +5,20 @@ var mouse = {};
 var mouseInCanvas =false;
 
 function getMousePosition(event) {
-    var canvas = document.getElementById("canvas");
-    var rect = canvas.getBoundingClientRect();
+    var rect = game.canvas.getBoundingClientRect();
 
     mouse = {
-        x: event.clientX - rect.left - parseInt($(canvas).css("padding-left")),
-        y: event.clientY - rect.top - parseInt($(canvas).css("padding-top"))
+        x: event.clientX - rect.left - parseInt($(game.canvas).css("padding-left")),
+        y: event.clientY - rect.top - parseInt($(game.canvas).css("padding-top"))
     };
     console.log("X: " + mouse.x + ", Y: " + mouse.y);
 }
 
 function drawRadius(){
     if(mouse && mouseInCanvas) {
-        var context = document.getElementById("canvas").getContext('2d');
+        var context = game.context;
         var boardValue = getValueFromPos(mouse.x, mouse.y);
 
-        console.log(boardValue);
         if(boardValue === 0 && boardValue !== null){
             context.fillStyle = 'Yellow';
         }else{

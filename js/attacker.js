@@ -20,40 +20,34 @@ function Attacker(){
         this.image= "Dragon.png",
         this.posX= startX,
         this.posY= startY,
-        this.locX= (posX * 40),
-        this.locY= (posY * 40),
+        this.locX= (this.posX * game.tileWidth),
+        this.locY= (this.posY * game.tileHeight),
         this.oldNow = Date.now(),
-        this.direction= startDirection
+        this.direction = startDirection
 }
 
 Attacker.prototype.move = function() {
-    console.log("moved");
-
     // board[this.posY-1] != null is nodig want dit zal null zijn als de sprite in de bovenste rij is
     if(this.direction != 2  && board[this.posY-1] != null && board[this.posY-1][this.posX] == 1 ){
         this.posY -= 1;
         this.direction = 0;
-        console.log("naar boven");
     }else if(this.direction != 3 && board[this.posY][this.posX+1] == 1 ){
         this.posX += 1;
         this.direction = 1;
-        console.log("naar rechts");
     }else if(this.direction != 0 && board[this.posY+1] != null && board[this.posY+1][this.posX] == 1 ){
         this.posY += 1;
         this.direction = 2;
-        console.log("naar beneden");
     }else if(this.direction != 1 && board[this.posY][this.posX-1] == 1 ){
         this.posX -= 1;
         this.direction = 3;
-        console.log("naar links");
     } else {
         deleteAttacker(this);
     }
 };
 
 Attacker.prototype.updatePosOnBoard = function(){
-    this.posX = Math.floor(this.locX / 40);
-    this.posY = Math.floor(this.locY / 40);
+    this.posX = Math.floor(this.locX / game.tileWidth);
+    this.posY = Math.floor(this.locY / game.tileHeight);
 };
 
 Attacker.prototype.updatePosition = function(){
@@ -61,27 +55,27 @@ Attacker.prototype.updatePosition = function(){
     var now = Date.now();
     var timeDelta = now - this.oldNow;
     this.oldNow = now;
-    //console.log(this.direction);
+
     if(this.direction === 0){
         if(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY - (this.speedY * timeDelta / 1000))) !== 1){
             this.move();
-            this.locY = this.posY * 40;
+            this.locY = this.posY * game.tileHeight;
             this.locX = Math.floor(this.locX);
         }else{
             this.locY -= this.speedY * timeDelta / 1000;
         }
     }else if(this.direction === 1){
-        if(getValueFromPos(Math.floor(this.locX) + 40, Math.floor(this.locY)) !== 1){
+        if(getValueFromPos(Math.floor(this.locX) + game.tileWidth, Math.floor(this.locY)) !== 1){
             this.move();
-            this.locX = this.posX * 40;
+            this.locX = this.posX * game.tileWidth;
             this.locY = Math.floor(this.locY);
         }else{
             this.locX += this.speedX * timeDelta / 1000;
         }
     }else if(this.direction === 2){
-        if(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY  + 40)) !== 1){
+        if(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY  + game.tileHeight)) !== 1){
             this.move();
-            this.locY = this.posY * 40;
+            this.locY = this.posY * game.tileHeight;
             this.locX = Math.floor(this.locX);
         }else{
             this.locY += this.speedY * timeDelta / 1000;
@@ -89,7 +83,7 @@ Attacker.prototype.updatePosition = function(){
     }else if(this.direction === 3){
         if(getValueFromPos(Math.floor(this.locX - (this.speedY * timeDelta / 1000)), Math.floor(this.locY)) !== 1){
             this.move();
-            this.locX = this.posX * 40;
+            this.locX = this.posX * game.tileWidth;
             this.locY = Math.floor(this.locY);
         }else{
             this.locX -= this.speedX * timeDelta / 1000;
@@ -100,7 +94,7 @@ Attacker.prototype.updatePosition = function(){
 Attacker.prototype.draw = function(){
     var sprite = new Image();
     sprite.src = "img/" + this.image;
-    game.context.drawImage(sprite, this.locX, this.locY, 40, 40);
+    game.context.drawImage(sprite, this.locX, this.locY, game.tileWidth, game.tileHeight);
 };
 
 function drawAttackers(){
