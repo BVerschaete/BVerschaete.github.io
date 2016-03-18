@@ -4,20 +4,32 @@
 //grid width and height
 var bw = 400;
 var bh = 400;
+var game = {};
 
 function setup() {
     addCanvas();
-    drawGrid();
     //useDisqus();
-    document.getElementById("moveIets").addEventListener("click", displayMove);
-    document.getElementById("canvas").addEventListener('mouseover', toggleMouseInCanvas, false);
-    document.getElementById("canvas").addEventListener('mouseout', toggleMouseInCanvas, false);
-    document.getElementById("canvas").addEventListener('mousemove', getMousePosition, false);
+    game = {
+        oldNow: Date.now(),
+        canvas: document.getElementById("canvas"),
+        context: canvas.getContext("2d"),
+    };
+    drawGrid();
+
+    document.getElementById("moveAttacker").addEventListener("click", moveAttacker);
+    game.canvas.addEventListener('mouseover', toggleMouseInCanvas, false);
+    game.canvas.addEventListener('mouseout', toggleMouseInCanvas, false);
+    game.canvas.addEventListener('mousemove', getMousePosition, false);
+
     gameLoop();
 }
 
 function addCanvas(){
     var canvas = $('<canvas/>').attr({width: bw, height: bh, id: 'canvas'}).appendTo('body');
+}
+
+function moveAttacker(){
+    move(attacker);
 }
 
 function displayMove(){
@@ -38,11 +50,15 @@ function displayMove(){
     move();
 }
 
+function drawAttackers(){
+    var sprite = new Image();
+    sprite.src = "img/" + attacker.image;
+    game.context.drawImage(sprite, attacker.locX, attacker.locY, 40, 40);
+}
+
 function drawMap(){
-    var canvas = document.getElementById("canvas");
-    var context = canvas.getContext("2d");
-    context.fillStyle = 'white';
-    context.fillRect(0,0,canvas.width, canvas.height);
+    game.context.fillStyle = 'white';
+    game.context.fillRect(0, 0, game.canvas.width, game.canvas.height);
 
     var path = new Image();
     path.src = "img/grasstile.png";
@@ -53,36 +69,34 @@ function drawMap(){
 
     for(var i = 0; i < board.length; i++){
         for(var j = 0; j < board[i].length; j++) {
-            if(board[i][j] == 0){
-                context.drawImage(build, j * 40, i * 40, 40, 40);
-            }else if(board[i][j] == 1) {
-                context.drawImage(path, j * 40, i * 40, 40, 40);
-            }else if(board[i][j] == 2) {
-                context.drawImage(water, j * 40, i * 40, 40, 40);
+            if(board[i][j] === 0){
+                game.context.drawImage(build, j * 40, i * 40, 40, 40);
+            }else if(board[i][j] === 1) {
+                game.context.drawImage(path, j * 40, i * 40, 40, 40);
+            }else if(board[i][j] === 2) {
+                game.context.drawImage(water, j * 40, i * 40, 40, 40);
             }
         }
     }
 }
 
 function drawGrid(){
-    var canvas = document.getElementById("canvas");
-    var context = canvas.getContext("2d");
-    context.fillStyle = 'white';
-    context.fillRect(0,0,canvas.width, canvas.height);
+    game.context.fillStyle = 'white';
+    game.context.fillRect(0, 0, game.canvas.width, game.canvas.height);
 
     for (var x = 0; x <= bw; x += 40) {
-        context.moveTo(0.5 + x, 0);
-        context.lineTo(0.5 + x, bh);
+        game.context.moveTo(0.5 + x, 0);
+        game.context.lineTo(0.5 + x, bh);
     }
 
 
     for (x = 0; x <= bh; x += 40) {
-        context.moveTo(0, 0.5 + x);
-        context.lineTo(bw, 0.5 + x);
+        game.context.moveTo(0, 0.5 + x);
+        game.context.lineTo(bw, 0.5 + x);
     }
 
-    context.strokeStyle = "black";
-    context.stroke();
+    game.context.strokeStyle = "black";
+    game.context.stroke();
 }
 
 var disqus_config = function () {
