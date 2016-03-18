@@ -4,8 +4,6 @@
 //grid width and height
 var bw = 400;
 var bh = 400;
-//padding around grid
-var p = 10;
 
 function setup() {
     addCanvas();
@@ -19,12 +17,7 @@ function setup() {
 }
 
 function addCanvas(){
-
-    //size of canvas
-    var cw = bw + (p*2) + 1;
-    var ch = bh + (p*2) + 1;
-
-    var canvas = $('<canvas/>').attr({width: cw, height: ch, id: 'canvas'}).appendTo('body');
+    var canvas = $('<canvas/>').attr({width: bw, height: bh, id: 'canvas'}).appendTo('body');
 }
 
 function displayMove(){
@@ -61,40 +54,14 @@ function drawMap(){
     for(var i = 0; i < board.length; i++){
         for(var j = 0; j < board[i].length; j++) {
             if(board[i][j] == 0){
-                context.drawImage(build, 11 + j * 40, 11 + i * 40, 40, 40);
+                context.drawImage(build, j * 40, i * 40, 40, 40);
             }else if(board[i][j] == 1) {
-                context.drawImage(path, 11 + j * 40, 11 + i * 40, 40, 40);
+                context.drawImage(path, j * 40, i * 40, 40, 40);
             }else if(board[i][j] == 2) {
-                context.drawImage(water, 11 + j * 40, 11 + i * 40, 40, 40);
+                context.drawImage(water, j * 40, i * 40, 40, 40);
             }
         }
     }
-/*
-    path.onload = function (){
-        for(var i = 0; i < board.length; i++){
-            for(var j = 0; j < board[i].length; j++){
-                if(board[i][j] == 1) {
-                    context.drawImage(path, 11 + j * 40, 11 + i * 40, 40, 40);
-                } else {
-
-                }
-            }
-        }
-    };
-
-    var build = new Image();
-    build.src = "img/background.png";
-    build.onload = function (){
-        for(var i = 0; i < board.length; i++){
-            for(var j = 0; j < board[i].length; j++){
-                if(board[i][j] == 0) {
-                    context.drawImage(build, 11 + j * 40, 11 + i * 40, 40, 40);
-                } else {
-
-                }
-            }
-        }
-    };*/
 }
 
 function drawGrid(){
@@ -104,14 +71,14 @@ function drawGrid(){
     context.fillRect(0,0,canvas.width, canvas.height);
 
     for (var x = 0; x <= bw; x += 40) {
-        context.moveTo(0.5 + x + p, p);
-        context.lineTo(0.5 + x + p, bh + p);
+        context.moveTo(0.5 + x, 0);
+        context.lineTo(0.5 + x, bh);
     }
 
 
     for (x = 0; x <= bh; x += 40) {
-        context.moveTo(p, 0.5 + x + p);
-        context.lineTo(bw + p, 0.5 + x + p);
+        context.moveTo(0, 0.5 + x);
+        context.lineTo(bw, 0.5 + x);
     }
 
     context.strokeStyle = "black";

@@ -33,3 +33,21 @@ var move = function() {
         direction = 3;
     }
 };
+
+// waarde van element in board[][] teruggeven voor corresponderende x en y waarde
+function getValueFromPos(x, y){
+    var canvas = document.getElementById("canvas");
+    var width = $(canvas).width();
+    var height = $(canvas).height();
+    var tileHeight = height / board.length;
+    var tileWidth = width / board[0].length;
+    var indexHeight = Math.floor(y / tileHeight);
+    var indexWidth = Math.floor(x / tileWidth);
+    console.log(tileHeight * indexHeight);
+    console.log(mouse.y);
+    if(mouse.y < height && mouse.y >= 0){
+        return board[indexHeight][indexWidth];
+    }else{
+        return null;
+    }
+}
