@@ -1,11 +1,15 @@
 /**
  * Created by Bastien on 3/12/2015.
  */
+
+
 function setup() {
     drawGrid();
     //useDisqus();
     document.getElementById("moveIets").addEventListener("click", displayMove);
-    window.addEventListener('mousemove', getMousePosition, false);
+    document.getElementById("canvas").addEventListener('mouseover', toggleMouseInCanvas, false);
+    document.getElementById("canvas").addEventListener('mouseout', toggleMouseInCanvas, false);
+    document.getElementById("canvas").addEventListener('mousemove', getMousePosition, false);
     setInterval(gameLoop, 1000/60);
 }
 

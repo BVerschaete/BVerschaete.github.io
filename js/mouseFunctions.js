@@ -2,6 +2,7 @@
  * Created by Gaben on 17/03/2016.
  */
 var mouse;
+var mouseInCanvas =false;
 
 function getMousePosition(event) {
     var rect = document.getElementById("canvas").getBoundingClientRect();
@@ -9,10 +10,11 @@ function getMousePosition(event) {
         x: event.clientX - rect.left,
         y: event.clientY - rect.top
     };
+    console.log("moving");
 }
 
 function drawRadius(){
-    if(mouse) {
+    if(mouse && mouseInCanvas) {
         console.log("drawing");
         var context = document.getElementById("canvas").getContext('2d');
         context.fillStyle = 'red';
@@ -23,4 +25,14 @@ function drawRadius(){
         context.fill();
         context.globalAlpha = 1;
     }
+}
+
+function toggleMouseInCanvas(){
+    if(!mouseInCanvas){
+        mouseInCanvas = true;
+    }else{
+        mouseInCanvas = false;
+    }
+
+    console.log(mouseInCanvas);
 }
