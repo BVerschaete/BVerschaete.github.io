@@ -50,7 +50,6 @@ function drawMap(){
     var context = canvas.getContext("2d");
     context.fillStyle = 'white';
     context.fillRect(0,0,canvas.width, canvas.height);
-    var a;
 
     var path = new Image();
     path.src = "img/grasstile.png";
