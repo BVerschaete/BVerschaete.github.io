@@ -14,11 +14,11 @@ function renderingStep(){
 
 function gameLoop() {
     processUserInput();
-    
+
     for(var i = 0; i < attackers.length; i++) {
         attackers[i].updatePosition();
     }
-    
+
     renderingStep();
     window.requestAnimationFrame(gameLoop);
 }

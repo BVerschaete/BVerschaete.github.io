@@ -23,7 +23,6 @@ function setup() {
     setTimeout(function( ) { clearInterval(loop); }, aantalMonsters * 3000);
 
     gameLoop();
-    //drawGrid(); //toont lijnen voor visualisatie
 }
 
 function addCanvas(){
@@ -87,5 +86,19 @@ function useDisqus() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME B
     s.setAttribute('data-timestamp', +new Date());
     (d.head || d.body).appendChild(s);
 }
+
+//vanaf hier code voor game
+function startGame(){
+    $("#createAttacker")[0].addEventListener('click', createAttacker);
+}
+
+function createAttacker(){
+    addAttacker("Bob");
+    var attackerDisplay = $('<div></div>').append([ $('<p></p>').text(attackers[attackers.length - 1].naam),
+                                                    $('<span></span>').text(attackers[attackers.length - 1].life)]
+                                                );
+    $("#demo").append(attackerDisplay)
+}
+
 
 window.addEventListener("load", setup);
