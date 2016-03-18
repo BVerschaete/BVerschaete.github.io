@@ -43,8 +43,7 @@ function getValueFromPos(x, y){
     var tileWidth = width / board[0].length;
     var indexHeight = Math.floor(y / tileHeight);
     var indexWidth = Math.floor(x / tileWidth);
-    console.log(tileHeight * indexHeight);
-    console.log(mouse.y);
+
     if(mouse.y < height && mouse.y >= 0){
         return board[indexHeight][indexWidth];
     }else{
