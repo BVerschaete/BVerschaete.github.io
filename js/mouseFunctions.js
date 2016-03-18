@@ -11,7 +11,6 @@ function getMousePosition(event) {
         x: event.clientX - rect.left - parseInt($(game.canvas).css("padding-left")),
         y: event.clientY - rect.top - parseInt($(game.canvas).css("padding-top"))
     };
-    console.log("X: " + mouse.x + ", Y: " + mouse.y);
 }
 
 function drawRadius(){

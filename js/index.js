@@ -4,8 +4,8 @@
 var game = {};
 
 function setup() {
-
     //useDisqus();
+    
     game = {
         canvas: null,
         context: null,
@@ -67,24 +67,6 @@ function drawMap(){
     }
 }
 
-function drawGrid(){
-    game.context.fillStyle = 'white';
-    game.context.fillRect(0, 0, game.canvas.width, game.canvas.height);
-
-    for (var x = 0; x <= game.canvasWidth; x += game.tileWidth) {
-        game.context.moveTo(0.5 + x, 0);
-        game.context.lineTo(0.5 + x, game.canvasHeight);
-    }
-
-    for (x = 0; x <= game.canvasHeight; x += game.tileHeight) {
-        game.context.moveTo(0, 0.5 + x);
-        game.context.lineTo(game.canvasWidth, 0.5 + x);
-    }
-
-    game.context.strokeStyle = "black";
-    game.context.stroke();
-}
-
 //alles voor disqus staat hier
 var disqus_config = function () {
     this.page.url = "http://bverschaete.github.io/";  // Replace PAGE_URL with your page's canonical URL variable
@@ -99,19 +81,5 @@ function useDisqus() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME B
     s.setAttribute('data-timestamp', +new Date());
     (d.head || d.body).appendChild(s);
 }
-
-//vanaf hier code voor game
-function startGame(){
-    $("#createAttacker")[0].addEventListener('click', createAttacker);
-}
-
-function createAttacker(){
-    addAttacker("Bob");
-    var attackerDisplay = $('<div></div>').append([ $('<p></p>').text(attackers[attackers.length - 1].naam),
-                                                    $('<span></span>').text(attackers[attackers.length - 1].life)]
-                                                );
-    $("#demo").append(attackerDisplay)
-}
-
 
 window.addEventListener("load", setup);
