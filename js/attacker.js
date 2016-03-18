@@ -28,13 +28,13 @@ function Attacker(){
 
 Attacker.prototype.move = function() {
     console.log("moved");
-    if(attacker.direction != 2 && board[attacker.posY-1] != null && board[attacker.posY-1][attacker.posX] == 1 ){
-        attacker.posY -= 1;
-        attacker.direction = 0;
+    if(this.direction != 2 && board[this.posY-1] != null && board[this.posY-1][this.posX] == 1 ){
+        this.posY -= 1;
+        this.direction = 0;
         console.log("naar boven");
-    }else if(attacker.direction != 3 && board[attacker.posY][attacker.posX+1] == 1 ){
-        attacker.posX += 1;
-        attacker.direction = 1;
+    }else if(this.direction != 3 && board[this.posY][this.posX+1] == 1 ){
+        this.posX += 1;
+        this.direction = 1;
         console.log("naar rechts");
     }else if(this.direction != 0 && board[this.posY+1] != null && board[this.posY+1][this.posX] == 1 ){
         this.posY += 1;

@@ -17,12 +17,16 @@ function setup() {
     game.canvas.addEventListener('mouseover', toggleMouseInCanvas, false);
     game.canvas.addEventListener('mouseout', toggleMouseInCanvas, false);
     game.canvas.addEventListener('mousemove', getMousePosition, false);
-
-    var loop = setInterval(addAttacker, 3000);
-    var aantalMonsters = 10;
-    setTimeout(function( ) { clearInterval(loop); }, aantalMonsters * 3000);
+    document.getElementById("btnSpawnWave").addEventListener("click", spawnWave);
 
     gameLoop();
+}
+
+function spawnWave(){
+    var waitTime = 1000;
+    var loop = setInterval(addAttacker,waitTime);
+    var aantalMonsters = 5;
+    setTimeout(function( ) { clearInterval(loop); }, aantalMonsters * waitTime);
 }
 
 function addCanvas(){
