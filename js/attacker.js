@@ -28,7 +28,9 @@ function Attacker(){
 
 Attacker.prototype.move = function() {
     console.log("moved");
-    if(this.direction != 2 && board[this.posY-1] != null && board[this.posY-1][this.posX] == 1 ){
+
+    // board[this.posY-1] != null is nodig want dit zal null zijn als de sprite in de bovenste rij is
+    if(this.direction != 2  && board[this.posY-1] != null && board[this.posY-1][this.posX] == 1 ){
         this.posY -= 1;
         this.direction = 0;
         console.log("naar boven");
@@ -49,11 +51,9 @@ Attacker.prototype.move = function() {
     }
 };
 
-Attacker.prototype.updatePosOnBoard = Attacker.prototype.updatePosOnBoard = function(){
+Attacker.prototype.updatePosOnBoard = function(){
     this.posX = Math.floor(this.locX / 40);
     this.posY = Math.floor(this.locY / 40);
-    // console.log("X: " + this.posX + " - " + this.locX);
-    // console.log("Y: " + this.posY + " - " + this.locY);
 };
 
 Attacker.prototype.updatePosition = function(){

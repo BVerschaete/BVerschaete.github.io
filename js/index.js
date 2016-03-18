@@ -1,18 +1,21 @@
 /**
  * Created by Bastien on 3/12/2015.
  */
-//grid width and height
-var bw = 400;
-var bh = 400;
 var game = {};
 
 function setup() {
-    addCanvas();
+
     //useDisqus();
     game = {
-        canvas: document.getElementById("canvas"),
-        context: this.canvas.getContext("2d")
+        canvas: null,
+        context: null,
+        tileWidth: 40,
+        tileHeight: 40,
+        canvasWidth: 0,
+        canvasHeight: 0
     };
+
+    addCanvas();
     
     game.canvas.addEventListener('mouseover', toggleMouseInCanvas, false);
     game.canvas.addEventListener('mouseout', toggleMouseInCanvas, false);
@@ -30,7 +33,14 @@ function spawnWave(){
 }
 
 function addCanvas(){
-    var canvas = $('<canvas/>').attr({width: bw, height: bh, id: 'canvas'}).appendTo('body');
+    var width = game.tileWidth * board[0].length;
+    var height =  game.tileHeight * board.length;
+    var canvas = $('<canvas/>').attr({width: width, height: height, id: 'canvas'}).appendTo('body');
+
+    game.canvas = document.getElementById("canvas");
+    game.context = game.canvas.getContext("2d");
+    game.canvasWidth = $(game.canvas).width();
+    game.canvasHeight = $(game.canvas).height();
 }
 
 function drawMap(){
@@ -47,11 +57,11 @@ function drawMap(){
     for(var i = 0; i < board.length; i++){
         for(var j = 0; j < board[i].length; j++) {
             if(board[i][j] === 0){
-                game.context.drawImage(build, j * 40, i * 40, 40, 40);
+                game.context.drawImage(build, j * game.tileWidth, i * game.tileHeight, game.tileWidth, game.tileHeight);
             }else if(board[i][j] === 1) {
-                game.context.drawImage(path, j * 40, i * 40, 40, 40);
+                game.context.drawImage(path, j * game.tileWidth, i * game.tileHeight, game.tileWidth, game.tileHeight);
             }else if(board[i][j] === 2) {
-                game.context.drawImage(water, j * 40, i * 40, 40, 40);
+                game.context.drawImage(water, j * game.tileWidth, i * game.tileHeight, game.tileWidth, game.tileHeight);
             }
         }
     }
@@ -61,15 +71,14 @@ function drawGrid(){
     game.context.fillStyle = 'white';
     game.context.fillRect(0, 0, game.canvas.width, game.canvas.height);
 
-    for (var x = 0; x <= bw; x += 40) {
+    for (var x = 0; x <= game.canvasWidth; x += game.tileWidth) {
         game.context.moveTo(0.5 + x, 0);
-        game.context.lineTo(0.5 + x, bh);
+        game.context.lineTo(0.5 + x, game.canvasHeight);
     }
 
-
-    for (x = 0; x <= bh; x += 40) {
+    for (x = 0; x <= game.canvasHeight; x += game.tileHeight) {
         game.context.moveTo(0, 0.5 + x);
-        game.context.lineTo(bw, 0.5 + x);
+        game.context.lineTo(game.canvasWidth, 0.5 + x);
     }
 
     game.context.strokeStyle = "black";
