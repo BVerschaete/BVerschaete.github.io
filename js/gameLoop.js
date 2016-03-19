@@ -9,6 +9,7 @@ function processUserInput(){
 function renderingStep(){
     drawMap();
     drawAttackers();
+    drawTowers();
     drawRadius();
 }
 

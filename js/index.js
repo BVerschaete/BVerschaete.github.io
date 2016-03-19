@@ -20,6 +20,8 @@ function setup() {
     game.canvas.addEventListener('mouseover', toggleMouseInCanvas, false);
     game.canvas.addEventListener('mouseout', toggleMouseInCanvas, false);
     game.canvas.addEventListener('mousemove', getMousePosition, false);
+    game.canvas.addEventListener('mousedown', placeTower, false);
+    $(".towerbutton").click(selectTower);
     document.getElementById("btnSpawnWave").addEventListener("click", spawnWave);
 
     gameLoop();
@@ -35,7 +37,8 @@ function spawnWave(){
 function addCanvas(){
     var width = game.tileWidth * board[0].length;
     var height =  game.tileHeight * board.length;
-    var canvas = $('<canvas/>').attr({width: width, height: height, id: 'canvas'}).appendTo('body');
+    $("#container").css({ 'width': width });
+    var canvas = $('<canvas/>').attr({width: width, height: height, id: 'canvas'}).appendTo('#container');
 
     game.canvas = document.getElementById("canvas");
     game.context = game.canvas.getContext("2d");

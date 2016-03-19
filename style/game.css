@@ -4,6 +4,16 @@ body {
 
 canvas {
     background: #fff;
-    margin: 20px;
+    margin: 0 auto;
     padding: 10px;
+}
+
+#container {
+    /* This could be done in one single declaration. See the extended sample. */
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.wrapper{
+    text-align: center;
 }

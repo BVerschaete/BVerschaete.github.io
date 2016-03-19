@@ -1,6 +1,7 @@
 /**
  * Created by Bastien on 18/03/2016.
  */
+//speciale scroll-functionaliteit voor welkom-pagina, gebruikt van https://css-tricks.com/
 $(function() {
     $('a[href*="#"]:not([href="#"])').click(function() {
         if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
@@ -14,8 +15,4 @@ $(function() {
             }
         }
     });
-});
-
-$(document).ready(function() {
-    $('section').fadeIn();
 });

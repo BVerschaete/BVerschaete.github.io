@@ -12,10 +12,21 @@
     <script type="text/javascript" charset="utf-8" src="js/mouseFunctions.js" defer></script>
     <script type="text/javascript" charset="utf-8" src="js/board.js" defer></script>
     <script type="text/javascript" charset="utf-8" src="js/attacker.js" defer></script>
+    <script type="text/javascript" charset="utf-8" src="js/tower.js" defer></script>
 </head>
 <body>
 <a href="welcome.html" class="btn btn-primary">Go to welcome page</a>
-<input type="button" value="spawn wave" id="btnSpawnWave"/>
+<div class="wrapper">
+    <div id="container"></div>
+    <div class="controls">
+        <h2>Controls</h2>
+        <input type="button" class="btn" value="Spawn Wave" id="btnSpawnWave"/>
+        <input type="button" class="btn towerbutton" data-type="0" value="Tower Tier 1" id="btnSpawnTower1"/>
+        <input type="button" class="btn towerbutton" data-type="1" value="Tower Tier 2" id="btnSpawnTower2"/>
+        <input type="button" class="btn towerbutton" data-type="2" value="Tower Tier 3" id="btnSpawnTower3"/>
+    </div>
+</div>
+
 <div id="disqus_thread"></div>
 </body>
 </html>
