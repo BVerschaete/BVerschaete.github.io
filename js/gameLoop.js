@@ -6,11 +6,13 @@ function processUserInput(){
 
 }
 
-function renderingStep(){
+function renderingStep() {
     drawMap();
     drawAttackers();
     drawTowers();
-    drawRadius();
+    if (currentTower != -1) {
+        drawRadius();
+    }
 }
 
 function gameLoop() {
@@ -21,7 +23,7 @@ function gameLoop() {
         checkDead();
     }
 
-    for(var i = 0; i < towers.length; i++) {
+    for(i = 0; i < towers.length; i++) {
         towers[i].findTarget();
         towers[i].attack();
     }
