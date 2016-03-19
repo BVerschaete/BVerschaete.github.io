@@ -53,7 +53,7 @@ Tower.prototype.findTarget = function(){
     this.target = null;
 
     for (var i = 0; i < attackers.length; i++) {
-        var distance = (attackers[i].locX - this.locX) * (attackers[i].locX - this.locX + game.tileWidth) + (attackers[i].locY - this.locY) * (attackers[i].locY - this.locY + game.tileHeight);
+        var distance = (attackers[i].locX - this.locX) * (attackers[i].locX - this.locX + game.tileSize) + (attackers[i].locY - this.locY) * (attackers[i].locY - this.locY + game.tileSize);
 
         if (distance < this.range * this.range) {
             this.target = attackers[i];
@@ -67,8 +67,8 @@ Tower.prototype.findUnitVector = function() {
     var xDist = this.target.locX - this.locX;
     var yDist = this.target.locY - this.locY;
     var dist = Math.sqrt(xDist * xDist + yDist * yDist);
-    this.xFire = this.locX; //+ game.tileWidth * xDist / dist; //where turret ends and bullets start
-    this.yFire = this.locY; //+ game.tileWidth * yDist / dist;
+    this.xFire = this.locX; //+ game.tileSize * xDist / dist; //where turret ends and bullets start
+    this.yFire = this.locY; //+ game.tileSize * yDist / dist;
 };
 
 

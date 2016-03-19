@@ -48,7 +48,7 @@ function displayAttScore(){
 function spawnWave(){
     toggleSpawn();
     console.log("uitvoeren");
-    var waitTime = 1800 * game.tileWidth / (new Attacker()).speedX;
+    var waitTime = 1800 * game.tileSize / (new Attacker()).speedX;
     var aantalMonsters = 5;
     var loop = setInterval(addAttacker,waitTime);
     setTimeout(function( ) { clearInterval(loop); toggleSpawn(); }, aantalMonsters * waitTime);
@@ -94,7 +94,7 @@ function useDisqus() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME B
 
     s.src = '//webdesigngame.disqus.com/embed.js';  // IMPORTANT: Replace EXAMPLE with your forum shortname!
 
-    s.setAttribute('data-timestamp', +new Date());
+    s.setAttribute('data-timestamp', + new Date());
     (d.head || d.body).appendChild(s);
 }
 

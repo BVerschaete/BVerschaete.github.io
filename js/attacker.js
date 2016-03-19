@@ -4,8 +4,8 @@
 var attackers = [];
 
 function Attacker(){
-    this.speedX= 50 * (game.tileWidth / 40); // snelheid relatief aan de snelheid bij een tileSize van 40
-    this.speedY= 50 * (game.tileHeight / 40);
+    this.speedX= 50 * (game.tileSize / 40); // snelheid relatief aan de snelheid bij een tileSize van 40
+    this.speedY= 50 * (game.tileSize / 40);
     this.image= "dragon.png";
     this.posX= startX;
     this.posY= startY;
@@ -94,7 +94,7 @@ Attacker.prototype.drawHealthBar = function(){
     var context = game.context;
 
     context.fillStyle = '#90EE90';
-    context.fillRect(this.locX + game.tileWidth / 8, this.locY - game.tileWidth / 3, (game.tileWidth - game.tileWidth / 4) * this.health / this.maxHealth, game.tileWidth / 4);
+    context.fillRect(this.locX + game.tileSize / 8, this.locY - game.tileSize / 3, (game.tileSize - game.tileSize / 4) * this.health / this.maxHealth, game.tileSize / 4);
 };
 
 function drawAttackers(){
