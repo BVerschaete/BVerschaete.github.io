@@ -41,7 +41,6 @@ function addCanvas(){
 
 function toggleSpawn(){
     var btnSpawn = $("#btnSpawnWave")[0];
-
     btnSpawn.disabled = !btnSpawn.disabled;
 }
 
@@ -52,7 +51,7 @@ function displayAttScore(){
 
 function spawnWave(){
     toggleSpawn();
-
+    console.log("uitvoeren");
     var waitTime = 1000;
     var loop = setInterval(addAttacker,waitTime);
     var aantalMonsters = 5;
