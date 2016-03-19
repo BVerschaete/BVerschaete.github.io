@@ -35,7 +35,6 @@ Attacker.prototype.move = function() {
     } else {
         deleteAttacker(this);
         game.attackersScore += 1;
-        displayAttScore();
     }
 };
 
@@ -122,4 +121,9 @@ function checkDead(){
 
 function addAttacker(){
     attackers.push(new Attacker());
+}
+
+// attackers score of game health of whatever
+function displayAttScore(){
+    $("#attackersScore").text(game.attackersScore);
 }

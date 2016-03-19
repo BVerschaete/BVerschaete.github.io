@@ -4,7 +4,6 @@
 var game = {
     canvas: null,
     context: null,
-    standardTileSize: 40, //nodig als standaardwaarde voor slider om te vergelijken
     tileSize: 40,
     attackersScore: 0,
     money: 200
@@ -41,14 +40,13 @@ function addCanvas(){
     game.context = game.canvas.getContext("2d");
 }
 
-// attackers score of game health of whatever
-function displayAttScore(){
-    $("#attackersScore")[0].innerHTML = game.attackersScore.toString();
+function displayMoney(){
+    $("#money").text(game.money);
 }
 
 function spawnWave(){
     toggleSpawn();
-    console.log("uitvoeren");
+
     var waitTime = 1800 * game.tileSize / (new Attacker()).speedX;
     var aantalMonsters = 5;
     var loop = setInterval(addAttacker,waitTime);

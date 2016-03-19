@@ -21,13 +21,13 @@ function updateLogic(){
         attackers[i].updatePosition();
     }
 
-    for(var i = 0; i < towers.length; i++) {
+    for(i = 0; i < towers.length; i++) {
         towers[i].findTarget();
         towers[i].findUnitVector();
         towers[i].attack();
     }
 
-    for(var i = 0; i < bullets.length; i++)
+    for(i = 0; i < bullets.length; i++)
     {
         bullets[i].move();
 
@@ -36,6 +36,9 @@ function updateLogic(){
             i--;
         }
     }
+    
+    displayAttScore();
+    displayMoney();
 
     checkDead();
 }
