@@ -4,8 +4,8 @@
 var attackers = [];
 
 function Attacker(){
-    this.speedX= 100;
-    this.speedY= 100;
+    this.speedX= 50 * (game.tileWidth / 40); // snelheid relatief aan de snelheid bij een tileSize van 40
+    this.speedY= 50 * (game.tileHeight / 40);
     this.image= "dragon.png";
     this.posX= startX;
     this.posY= startY;
@@ -13,7 +13,8 @@ function Attacker(){
     this.locY= (this.posY * game.tileHeight);
     this.oldNow = Date.now();
     this.direction = startDirection;
-    this.health = 10;
+    this.maxHealth = 100;
+    this.health = this.maxHealth;
 }
 
 Attacker.prototype.move = function() {
@@ -89,9 +90,17 @@ Attacker.prototype.draw = function(){
     game.context.drawImage(sprite, this.locX, this.locY, game.tileWidth, game.tileHeight);
 };
 
+Attacker.prototype.drawHealthBar = function(){
+    var context = game.context;
+
+    context.fillStyle = '#90EE90';
+    context.fillRect(this.locX + game.tileWidth / 8, this.locY - game.tileWidth / 3, (game.tileWidth - game.tileWidth / 4) * this.health / this.maxHealth, game.tileWidth / 4);
+};
+
 function drawAttackers(){
     for(var i = 0; i < attackers.length; i++){
         attackers[i].draw();
+        attackers[i].drawHealthBar();
     }
 }
 
@@ -100,7 +109,6 @@ function deleteAttacker(attacker){
     attackers.splice(index, 1);
 }
 
-//nog niet in gebruik
 function checkDead(){
     for(var i = 0; i < attackers.length; i++){
         if(attackers[i].health <= 0){
@@ -111,6 +119,5 @@ function checkDead(){
 }
 
 function addAttacker(){
-    console.log("spawned");
     attackers.push(new Attacker());
 }

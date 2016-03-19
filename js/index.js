@@ -52,9 +52,9 @@ function displayAttScore(){
 function spawnWave(){
     toggleSpawn();
     console.log("uitvoeren");
-    var waitTime = 1000;
-    var loop = setInterval(addAttacker,waitTime);
+    var waitTime = 1800 * game.tileWidth / (new Attacker()).speedX;
     var aantalMonsters = 5;
+    var loop = setInterval(addAttacker,waitTime);
     setTimeout(function( ) { clearInterval(loop); toggleSpawn(); }, aantalMonsters * waitTime);
 
 }

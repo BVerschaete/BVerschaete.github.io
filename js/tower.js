@@ -8,11 +8,12 @@ var currentTower = 0;
 function Tower(x, y){
     this.locX= x;
     this.locY= y;
+    this.oldNow = Date.now(); // tijdstip van laatste aanval
 }
 
 Tower.prototype.image = "tower1.png";
 Tower.prototype.range = (game.tileHeight*1.875); //40*1.875 = 75, in functie van tileheight stellen om gemakkelijk spel te resizen-
-Tower.prototype.fireRate = 500; // 1 keer per 1000 milliseconden
+Tower.prototype.fireRate = 500; // 1 keer per fireRate (in milliseconden)
 Tower.prototype.damage = 10;
 
 //child object van Tower, zodat we verschillende torens kunnen maken en gewoon de
@@ -34,8 +35,8 @@ function Tower3(x,y) {
 Tower3.prototype = Object.create(Tower.prototype);
 Tower3.prototype.image = "tower3.png";
 Tower3.prototype.range = (game.tileHeight*3.125); //125
-Tower2.prototype.fireRate = Tower.prototype.fireRate * 3;
-Tower2.prototype.damage = Tower.prototype.damage * 3;
+Tower3.prototype.fireRate = Tower.prototype.fireRate * 3;
+Tower3.prototype.damage = Tower.prototype.damage * 3;
 
 //array met constructors van alle verschillende towers, door towerClasses[n](x, y) te callen kunnen we zo gemakkelijk towers
 //maken
@@ -49,29 +50,37 @@ Tower.prototype.draw = function(){
 };
 
 Tower.prototype.findTarget = function(){
-    // Als er geen attackers zijn
-    if(attackers.length === 0) {
-        this.target = null;
-        return;
-    }else if(this.target && this.target.health <= 0){  // attacker dood?
-        this.target = null;
-    }
+    this.target = null;
 
-    if(this.target == null) {
-        for (var i = 0; i < attackers.length; i++) {
-            var distance = (attackers[i].locX - this.locX) * (attackers[i].locX - this.locX + game.tileWidth) + (attackers[i].locY - this.locY) * (attackers[i].locY - this.locY + game.tileWidth);
-            console.log(distance);
-            if (distance < this.range * this.range) {
-                this.target = attackers[i];
-                return;
-            }
+    for (var i = 0; i < attackers.length; i++) {
+        var distance = (attackers[i].locX - this.locX) * (attackers[i].locX - this.locX + game.tileWidth) + (attackers[i].locY - this.locY) * (attackers[i].locY - this.locY + game.tileHeight);
+
+        if (distance < this.range * this.range) {
+            this.target = attackers[i];
+            return;
         }
     }
 };
 
+Tower.prototype.findUnitVector = function() {
+    if (!this.target) return false; //if there is no target, dont bother calculating unit vector
+    var xDist = this.target.locX - this.locX;
+    var yDist = this.target.locY - this.locY;
+    var dist = Math.sqrt(xDist * xDist + yDist * yDist);
+    this.xFire = this.locX; //+ game.tileWidth * xDist / dist; //where turret ends and bullets start
+    this.yFire = this.locY; //+ game.tileWidth * yDist / dist;
+};
+
+
 Tower.prototype.attack = function(){
-    if(this.target != null){
-          this.target.health -= this.damage;
+    var now = Date.now();
+    var delta = now - this.oldNow;
+
+    if(this.target != null && delta >= this.fireRate){
+        this.oldNow = now - (delta - this.fireRate);
+        bullets.push(new Bullet(this.xFire, this.yFire, this.target, this.damage));
+    }else if(this.target == null){
+        this.oldNow = now - this.fireRate;
     }
 };
 
@@ -89,4 +98,3 @@ function selectTower(event){
     //custom attribuut van iedere button die zegt welke soort tower er moet geplaatst worden
     currentTower = event.target.getAttribute("data-type");
 }
-
