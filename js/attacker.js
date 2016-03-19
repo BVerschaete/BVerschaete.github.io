@@ -9,8 +9,8 @@ function Attacker(){
     this.image= "dragon.png";
     this.posX= startX;
     this.posY= startY;
-    this.locX= (this.posX * game.tileWidth);
-    this.locY= (this.posY * game.tileHeight);
+    this.locX= (this.posX * game.tileSize);
+    this.locY= (this.posY * game.tileSize);
     this.oldNow = Date.now();
     this.direction = startDirection;
     this.maxHealth = 100;
@@ -39,8 +39,8 @@ Attacker.prototype.move = function() {
 };
 
 Attacker.prototype.updatePosOnBoard = function(){
-    this.posX = Math.floor(this.locX / game.tileWidth);
-    this.posY = Math.floor(this.locY / game.tileHeight);
+    this.posX = Math.floor(this.locX / game.tileSize);
+    this.posY = Math.floor(this.locY / game.tileSize);
 };
 
 Attacker.prototype.updatePosition = function(){
@@ -52,23 +52,23 @@ Attacker.prototype.updatePosition = function(){
     if(this.direction === 0){
         if(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY - (this.speedY * timeDelta / 1000))) !== 1){
             this.move();
-            this.locY = this.posY * game.tileHeight;
+            this.locY = this.posY * game.tileSize;
             this.locX = Math.floor(this.locX);
         }else{
             this.locY -= this.speedY * timeDelta / 1000;
         }
     }else if(this.direction === 1){
-        if(getValueFromPos(Math.floor(this.locX) + game.tileWidth, Math.floor(this.locY)) !== 1){
+        if(getValueFromPos(Math.floor(this.locX) + game.tileSize, Math.floor(this.locY)) !== 1){
             this.move();
-            this.locX = this.posX * game.tileWidth;
+            this.locX = this.posX * game.tileSize;
             this.locY = Math.floor(this.locY);
         }else{
             this.locX += this.speedX * timeDelta / 1000;
         }
     }else if(this.direction === 2){
-        if(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY  + game.tileHeight)) !== 1){
+        if(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY  + game.tileSize)) !== 1){
             this.move();
-            this.locY = this.posY * game.tileHeight;
+            this.locY = this.posY * game.tileSize;
             this.locX = Math.floor(this.locX);
         }else{
             this.locY += this.speedY * timeDelta / 1000;
@@ -76,7 +76,7 @@ Attacker.prototype.updatePosition = function(){
     }else if(this.direction === 3){
         if(getValueFromPos(Math.floor(this.locX - (this.speedY * timeDelta / 1000)), Math.floor(this.locY)) !== 1){
             this.move();
-            this.locX = this.posX * game.tileWidth;
+            this.locX = this.posX * game.tileSize;
             this.locY = Math.floor(this.locY);
         }else{
             this.locX -= this.speedX * timeDelta / 1000;
@@ -87,7 +87,7 @@ Attacker.prototype.updatePosition = function(){
 Attacker.prototype.draw = function(){
     var sprite = new Image();
     sprite.src = "img/" + this.image;
-    game.context.drawImage(sprite, this.locX, this.locY, game.tileWidth, game.tileHeight);
+    game.context.drawImage(sprite, this.locX, this.locY, game.tileSize, game.tileSize);
 };
 
 Attacker.prototype.drawHealthBar = function(){

@@ -10,7 +10,9 @@ function renderingStep(){
     drawMap();
     drawAttackers();
     drawTowers();
-    drawRadius();
+    if (currentTower != -1) {
+        drawRadius();
+    }
     drawBullets();
 }
 
@@ -34,12 +36,13 @@ function updateLogic(){
             i--;
         }
     }
+
+    checkDead();
 }
 
 function gameLoop() {
     processUserInput();
     updateLogic();
     renderingStep();
-    checkDead();
     window.requestAnimationFrame(gameLoop);
 }

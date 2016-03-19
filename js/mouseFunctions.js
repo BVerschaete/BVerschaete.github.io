@@ -18,10 +18,10 @@ function getMousePosition(event) {
 function drawRadius(){
     if(mouse.inCanvas) {
         var context = game.context;
-        var boardValueLinksBoven = getValueFromPos(mouse.x-(game.tileHeight/4), mouse.y-(game.tileHeight/4));
-        var boardValueRechtsBoven = getValueFromPos(mouse.x+(game.tileHeight/4), mouse.y-(game.tileHeight/4));
-        var boardValueLinksOnder = getValueFromPos(mouse.x-(game.tileHeight/4), mouse.y+(game.tileHeight/4));
-        var boardValueRechtsOnder = getValueFromPos(mouse.x+(game.tileHeight/4), mouse.y+(game.tileHeight/4));
+        var boardValueLinksBoven = getValueFromPos(mouse.x-(game.tileSize/4), mouse.y-(game.tileSize/4));
+        var boardValueRechtsBoven = getValueFromPos(mouse.x+(game.tileSize/4), mouse.y-(game.tileSize/4));
+        var boardValueLinksOnder = getValueFromPos(mouse.x-(game.tileSize/4), mouse.y+(game.tileSize/4));
+        var boardValueRechtsOnder = getValueFromPos(mouse.x+(game.tileSize/4), mouse.y+(game.tileSize/4));
 
         var canPlace =(boardValueLinksBoven === 0 && boardValueLinksBoven !== null) &&
                         (boardValueRechtsBoven === 0 && boardValueRechtsBoven !== null) &&
@@ -36,14 +36,28 @@ function drawRadius(){
             mouse.canPlaceTowerHere = false;
         }
 
-        context.beginPath();
-        var range = towerClasses[currentTower].prototype.range;
-        context.arc(mouse.x, mouse.y, range, 0, 2 * Math.PI);
-        // globalAlpha = transparancy
-        context.globalAlpha = 0.4;
-        context.fill();
-        context.globalAlpha = 1;
+        function drawCircle() {
+            context.beginPath();
+            var range = towerClasses[currentTower].prototype.range;
+            context.arc(mouse.x, mouse.y, range, 0, 2 * Math.PI);
+            // globalAlpha = transparancy
+            context.globalAlpha = 0.4;
+            context.fill();
+            context.globalAlpha = 1;
+        }
+
+        function drawTower(){
+            var sprite = new Image();
+            sprite.src = "img/" + towerClasses[currentTower].prototype.image;
+            context.globalAlpha = 0.4;
+            context.drawImage(sprite, mouse.x - game.tileSize/4, mouse.y - game.tileSize/4, game.tileSize/2, game.tileSize/2);
+            context.globalAlpha = 1;
+        }
+        
+        drawCircle();
+        drawTower();
     }
+
 }
 
 function toggleMouseInCanvas(){
@@ -51,7 +65,8 @@ function toggleMouseInCanvas(){
 }
 
 //plaatst tower bij muisklik
-function placeTower() {
+function placeTower(event) {
+    event.stopPropagation();
     if (mouse.canPlaceTowerHere) {
         addTower(mouse.x, mouse.y);
     }

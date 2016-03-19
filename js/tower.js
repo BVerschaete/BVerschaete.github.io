@@ -2,7 +2,7 @@
  * Created by Bastien on 19/03/2016.
  */
 var towers = [];
-var currentTower = 0;
+var currentTower = -1;
 
 //basis toren
 function Tower(x, y){
@@ -12,8 +12,8 @@ function Tower(x, y){
 }
 
 Tower.prototype.image = "tower1.png";
-Tower.prototype.range = (game.tileHeight*1.875); //40*1.875 = 75, in functie van tileheight stellen om gemakkelijk spel te resizen-
-Tower.prototype.fireRate = 500; // 1 keer per fireRate (in milliseconden)
+Tower.prototype.range = (game.tileSize/2) + (game.tileSize*1.5); //40*1.875 = 75, in functie van tileSize stellen om gemakkelijk spel te resizen-
+Tower.prototype.fireRate = 500; // 1 keer per 1000 milliseconden
 Tower.prototype.damage = 10;
 
 //child object van Tower, zodat we verschillende torens kunnen maken en gewoon de
@@ -24,7 +24,7 @@ function Tower2(x,y) {
 
 Tower2.prototype = Object.create(Tower.prototype);
 Tower2.prototype.image = "tower2.png";
-Tower2.prototype.range = (game.tileHeight*2.5); //100
+Tower2.prototype.range = (game.tileSize*2.5); //100
 Tower2.prototype.fireRate = Tower.prototype.fireRate * 2;
 Tower2.prototype.damage = Tower.prototype.damage * 2;
 
@@ -34,9 +34,9 @@ function Tower3(x,y) {
 
 Tower3.prototype = Object.create(Tower.prototype);
 Tower3.prototype.image = "tower3.png";
-Tower3.prototype.range = (game.tileHeight*3.125); //125
-Tower3.prototype.fireRate = Tower.prototype.fireRate * 3;
-Tower3.prototype.damage = Tower.prototype.damage * 3;
+Tower3.prototype.range = (game.tileSize*3.125); //125
+Tower2.prototype.fireRate = Tower.prototype.fireRate * 3;
+Tower2.prototype.damage = Tower.prototype.damage * 3;
 
 //array met constructors van alle verschillende towers, door towerClasses[n](x, y) te callen kunnen we zo gemakkelijk towers
 //maken
@@ -46,7 +46,7 @@ var towerClasses = [Tower,Tower2,Tower3];
 Tower.prototype.draw = function(){
     var sprite = new Image();
     sprite.src = "img/" + this.image;
-    game.context.drawImage(sprite, this.locX - game.tileWidth/4, this.locY - game.tileHeight/4, game.tileWidth/2, game.tileHeight/2);
+    game.context.drawImage(sprite, this.locX - game.tileSize/4, this.locY - game.tileSize/4, game.tileSize/2, game.tileSize/2);
 };
 
 Tower.prototype.findTarget = function(){
@@ -91,10 +91,14 @@ function drawTowers(){
 }
 
 function addTower(){
-    towers.push(new towerClasses[currentTower](mouse.x,mouse.y));
+    if(currentTower != -1) {
+        towers.push(new towerClasses[currentTower](mouse.x, mouse.y));
+    }
 }
 
 function selectTower(event){
     //custom attribuut van iedere button die zegt welke soort tower er moet geplaatst worden
+    event.stopPropagation();
     currentTower = event.target.getAttribute("data-type");
 }
+

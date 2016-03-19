@@ -47,10 +47,10 @@ var startDirection = level1.startDirection;
 
 // waarde van element in board[][] teruggeven voor corresponderende x en y waarde
 function getValueFromPos(x, y){
-    var indexHeight = Math.floor(y / game.tileHeight);
-    var indexWidth = Math.floor(x / game.tileWidth);
+    var indexHeight = Math.floor(y / game.tileSize);
+    var indexWidth = Math.floor(x / game.tileSize);
 
-    if(y < game.canvasHeight && y >= 0){
+    if(y < $("canvas").attr("height") && y >= 0){
         return board[indexHeight][indexWidth];
     }else{
         return null;
