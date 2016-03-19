@@ -13,6 +13,7 @@ function Attacker(){
     this.locY= (this.posY * game.tileHeight);
     this.oldNow = Date.now();
     this.direction = startDirection;
+    this.health = 10;
 }
 
 Attacker.prototype.move = function() {
@@ -102,7 +103,7 @@ function deleteAttacker(attacker){
 //nog niet in gebruik
 function checkDead(){
     for(var i = 0; i < attackers.length; i++){
-        if(attackers[i].life <= 0){
+        if(attackers[i].health <= 0){
             attackers.splice(i, 1);
             i--;
         }

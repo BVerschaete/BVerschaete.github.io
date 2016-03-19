@@ -18,6 +18,12 @@ function gameLoop() {
 
     for(var i = 0; i < attackers.length; i++) {
         attackers[i].updatePosition();
+        checkDead();
+    }
+
+    for(var i = 0; i < towers.length; i++) {
+        towers[i].findTarget();
+        towers[i].attack();
     }
 
     renderingStep();

@@ -40,7 +40,7 @@ function addCanvas(){
 }
 
 function toggleSpawn(){
-    var btnSpawn = $("#btnSpawnWave");
+    var btnSpawn = $("#btnSpawnWave")[0];
 
     btnSpawn.disabled = !btnSpawn.disabled;
 }
