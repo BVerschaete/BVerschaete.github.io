@@ -18,10 +18,10 @@ function getMousePosition(event) {
 function drawRadius(){
     if(mouse.inCanvas) {
         var context = game.context;
-        var boardValueLinksBoven = getValueFromPos(mouse.x-10, mouse.y-10);
-        var boardValueRechtsBoven = getValueFromPos(mouse.x+10, mouse.y-10);
-        var boardValueLinksOnder = getValueFromPos(mouse.x-10, mouse.y+10);
-        var boardValueRechtsOnder = getValueFromPos(mouse.x+10, mouse.y+10);
+        var boardValueLinksBoven = getValueFromPos(mouse.x-(game.tileHeight/4), mouse.y-(game.tileHeight/4));
+        var boardValueRechtsBoven = getValueFromPos(mouse.x+(game.tileHeight/4), mouse.y-(game.tileHeight/4));
+        var boardValueLinksOnder = getValueFromPos(mouse.x-(game.tileHeight/4), mouse.y+(game.tileHeight/4));
+        var boardValueRechtsOnder = getValueFromPos(mouse.x+(game.tileHeight/4), mouse.y+(game.tileHeight/4));
 
         var canPlace =(boardValueLinksBoven === 0 && boardValueLinksBoven !== null) &&
                         (boardValueRechtsBoven === 0 && boardValueRechtsBoven !== null) &&
@@ -37,7 +37,8 @@ function drawRadius(){
         }
 
         context.beginPath();
-        context.arc(mouse.x, mouse.y, 50, 0, 2 * Math.PI);
+        var range = towerClasses[currentTower].prototype.range;
+        context.arc(mouse.x, mouse.y, range, 0, 2 * Math.PI);
         // globalAlpha = transparancy
         context.globalAlpha = 0.4;
         context.fill();

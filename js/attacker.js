@@ -4,15 +4,15 @@
 var attackers = [];
 
 function Attacker(){
-    this.speedX= 100,
-    this.speedY= 100,
-    this.image= "dragon.png",
-    this.posX= startX,
-    this.posY= startY,
-    this.locX= (this.posX * game.tileWidth),
-    this.locY= (this.posY * game.tileHeight),
-    this.oldNow = Date.now(),
-    this.direction = startDirection
+    this.speedX= 100;
+    this.speedY= 100;
+    this.image= "dragon.png";
+    this.posX= startX;
+    this.posY= startY;
+    this.locX= (this.posX * game.tileWidth);
+    this.locY= (this.posY * game.tileHeight);
+    this.oldNow = Date.now();
+    this.direction = startDirection;
 }
 
 Attacker.prototype.move = function() {

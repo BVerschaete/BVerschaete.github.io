@@ -6,6 +6,9 @@ canvas {
     background: #fff;
     margin: 0 auto;
     padding: 10px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
 }
 
 #container {

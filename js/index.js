@@ -1,20 +1,18 @@
 /**
  * Created by Bastien on 3/12/2015.
  */
-var game = {};
+var game = {
+    canvas: null,
+    context: null,
+    tileWidth: 40,
+    tileHeight: 40,
+    canvasWidth: 0,
+    canvasHeight: 0,
+    attackersScore: 0
+};
 
 function setup() {
     //useDisqus();
-    
-    game = {
-        canvas: null,
-        context: null,
-        tileWidth: 40,
-        tileHeight: 40,
-        canvasWidth: 0,
-        canvasHeight: 0,
-        attackersScore: 0,
-    };
 
     addCanvas();
     
@@ -23,35 +21,11 @@ function setup() {
     game.canvas.addEventListener('mousemove', getMousePosition, false);
     game.canvas.addEventListener('mousedown', placeTower, false);
     $(".towerbutton").click(selectTower);
-    document.getElementById("btnSpawnWave").addEventListener("click", spawnWave);
+    $("#btnSpawnWave").click(spawnWave);
 
     gameLoop();
 }
 
-function toggleSpawn(){
-    var btnSpawn = document.getElementById("btnSpawnWave");
-
-    if(btnSpawn.disabled){
-        btnSpawn.disabled = false;
-    }else{
-        btnSpawn.disabled = true;
-    }
-}
-
-// attackers score of game health of whatever
-function displayAttScore(){
-    document.getElementById("attackersScore").innerHTML = game.attackersScore.toString();
-}
-
-function spawnWave(){
-    toggleSpawn();
-
-    var waitTime = 1000;
-    var loop = setInterval(addAttacker,waitTime);
-    var aantalMonsters = 5;
-    setTimeout(function( ) { clearInterval(loop); toggleSpawn(); }, aantalMonsters * waitTime);
-
-}
 
 function addCanvas(){
     var width = game.tileWidth * board[0].length;
@@ -63,6 +37,27 @@ function addCanvas(){
     game.context = game.canvas.getContext("2d");
     game.canvasWidth = $(game.canvas).width();
     game.canvasHeight = $(game.canvas).height();
+}
+
+function toggleSpawn(){
+    var btnSpawn = $("#btnSpawnWave");
+
+    btnSpawn.disabled = !btnSpawn.disabled;
+}
+
+// attackers score of game health of whatever
+function displayAttScore(){
+    $("#attackersScore").innerHTML = game.attackersScore.toString();
+}
+
+function spawnWave(){
+    toggleSpawn();
+
+    var waitTime = 1000;
+    var loop = setInterval(addAttacker,waitTime);
+    var aantalMonsters = 5;
+    setTimeout(function( ) { clearInterval(loop); toggleSpawn(); }, aantalMonsters * waitTime);
+
 }
 
 function drawMap(){
