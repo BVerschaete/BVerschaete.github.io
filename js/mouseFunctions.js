@@ -26,7 +26,8 @@ function drawRadius(){
         var canPlace =(boardValueLinksBoven === 0 && boardValueLinksBoven !== null) &&
                         (boardValueRechtsBoven === 0 && boardValueRechtsBoven !== null) &&
                         (boardValueLinksOnder === 0 && boardValueLinksOnder !== null) &&
-                        (boardValueRechtsOnder === 0 && boardValueRechtsOnder !== null);
+                        (boardValueRechtsOnder === 0 && boardValueRechtsOnder !== null) &&
+                        (game.money >= towerClasses[currentTower].prototype.cost);
 
         if(canPlace){
             context.fillStyle = 'Yellow';
@@ -69,6 +70,8 @@ function placeTower(event) {
     event.stopPropagation();
     if (mouse.canPlaceTowerHere) {
         addTower(mouse.x, mouse.y);
+        game.money -= towerClasses[currentTower].prototype.cost;
+        console.log(game.money);
     }
 }
 

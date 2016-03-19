@@ -15,6 +15,7 @@ function Attacker(){
     this.direction = startDirection;
     this.maxHealth = 100;
     this.health = this.maxHealth;
+    this.reward = 10;
 }
 
 Attacker.prototype.move = function() {
@@ -112,6 +113,7 @@ function deleteAttacker(attacker){
 function checkDead(){
     for(var i = 0; i < attackers.length; i++){
         if(attackers[i].health <= 0){
+            game.money += attackers[i].reward;
             attackers.splice(i, 1);
             i--;
         }

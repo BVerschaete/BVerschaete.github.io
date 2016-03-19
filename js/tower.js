@@ -15,6 +15,7 @@ Tower.prototype.image = "tower1.png";
 Tower.prototype.range = (game.tileSize/2) + (game.tileSize*1.5); //40*1.875 = 75, in functie van tileSize stellen om gemakkelijk spel te resizen-
 Tower.prototype.fireRate = 500; // 1 keer per 1000 milliseconden
 Tower.prototype.damage = 10;
+Tower.prototype.cost = 60;
 
 //child object van Tower, zodat we verschillende torens kunnen maken en gewoon de
 //variabelen per tower moeten aanpassen voor verschillende functionaliteit
@@ -27,6 +28,7 @@ Tower2.prototype.image = "tower2.png";
 Tower2.prototype.range = (game.tileSize*2.5); //100
 Tower2.prototype.fireRate = Tower.prototype.fireRate * 2;
 Tower2.prototype.damage = Tower.prototype.damage * 2;
+Tower2.prototype.cost = Tower.prototype.cost * 1.2;
 
 function Tower3(x,y) {
     Tower.call(this,x,y);
@@ -37,6 +39,7 @@ Tower3.prototype.image = "tower3.png";
 Tower3.prototype.range = (game.tileSize*3.125); //125
 Tower2.prototype.fireRate = Tower.prototype.fireRate * 3;
 Tower2.prototype.damage = Tower.prototype.damage * 3;
+Tower3.prototype.cost = Tower.prototype.cost * 1.4;
 
 //array met constructors van alle verschillende towers, door towerClasses[n](x, y) te callen kunnen we zo gemakkelijk towers
 //maken

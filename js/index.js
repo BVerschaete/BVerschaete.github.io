@@ -6,7 +6,8 @@ var game = {
     context: null,
     standardTileSize: 40, //nodig als standaardwaarde voor slider om te vergelijken
     tileSize: 40,
-    attackersScore: 0
+    attackersScore: 0,
+    money: 200
 };
 
 function setup() {
