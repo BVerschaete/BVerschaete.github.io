@@ -18,14 +18,22 @@ function getMousePosition(event) {
 function drawRadius(){
     if(mouse.inCanvas) {
         var context = game.context;
-        var boardValue = getValueFromPos(mouse.x, mouse.y);
+        var boardValueLinksBoven = getValueFromPos(mouse.x-10, mouse.y-10);
+        var boardValueRechtsBoven = getValueFromPos(mouse.x+10, mouse.y-10);
+        var boardValueLinksOnder = getValueFromPos(mouse.x-10, mouse.y+10);
+        var boardValueRechtsOnder = getValueFromPos(mouse.x+10, mouse.y+10);
 
-        if(boardValue === 0 && boardValue !== null){
+        var canPlace =(boardValueLinksBoven === 0 && boardValueLinksBoven !== null) &&
+                        (boardValueRechtsBoven === 0 && boardValueRechtsBoven !== null) &&
+                        (boardValueLinksOnder === 0 && boardValueLinksOnder !== null) &&
+                        (boardValueRechtsOnder === 0 && boardValueRechtsOnder !== null);
+
+        if(canPlace){
             context.fillStyle = 'Yellow';
-            mouse.placeTower = true;
+            mouse.canPlaceTowerHere = true;
         }else{
             context.fillStyle = 'red';
-            mouse.placeTower = false;
+            mouse.canPlaceTowerHere = false;
         }
 
         context.beginPath();
@@ -41,8 +49,9 @@ function toggleMouseInCanvas(){
     mouse.inCanvas = !mouse.inCanvas;
 }
 
+//plaatst tower bij muisklik
 function placeTower() {
-    if (mouse.placeTower) {
+    if (mouse.canPlaceTowerHere) {
         addTower(mouse.x, mouse.y);
     }
 }

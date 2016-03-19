@@ -29,7 +29,7 @@ Tower3.prototype = Object.create(Tower.prototype);
 Tower3.prototype.image = "tower3.png";
 
 //array met constructors van alle verschillende towers, door towerClasses[n](x, y) te callen kunnen we zo gemakkelijk towers
-//tekenen
+//maken
 var towerClasses = [Tower,Tower2,Tower3];
 
 //gemeenschappelijke draw-functie
