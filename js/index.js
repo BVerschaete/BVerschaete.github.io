@@ -4,9 +4,8 @@
 var game = {
     canvas: null,
     context: null,
+    standardTileSize: 40, //nodig als standaardwaarde voor slider om te vergelijken
     tileSize: 40,
-    canvasWidth: 0,
-    canvasHeight: 0,
     attackersScore: 0
 };
 
@@ -22,9 +21,11 @@ function setup() {
     $(".towerbutton").click(selectTower);
     $("#btnSpawnWave").click(spawnWave);
 
+    //cleart het plaatsen van een tower
     $("body").click(function(){
         currentTower = -1;
     });
+    
     gameLoop();
 }
 
@@ -33,17 +34,10 @@ function addCanvas(){
     var width = game.tileSize * board[0].length;
     var height =  game.tileSize * board.length;
     $("#container").css({ 'width': width });
-    var canvas = $('<canvas/>').attr({width: width, height: height, id: 'canvas'}).appendTo('#container');
+    $('<canvas/>').attr({width: width, height: height, id: 'canvas'}).appendTo('#container');
 
     game.canvas = $("canvas")[0];
     game.context = game.canvas.getContext("2d");
-    game.canvasWidth = $(game.canvas).width();
-    game.canvasHeight = $(game.canvas).height();
-}
-
-function toggleSpawn(){
-    var btnSpawn = $("#btnSpawnWave")[0];
-    btnSpawn.disabled = !btnSpawn.disabled;
 }
 
 // attackers score of game health of whatever
@@ -58,12 +52,16 @@ function spawnWave(){
     var loop = setInterval(addAttacker,waitTime);
     var aantalMonsters = 5;
     setTimeout(function( ) { clearInterval(loop); toggleSpawn(); }, aantalMonsters * waitTime);
+}
 
+function toggleSpawn(){
+    var btnSpawn = $("#btnSpawnWave")[0];
+    btnSpawn.disabled = !btnSpawn.disabled;
 }
 
 function drawMap(){
     game.context.fillStyle = 'white';
-    game.context.fillRect(0, 0, game.canvas.width, game.canvas.height);
+    game.context.fillRect(0, 0, $(game.canvas).attr("width"), $(game.canvas).attr("height"));
 
     var path = new Image();
     path.src = "img/grasstile.png";
