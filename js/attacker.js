@@ -31,6 +31,8 @@ Attacker.prototype.move = function() {
         this.direction = 3;
     } else {
         deleteAttacker(this);
+        game.attackersScore += 1;
+        displayAttScore();
     }
 };
 

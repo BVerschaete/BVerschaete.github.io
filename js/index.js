@@ -12,7 +12,8 @@ function setup() {
         tileWidth: 40,
         tileHeight: 40,
         canvasWidth: 0,
-        canvasHeight: 0
+        canvasHeight: 0,
+        attackersScore: 0,
     };
 
     addCanvas();
@@ -27,11 +28,29 @@ function setup() {
     gameLoop();
 }
 
+function toggleSpawn(){
+    var btnSpawn = document.getElementById("btnSpawnWave");
+
+    if(btnSpawn.disabled){
+        btnSpawn.disabled = false;
+    }else{
+        btnSpawn.disabled = true;
+    }
+}
+
+// attackers score of game health of whatever
+function displayAttScore(){
+    document.getElementById("attackersScore").innerHTML = game.attackersScore.toString();
+}
+
 function spawnWave(){
+    toggleSpawn();
+
     var waitTime = 1000;
     var loop = setInterval(addAttacker,waitTime);
     var aantalMonsters = 5;
-    setTimeout(function( ) { clearInterval(loop); }, aantalMonsters * waitTime);
+    setTimeout(function( ) { clearInterval(loop); toggleSpawn(); }, aantalMonsters * waitTime);
+
 }
 
 function addCanvas(){
