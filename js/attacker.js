@@ -93,7 +93,13 @@ Attacker.prototype.draw = function(){
 Attacker.prototype.drawHealthBar = function(){
     var context = game.context;
 
-    context.fillStyle = '#90EE90';
+    if(this.health > (50/100)*this.maxHealth) {
+        context.fillStyle = '#9fff80';
+    } else if (this.health > (25/100)*this.maxHealth){
+        context.fillStyle = '#ffff80';
+    } else {
+        context.fillStyle = '#ff8080';
+    }
     context.fillRect(this.locX + game.tileSize / 8, this.locY - game.tileSize / 3, (game.tileSize - game.tileSize / 4) * this.health / this.maxHealth, game.tileSize / 4);
 };
 
