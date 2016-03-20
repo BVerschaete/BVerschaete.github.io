@@ -2,38 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
-    <link rel="stylesheet" type="text/css" href="style/game.css" media="screen">
+    <title>Tower Defense</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="js/allPages.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/index.js" defer></script>
-    <script type="text/javascript" charset="utf-8" src="js/gameLoop.js" defer></script>
-    <script type="text/javascript" charset="utf-8" src="js/mouseFunctions.js" defer></script>
-    <script type="text/javascript" charset="utf-8" src="js/board.js" defer></script>
-    <script type="text/javascript" charset="utf-8" src="js/attacker.js" defer></script>
-    <script type="text/javascript" charset="utf-8" src="js/tower.js" defer></script>
-    <script type="text/javascript" charset="utf-8" src="js/bullet.js" defer></script>
+    <link rel="stylesheet" href="style/welcome.css">
 </head>
 <body>
-<a href="welcome.html" class="btn btn-primary">Go to welcome page</a>
-<div class="wrapper">
-    <div id="container"></div>
-    <div class="controls">
-        <h2>Controls</h2>
-        <input type="button" class="btn" value="Spawn Wave" id="btnSpawnWave"/>
-        <input type="button" class="btn towerbutton" data-type="0" value="Tower Tier 1 (60 coins)"/>
-        <input type="button" class="btn towerbutton" data-type="1" value="Tower Tier 2 (72 coins)"/>
-        <input type="button" class="btn towerbutton" data-type="2" value="Tower Tier 3 (84 coins)"/>
+<section id="home">
+    <article class="jumbotron">
+        <h1>Tower Defense</h1>
+        <p>Hello! Welcome to a tower defense game, created by Matthias Neirinck and Bastien Verschaete. We hope you have a wonderful experience playing our game and browsing our site.
+        On the top of this page you can see who you're competing against, a tutorial on how to play and a look at how this code actually works. Found a bug? Feel free to contact us
+        in the upper right corner! While you're there you can take a look at our github page as well.</p>
+        <p>What are you waiting for? Go ahead!</p>
+        <h2><a id="usernameLink" href="#username">Click here to select a username and start playing!</a></h2>
+    </article>
+</section>
+<section id="username">
+    <h2>Enter your username:</h2>
+    <form role="form">
+        <div class="form-group">
+            <input type="text" class="form-control" id="usernameInput" placeholder="Enter username">
+        </div>
+        <a href="levelselect.html" class="btn btn-primary" id="startGame">Start</a>
+    </form>
+    <div>
+        <a id="homeLink" href="#home" class="btn btn-info">Not feeling ready? Go back!</a>
     </div>
-    <div id="towerInfo">
-
-    </div>
-</div>
-
-<p>Attackers score: <span id="attackersScore">0</span></p>
-<p>Attackers stopped: <span id="attackersStopped">0</span></p>
-<p>Money: <span id="money">200</span></p>
-<div id="disqus_thread"></div>
+</section>
+<script>
+    //zorgt ervoor dat spelernaam wordt doorgegeven aan gamepagina
+    $('#startGame').click(function(){
+        sessionStorage.playerName = $('#usernameInput').val();
+    })
+</script>
 </body>
 </html>

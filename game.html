@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tower Defense</title>
+    <link rel="stylesheet" type="text/css" href="style/game.css" media="screen">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+    <script src="js/allPages.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/levels.js" defer></script>
+    <script type="text/javascript" charset="utf-8" src="js/index.js" defer></script>
+    <script type="text/javascript" charset="utf-8" src="js/gameLoop.js" defer></script>
+    <script type="text/javascript" charset="utf-8" src="js/mouseFunctions.js" defer></script>
+    <script type="text/javascript" charset="utf-8" src="js/board.js" defer></script>
+    <script type="text/javascript" charset="utf-8" src="js/attacker.js" defer></script>
+    <script type="text/javascript" charset="utf-8" src="js/tower.js" defer></script>
+    <script type="text/javascript" charset="utf-8" src="js/bullet.js" defer></script>
+</head>
+<body>
+<div class="wrapper">
+    <div id="container"></div>
+    <div class="controls">
+        <h2>Controls</h2>
+        <input type="button" class="btn" value="Spawn Wave" id="btnSpawnWave"/>
+        <input type="button" class="btn towerbutton" data-type="0" value="Tower Tier 1 (60 coins)"/>
+        <input type="button" class="btn towerbutton" data-type="1" value="Tower Tier 2 (72 coins)"/>
+        <input type="button" class="btn towerbutton" data-type="2" value="Tower Tier 3 (84 coins)"/>
+    </div>
+    <div id="towerInfo">
+
+    </div>
+    <p>Attackers score: <span id="attackersScore">0</span></p>
+    <p>Attackers stopped: <span id="attackersStopped">0</span></p>
+    <p>Money: <span id="money">200</span></p>
+</div>
+<div id="disqus_thread"></div>
+</body>
+</html>

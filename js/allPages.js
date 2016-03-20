@@ -1,8 +1,15 @@
 /**
  * Created by Bastien on 18/03/2016.
  */
-//speciale scroll-functionaliteit voor welkom-pagina, gebruikt van https://css-tricks.com/
-$(function() {
+//javascript nodig bij alle pages
+
+function setup(){
+    scroll();
+    loadNavBar();
+}
+
+//speciale scroll/click-functionaliteit voor welkom-pagina, gebruikt van https://css-tricks.com/
+function scroll() {
     $('a[href*="#"]:not([href="#"])').click(function() {
         if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
             var target = $(this.hash);
@@ -15,4 +22,12 @@ $(function() {
             }
         }
     });
-});
+}
+
+//loads navbar code to HTML page, removes repeated navbar code
+function loadNavBar(){
+    $('<div/>').attr("id", "navbar").prependTo("body");
+    $('#navbar').load("repeatedHTML/navbar.html");
+}
+
+$(window).load(setup);

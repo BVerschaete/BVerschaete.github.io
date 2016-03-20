@@ -1,0 +1,48 @@
+body{
+    background-color: #6093CA !important;
+    text-align: center;
+}
+
+.levelSelectButton {
+    margin: 20px;
+    background: #3498db;
+    background-image: -webkit-linear-gradient(top, #3498db, #2b698f);
+    background-image: -moz-linear-gradient(top, #3498db, #2b698f);
+    background-image: -ms-linear-gradient(top, #3498db, #2b698f);
+    background-image: -o-linear-gradient(top, #3498db, #2b698f);
+    background-image: linear-gradient(to bottom, #3498db, #2b698f);
+    text-shadow: 1px 4px 7px #000000;
+    font-family: Arial;
+    color: #8f713c;
+    font-size: 40px;
+    padding: 10px 20px 10px 20px;
+    border: solid black 2px;
+    text-decoration: none;
+}
+
+.levelSelectButton:hover, a.hovered {
+    background: #3cb0fd;
+    color: #8f713c;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+}
+
+#buttonContainer{
+    margin-top: 50px;
+}
+
+h1{
+    margin-top: 80px;
+}
+
+#levelInfo{
+    text-align: center;
+    font-size: 2em;
+    display: block;
+    margin: 15px;
+    height: 40px;
+}

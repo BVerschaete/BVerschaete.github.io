@@ -7,12 +7,12 @@ function Attacker(){
     this.speedX= 50 * (game.tileSize / 40); // snelheid relatief aan de snelheid bij een tileSize van 40
     this.speedY= 50 * (game.tileSize / 40);
     this.image= "dragon.png";
-    this.posX= startX;
-    this.posY= startY;
+    this.posX= selectedLevel.startX;
+    this.posY= selectedLevel.startY;
     this.locX= (this.posX * game.tileSize);
     this.locY= (this.posY * game.tileSize);
     this.oldNow = Date.now();
-    this.direction = startDirection;
+    this.direction = selectedLevel.startDirection;
     this.maxHealth = 100;
     this.health = this.maxHealth;
     this.reward = 10;
@@ -20,6 +20,7 @@ function Attacker(){
 
 Attacker.prototype.move = function() {
     // board[this.posY-1] != null is nodig want dit zal null zijn als de sprite in de bovenste rij is
+    var board = selectedLevel.board;
     if(this.direction != 2  && board[this.posY-1] != null && board[this.posY-1][this.posX] == 1 ){
         this.posY -= 1;
         this.direction = 0;

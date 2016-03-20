@@ -2,6 +2,7 @@
  * Created by Bastien on 3/12/2015.
  */
 var game = {
+    playerName: sessionStorage.playerName,
     canvas: null,
     context: null,
     tileSize: 40,
@@ -12,7 +13,7 @@ var game = {
 
 function setup() {
     //useDisqus();
-
+    console.log(game.playerName);
     addCanvas();
     
     $(game.canvas).mouseover(toggleMouseInCanvas);
@@ -32,6 +33,7 @@ function setup() {
 
 
 function addCanvas(){
+    var board = selectedLevel.board;
     var width = game.tileSize * board[0].length;
     var height =  game.tileSize * board.length;
     $("#container").css({ 'width': width });
@@ -70,6 +72,7 @@ function drawMap(){
     var water = new Image();
     water.src = "img/watertile.jpg";
 
+    var board = selectedLevel.board;
     for(var i = 0; i < board.length; i++){
         for(var j = 0; j < board[i].length; j++) {
             if(board[i][j] === 0){
@@ -98,4 +101,4 @@ function useDisqus() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME B
     (d.head || d.body).appendChild(s);
 }
 
-window.addEventListener("load", setup);
+$(window).load(setup);
