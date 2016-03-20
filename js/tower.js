@@ -22,7 +22,7 @@ Tower.prototype.cost = 60;
 function Tower2(x,y) {
     Tower.call(this,x,y);
 }
-// test
+
 Tower2.prototype = Object.create(Tower.prototype);
 Tower2.prototype.image = "tower2.png";
 Tower2.prototype.range = (game.tileSize*2.5); //100
