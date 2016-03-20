@@ -20,3 +20,7 @@ canvas {
 .wrapper{
     text-align: center;
 }
+
+#towerInfo{
+    visibility: hidden;
+}

@@ -12,6 +12,8 @@ function renderingStep(){
     drawTowers();
     if (currentTower != -1) {
         drawRadius();
+    }else if(selectedTower != -1){
+        towers[selectedTower].drawRange();
     }
     drawBullets();
 }
