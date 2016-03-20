@@ -34,7 +34,7 @@ Attacker.prototype.move = function() {
         this.direction = 3;
     } else {
         deleteAttacker(this);
-        game.attackersScore += 1;
+        game.attackersScore++;
     }
 };
 
@@ -84,7 +84,7 @@ Attacker.prototype.updatePosition = function(){
     }
 };
 
-Attacker.prototype.draw = function(){
+Attacker.prototype.drawImage = function(){
     var sprite = new Image();
     sprite.src = "img/" + this.image;
     game.context.drawImage(sprite, this.locX, this.locY, game.tileSize, game.tileSize);
@@ -105,7 +105,7 @@ Attacker.prototype.drawHealthBar = function(){
 
 function drawAttackers(){
     for(var i = 0; i < attackers.length; i++){
-        attackers[i].draw();
+        attackers[i].drawImage();
         attackers[i].drawHealthBar();
     }
 }
@@ -119,7 +119,8 @@ function checkDead(){
     for(var i = 0; i < attackers.length; i++){
         if(attackers[i].health <= 0){
             game.money += attackers[i].reward;
-            attackers.splice(i, 1);
+            deleteAttacker(attackers[i]);
+            game.attackersStopped++;
             i--;
         }
     }
@@ -132,4 +133,8 @@ function addAttacker(){
 // attackers score of game health of whatever
 function displayAttScore(){
     $("#attackersScore").text(game.attackersScore);
+}
+
+function displayAttStopped(){
+    $("#attackersStopped").text(game.attackersStopped);
 }

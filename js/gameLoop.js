@@ -38,6 +38,7 @@ function updateLogic(){
     }
     
     displayAttScore();
+    displayAttStopped();
     displayMoney();
 
     checkDead();

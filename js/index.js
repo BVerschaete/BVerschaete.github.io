@@ -6,6 +6,7 @@ var game = {
     context: null,
     tileSize: 40,
     attackersScore: 0,
+    attackersStopped: 0,
     money: 200
 };
 
