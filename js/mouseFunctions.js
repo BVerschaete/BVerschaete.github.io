@@ -23,11 +23,12 @@ function drawRadius(){
         var boardValueLinksOnder = getValueFromPos(mouse.x-(game.tileSize/4), mouse.y+(game.tileSize/4));
         var boardValueRechtsOnder = getValueFromPos(mouse.x+(game.tileSize/4), mouse.y+(game.tileSize/4));
 
-        var canPlace =(boardValueLinksBoven === 0 && boardValueLinksBoven !== null) &&
+        var canPlace =( (game.money >= towerClasses[currentTower].prototype.cost) &&
+                        (boardValueLinksBoven === 0 && boardValueLinksBoven !== null) &&
                         (boardValueRechtsBoven === 0 && boardValueRechtsBoven !== null) &&
                         (boardValueLinksOnder === 0 && boardValueLinksOnder !== null) &&
                         (boardValueRechtsOnder === 0 && boardValueRechtsOnder !== null) &&
-                        (game.money >= towerClasses[currentTower].prototype.cost);
+                        (towerOnLocation(mouse.x, mouse.y) === -1));
 
         if(canPlace){
             context.fillStyle = 'Yellow';
@@ -58,7 +59,6 @@ function drawRadius(){
         drawCircle();
         drawTower();
     }
-
 }
 
 function toggleMouseInCanvas(){
@@ -68,10 +68,14 @@ function toggleMouseInCanvas(){
 //plaatst tower bij muisklik
 function placeTower(event) {
     event.stopPropagation();
+    selectedTower = towerOnLocation(mouse.x, mouse.y);
+    var tower = towers[selectedTower];
+
     if (mouse.canPlaceTowerHere) {
         addTower(mouse.x, mouse.y);
         game.money -= towerClasses[currentTower].prototype.cost;
-        console.log(game.money);
+    }else if(tower !== null && currentTower === -1) {
+        tower.displayInfo();
     }
 }
 

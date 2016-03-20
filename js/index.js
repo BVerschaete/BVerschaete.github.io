@@ -8,7 +8,7 @@ var game = {
     tileSize: 40,
     attackersScore: 0,
     attackersStopped: 0,
-    money: 200
+    money: 400
 };
 
 function setup() {
@@ -26,6 +26,7 @@ function setup() {
     //cleart het plaatsen van een tower
     $("body").click(function(){
         currentTower = -1;
+        selectedTower = -1;
     });
     
     gameLoop();

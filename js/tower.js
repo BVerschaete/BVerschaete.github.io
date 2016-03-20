@@ -3,12 +3,14 @@
  */
 var towers = [];
 var currentTower = -1;
+var selectedTower = -1; // de index van de geselecteerde toren in de towers array
 
 //basis toren
 function Tower(x, y){
     this.locX= x;
     this.locY= y;
     this.oldNow = Date.now(); // tijdstip van laatste aanval
+    this.level = 1;
 }
 
 Tower.prototype.image = "tower1.png";
@@ -67,9 +69,6 @@ Tower.prototype.findTarget = function(){
 
 Tower.prototype.findUnitVector = function() {
     if (!this.target) return false; //if there is no target, dont bother calculating unit vector
-    var xDist = this.target.locX - this.locX;
-    var yDist = this.target.locY - this.locY;
-    var dist = Math.sqrt(xDist * xDist + yDist * yDist);
     this.xFire = this.locX; //+ game.tileSize * xDist / dist; //where turret ends and bullets start
     this.yFire = this.locY; //+ game.tileSize * yDist / dist;
 };
@@ -85,6 +84,27 @@ Tower.prototype.attack = function(){
     }else if(this.target == null){
         this.oldNow = now - this.fireRate;
     }
+};
+
+Tower.prototype.displayInfo = function(){
+    document.getElementById("towerInfo").style.visibility = "visible";
+    document.getElementById("towerDamage").innerHTML = this.damage.toString();
+    document.getElementById("towerRange").innerHTML = this.range.toString();
+    document.getElementById("towerLevel").innerHTML = this.level.toString();
+    document.getElementById("towerImg").src = "./img/" + this.image;
+};
+
+Tower.prototype.drawRange = function(){
+    var context = game.context;
+    var range = this.range;
+
+    context.fillStyle = 'white';
+    context.beginPath();
+    context.arc(this.locX, this.locY, range, 0, 2 * Math.PI);
+    // globalAlpha = transparancy
+    context.globalAlpha = 0.4;
+    context.fill();
+    context.globalAlpha = 1;
 };
 
 function drawTowers(){
@@ -105,3 +125,13 @@ function selectTower(event){
     currentTower = event.target.getAttribute("data-type");
 }
 
+function towerOnLocation(x, y){
+    for (var i = 0; i < towers.length; i++) {
+
+        // vierkante check om te kijken of er een tower op de locatie staat, aangepast aan de grootte van de towers
+        if(Math.abs(x - towers[i].locX) < game.tileSize / 2 && Math.abs(towers[i].locY - y) < game.tileSize / 2){
+            return i;
+        }
+    }
+    return -1;
+}

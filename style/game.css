@@ -21,3 +21,8 @@ canvas {
     text-align: center;
     margin-top: 50px;
 }
+
+#towerInfo{
+    visibility: hidden;
+>>>>>>> refs/remotes/origin/master
+}
