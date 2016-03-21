@@ -2,7 +2,7 @@
  * Created by Bastien on 19/03/2016.
  */
 var towers = [];
-var currentTower = -1;
+var currentTower = -1; //het type tower om te plaatsen
 var selectedTower = -1; // de index van de geselecteerde toren in de towers array
 
 //basis toren

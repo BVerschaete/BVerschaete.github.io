@@ -89,7 +89,7 @@ Attacker.prototype.updatePosition = function(){
 Attacker.prototype.drawImage = function(){
     var sprite = new Image();
     sprite.src = "img/" + this.image;
-    game.context.drawImage(sprite, this.locX + game.tileSize * (1-this.scale) / 2, this.locY + game.tileSize * (1-this.scale) / 2, game.tileSize * this.scale, game.tileSize * this.scale);
+    game.context.drawImage(sprite, (this.locX + game.tileSize * (1-this.scale) / 2), (this.locY + game.tileSize * (1-this.scale) / 2), (game.tileSize * this.scale), (game.tileSize * this.scale));
 };
 
 Attacker.prototype.drawHealthBar = function(){
@@ -102,7 +102,7 @@ Attacker.prototype.drawHealthBar = function(){
     } else {
         context.fillStyle = '#ff8080';
     }
-    context.fillRect(this.locX + game.tileSize / 8, this.locY - game.tileSize / 3, (game.tileSize - game.tileSize / 4) * this.health / this.maxHealth, game.tileSize / 4);
+    context.fillRect((this.locX + game.tileSize / 8), (this.locY - game.tileSize / 3), ((game.tileSize - game.tileSize / 4) * this.health / this.maxHealth), (game.tileSize / 4));
 };
 
 function drawAttackers(){

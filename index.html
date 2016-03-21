@@ -36,8 +36,20 @@
 </section>
 <script>
     //zorgt ervoor dat spelernaam wordt doorgegeven aan gamepagina
-    $('#startGame').click(function(){
-        sessionStorage.playerName = $('#usernameInput').val();
+    var start = $('#startGame');
+    var input = $('#usernameInput');
+    start.addClass("disabled");
+    input.on('input', function(){
+        if(input.val().trim()){
+            start.removeClass("disabled");
+        } else {
+            start.addClass("disabled");
+        }
+    });
+
+
+    start.click(function(){
+        sessionStorage.playerName = input.val();
     })
 </script>
 <div id="disqus_thread"></div>

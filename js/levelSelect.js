@@ -3,7 +3,7 @@
  */
 $(function() {
     var startButton = $("#startSelectedLevel");
-    startButton.attr('disabled', true);
+    startButton.addClass("disabled");
 
     for(var i = 0; i < levels.length; i++){
         var button = $('<a/>');
@@ -22,7 +22,6 @@ $(function() {
         var levelName = levels[id].name;
         $('#levelInfo').text(levelName);
         sessionStorage.selectedLevel = id;
-        startButton.attr('disabled', false);
-        startButton.attr('href', "game.html")
+        startButton.removeClass("disabled");
     });
 });
