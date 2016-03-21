@@ -119,10 +119,12 @@ function addTower(){
     }
 }
 
-function selectTower(event){
-    //custom attribuut van iedere button die zegt welke soort tower er moet geplaatst worden
+//door op knop te klikken, selecteren welke toren er gebouwd moet worden
+function selectTowerToBuild(event){
     event.stopPropagation();
+    //verandert de geselecteerde toren terug op 1 zodat de towerInfo en select cirkel worden uitgeschakeld
     selectedTower = -1;
+    //custom attribuut van iedere button die zegt welke soort tower er moet geplaatst worden
     currentTower = event.target.getAttribute("data-type");
 }
 

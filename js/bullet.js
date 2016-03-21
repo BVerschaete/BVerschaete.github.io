@@ -34,9 +34,9 @@ Bullet.prototype.draw = function() {
 
 Bullet.prototype.checkCollision = function() {
     if(this.locX <= this.target.locX + game.tileSize * this.target.scale &&
-        this.locX + this.r >= this.target.locX + game.tileSize * (1 - this.target.scale) &&
+        this.locX >= this.target.locX + game.tileSize * (1 - this.target.scale) &&
         this.locY <= this.target.locY + game.tileSize * this.target.scale &&
-        this.locY + this.r >= this.target.locY + game.tileSize * (1 - this.target.scale)) {
+        this.locY >= this.target.locY + game.tileSize * (1 - this.target.scale)) {
 
         this.target.health -= this.damage;
         return true;

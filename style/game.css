@@ -1,28 +1,23 @@
 body {
     background: #6093CA !important;
+    text-align: center;
 }
 
 canvas {
     background: #fff;
-    margin: 0 auto;
-    padding: 10px;
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
-}
-
-#container {
-    /* This could be done in one single declaration. See the extended sample. */
-    margin-right: auto;
-    margin-left: auto;
+    border: solid black 2px;
+    margin: 50px auto 0;
 }
 
 .wrapper{
     text-align: center;
     margin-top: 50px;
+    position: relative;
 }
 
 #towerInfo{
-    visibility: hidden;
->>>>>>> refs/remotes/origin/master
+    display: none;
 }

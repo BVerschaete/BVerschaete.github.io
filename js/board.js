@@ -42,9 +42,9 @@ function addCanvas(){
     var board = selectedLevel.board;
     var width = game.tileSize * board[0].length;
     var height =  game.tileSize * board.length;
-    $("#container").css({ 'width': width });
-    $('<canvas/>').attr({width: width, height: height, id: 'canvas'}).appendTo('#container');
-
+    var canvas = $('<canvas/>').attr({width: width, height: height});
+    //canvas.css("margin-left", 50*(window.innerWidth - canvas.attr('width'))/window.innerWidth + "%");
+    canvas.prependTo('body');
     game.canvas = $("canvas")[0];
     game.context = game.canvas.getContext("2d");
 }

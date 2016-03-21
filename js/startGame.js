@@ -5,7 +5,7 @@ var game = {
     playerName: sessionStorage.playerName,
     canvas: null,
     context: null,
-    tileSize: 40,
+    tileSize: 50,
     attackersScore: 0,
     attackersStopped: 0,
     money: 400
@@ -15,6 +15,7 @@ function setup() {
     //check if they entered username and chosen level
     if(game.playerName && selectedLevel) {
         //useDisqus();
+        
         addCanvas();
 
         $(game.canvas).mouseover(toggleMouseInCanvas);
@@ -22,7 +23,7 @@ function setup() {
         $(game.canvas).mousemove(getMousePosition);
         $(game.canvas).click(displayInfo);
         $(game.canvas).click(placeTower);
-        $(".towerbutton").click(selectTower);
+        $(".towerbutton").click(selectTowerToBuild);
         $("#btnSpawnWave").click(spawnWave);
 
         //clear placing and selecting tower, displayInfo here makes sure the towerInfo div isn't shown
