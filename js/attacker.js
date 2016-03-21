@@ -4,8 +4,8 @@
 var attackers = [];
 
 function Attacker(){
-    this.speedX= 50 * (game.tileSize / 40); // snelheid relatief aan de snelheid bij een tileSize van 40
-    this.speedY= 50 * (game.tileSize / 40);
+    this.speedX= 30 * (game.tileSize / 40); // snelheid relatief aan de snelheid bij een tileSize van 40
+    this.speedY= 30 * (game.tileSize / 40);
     this.image= "dragon.png";
     this.posX= selectedLevel.startX;
     this.posY= selectedLevel.startY;
@@ -16,6 +16,7 @@ function Attacker(){
     this.maxHealth = 100;
     this.health = this.maxHealth;
     this.reward = 10;
+    this.scale = 0.8;
 }
 
 Attacker.prototype.move = function() {
@@ -88,7 +89,7 @@ Attacker.prototype.updatePosition = function(){
 Attacker.prototype.drawImage = function(){
     var sprite = new Image();
     sprite.src = "img/" + this.image;
-    game.context.drawImage(sprite, this.locX, this.locY, game.tileSize, game.tileSize);
+    game.context.drawImage(sprite, this.locX + game.tileSize * (1-this.scale) / 2, this.locY + game.tileSize * (1-this.scale) / 2, game.tileSize * this.scale, game.tileSize * this.scale);
 };
 
 Attacker.prototype.drawHealthBar = function(){

@@ -11,7 +11,7 @@ function Bullet(x,y,target,damage) {
 }
 
 Bullet.prototype.r = game.tileSize / 10;
-Bullet.prototype.speed = 2 * (game.tileSize / 40);
+Bullet.prototype.speed = 1 * (game.tileSize / 40);
 
 Bullet.prototype.move = function() {
     //find unit vector
@@ -33,10 +33,10 @@ Bullet.prototype.draw = function() {
 };
 
 Bullet.prototype.checkCollision = function() {
-    if(this.locX <= this.target.locX + game.tileSize * 0.8 &&
-        this.locX + this.r >= this.target.locX &&
-        this.locY <= this.target.locY + game.tileSize * 0.8 &&
-        this.locY + this.r >= this.target.locY + game.tileSize * 0.2) {
+    if(this.locX <= this.target.locX + game.tileSize * this.target.scale &&
+        this.locX + this.r >= this.target.locX + game.tileSize * (1 - this.target.scale) &&
+        this.locY <= this.target.locY + game.tileSize * this.target.scale &&
+        this.locY + this.r >= this.target.locY + game.tileSize * (1 - this.target.scale)) {
 
         this.target.health -= this.damage;
         return true;
