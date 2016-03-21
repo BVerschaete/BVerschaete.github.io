@@ -28,7 +28,7 @@ function drawRadius(){
                         (boardValueRechtsBoven === 0 && boardValueRechtsBoven !== null) &&
                         (boardValueLinksOnder === 0 && boardValueLinksOnder !== null) &&
                         (boardValueRechtsOnder === 0 && boardValueRechtsOnder !== null) &&
-                        (towerOnLocationPlace(mouse.x, mouse.y) === -1));
+                        (towerOnLocationPlace(mouse.x, mouse.y)));
 
         if(canPlace){
             context.fillStyle = 'Yellow';
