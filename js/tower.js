@@ -122,6 +122,7 @@ function addTower(){
 function selectTower(event){
     //custom attribuut van iedere button die zegt welke soort tower er moet geplaatst worden
     event.stopPropagation();
+    selectedTower = -1;
     currentTower = event.target.getAttribute("data-type");
 }
 
@@ -132,10 +133,10 @@ function towerOnLocationPlace(x1, y1){
         var x0 = towers[i].locX;
         var y0 = towers[i].locY;
         if(Math.sqrt((x1-x0)*(x1-x0) + (y1-y0)*(y1-y0)) < r){
-            return true;
+            return false;
         }
     }
-    return false;
+    return true;
 }
 
 //kijkt of toren op deze plaats staat, en zoja welkeen, met een gewone straal

@@ -20,6 +20,7 @@ function setup() {
         $(game.canvas).mouseover(toggleMouseInCanvas);
         $(game.canvas).mouseout(toggleMouseInCanvas);
         $(game.canvas).mousemove(getMousePosition);
+        $(game.canvas).click(displayInfo);
         $(game.canvas).click(placeTower);
         $(".towerbutton").click(selectTower);
         $("#btnSpawnWave").click(spawnWave);
@@ -28,6 +29,7 @@ function setup() {
         $("body").click(function () {
             currentTower = -1;
             selectedTower = -1;
+            displayInfo();
         });
 
         gameLoop();

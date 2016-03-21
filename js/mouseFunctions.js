@@ -68,14 +68,29 @@ function toggleMouseInCanvas(){
 //plaatst tower bij muisklik
 function placeTower(event) {
     event.stopPropagation();
-    selectedTower = towerOnLocationSelect(mouse.x, mouse.y);
-    var tower = towers[selectedTower];
 
-    if (mouse.canPlaceTowerHere) {
+    if (mouse.canPlaceTowerHere && currentTower != -1) {
         addTower(mouse.x, mouse.y);
         game.money -= towerClasses[currentTower].prototype.cost;
-    }else if(tower !== null && currentTower === -1) {
-        tower.displayInfo();
+    }
+}
+
+function displayInfo() {
+    event.stopPropagation();
+    var i = towerOnLocationSelect(mouse.x, mouse.y);
+    var tower = towers[i];
+    var towerInfo = $('#towerInfo');
+    if(tower){
+        if(currentTower == -1){
+            selectedTower = i;
+            tower.displayInfo();
+            towerInfo.show();
+        } else {
+            currentTower = -1;
+        }
+    } else {
+        selectedTower = -1;
+        towerInfo.hide();
     }
 }
 
