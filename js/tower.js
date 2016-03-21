@@ -128,20 +128,15 @@ function selectTower(event){
 
 //kijkt of toren op deze plaats staat, met een dubbel zo grote straal, zodat omtrek van geplaatste tower ook meegerekend wordt
 function towerOnLocationPlace(x1, y1){
-    var r = game.tileSize/2;
-    for (var i = 0; i < towers.length; i++) {
-        var x0 = towers[i].locX;
-        var y0 = towers[i].locY;
-        if(Math.sqrt((x1-x0)*(x1-x0) + (y1-y0)*(y1-y0)) < r){
-            return false;
-        }
-    }
-    return true;
+    return towerOnLocation(x1, y1, game.tileSize/2);
 }
 
 //kijkt of toren op deze plaats staat, en zoja welkeen, met een gewone straal
 function towerOnLocationSelect(x1, y1){
-    var r = game.tileSize/4;
+    return towerOnLocation(x1, y1, game.tileSize/4);
+}
+
+function towerOnLocation(x1, y1, r){
     for (var i = 0; i < towers.length; i++) {
         var x0 = towers[i].locX;
         var y0 = towers[i].locY;

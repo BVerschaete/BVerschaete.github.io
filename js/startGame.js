@@ -25,7 +25,7 @@ function setup() {
         $(".towerbutton").click(selectTower);
         $("#btnSpawnWave").click(spawnWave);
 
-        //cleart het plaatsen van een tower
+        //clear placing and selecting tower, displayInfo here makes sure the towerInfo div isn't shown
         $("body").click(function () {
             currentTower = -1;
             selectedTower = -1;

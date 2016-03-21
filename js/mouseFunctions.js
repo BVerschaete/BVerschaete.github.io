@@ -28,10 +28,10 @@ function drawRadius(){
                         (boardValueRechtsBoven === 0 && boardValueRechtsBoven !== null) &&
                         (boardValueLinksOnder === 0 && boardValueLinksOnder !== null) &&
                         (boardValueRechtsOnder === 0 && boardValueRechtsOnder !== null) &&
-                        (towerOnLocationPlace(mouse.x, mouse.y)));
+                        (towerOnLocationPlace(mouse.x, mouse.y) == -1));
 
         if(canPlace){
-            context.fillStyle = 'Yellow';
+            context.fillStyle = 'yellow';
             mouse.canPlaceTowerHere = true;
         }else{
             context.fillStyle = 'red';
@@ -75,6 +75,7 @@ function placeTower(event) {
     }
 }
 
+//toont info als er tower geselecteert wordt, cleart de doorzichtige tower placement als je bezig bent met towers plaatsen dmv currentTower = -1
 function displayInfo() {
     event.stopPropagation();
     var i = towerOnLocationSelect(mouse.x, mouse.y);
