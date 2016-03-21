@@ -28,7 +28,7 @@ function drawRadius(){
                         (boardValueRechtsBoven === 0 && boardValueRechtsBoven !== null) &&
                         (boardValueLinksOnder === 0 && boardValueLinksOnder !== null) &&
                         (boardValueRechtsOnder === 0 && boardValueRechtsOnder !== null) &&
-                        (towerOnLocation(mouse.x, mouse.y) === -1));
+                        (towerOnLocationPlace(mouse.x, mouse.y) === -1));
 
         if(canPlace){
             context.fillStyle = 'Yellow';
@@ -68,7 +68,7 @@ function toggleMouseInCanvas(){
 //plaatst tower bij muisklik
 function placeTower(event) {
     event.stopPropagation();
-    selectedTower = towerOnLocation(mouse.x, mouse.y);
+    selectedTower = towerOnLocationSelect(mouse.x, mouse.y);
     var tower = towers[selectedTower];
 
     if (mouse.canPlaceTowerHere) {

@@ -125,11 +125,26 @@ function selectTower(event){
     currentTower = event.target.getAttribute("data-type");
 }
 
-function towerOnLocation(x, y){
+function towerOnLocationPlace(x1, y1){
+    var r = game.tileSize/2;
     for (var i = 0; i < towers.length; i++) {
-
+        var x0 = towers[i].locX;
+        var y0 = towers[i].locY;
         // vierkante check om te kijken of er een tower op de locatie staat, aangepast aan de grootte van de towers
-        if(Math.abs(x - towers[i].locX) < game.tileSize / 2 && Math.abs(towers[i].locY - y) < game.tileSize / 2){
+        if(Math.sqrt((x1-x0)*(x1-x0) + (y1-y0)*(y1-y0)) < r){
+            return i;
+        }
+    }
+    return -1;
+}
+
+function towerOnLocationSelect(x1, y1){
+    var r = game.tileSize/4;
+    for (var i = 0; i < towers.length; i++) {
+        var x0 = towers[i].locX;
+        var y0 = towers[i].locY;
+        // vierkante check om te kijken of er een tower op de locatie staat, aangepast aan de grootte van de towers
+        if(Math.sqrt((x1-x0)*(x1-x0) + (y1-y0)*(y1-y0)) < r){
             return i;
         }
     }
