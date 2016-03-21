@@ -33,6 +33,7 @@ function setup() {
         gameLoop();
     } else {
         window.location.href = "index.html";
+        window.alert("Please select a name and a level before going to the game.html page");
     }
 }
 

@@ -55,3 +55,8 @@ form{
     transition: all 0.3s ease-in-out 0s;
     width: 100%;
 }
+
+#warning{
+    float: left;
+    margin: 0 auto;
+}
