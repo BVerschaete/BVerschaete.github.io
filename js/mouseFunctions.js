@@ -84,7 +84,7 @@ function displayInfo() {
     if(tower){
         if(currentTower == -1){
             selectedTower = i;
-            tower.displayInfo();
+            displaySelectedTowerInfo();
             towerInfo.css('visibility', 'visible');
         } else {
             currentTower = -1;

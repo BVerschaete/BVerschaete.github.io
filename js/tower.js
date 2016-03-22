@@ -54,28 +54,6 @@ Tower.prototype.attack = function(){
     }
 };
 
-Tower.prototype.displayInfo = function(){
-    $("#towerInfo").css('visibility', 'visible');
-    $("#towerImg").attr("src", "./img/" + this.image);
-    $("#towerLevel").text(this.level);
-    $("#towerDamage").text(this.damage);
-    $("#towerRange").text(this.range);
-
-    var upgradeCost = $('#upgradeCost');
-    var upgradeButton = $('#upgradeTower');
-    if(this.level < this.maxUpgradeLevel && this.upgradeCost <= game.money) {
-        upgradeCost.text(this.upgradeCost);
-        upgradeButton.removeClass("disabled");
-    } else {
-        upgradeButton.addClass("disabled");
-        if(this.upgradeCost > game.money){
-            upgradeCost.text(this.upgradeCost);
-        } else {
-            upgradeCost.text("This tower is fully upgraded.");
-        }
-    }
-};
-
 Tower.prototype.drawRange = function(){
     var context = game.context;
     var range = this.range;
@@ -176,14 +154,57 @@ function towerOnLocation(x1, y1, r){
     return -1;
 }
 
-function upgradeCurrentTower(){
+function upgradeSelectedTower(){
     event.stopPropagation();
     var tower = towers[selectedTower];
     if(tower){
         if(tower.level < tower.maxUpgradeLevel && tower.upgradeCost <= game.money) {
             game.money -= tower.upgradeCost;
             tower.upgrade();
-            tower.displayInfo();
+            displaySelectedTowerInfo();
         }
+    }
+}
+
+function displaySelectedTowerInfo(){
+    var tower = towers[selectedTower];
+    if(tower) {
+        $("#towerInfo").css('visibility', 'visible');
+        $("#towerImg").attr("src", "./img/" + tower.image);
+        $("#towerLevel").text(tower.level);
+        $("#towerDamage").text(tower.damage);
+        $("#towerRange").text(tower.range);
+
+        var upgradeCost = $('#upgradeCost');
+        var upgradeButton = $('#upgradeTower');
+        if (tower.level < tower.maxUpgradeLevel && tower.upgradeCost <= game.money) {
+            upgradeCost.text(tower.upgradeCost);
+            upgradeButton.removeClass("disabled");
+        } else {
+            upgradeButton.addClass("disabled");
+            if (tower.upgradeCost > game.money) {
+                upgradeCost.text(tower.upgradeCost);
+            } else {
+                upgradeCost.text("This tower is fully upgraded.");
+            }
+        }
+    }
+}
+
+function showUpgradeInfo(){
+    var tower = towers[selectedTower];
+    if(tower) {
+        $("#towerLevel").text(tower.level + " --> " + (tower.level+1));
+        $("#towerDamage").text(tower.damage + " --> " + Math.floor(tower.damage * 1.4));
+        $("#towerRange").text(tower.range + " --> " + Math.floor(tower.range * 1.125));
+    }
+}
+
+function hideUpgradeInfo(){
+    var tower = towers[selectedTower];
+    if(tower) {
+        $("#towerLevel").text(tower.level);
+        $("#towerDamage").text(tower.damage);
+        $("#towerRange").text(tower.range);
     }
 }
