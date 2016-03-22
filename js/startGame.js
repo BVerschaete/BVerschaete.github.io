@@ -25,6 +25,7 @@ function setup() {
         $(game.canvas).click(placeTower);
         $(".towerbutton").click(selectTowerToBuild);
         $("#btnSpawnWave").click(spawnWave);
+        $("#upgradeTower").click(upgradeCurrentTower);
 
         //clear placing and selecting tower, displayInfo here makes sure the towerInfo div isn't shown
         $("body").click(function () {

@@ -11,42 +11,10 @@ function Tower(x, y){
     this.locY= y;
     this.oldNow = Date.now(); // tijdstip van laatste aanval
     this.level = 1;
+    Tower.prototype.upgradeCost = this.cost/2;
 }
 
-Tower.prototype.image = "tower1.png";
-Tower.prototype.range = (game.tileSize/2) + (game.tileSize*1.5); //40*1.875 = 75, in functie van tileSize stellen om gemakkelijk spel te resizen-
-Tower.prototype.fireRate = 500; // 1 keer per 1000 milliseconden
-Tower.prototype.damage = 10;
-Tower.prototype.cost = 60;
-
-//child object van Tower, zodat we verschillende torens kunnen maken en gewoon de
-//variabelen per tower moeten aanpassen voor verschillende functionaliteit
-function Tower2(x,y) {
-    Tower.call(this,x,y);
-}
-
-Tower2.prototype = Object.create(Tower.prototype);
-Tower2.prototype.image = "tower2.png";
-Tower2.prototype.range = (game.tileSize*2.5); //100
-Tower2.prototype.fireRate = Tower.prototype.fireRate * 2;
-Tower2.prototype.damage = Tower.prototype.damage * 2;
-Tower2.prototype.cost = Tower.prototype.cost * 1.2;
-
-function Tower3(x,y) {
-    Tower.call(this,x,y);
-}
-
-Tower3.prototype = Object.create(Tower.prototype);
-Tower3.prototype.image = "tower3.png";
-Tower3.prototype.range = (game.tileSize*3.125); //125
-Tower3.prototype.fireRate = Tower.prototype.fireRate * 3;
-Tower3.prototype.damage = Tower.prototype.damage * 3;
-Tower3.prototype.cost = Tower.prototype.cost * 1.4;
-
-//array met constructors van alle verschillende towers, door towerClasses[n](x, y) te callen kunnen we zo gemakkelijk towers
-//maken
-var towerClasses = [Tower,Tower2,Tower3];
-
+//basisfuncties van alle towers
 //gemeenschappelijke draw-functie
 Tower.prototype.draw = function(){
     var sprite = new Image();
@@ -87,11 +55,25 @@ Tower.prototype.attack = function(){
 };
 
 Tower.prototype.displayInfo = function(){
-    document.getElementById("towerInfo").style.visibility = "visible";
-    document.getElementById("towerDamage").innerHTML = this.damage.toString();
-    document.getElementById("towerRange").innerHTML = this.range.toString();
-    document.getElementById("towerLevel").innerHTML = this.level.toString();
-    document.getElementById("towerImg").src = "./img/" + this.image;
+    $("#towerInfo").show();
+    $("#towerImg").attr("src", "./img/" + this.image);
+    $("#towerLevel").text(this.level);
+    $("#towerDamage").text(this.damage);
+    $("#towerRange").text(this.range);
+
+    var upgradeCost = $('#upgradeCost');
+    var upgradeButton = $('#upgradeTower');
+    if(this.level < this.maxUpgradeLevel && this.upgradeCost <= game.money) {
+        upgradeCost.text(this.upgradeCost);
+        upgradeButton.show();
+    } else {
+        upgradeButton.hide();
+        if(this.upgradeCost > game.money){
+            upgradeCost.text(this.upgradeCost);
+        } else {
+            upgradeCost.text("This tower is fully upgraded.");
+        }
+    }
 };
 
 Tower.prototype.drawRange = function(){
@@ -106,6 +88,51 @@ Tower.prototype.drawRange = function(){
     context.fill();
     context.globalAlpha = 1;
 };
+
+Tower.prototype.upgrade = function(){
+    this.level += 1;
+    this.range = Math.floor(this.range * 1.125);
+    this.damage = Math.floor(this.damage * 1.4);
+    this.upgradeCost *= 2;
+};
+
+//verschillen per tower functies komen hier;
+Tower.prototype.image = "tower1.png";
+Tower.prototype.range = (game.tileSize/2) + (game.tileSize*1.5); //40*1.875 = 75, in functie van tileSize stellen om gemakkelijk spel te resizen-
+Tower.prototype.fireRate = 500; // 1 keer per 1000 milliseconden
+Tower.prototype.damage = 10;
+Tower.prototype.cost = 60;
+Tower.prototype.maxUpgradeLevel = 5;
+
+//child object van Tower, zodat we verschillende torens kunnen maken en gewoon de
+//variabelen per tower moeten aanpassen voor verschillende functionaliteit
+function Tower2(x,y) {
+    Tower.call(this,x,y);
+}
+
+Tower2.prototype = Object.create(Tower.prototype);
+Tower2.prototype.image = "tower2.png";
+Tower2.prototype.range = (game.tileSize*2.5); //100
+Tower2.prototype.fireRate = Tower.prototype.fireRate * 2;
+Tower2.prototype.damage = Tower.prototype.damage * 2;
+Tower2.prototype.cost = Tower.prototype.cost * 1.2;
+Tower2.prototype.maxUpgradeLevel = 6;
+
+function Tower3(x,y) {
+    Tower.call(this,x,y);
+}
+
+Tower3.prototype = Object.create(Tower.prototype);
+Tower3.prototype.image = "tower3.png";
+Tower3.prototype.range = (game.tileSize*3.125); //125
+Tower3.prototype.fireRate = Tower.prototype.fireRate * 3;
+Tower3.prototype.damage = Tower.prototype.damage * 3;
+Tower3.prototype.cost = Tower.prototype.cost * 1.4;
+Tower2.prototype.maxUpgradeLevel = 7;
+
+//array met constructors van alle verschillende towers, door towerClasses[n](x, y) te callen kunnen we zo gemakkelijk towers
+//maken
+var towerClasses = [Tower,Tower2,Tower3];
 
 function drawTowers(){
     for(var i = 0; i < towers.length; i++){
@@ -147,4 +174,16 @@ function towerOnLocation(x1, y1, r){
         }
     }
     return -1;
+}
+
+function upgradeCurrentTower(){
+    event.stopPropagation();
+    var tower = towers[selectedTower];
+    if(tower){
+        if(tower.level < tower.maxUpgradeLevel && tower.upgradeCost <= game.money) {
+            game.money -= tower.upgradeCost;
+            tower.upgrade();
+            tower.displayInfo();
+        }
+    }
 }

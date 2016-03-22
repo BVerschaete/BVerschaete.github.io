@@ -55,6 +55,7 @@ function displayMoney(){
 }
 
 function spawnWave(){
+    event.stopPropagation();
     toggleSpawn();
 
     var waitTime = 1800 * game.tileSize / (new Attacker()).speedX;
