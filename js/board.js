@@ -44,8 +44,15 @@ function addCanvas(){
     var width = game.tileSize * board[0].length;
     var height =  game.tileSize * board.length;
     var canvas = $('<canvas/>').attr({width: width, height: height});
-    //canvas.css("margin-left", 50*(window.innerWidth - canvas.attr('width'))/window.innerWidth + "%");
-    canvas.prependTo('body');
+
+    //geen vragen bij stellen, het werkt
+    var gameInfo = $('#gameInfo');
+    var marginLeftPercentage = 100*(((window.innerWidth - canvas.attr('width'))/2) - gameInfo.width() - parseInt(gameInfo.css('marginRight')))/window.innerWidth;
+
+    gameInfo.css("margin-left",  marginLeftPercentage + "%");
+    $('#container').find('div:eq(0)').after(canvas);
+
+
     game.canvas = $("canvas")[0];
     game.context = game.canvas.getContext("2d");
 }

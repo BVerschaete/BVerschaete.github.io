@@ -18,19 +18,20 @@
     <script type="text/javascript" charset="utf-8" src="js/bullet.js" defer></script>
 </head>
 <body>
-<div class="wrapper">
+<div id="container">
+    <div id="gameInfo">
+        <p><img src="img/dragon.png" width="40" height="40">Attackers score: <span id="attackersScore">0</span></p>
+        <p><img src="img/coin.png" width="40" height="40">Money: <span id="money">200</span></p>
+    </div>
     <div id="towerInfo">
         <img src="" id="towerImg"/>
         <p>Level: <span id="towerLevel"></span></p>
         <p>Damage: <span id="towerDamage"></span></p>
         <p>Range: <span id="towerRange"></span></p>
         <p>Upgrade cost: <span id="upgradeCost"></span></p>
-        <button id="upgradeTower">Upgrade</button>
+        <button class="btn" id="upgradeTower">Upgrade</button>
     </div>
-    <div id="gameInfo">
-        <p><img src="img/dragon.png" width="40" height="40">Attackers score: <span id="attackersScore">0</span></p>
-        <p><img src="img/coin.png" width="40" height="40">Money: <span id="money">200</span></p>
-    </div>
+    <div style="clear: both"></div> <!--Nodig om controls onder container te plaatsen-->
 </div>
 <div id="controls">
     <h2>Controls</h2>

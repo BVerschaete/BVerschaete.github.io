@@ -85,13 +85,13 @@ function displayInfo() {
         if(currentTower == -1){
             selectedTower = i;
             tower.displayInfo();
-            towerInfo.show();
+            towerInfo.css('visibility', 'visible');
         } else {
             currentTower = -1;
         }
     } else {
         selectedTower = -1;
-        towerInfo.hide();
+        towerInfo.css('visibility', 'hidden');
     }
 }
 

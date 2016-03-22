@@ -55,7 +55,7 @@ Tower.prototype.attack = function(){
 };
 
 Tower.prototype.displayInfo = function(){
-    $("#towerInfo").show();
+    $("#towerInfo").css('visibility', 'visible');
     $("#towerImg").attr("src", "./img/" + this.image);
     $("#towerLevel").text(this.level);
     $("#towerDamage").text(this.damage);
@@ -65,9 +65,9 @@ Tower.prototype.displayInfo = function(){
     var upgradeButton = $('#upgradeTower');
     if(this.level < this.maxUpgradeLevel && this.upgradeCost <= game.money) {
         upgradeCost.text(this.upgradeCost);
-        upgradeButton.show();
+        upgradeButton.removeClass("disabled");
     } else {
-        upgradeButton.hide();
+        upgradeButton.addClass("disabled");
         if(this.upgradeCost > game.money){
             upgradeCost.text(this.upgradeCost);
         } else {
