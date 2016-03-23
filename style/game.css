@@ -28,8 +28,16 @@ canvas {
     float: left;
 }
 
+#towerInfo > div {
+    text-align: left;
+}
+
 #gameInfo{
     margin-right: 50px;
     margin-top: 50px;
     float: left;
+}
+
+#gameInfo > div {
+    text-align: left;
 }
