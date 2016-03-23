@@ -194,9 +194,11 @@ function displaySelectedTowerInfo(){
 function showUpgradeInfo(){
     var tower = towers[selectedTower];
     if(tower) {
-        $("#towerLevel").text(tower.level + " --> " + (tower.level+1));
-        $("#towerDamage").text(tower.damage + " --> " + Math.floor(tower.damage * 1.4));
-        $("#towerRange").text(tower.range + " --> " + Math.floor(tower.range * 1.125));
+        if(tower.level < tower.maxUpgradeLevel) {
+            $("#towerLevel").text(tower.level + " --> " + (tower.level + 1));
+            $("#towerDamage").text(tower.damage + " --> " + Math.floor(tower.damage * 1.4));
+            $("#towerRange").text(tower.range + " --> " + Math.floor(tower.range * 1.125));
+        }
     }
 }
 
