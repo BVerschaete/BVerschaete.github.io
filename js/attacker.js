@@ -122,6 +122,7 @@ function checkDead(){
         if(attackers[i].health <= 0){
             game.money += attackers[i].reward;
             deleteAttacker(attackers[i]);
+            enableUpgradeButton();
             game.attackersStopped++;
             i--;
         }

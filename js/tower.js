@@ -162,6 +162,7 @@ function upgradeSelectedTower(){
             game.money -= tower.upgradeCost;
             tower.upgrade();
             displaySelectedTowerInfo();
+            showUpgradeInfo();
         }
     }
 }
@@ -174,18 +175,25 @@ function displaySelectedTowerInfo(){
         $("#towerLevel").text(tower.level);
         $("#towerDamage").text(tower.damage);
         $("#towerRange").text(tower.range);
+        enableUpgradeButton();
+    }
+}
 
-        var upgradeCost = $('#upgradeCost');
+//kijkt wanneer upgrade mogelijk is en activeert button.
+function enableUpgradeButton(){
+    var tower = towers[selectedTower];
+    if(tower) {
         var upgradeButton = $('#upgradeTower');
+        var upgradeCost = $('#upgradeCost');
         if (tower.level < tower.maxUpgradeLevel && tower.upgradeCost <= game.money) {
             upgradeCost.text(tower.upgradeCost);
             upgradeButton.removeClass("disabled");
         } else {
             upgradeButton.addClass("disabled");
-            if (tower.upgradeCost > game.money) {
-                upgradeCost.text(tower.upgradeCost);
-            } else {
+            if (tower.level >= tower.maxUpgradeLevel) {
                 upgradeCost.text("This tower is fully upgraded.");
+            } else {
+                upgradeCost.text(tower.upgradeCost);
             }
         }
     }
