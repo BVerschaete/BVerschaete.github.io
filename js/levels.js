@@ -60,6 +60,6 @@ var level0 = {
 // };
 
 //NA HET MAKEN VAN EEN LEVEL VERPLICHT TOEVOEGEN AAN ARRAY!!
-var levels = [level0, level1];
+var levels = [level0];
 
 var selectedLevel = levels[sessionStorage.selectedLevel];
