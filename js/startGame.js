@@ -9,7 +9,8 @@ var game = {
     tileSize: 50,
     attackersScore: 0,
     attackersStopped: 0,
-    money: 400
+    money: 400,
+    waveStarted: false
 };
 
 function setup() {

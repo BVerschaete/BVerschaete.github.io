@@ -72,7 +72,12 @@ function spawnWave(){
     var waitTime = 1800 * game.tileSize / (new Attacker()).speedX;
     var aantalMonsters = 5;
     var loop = setInterval(addAttacker,waitTime);
-    setTimeout(function( ) { clearInterval(loop); toggleSpawn(); }, aantalMonsters * waitTime);
+    
+    setTimeout(function(){ 
+        clearInterval(loop); 
+        toggleSpawn();
+        game.waveStarted = true;
+    }, aantalMonsters * waitTime);
 }
 
 //update de spawnbutton zodat hij gedisabled moet worden of niet
