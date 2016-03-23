@@ -1,6 +1,7 @@
 /**
  * Created by Bastien on 3/12/2015.
  */
+//basiswaarden om een game te starten
 var game = {
     playerName: sessionStorage.playerName,
     canvas: null,
@@ -12,10 +13,10 @@ var game = {
 };
 
 function setup() {
-    //check if they entered username and chosen level
+    //kijken of speler naam en level ingevoerd heeft
     if(game.playerName && selectedLevel) {
-        //useDisqus();
-        
+//useDisqus();
+
         addCanvas();
 
         $(game.canvas).mouseover(toggleMouseInCanvas);

@@ -13,6 +13,7 @@ function getValueFromPos(x, y){
     }
 }
 
+//tekent de achtergrond adhv schema in levels.js
 function drawMap(){
     game.context.fillStyle = 'white';
     game.context.fillRect(0, 0, $(game.canvas).attr("width"), $(game.canvas).attr("height"));
@@ -39,6 +40,7 @@ function drawMap(){
     }
 }
 
+//voegt het canvas toe aan de html pagina en update de margins en canvasgrootte naar de grootte van het geselecteerde level
 function addCanvas(){
     var board = selectedLevel.board;
     var width = game.tileSize * board[0].length;
@@ -57,10 +59,12 @@ function addCanvas(){
     game.context = game.canvas.getContext("2d");
 }
 
+//toont het geld op het scherm
 function displayMoney(){
     $("#money").text(game.money);
 }
 
+//spawnt X aantal monsters
 function spawnWave(){
     event.stopPropagation();
     toggleSpawn();
@@ -71,6 +75,7 @@ function spawnWave(){
     setTimeout(function( ) { clearInterval(loop); toggleSpawn(); }, aantalMonsters * waitTime);
 }
 
+//update de spawnbutton zodat hij gedisabled moet worden of niet
 function toggleSpawn(){
     var btnSpawn = $("#btnSpawnWave")[0];
     btnSpawn.disabled = !btnSpawn.disabled;

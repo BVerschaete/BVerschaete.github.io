@@ -22,6 +22,7 @@ Tower.prototype.draw = function(){
     game.context.drawImage(sprite, this.locX - game.tileSize/4, this.locY - game.tileSize/4, game.tileSize/2, game.tileSize/2);
 };
 
+//returnt de eerste attacker in de array (dus het verst op de map) die binnen de range van de toren is
 Tower.prototype.findTarget = function(){
     this.target = null;
 
@@ -35,13 +36,14 @@ Tower.prototype.findTarget = function(){
     }
 };
 
+//berekent de +x en +y die een bullet-object moet optellen bij zijn huidige waarden om richting de aanvaller te gaan.
 Tower.prototype.findUnitVector = function() {
     if (!this.target) return false; //if there is no target, dont bother calculating unit vector
     this.xFire = this.locX; //+ game.tileSize * xDist / dist; //where turret ends and bullets start
     this.yFire = this.locY; //+ game.tileSize * yDist / dist;
 };
 
-
+//valt het huidig target aan met een bullet
 Tower.prototype.attack = function(){
     var now = Date.now();
     var delta = now - this.oldNow;
@@ -54,6 +56,7 @@ Tower.prototype.attack = function(){
     }
 };
 
+//tekent de range van de tower op het canvas
 Tower.prototype.drawRange = function(){
     var context = game.context;
     var range = this.range;
@@ -67,6 +70,7 @@ Tower.prototype.drawRange = function(){
     context.globalAlpha = 1;
 };
 
+//upgrade de waarden van deze tower
 Tower.prototype.upgrade = function(){
     this.level += 1;
     this.range = Math.floor(this.range * 1.125);
@@ -112,12 +116,14 @@ Tower2.prototype.maxUpgradeLevel = 7;
 //maken
 var towerClasses = [Tower,Tower2,Tower3];
 
+//voert draw functie uit bij alle torens
 function drawTowers(){
     for(var i = 0; i < towers.length; i++){
         towers[i].draw();
     }
 }
 
+//voegt toren toe aan toren-array
 function addTower(){
     if(currentTower != -1) {
         towers.push(new towerClasses[currentTower](mouse.x, mouse.y));
@@ -143,6 +149,7 @@ function towerOnLocationSelect(x1, y1){
     return towerOnLocation(x1, y1, game.tileSize/4);
 }
 
+//bij klik, kijkt functie of er op de plaats van de coordinaten een toren staat
 function towerOnLocation(x1, y1, r){
     for (var i = 0; i < towers.length; i++) {
         var x0 = towers[i].locX;
@@ -154,6 +161,7 @@ function towerOnLocation(x1, y1, r){
     return -1;
 }
 
+//upgrade de geselecteerde toren en past towerinfo aan
 function upgradeSelectedTower(){
     event.stopPropagation();
     var tower = towers[selectedTower];
@@ -167,6 +175,7 @@ function upgradeSelectedTower(){
     }
 }
 
+//toont info over geselecteerde toren
 function displaySelectedTowerInfo(){
     var tower = towers[selectedTower];
     if(tower) {
@@ -199,6 +208,7 @@ function enableUpgradeButton(){
     }
 }
 
+//toont de waarden van de volgende upgrade van de geselecteerde toren
 function showUpgradeInfo(){
     var tower = towers[selectedTower];
     if(tower) {
@@ -210,6 +220,7 @@ function showUpgradeInfo(){
     }
 }
 
+//toont terug de gewone waarden van de geselecteerde toren
 function hideUpgradeInfo(){
     var tower = towers[selectedTower];
     if(tower) {

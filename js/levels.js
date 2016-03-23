@@ -40,7 +40,26 @@ var level0 = {
     startY: 1
 };
 
+// var level1 = {
+//     name: "One step at a time",
+//     board:  [
+//         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//         [1, 1, 1, 1, 1, 1, 1, 0, 2, 2],
+//         [0, 0, 0, 0, 0, 0, 1, 0, 2, 2],
+//         [0, 2, 2, 2, 0, 0, 1, 0, 0, 0],
+//         [0, 2, 2, 2, 0, 0, 1, 1, 1, 0],
+//         [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+//         [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+//         [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+//         [0, 1, 1, 1, 0, 2, 2, 2, 2, 0],
+//         [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+//     ],
+//     startDirection: 1,
+//     startX: 0,
+//     startY: 1
+// };
+
 //NA HET MAKEN VAN EEN LEVEL VERPLICHT TOEVOEGEN AAN ARRAY!!
-var levels = [level0];
+var levels = [level0, level1];
 
 var selectedLevel = levels[sessionStorage.selectedLevel];

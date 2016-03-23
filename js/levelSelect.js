@@ -1,6 +1,7 @@
 /**
  * Created by Bastien on 20/03/2016.
  */
+//kleine code bij het level select scherm om button te deactiveren en select kleuren aan te passen
 $(function() {
     var startButton = $("#startSelectedLevel");
     startButton.addClass("disabled");

@@ -8,6 +8,7 @@ var mouse = {
     y: 0
 };
 
+//zoekt x en y coordinaten van muis
 function getMousePosition(event) {
     var rect = game.canvas.getBoundingClientRect();
 
@@ -15,6 +16,7 @@ function getMousePosition(event) {
     mouse.y = event.clientY - rect.top - parseInt($(game.canvas).css("padding-top"));
 }
 
+//tekent 'ghost' tower en als er een tower geselecteerd is om te bouwen
 function drawRadius(){
     if(mouse.inCanvas) {
         var context = game.context;

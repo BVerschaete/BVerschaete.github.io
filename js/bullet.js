@@ -13,6 +13,7 @@ function Bullet(x,y,target,damage) {
 Bullet.prototype.r = game.tileSize / 10;
 Bullet.prototype.speed = 1 * (game.tileSize / 40);
 
+//beweegt bullet naar zijn locX en locY
 Bullet.prototype.move = function() {
     //find unit vector
     var xDist = this.target.locX + game.tileSize / 2 - this.locX; //"+rectWidth/2" because we want bullet to go for center of enemy no top left corner
@@ -23,6 +24,7 @@ Bullet.prototype.move = function() {
 
 };
 
+//tekent bullet
 Bullet.prototype.draw = function() {
     var context = game.context;
 
@@ -32,6 +34,7 @@ Bullet.prototype.draw = function() {
     context.fill();
 };
 
+//checkt wanneer bullet een attacker raakt
 Bullet.prototype.checkCollision = function() {
     if(this.locX <= this.target.locX + game.tileSize * this.target.scale &&
         this.locX >= this.target.locX + game.tileSize * (1 - this.target.scale) &&
@@ -44,6 +47,7 @@ Bullet.prototype.checkCollision = function() {
     return false;
 };
 
+//tekent alle bullets
 function drawBullets(){
     for(var i = 0; i < bullets.length; i++){
         bullets[i].draw();

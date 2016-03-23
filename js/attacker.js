@@ -19,6 +19,7 @@ function Attacker(){
     this.scale = 0.8;
 }
 
+//beweegt een attacker volgens zijn pad
 Attacker.prototype.move = function() {
     // board[this.posY-1] != null is nodig want dit zal null zijn als de sprite in de bovenste rij is
     var board = selectedLevel.board;
@@ -40,11 +41,13 @@ Attacker.prototype.move = function() {
     }
 };
 
+//update zijn positie op het bord
 Attacker.prototype.updatePosOnBoard = function(){
     this.posX = Math.floor(this.locX / game.tileSize);
     this.posY = Math.floor(this.locY / game.tileSize);
 };
 
+//update zijn werkelijke positie
 Attacker.prototype.updatePosition = function(){
     this.updatePosOnBoard();
     var now = Date.now();
@@ -86,12 +89,14 @@ Attacker.prototype.updatePosition = function(){
     }
 };
 
+//tekent zijn afbeelding
 Attacker.prototype.drawImage = function(){
     var sprite = new Image();
     sprite.src = "img/" + this.image;
     game.context.drawImage(sprite, (this.locX + game.tileSize * (1-this.scale) / 2), (this.locY + game.tileSize * (1-this.scale) / 2), (game.tileSize * this.scale), (game.tileSize * this.scale));
 };
 
+//tekent zijn health bar
 Attacker.prototype.drawHealthBar = function(){
     var context = game.context;
 
@@ -105,6 +110,7 @@ Attacker.prototype.drawHealthBar = function(){
     context.fillRect((this.locX + game.tileSize / 8), (this.locY - game.tileSize / 3), ((game.tileSize - game.tileSize / 4) * this.health / this.maxHealth), (game.tileSize / 4));
 };
 
+//tekent een attacker op z'n geheel
 function drawAttackers(){
     for(var i = 0; i < attackers.length; i++){
         attackers[i].drawImage();
@@ -112,11 +118,18 @@ function drawAttackers(){
     }
 }
 
+//voegt een attacker toe aan de array
+function addAttacker(){
+    attackers.push(new Attacker());
+}
+
+//verwijdert een attacker uit de array
 function deleteAttacker(attacker){
     var index = attackers.indexOf(attacker);
     attackers.splice(index, 1);
 }
 
+//overloopt iedere gameloop of er attackers gestorven zijn, zoja, update game variabelen
 function checkDead(){
     for(var i = 0; i < attackers.length; i++){
         if(attackers[i].health <= 0){
@@ -129,15 +142,12 @@ function checkDead(){
     }
 }
 
-function addAttacker(){
-    attackers.push(new Attacker());
-}
-
-// attackers score of game health of whatever
+//Toont score attackers
 function displayAttScore(){
     $("#attackersScore").text(game.attackersScore);
 }
 
+//Toont aantal attackers gestopt
 function displayAttStopped(){
     $("#attackersStopped").text(game.attackersStopped);
 }

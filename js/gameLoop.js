@@ -1,12 +1,14 @@
 /**
  * Created by Gaben on 18/03/2016.
  */
-
-function processUserInput(){
-
-}
-
+//update alles van het canvas en de GUI
 function renderingStep(){
+    //gui updates
+    displayAttScore();
+    displayAttStopped();
+    displayMoney();
+    
+    //canvas updates
     drawMap();
     drawAttackers();
     drawTowers();
@@ -20,6 +22,7 @@ function renderingStep(){
     drawBullets();
 }
 
+//update alle game variabelen
 function updateLogic(){
     for(var i = 0; i < attackers.length; i++) {
         attackers[i].updatePosition();
@@ -40,16 +43,12 @@ function updateLogic(){
             i--;
         }
     }
-    
-    displayAttScore();
-    displayAttStopped();
-    displayMoney();
 
     checkDead();
 }
 
+//loop van de volledige game
 function gameLoop() {
-    processUserInput();
     updateLogic();
     renderingStep();
     window.requestAnimationFrame(gameLoop);
