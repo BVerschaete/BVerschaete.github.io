@@ -44,11 +44,6 @@ function updateLogic(){
         }
     }
 
-    if(game.waveStarted == true && attackers.length == 0){
-        game.waveStarted = false;
-        $('#wonWave')[0].play();
-    }
-
     checkDead();
 }
 
