@@ -16,7 +16,7 @@ function Attacker(){
     this.maxHealth = 100;
     this.health = this.maxHealth;
     this.reward = 10;
-    this.scale = 1;
+    this.scale = 0.8;
 }
 
 //beweegt een attacker volgens zijn pad
