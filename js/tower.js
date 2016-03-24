@@ -182,8 +182,8 @@ function displaySelectedTowerInfo(){
         $("#towerInfo").css('visibility', 'visible');
         $("#towerImg").attr("src", "./img/" + tower.image);
         $("#towerLevel").text(tower.level);
-        $("#towerDamage").text(tower.damage);
-        $("#towerRange").text(tower.range);
+        $("#towerDamage").text(Math.floor(tower.damage));
+        $("#towerRange").text(Math.floor(tower.range));
         enableUpgradeButton();
     }
 }

@@ -41,6 +41,9 @@ function updateLogic(){
         if (bullets[i].checkCollision()) {
             bullets.splice(i, 1);
             i--;
+        }else if(bullets[i].target.health <= 0){
+            bullets.splice(i, 1);
+            i--;
         }
     }
 
