@@ -2,16 +2,16 @@
  * Created by Gaben on 19/03/2016.
  */
 var bullets = [];
-
+var standaardAttackerSnelheid = new Attacker().speed;
 function Bullet(x,y,target,damage) {
     this.locX = x;
     this.locY = y;
     this.target = target;
     this.damage = damage;
+    this.speed = 1 * (game.tileSize / 40) * this.target.speed / standaardAttackerSnelheid;
 }
 
 Bullet.prototype.r = game.tileSize / 10;
-Bullet.prototype.speed = 1 * (game.tileSize / 40);
 
 //beweegt bullet naar zijn locX en locY
 Bullet.prototype.move = function() {

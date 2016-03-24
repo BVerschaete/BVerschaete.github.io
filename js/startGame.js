@@ -8,7 +8,6 @@ var game = {
     context: null,
     tileSize: 50,
     attackersScore: 0,
-    attackersStopped: 0,
     money: 400,
     waveStarted: false
 };
@@ -27,10 +26,10 @@ function setup() {
         $(game.canvas).click(placeTower);
         $(".towerbutton").click(selectTowerToBuild);
         $("#btnSpawnWave").click(spawnWave);
+
         var upgradeTower = $("#upgradeTower");
         upgradeTower.click(upgradeSelectedTower);
         upgradeTower.hover(showUpgradeInfo, hideUpgradeInfo);
-        
 
         //clear placing and selecting tower, displayInfo here makes sure the towerInfo div isn't shown
         $("body").click(function () {
@@ -38,7 +37,7 @@ function setup() {
             selectedTower = -1;
             displayInfo();
         });
-
+        
         gameLoop();
     } else {
         window.location.href = "index.html";

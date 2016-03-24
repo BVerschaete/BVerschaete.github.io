@@ -4,20 +4,20 @@
 var attackers = [];
 
 function Attacker(){
-    this.speedX= 50 * (game.tileSize / 40); // snelheid relatief aan de snelheid bij een tileSize van 40
-    this.speedY= 50 * (game.tileSize / 40);
-    this.image= "dragon.png";
+    this.speed= 50 * (game.tileSize / 40); // snelheid relatief aan de snelheid bij een tileSize van 40
     this.posX= selectedLevel.startX;
     this.posY= selectedLevel.startY;
     this.locX= (this.posX * game.tileSize);
     this.locY= (this.posY * game.tileSize);
     this.oldNow = Date.now();
     this.direction = selectedLevel.startDirection;
-    this.maxHealth = 100;
     this.health = this.maxHealth;
-    this.reward = 10;
     this.scale = 0.8;
 }
+
+Attacker.prototype.image = "dragon.png";
+Attacker.prototype.reward = 10;
+Attacker.prototype.maxHealth = 100;
 
 //beweegt een attacker volgens zijn pad
 Attacker.prototype.move = function() {
@@ -55,12 +55,12 @@ Attacker.prototype.updatePosition = function(){
     this.oldNow = now;
 
     if(this.direction === directions.boven){
-        if(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY - (this.speedY * timeDelta / 1000))) !== 1){
+        if(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY - (this.speed * timeDelta / 1000))) !== 1){
             this.move();
             this.locY = this.posY * game.tileSize;
             this.locX = Math.floor(this.locX);
         }else{
-            this.locY -= this.speedY * timeDelta / 1000;
+            this.locY -= this.speed * timeDelta / 1000;
         }
     }else if(this.direction === directions.rechts){
         if(getValueFromPos(Math.floor(this.locX) + game.tileSize, Math.floor(this.locY)) !== 1){
@@ -68,7 +68,7 @@ Attacker.prototype.updatePosition = function(){
             this.locX = this.posX * game.tileSize;
             this.locY = Math.floor(this.locY);
         }else{
-            this.locX += this.speedX * timeDelta / 1000;
+            this.locX += this.speed * timeDelta / 1000;
         }
     }else if(this.direction === directions.onder){
         if(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY  + game.tileSize)) !== 1){
@@ -76,15 +76,15 @@ Attacker.prototype.updatePosition = function(){
             this.locY = this.posY * game.tileSize;
             this.locX = Math.floor(this.locX);
         }else{
-            this.locY += this.speedY * timeDelta / 1000;
+            this.locY += this.speed * timeDelta / 1000;
         }
     }else if(this.direction === directions.links){
-        if(getValueFromPos(Math.floor(this.locX - (this.speedY * timeDelta / 1000)), Math.floor(this.locY)) !== 1){
+        if(getValueFromPos(Math.floor(this.locX - (this.speed * timeDelta / 1000)), Math.floor(this.locY)) !== 1){
             this.move();
             this.locX = this.posX * game.tileSize;
             this.locY = Math.floor(this.locY);
         }else{
-            this.locX -= this.speedX * timeDelta / 1000;
+            this.locX -= this.speed * timeDelta / 1000;
         }
     }
 };
@@ -119,8 +119,8 @@ function drawAttackers(){
 }
 
 //voegt een attacker toe aan de array
-function addAttacker(){
-    attackers.push(new Attacker());
+function addAttacker(attacker){
+    attackers.push(new attackerTypes[attacker]());
 }
 
 //verwijdert een attacker uit de array
@@ -136,7 +136,6 @@ function checkDead(){
             game.money += attackers[i].reward;
             deleteAttacker(attackers[i]);
             enableUpgradeButton();
-            game.attackersStopped++;
             i--;
         }
     }
@@ -145,9 +144,4 @@ function checkDead(){
 //Toont score attackers
 function displayAttScore(){
     $("#attackersScore").text(game.attackersScore);
-}
-
-//Toont aantal attackers gestopt
-function displayAttStopped(){
-    $("#attackersStopped").text(game.attackersStopped);
 }

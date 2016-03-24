@@ -5,7 +5,6 @@
 function renderingStep(){
     //gui updates
     displayAttScore();
-    displayAttStopped();
     displayMoney();
     
     //canvas updates

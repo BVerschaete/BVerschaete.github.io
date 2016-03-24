@@ -11,7 +11,7 @@ function Tower(x, y){
     this.locY= y;
     this.oldNow = Date.now(); // tijdstip van laatste aanval
     this.level = 1;
-    Tower.prototype.upgradeCost = this.cost/2;
+    this.upgradeCost = this.cost/2;
 }
 
 //basisfuncties van alle towers
@@ -85,36 +85,6 @@ Tower.prototype.fireRate = 500; // 1 keer per 1000 milliseconden
 Tower.prototype.damage = 10;
 Tower.prototype.cost = 60;
 Tower.prototype.maxUpgradeLevel = 5;
-
-//child object van Tower, zodat we verschillende torens kunnen maken en gewoon de
-//variabelen per tower moeten aanpassen voor verschillende functionaliteit
-function Tower2(x,y) {
-    Tower.call(this,x,y);
-}
-
-Tower2.prototype = Object.create(Tower.prototype);
-Tower2.prototype.image = "tower2.png";
-Tower2.prototype.range = (game.tileSize*2.5); //100
-Tower2.prototype.fireRate = Tower.prototype.fireRate * 2;
-Tower2.prototype.damage = Tower.prototype.damage * 2;
-Tower2.prototype.cost = Tower.prototype.cost * 1.2;
-Tower2.prototype.maxUpgradeLevel = 6;
-
-function Tower3(x,y) {
-    Tower.call(this,x,y);
-}
-
-Tower3.prototype = Object.create(Tower.prototype);
-Tower3.prototype.image = "tower3.png";
-Tower3.prototype.range = (game.tileSize*3.125); //125
-Tower3.prototype.fireRate = Tower.prototype.fireRate * 3;
-Tower3.prototype.damage = Tower.prototype.damage * 3;
-Tower3.prototype.cost = Tower.prototype.cost * 1.4;
-Tower2.prototype.maxUpgradeLevel = 7;
-
-//array met constructors van alle verschillende towers, door towerClasses[n](x, y) te callen kunnen we zo gemakkelijk towers
-//maken
-var towerClasses = [Tower,Tower2,Tower3];
 
 //voert draw functie uit bij alle torens
 function drawTowers(){
