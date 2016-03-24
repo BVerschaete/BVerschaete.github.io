@@ -44,10 +44,6 @@ function setup() {
         window.location.href = "index.html";
         window.alert("Please select a name and a level before going to the game.html page");
     }
-
-    jQuery.get('./test leaderboard.txt', function(data) {
-        alert(data);
-    });
 }
 
 //alles voor disqus staat hier

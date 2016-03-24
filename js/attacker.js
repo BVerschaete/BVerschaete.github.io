@@ -16,7 +16,7 @@ function Attacker(){
     this.maxHealth = 100;
     this.health = this.maxHealth;
     this.reward = 10;
-    this.scale = 0.8;
+    this.scale = 1;
 }
 
 //beweegt een attacker volgens zijn pad
@@ -99,6 +99,8 @@ Attacker.prototype.drawImage = function(){
 //tekent zijn health bar
 Attacker.prototype.drawHealthBar = function(){
     var context = game.context;
+    var barHeight = (game.tileSize * this.scale) / 4;
+    var verschil = ((game.tileSize * this.scale) - game.tileSize) / 2; // het verschil van de locatie volgens het programma en de werkelijke locatie
 
     if(this.health > (50/100)*this.maxHealth) {
         context.fillStyle = '#9fff80';
@@ -107,7 +109,9 @@ Attacker.prototype.drawHealthBar = function(){
     } else {
         context.fillStyle = '#ff8080';
     }
-    context.fillRect((this.locX + game.tileSize / 8), (this.locY - game.tileSize / 3), ((game.tileSize - game.tileSize / 4) * this.health / this.maxHealth), (game.tileSize / 4));
+
+    // de lengte en hoogt van de healthbar is relatief aan de grootte van de attacker en tilegrootte
+    context.fillRect(this.locX - verschil + (game.tileSize * this.scale) / 8, this.locY - verschil - barHeight - (game.tileSize * this.scale) / 10, ((game.tileSize * this.scale - (game.tileSize *this.scale) / 4) * this.health / this.maxHealth), barHeight);
 };
 
 //tekent een attacker op z'n geheel

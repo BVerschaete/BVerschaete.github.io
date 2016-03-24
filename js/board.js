@@ -69,7 +69,7 @@ function spawnWave(){
     event.stopPropagation();
     toggleSpawn();
 
-    var waitTime = 1800 * game.tileSize / (new Attacker()).speedX;
+    var waitTime = 1800 * (game.tileSize * (new Attacker().scale)) / (new Attacker()).speedX;
     var aantalMonsters = 5;
     var loop = setInterval(addAttacker,waitTime);
     
