@@ -35,7 +35,7 @@ var level0 = {
         [0, 0, 1, 0, 1, 0, 0, 1, 0, 0],
         [0, 0, 1, 1, 1, 0, 0, 1, 1, 1]
     ],
-    startDirection: 1,
+    startDirection: directions.rechts,
     startX: 0,
     startY: 1
 };
