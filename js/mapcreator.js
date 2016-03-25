@@ -13,9 +13,9 @@ function setup(){
     board = generateBoard($("#sldRows").val(), $("#sldCols").val());
     addImages();
     addCanvas();
-    $("#sldTilesize").on("change", changeTileSize);
-    $("#sldRows").on("change", changeBoardSize);
-    $("#sldCols").on("change", changeBoardSize);
+    $("#sldTilesize").on("input", changeTileSize);
+    $("#sldRows").on("input", changeBoardSize);
+    $("#sldCols").on("input", changeBoardSize);
     gameLoop();
 }
 
