@@ -63,3 +63,8 @@ function addCanvas(){
 function displayMoney() {
     $("#money").text(game.money);
 }
+
+function displayTime(){
+    var time = Math.ceil(selectedLevel.spawnSpeed - (Date.now() - game.timeLastWaveSpawned)/1000);
+    $("#nextWaveTime").text(time);
+}

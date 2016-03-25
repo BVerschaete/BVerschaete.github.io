@@ -25,7 +25,7 @@ function drawRadius(){
         var boardValueLinksOnder = getValueFromPos(mouse.x-(game.tileSize/4), mouse.y+(game.tileSize/4));
         var boardValueRechtsOnder = getValueFromPos(mouse.x+(game.tileSize/4), mouse.y+(game.tileSize/4));
 
-        var canPlace =( (game.money >= towerClasses[currentTower].prototype.cost) &&
+        var canPlace =( (game.money >= towerTypes[currentTower].prototype.cost) &&
                         (boardValueLinksBoven === 0 && boardValueLinksBoven !== null) &&
                         (boardValueRechtsBoven === 0 && boardValueRechtsBoven !== null) &&
                         (boardValueLinksOnder === 0 && boardValueLinksOnder !== null) &&
@@ -42,7 +42,7 @@ function drawRadius(){
 
         function drawCircle() {
             context.beginPath();
-            var range = towerClasses[currentTower].prototype.range;
+            var range = towerTypes[currentTower].prototype.range;
             context.arc(mouse.x, mouse.y, range, 0, 2 * Math.PI);
             // globalAlpha = transparancy
             context.globalAlpha = 0.4;
@@ -52,7 +52,7 @@ function drawRadius(){
 
         function drawTower(){
             var sprite = new Image();
-            sprite.src = "img/" + towerClasses[currentTower].prototype.image;
+            sprite.src = "img/" + towerTypes[currentTower].prototype.image;
             context.globalAlpha = 0.4;
             context.drawImage(sprite, mouse.x - game.tileSize/4, mouse.y - game.tileSize/4, game.tileSize/2, game.tileSize/2);
             context.globalAlpha = 1;
@@ -73,7 +73,7 @@ function placeTower(event) {
 
     if (mouse.canPlaceTowerHere && currentTower != -1) {
         addTower(mouse.x, mouse.y);
-        game.money -= towerClasses[currentTower].prototype.cost;
+        game.money -= towerTypes[currentTower].prototype.cost;
     }
 }
 

@@ -9,7 +9,8 @@ var game = {
     tileSize: 50,
     attackersScore: 0,
     money: 400,
-    waveStarted: false
+    currentWave: 0,
+    timeLastWaveSpawned: Date.now()
 };
 
 function setup() {
@@ -25,7 +26,7 @@ function setup() {
         $(game.canvas).click(displayInfo);
         $(game.canvas).click(placeTower);
         $(".towerbutton").click(selectTowerToBuild);
-        $("#btnSpawnWave").click(spawnWave);
+        $("#btnSpawnWave").click(spawnWaveNow);
 
         var upgradeTower = $("#upgradeTower");
         upgradeTower.click(upgradeSelectedTower);

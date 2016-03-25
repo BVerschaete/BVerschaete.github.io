@@ -96,7 +96,7 @@ function drawTowers(){
 //voegt toren toe aan toren-array
 function addTower(){
     if(currentTower != -1) {
-        towers.push(new towerClasses[currentTower](mouse.x, mouse.y));
+        towers.push(new towerTypes[currentTower](mouse.x, mouse.y));
     }
 }
 

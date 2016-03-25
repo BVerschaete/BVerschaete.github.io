@@ -1,10 +1,11 @@
 /**
  * Created by Bastien on 20/03/2016.
  */
-//Level Template, CTRL-/ to uncomment, directions: 0=boven, 1 = rechts, 2 = beneden, 3 = links, zie ook "var levels" hieronder
+//Level Template, CTRL-/ to uncomment, directions: 0=boven, 1 = rechts, 2 = beneden, 3 = links, zie ook "var levels" hieronder, spawnspeed in seconden
 // var levelName = {
 //     name: "customName",
 //     difficulty: 0,
+//     spawnSpeed: 0,
 //     board:  [
 //         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 //         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -25,6 +26,7 @@
 var level0 = {
     name: "Learning the ropes",
     difficulty: 1,
+    spawnSpeed: 20,
     board:  [
         [0, 0, 0, 0, 0, 0, 1, 1, 1, 0],
         [1, 1, 0, 2, 0, 0, 1, 0, 1, 0],

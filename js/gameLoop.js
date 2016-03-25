@@ -6,6 +6,7 @@ function renderingStep(){
     //gui updates
     displayAttScore();
     displayMoney();
+    displayTime();
     
     //canvas updates
     drawMap();
@@ -44,6 +45,11 @@ function updateLogic(){
             bullets.splice(i, 1);
             i--;
         }
+    }
+
+    //spawnt wave iedere 10 seconden
+    if((Date.now() - game.timeLastWaveSpawned) > selectedLevel.spawnSpeed * 1000){
+        spawnWave();
     }
 
     checkDead();
