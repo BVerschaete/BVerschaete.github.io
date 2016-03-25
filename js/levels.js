@@ -47,6 +47,7 @@ var level0 = {
 // var level1 = {
 //     name: "One step at a time",
 //     difficulty: 2,
+//     spawnSpeed: 17,
 //     board:  [
 //         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 //         [1, 1, 1, 1, 1, 1, 1, 0, 2, 2],

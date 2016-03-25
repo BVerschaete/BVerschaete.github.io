@@ -11,11 +11,11 @@ function createWave(){
     var wave = new Wave();
     for(var i = 0; i < aantalMonsters; i++){
         if(i == aantalMonsters - 1){
-            wave.attackers.push(1);
+            wave.attackers.push(attackerCodes.strongAttacker);
         } else if (i == aantalMonsters-2){
-            wave.attackers.push(2);
+            wave.attackers.push(attackerCodes.speedAttacker);
         } else {
-            wave.attackers.push(0);
+            wave.attackers.push(attackerCodes.normalAttacker);
         }
     }
     game.currentWave += 1;

@@ -7,3 +7,9 @@ var directions = {
     onder: 2,
     links: 3
 };
+
+var attackerCodes = {
+    normalAttacker: 0,
+    strongAttacker: 1,
+    speedAttacker: 2
+};
