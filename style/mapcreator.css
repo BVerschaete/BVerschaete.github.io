@@ -1,0 +1,30 @@
+body{
+    background-color: #6093CA !important;
+}
+
+#container{
+    margin-top: 50px;
+}
+
+#availableImages img{
+    width: 50px;
+    height: 50px;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+#selectedImage{
+    float: right;
+}
+
+#selectedImage img{
+    max-width: 100px;
+    max-height: 100px;
+}
+
+canvas{
+    margin: 5px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Map creator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="style/mapcreator.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+    <script src="js/allPages.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/mapcreator.js" defer></script>
+</head>
+<body>
+    <div id="container">
+        <div id="availableImages">
+
+        </div>
+        <div id="selectedImage">
+            <img />
+        </div>
+        <div style="width: 100px;">
+            <p>Change tilesize: </p><input id="sldTilesize" type="range" min="5" max="100" step="5" value="50"/>
+        </div>
+    </div>
+</body>
+</html>
