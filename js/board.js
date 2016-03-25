@@ -60,6 +60,6 @@ function addCanvas(){
 }
 
 //toont het geld op het scherm
-function displayMoney(){
+function displayMoney() {
     $("#money").text(game.money);
 }

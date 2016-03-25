@@ -1,1 +1,36 @@
-
+<?xml version="1.0" ?>
+<scoreboard>
+    <score>
+        <speler>
+            Speler 1
+        </speler>
+        <punten>
+            1000
+        </punten>
+        <datum>
+            24/03/2016
+        </datum>
+    </score>
+    <score>
+        <speler>
+            Speler 2
+        </speler>
+        <punten>
+            900
+        </punten>
+        <datum>
+            24/03/2016
+        </datum>
+    </score>
+    <score>
+        <speler>
+            Speler 3
+        </speler>
+        <punten>
+            1300
+        </punten>
+        <datum>
+            24/03/2016
+        </datum>
+    </score>
+</scoreboard>

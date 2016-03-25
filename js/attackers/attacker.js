@@ -99,6 +99,9 @@ Attacker.prototype.drawImage = function(){
 //tekent zijn health bar
 Attacker.prototype.drawHealthBar = function(){
     var context = game.context;
+    var spriteSize = (game.tileSize * this.scale);
+    var barHeight = game.tileSize / 4;
+    var verschil = (spriteSize - game.tileSize) / 2; // het verschil van de locatie volgens het programma en de werkelijke locatie
 
     if(this.health > (50/100)*this.maxHealth) {
         context.fillStyle = '#9fff80';
@@ -107,7 +110,9 @@ Attacker.prototype.drawHealthBar = function(){
     } else {
         context.fillStyle = '#ff8080';
     }
-    context.fillRect((this.locX + game.tileSize / 8), (this.locY - game.tileSize / 3), ((game.tileSize - game.tileSize / 4) * this.health / this.maxHealth), (game.tileSize / 4));
+
+    // de lengte en hoogt van de healthbar is relatief aan de grootte van de attacker en tilegrootte
+    context.fillRect(this.locX - verschil + spriteSize / 8, this.locY - verschil - barHeight - spriteSize / 10, ((spriteSize - spriteSize / 4) * this.health / this.maxHealth), barHeight);
 };
 
 //tekent een attacker op z'n geheel
