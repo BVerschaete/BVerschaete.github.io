@@ -3,4 +3,3 @@
  */
 var attackerTypes=[Attacker, TankAttacker, SpeedAttacker];
 var towerTypes = [Tower,Tower2,Tower3];
-var currentWaves = [];

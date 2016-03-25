@@ -29,7 +29,6 @@ function spawnWaveNow(){
 
 function spawnWave(){
     var wave = createWave();
-    currentWaves.push(wave);
     toggleSpawn();
     game.timeLastWaveSpawned = Date.now();
 
@@ -45,9 +44,6 @@ function spawnWave(){
     setTimeout(function(){
         clearInterval(loop);
         toggleSpawn();
-        
-        var index = currentWaves.indexOf(wave);
-        currentWaves.slice(index, 1);
     }, wave.attackers.length * waitTime);
 }
 
