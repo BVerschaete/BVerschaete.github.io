@@ -2,6 +2,16 @@ body{
     background-color: #6093CA !important;
 }
 
+#settings{
+    width: 50%;
+    float: left;
+}
+
+#availableImages{
+    width: 50%;
+    float: right;
+}
+
 #container{
     margin-top: 50px;
 }
@@ -14,12 +24,19 @@ body{
 }
 
 #selectedImage{
+    margin-top: 10px;
+    width: 50%;
     float: right;
 }
 
 #selectedImage img{
     max-width: 100px;
     max-height: 100px;
+}
+
+#canvasContainer{
+    width: 100%;
+    clear: both;
 }
 
 canvas{

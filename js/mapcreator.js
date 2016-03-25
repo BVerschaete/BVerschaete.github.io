@@ -84,7 +84,7 @@ function addCanvas(){
     var height = map.tileSize * board.length;
     var $canvas = $('<canvas/>').prop({width: width, height: height});
 
-    $('#container').find('div:eq(0)').after($canvas);
+    $('#canvasContainer').append($canvas);
 
     map.canvas = $("canvas")[0];
     map.context = map.canvas.getContext("2d");
