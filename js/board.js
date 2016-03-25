@@ -6,7 +6,7 @@ function getValueFromPos(x, y){
     var indexHeight = Math.floor(y / game.tileSize);
     var indexWidth = Math.floor(x / game.tileSize);
 
-    if(y < $("canvas").attr("height") && y >= 0){
+    if(y < $("canvas").prop("height") && y >= 0){
         return selectedLevel.board[indexHeight][indexWidth];
     }else{
         return null;
@@ -15,9 +15,6 @@ function getValueFromPos(x, y){
 
 //tekent de achtergrond adhv schema in levels.js
 function drawMap(){
-    game.context.fillStyle = 'white';
-    game.context.fillRect(0, 0, $(game.canvas).attr("width"), $(game.canvas).attr("height"));
-
     //all different tiles, add to tiles object afterwards
     var grass = new Image();
     grass.src = "img/background.png";
@@ -45,11 +42,11 @@ function addCanvas(){
     var board = selectedLevel.board;
     var width = game.tileSize * board[0].length;
     var height =  game.tileSize * board.length;
-    var canvas = $('<canvas/>').attr({width: width, height: height});
+    var canvas = $('<canvas/>').prop({width: width, height: height});
 
     //geen vragen bij stellen, het werkt
     var gameInfo = $('#gameInfo');
-    var marginLeftPercentage = 100*(((window.innerWidth - canvas.attr('width'))/2) - gameInfo.width() - parseInt(gameInfo.css('marginRight')))/window.innerWidth;
+    var marginLeftPercentage = 100*(((window.innerWidth - canvas.prop('width'))/2) - gameInfo.width() - parseInt(gameInfo.css('marginRight')))/window.innerWidth;
 
     gameInfo.css("margin-left",  marginLeftPercentage + "%");
     $('#container').find('div:eq(0)').after(canvas);
@@ -64,6 +61,7 @@ function displayMoney() {
     $("#money").text(game.money);
 }
 
+//toont timer voor volgende wave
 function displayTime(){
     var time = Math.ceil(selectedLevel.spawnSpeed - (Date.now() - game.timeLastWaveSpawned)/1000);
     $("#nextWaveTime").text(time);
