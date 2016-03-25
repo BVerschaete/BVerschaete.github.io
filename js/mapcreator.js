@@ -7,27 +7,42 @@ var map = { tileSize: 40,
             canvas: null,
             context: null
 };
-var board = [[0,1,0,1,0,1,0,1,0,1],
-             [1,0,1,0,1,0,1,0,1,0],
-             [0,1,0,1,0,1,0,1,0,1],
-             [1,0,1,0,1,0,1,0,1,0],
-             [0,1,0,1,0,1,0,1,0,1],
-             [1,0,1,0,1,0,1,0,1,0],
-             [0,1,0,1,0,1,0,1,0,1],
-             [1,0,1,0,1,0,1,0,1,0],
-             [0,1,0,1,0,1,0,1,0,1],
-             [1,0,1,0,1,0,1,0,1,0]];
+var board;
 
 function setup(){
+    board = generateBoard($("#sldRows").val(), $("#sldCols").val());
     addImages();
     addCanvas();
     $("#sldTilesize").on("change", changeTileSize);
-
+    $("#sldRows").on("change", changeBoardSize);
+    $("#sldCols").on("change", changeBoardSize);
     gameLoop();
+}
+
+function generateBoard(rows, cols){
+    var b = [];
+
+    for(var i = 0; i < rows; i++){
+        b[i] = [];
+        for(var j = 0; j < cols; j++){
+            b[i][j] = (i + j) % 2;
+        }
+    }
+
+    return b;
+}
+
+function changeBoardSize(){
+    board = generateBoard($("#sldRows").val(), $("#sldCols").val());
+    $("#atlRows").html(board.length);
+    $("#atlCols").html(board[0].length);
+
+    addCanvas();
 }
 
 function changeTileSize(event){
     map.tileSize = event.target.value;
+    $("#tileSize").html(map.tileSize);
     addCanvas();
 }
 
