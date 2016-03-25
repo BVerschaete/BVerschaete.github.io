@@ -8,7 +8,7 @@ function Bullet(x,y,target,damage) {
     this.locY = y;
     this.target = target;
     this.damage = damage;
-    this.speed = 2.5 * (game.tileSize / 40) * this.target.speed / standaardAttackerSnelheid;
+    this.speed = 1.5 * (game.tileSize / 40) * this.target.speed / standaardAttackerSnelheid;
 }
 
 Bullet.prototype.r = game.tileSize / 10;

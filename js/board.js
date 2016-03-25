@@ -15,9 +15,6 @@ function getValueFromPos(x, y){
 
 //tekent de achtergrond adhv schema in levels.js
 function drawMap(){
-    game.context.fillStyle = 'white';
-    game.context.fillRect(0, 0, $(game.canvas).prop("width"), $(game.canvas).prop("height"));
-
     //all different tiles, add to tiles object afterwards
     var grass = new Image();
     grass.src = "img/background.png";
