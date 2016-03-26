@@ -30,9 +30,14 @@ function spawnWaveNow(){
 function spawnWave(){
     var wave = createWave();
     toggleSpawn();
-    game.timeLastWaveSpawned = Date.now();
-
+    
+    //time between attackers
     var waitTime = 1800 * game.tileSize / (new Attacker().speed);
+    
+    //time when to stop spawning attackers
+    var stopSpawnTime = wave.attackers.length * waitTime;
+    
+    game.timeLastWaveSpawnEnds = Date.now() + stopSpawnTime;
 
     //pushes every attacker from wave to real attackers
     var loop = setInterval(function(){
@@ -44,7 +49,7 @@ function spawnWave(){
     setTimeout(function(){
         clearInterval(loop);
         toggleSpawn();
-    }, wave.attackers.length * waitTime);
+    }, stopSpawnTime);
 }
 
 //update de spawnbutton zodat hij gedisabled moet worden of niet

@@ -10,7 +10,7 @@ var game = {
     attackersScore: 0,
     money: 400,
     currentWave: 0,
-    timeLastWaveSpawned: Date.now(),
+    timeLastWaveSpawnEnds: Date.now(),
     lives: 10
 };
 

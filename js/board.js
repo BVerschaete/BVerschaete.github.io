@@ -49,6 +49,11 @@ function displayMoney() {
 
 //toont timer voor volgende wave
 function displayTime(){
-    var time = Math.ceil(selectedLevel.spawnSpeed - (Date.now() - game.timeLastWaveSpawned)/1000);
-    $("#nextWaveTime").text(time);
+    var timeField = $("#nextWaveTime");
+    if(game.timeLastWaveSpawnEnds < Date.now()) {
+        var time = Math.ceil(selectedLevel.spawnSpeed - (Date.now() - game.timeLastWaveSpawnEnds) / 1000);
+        timeField.text(time);
+    } else {
+        timeField.text(selectedLevel.spawnSpeed);
+    }
 }
