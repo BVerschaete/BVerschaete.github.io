@@ -57,7 +57,7 @@ function selectTile(event){
 
 function addImages(){
     // voorlopig zelf instellen hoeveel images er in zitten :(
-    for(var i = 0; i < 8; i++){
+    for(var i = 0; i < 12; i++){
         var $img = $(tiles[i]);
         $img.attr("data-id", i); // het lukt niet met prop
         $img.click(selectTile);
