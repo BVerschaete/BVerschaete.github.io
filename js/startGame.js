@@ -10,13 +10,14 @@ var game = {
     attackersScore: 0,
     money: 400,
     currentWave: 0,
-    timeLastWaveSpawned: Date.now()
+    timeLastWaveSpawned: Date.now(),
+    lives: 10
 };
 
 function setup() {
     //kijken of speler naam en level ingevoerd heeft
     if(game.playerName && selectedLevel) {
-//useDisqus();
+    //useDisqus();
 
         addCanvas();
 
@@ -42,7 +43,7 @@ function setup() {
         gameLoop();
     } else {
         window.location.href = "index.html";
-        window.alert("Please select a name and a level before going to the game.html page");
+        alert("Please select a name and a level before going to the game.html page");
     }
 }
 

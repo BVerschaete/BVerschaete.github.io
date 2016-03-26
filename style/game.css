@@ -30,6 +30,7 @@ canvas {
 
 #towerInfo > div {
     text-align: left;
+    font-size: 2em;
 }
 
 #gameInfo{
@@ -40,4 +41,6 @@ canvas {
 
 #gameInfo > div {
     text-align: right;
+    font-size: 2em;
 }
+

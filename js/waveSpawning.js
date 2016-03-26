@@ -10,9 +10,9 @@ function createWave(){
     var aantalMonsters = 4 + game.currentWave * selectedLevel.difficulty;
     var wave = new Wave();
     for(var i = 0; i < aantalMonsters; i++){
-        if(i == aantalMonsters - 1){
+        if(i%3 == 0 && i != 0){
             wave.attackers.push(attackerCodes.strongAttacker);
-        } else if (i == aantalMonsters-2){
+        } else if (i%5 == 0 && i != 0){
             wave.attackers.push(attackerCodes.speedAttacker);
         } else {
             wave.attackers.push(attackerCodes.normalAttacker);
