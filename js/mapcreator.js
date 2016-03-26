@@ -1,7 +1,6 @@
 /**
  * Created by Gaben on 25/03/2016.
  */
-var dir = "./img/tiles/";
 var selectedImage;
 var map = { tileSize: 50,
             canvas: null,
@@ -142,12 +141,9 @@ function getMousePosition(event) {
 }
 
 function drawMap(){
-    var image = new Image();
-
     for(var i = 0; i < board.length; i++){
         for(var j = 0; j < board[i].length; j++) {
-            image.src = dir + board[i][j] + ".png";
-            map.context.drawImage(image, j * map.tileSize, i * map.tileSize, map.tileSize, map.tileSize);
+            map.context.drawImage(tiles[board[i][j]], j * map.tileSize, i * map.tileSize, map.tileSize, map.tileSize);
         }
     }
 }
