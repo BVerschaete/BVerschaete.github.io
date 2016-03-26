@@ -18,21 +18,22 @@ function Attacker(){
 Attacker.prototype.image = "dragon.png";
 Attacker.prototype.reward = 10;
 Attacker.prototype.maxHealth = 100;
+Attacker.prototype.passableTiles = [2, 3, 4, 5, 6, 7];
 
 //beweegt een attacker volgens zijn pad
 Attacker.prototype.move = function() {
     // board[this.posY-1] != null is nodig want dit zal null zijn als de sprite in de bovenste rij is
     var board = selectedLevel.board;
-    if(this.direction != directions.onder  && board[this.posY-1] != null && board[this.posY-1][this.posX] == 1 ){
+    if(this.direction != directions.onder && board[this.posY-1] != null && this.passableTiles.indexOf(board[this.posY-1][this.posX]) >= 0){
         this.posY -= 1;
         this.direction = directions.boven;
-    }else if(this.direction != directions.links && board[this.posY][this.posX+1] == 1 ){
+    }else if(this.direction != directions.links && this.passableTiles.indexOf(board[this.posY][this.posX+1]) >= 0){
         this.posX += 1;
         this.direction = directions.rechts;
-    }else if(this.direction != directions.boven && board[this.posY+1] != null && board[this.posY+1][this.posX] == 1 ){
+    }else if(this.direction != directions.boven && board[this.posY+1] != null && this.passableTiles.indexOf(board[this.posY+1][this.posX]) >= 0){
         this.posY += 1;
         this.direction = directions.onder;
-    }else if(this.direction != directions.rechts && board[this.posY][this.posX-1] == 1 ){
+    }else if(this.direction != directions.rechts && this.passableTiles.indexOf(board[this.posY][this.posX-1]) >= 0){
         this.posX -= 1;
         this.direction = directions.links;
     } else {
@@ -55,7 +56,7 @@ Attacker.prototype.updatePosition = function(){
     this.oldNow = now;
 
     if(this.direction === directions.boven){
-        if(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY - (this.speed * timeDelta / 1000))) !== 1){
+        if(this.passableTiles.indexOf(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY - (this.speed * timeDelta / 1000)))) == -1){
             this.move();
             this.locY = this.posY * game.tileSize;
             this.locX = Math.floor(this.locX);
@@ -63,7 +64,7 @@ Attacker.prototype.updatePosition = function(){
             this.locY -= this.speed * timeDelta / 1000;
         }
     }else if(this.direction === directions.rechts){
-        if(getValueFromPos(Math.floor(this.locX) + game.tileSize, Math.floor(this.locY)) !== 1){
+        if(this.passableTiles.indexOf(getValueFromPos(Math.floor(this.locX) + game.tileSize, Math.floor(this.locY))) == -1){
             this.move();
             this.locX = this.posX * game.tileSize;
             this.locY = Math.floor(this.locY);
@@ -71,7 +72,7 @@ Attacker.prototype.updatePosition = function(){
             this.locX += this.speed * timeDelta / 1000;
         }
     }else if(this.direction === directions.onder){
-        if(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY  + game.tileSize)) !== 1){
+        if(this.passableTiles.indexOf(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY  + game.tileSize))) == -1){
             this.move();
             this.locY = this.posY * game.tileSize;
             this.locX = Math.floor(this.locX);
@@ -79,7 +80,7 @@ Attacker.prototype.updatePosition = function(){
             this.locY += this.speed * timeDelta / 1000;
         }
     }else if(this.direction === directions.links){
-        if(getValueFromPos(Math.floor(this.locX - (this.speed * timeDelta / 1000)), Math.floor(this.locY)) !== 1){
+        if(this.passableTiles.indexOf(getValueFromPos(Math.floor(this.locX - (this.speed * timeDelta / 1000)), Math.floor(this.locY))) == -1){
             this.move();
             this.locX = this.posX * game.tileSize;
             this.locY = Math.floor(this.locY);
