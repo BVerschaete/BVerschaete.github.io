@@ -32,7 +32,23 @@ cornerRightUp.src = "img/tiles/6.png";
 var cornerRightDown = new Image();
 cornerRightDown.src = "img/tiles/7.png";
 var waterCornerRightUp = new Image();
-cornerRightDown.src = "img/tiles/8.png";
+waterCornerRightUp.src = "img/tiles/8.png";
+var waterRight = new Image();
+waterRight.src = "img/tiles/9.png";
+var waterCornerRightDown = new Image();
+waterCornerRightDown.src = "img/tiles/10.png";
+var waterDown = new Image();
+waterDown.src = "img/tiles/11.png";
+var waterCornerLeftDown = new Image();
+waterCornerLeftDown.src = "img/tiles/12.png";
+var waterLeft = new Image();
+waterLeft.src = "img/tiles/13.png";
+var waterCornerLeftTop = new Image();
+waterCornerLeftTop.src = "img/tiles/14.png";
+var waterUp = new Image();
+waterUp.src = "img/tiles/15.png";
+var waterMiddle = new Image();
+waterMiddle.src = "img/tiles/16.png";
 
 var tiles = {
     0: grass,
@@ -43,5 +59,13 @@ var tiles = {
     5: cornerLeftUp,
     6: cornerRightUp,
     7: cornerRightDown,
-    8: waterCornerRightUp
+    8: waterCornerRightUp,
+    9: waterRight,
+    10: waterCornerRightDown,
+    11: waterDown,
+    12: waterCornerLeftDown,
+    13: waterLeft,
+    14: waterCornerLeftTop,
+    15: waterUp,
+    16: waterMiddle
 };
