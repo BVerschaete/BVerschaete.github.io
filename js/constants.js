@@ -31,6 +31,8 @@ var cornerRightUp = new Image();
 cornerRightUp.src = "img/tiles/6.png";
 var cornerRightDown = new Image();
 cornerRightDown.src = "img/tiles/7.png";
+var waterCornerRightUp = new Image();
+cornerRightDown.src = "img/tiles/8.png";
 
 var tiles = {
     0: grass,
@@ -40,5 +42,6 @@ var tiles = {
     4: cornerLeftDown,
     5: cornerLeftUp,
     6: cornerRightUp,
-    7: cornerRightDown
+    7: cornerRightDown,
+    8: waterCornerRightUp
 };
