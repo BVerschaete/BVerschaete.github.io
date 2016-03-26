@@ -3,7 +3,7 @@
  */
 var dir = "./img/tiles/";
 var selectedImage;
-var map = { tileSize: 40,
+var map = { tileSize: 50,
             canvas: null,
             context: null
 };
@@ -58,7 +58,8 @@ function selectTile(event){
 }
 
 function addImages(){
-    for(var i = 0; i < 3; i++){
+    // voorlopig zelf instellen hoeveel images er in zitten :(
+    for(var i = 0; i < 10; i++){
         var $img = $("<img>");
         $img.prop("src", dir + i + ".png");
         $img.attr("data-id", i); // het lukt niet met prop
