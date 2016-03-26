@@ -25,7 +25,7 @@ function generateBoard(rows, cols){
     for(var i = 0; i < rows; i++){
         b[i] = [];
         for(var j = 0; j < cols; j++){
-            b[i][j] = (i + j) % 2;
+            b[i][j] = 0;
         }
     }
 
@@ -46,9 +46,7 @@ function changeTileSize(event){
     addCanvas();
 }
 
-function placeTile(event){
-    event.stopPropagation();
-
+function placeTile(){
     board[getYIndexFromPos(mouse.x, mouse.y)][getXIndexFromPos(mouse.x, mouse.y)] = selectedImage.getAttribute("data-id");
 }
 
@@ -95,7 +93,18 @@ function addCanvas(){
     $(map.canvas).mouseover(toggleMouseInCanvas);
     $(map.canvas).mouseout(toggleMouseInCanvas);
     $(map.canvas).mousemove(getMousePosition);
-    $(map.canvas).click(placeTile);
+    
+    var interval;
+    $(map.canvas).on('mousedown',function(event) {
+        event.stopPropagation();
+        interval = setInterval(function() {
+            placeTile();
+        },25); // 500ms between each frame
+    });
+    
+    $(map.canvas).on('mouseup',function() {
+        clearInterval(interval);
+    });
 
 }
 
