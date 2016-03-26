@@ -59,9 +59,8 @@ function selectTile(event){
 
 function addImages(){
     // voorlopig zelf instellen hoeveel images er in zitten :(
-    for(var i = 0; i < 10; i++){
-        var $img = $("<img>");
-        $img.prop("src", dir + i + ".png");
+    for(var i = 0; i < 8; i++){
+        var $img = $(tiles[i]);
         $img.attr("data-id", i); // het lukt niet met prop
         $img.click(selectTile);
         $("#availableImages").append($img);

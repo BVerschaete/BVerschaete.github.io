@@ -15,20 +15,6 @@ function getValueFromPos(x, y){
 
 //tekent de achtergrond adhv schema in levels.js
 function drawMap(){
-    //all different tiles, add to tiles object afterwards
-    var grass = new Image();
-    grass.src = "img/background.png";
-    var path = new Image();
-    path.src = "img/grasstile.png";
-    var water = new Image();
-    water.src = "img/watertile.jpg";
-    
-    var tiles = {
-        0: grass,
-        1: path,
-        2: water
-    };
-
     var board = selectedLevel.board;
     for(var i = 0; i < board.length; i++){
         for(var j = 0; j < board[i].length; j++) {
