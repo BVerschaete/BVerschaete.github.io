@@ -92,7 +92,7 @@ Attacker.prototype.updatePosition = function(){
 //tekent zijn afbeelding
 Attacker.prototype.drawImage = function(){
     var sprite = new Image();
-    sprite.src = "img/" + this.image;
+    sprite.src = "img/attackers/" + this.image;
     game.context.drawImage(sprite, (this.locX + game.tileSize * (1-this.scale) / 2), (this.locY + game.tileSize * (1-this.scale) / 2), (game.tileSize * this.scale), (game.tileSize * this.scale));
 };
 

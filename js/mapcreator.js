@@ -99,7 +99,7 @@ function addCanvas(){
         event.stopPropagation();
         interval = setInterval(function() {
             placeTile();
-        },25); // 500ms between each frame
+        },25);
     });
     
     $(map.canvas).on('mouseup',function() {

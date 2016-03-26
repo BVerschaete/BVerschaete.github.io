@@ -52,7 +52,7 @@ function drawRadius(){
 
         function drawTower(){
             var sprite = new Image();
-            sprite.src = "img/" + towerTypes[currentTower].prototype.image;
+            sprite.src = "img/towers/" + towerTypes[currentTower].prototype.image;
             context.globalAlpha = 0.4;
             context.drawImage(sprite, mouse.x - game.tileSize/4, mouse.y - game.tileSize/4, game.tileSize/2, game.tileSize/2);
             context.globalAlpha = 1;

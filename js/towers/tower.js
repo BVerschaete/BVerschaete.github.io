@@ -18,7 +18,7 @@ function Tower(x, y){
 //gemeenschappelijke draw-functie
 Tower.prototype.draw = function(){
     var sprite = new Image();
-    sprite.src = "img/" + this.image;
+    sprite.src = "img/towers/" + this.image;
     game.context.drawImage(sprite, this.locX - game.tileSize/4, this.locY - game.tileSize/4, game.tileSize/2, game.tileSize/2);
 };
 
@@ -150,7 +150,7 @@ function displaySelectedTowerInfo(){
     var tower = towers[selectedTower];
     if(tower) {
         $("#towerInfo").css('visibility', 'visible');
-        $("#towerImg").attr("src", "./img/" + tower.image);
+        $("#towerImg").attr("src", "img/towers/" + tower.image);
         $("#towerLevel").text(tower.level);
         $("#towerDamage").text(Math.floor(tower.damage));
         $("#towerRange").text(Math.floor(tower.range));
