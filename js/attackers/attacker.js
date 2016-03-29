@@ -18,7 +18,7 @@ function Attacker(){
 Attacker.prototype.image = "dragon.png";
 Attacker.prototype.reward = 10;
 Attacker.prototype.maxHealth = 100;
-Attacker.prototype.passableTiles = [2, 3, 4, 5, 6, 7];
+Attacker.prototype.passableTiles = [1, 2, 3, 4, 5, 6];
 
 //beweegt een attacker volgens zijn pad
 Attacker.prototype.move = function() {

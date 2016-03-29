@@ -4,21 +4,49 @@
 //spawnt X aantal monsters
 function Wave(){
     this.attackers = [];
+    this.spawnSpeed = 0;
+}
+//kiest adhv de hoeveelste wave het is, welke wave moet gespawned worden
+function chooseWave(){
+    if(game.currentWave%5 == 0 && game.currentWave != 0){
+        return createSpeedWave();
+    } else if(game.currentWave%3 == 0 && game.currentWave != 0){
+        return createTankWave();
+    } else{
+        return createNormalWave();
+    }
 }
 
-function createWave(){
+function createNormalWave(){
     var aantalMonsters = 4 + game.currentWave * selectedLevel.difficulty;
     var wave = new Wave();
     for(var i = 0; i < aantalMonsters; i++){
-        if(i%3 == 0 && i != 0){
-            wave.attackers.push(attackerCodes.strongAttacker);
-        } else if (i%5 == 0 && i != 0){
-            wave.attackers.push(attackerCodes.speedAttacker);
-        } else {
-            wave.attackers.push(attackerCodes.normalAttacker);
-        }
+        wave.attackers.push(attackerCodes.normalAttacker);
     }
     game.currentWave += 1;
+    wave.spawnSpeed = new Attacker().speed;
+    return wave;
+}
+
+function createTankWave(){
+    var aantalMonsters = 4 + Math.floor(game.currentWave/3) * selectedLevel.difficulty;
+    var wave = new Wave();
+    for(var i = 0; i < aantalMonsters; i++){
+        wave.attackers.push(attackerCodes.strongAttacker);
+    }
+    game.currentWave += 1;
+    wave.spawnSpeed = new TankAttacker().speed;
+    return wave;
+}
+
+function createSpeedWave(){
+    var aantalMonsters = 4 + Math.floor(game.currentWave/3) * selectedLevel.difficulty;
+    var wave = new Wave();
+    for(var i = 0; i < aantalMonsters; i++){
+        wave.attackers.push(attackerCodes.speedAttacker);
+    }
+    game.currentWave += 1;
+    wave.spawnSpeed = new SpeedAttacker().speed;
     return wave;
 }
 
@@ -28,11 +56,11 @@ function spawnWaveNow(){
 }
 
 function spawnWave(){
-    var wave = createWave();
+    var wave = chooseWave();
     toggleSpawn();
     
     //time between attackers
-    var waitTime = 1800 * game.tileSize / (new Attacker().speed);
+    var waitTime = 1800 * game.tileSize / wave.spawnSpeed;
     
     //time when to stop spawning attackers
     var stopSpawnTime = wave.attackers.length * waitTime;
