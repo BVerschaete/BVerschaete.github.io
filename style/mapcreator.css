@@ -2,9 +2,29 @@ body{
     background-color: #6093CA !important;
 }
 
+span{
+    font-size: 1.5em;
+    display: inline-block;
+}
+
+.sliderDiv{
+    width: 100px;
+    display: inline-block;
+}
+
+.sliderLabel{
+    width: 200px;
+}
+
+input{
+    line-height: 50px;
+}
+
 #settings{
+    margin-top: 15px;
     width: 50%;
     float: left;
+    padding-left: 50px;
 }
 
 #availableImages{
@@ -20,11 +40,11 @@ body{
     width: 50px;
     height: 50px;
     margin-left: 5px;
-    margin-top: 5px;
+    margin-top: 15px;
 }
 
 #selectedImage{
-    margin-top: 10px;
+    margin-top: 50px;
     width: 50%;
     float: right;
 }
@@ -37,6 +57,11 @@ body{
 #canvasContainer{
     width: 100%;
     clear: both;
+    padding-left: 50px;
+}
+
+img{
+    border: 2px solid black;
 }
 
 canvas{
@@ -44,4 +69,9 @@ canvas{
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
+    border: solid black 2px;
+}
+
+nav{
+    height: 50px;
 }
