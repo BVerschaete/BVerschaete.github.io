@@ -17,6 +17,9 @@ var level = {
     startY: null
 };
 
+var customLevels = [];
+var selectedCustomLevel = -1;
+
 function setup(){
     level.board = generateBoard($("#sldRows").val(), $("#sldCols").val());
     addImages();
@@ -25,7 +28,12 @@ function setup(){
     $("#sldRows, #sldCols").on("input", changeBoardSize);
     $('#levelStartCoords').click(selectStartTile);
     $('#save').click(saveLevel);
+    $('#load').click(loadLevels);
     gameLoop();
+
+    if(checkCookie("customLevels")) {
+        customLevels = JSON.parse(getCookie("customLevels"));
+    }
 }
 
 function generateBoard(rows, cols){
@@ -212,25 +220,71 @@ function createLevel(){
     level.name = $('#levelName').val();
     level.difficulty = parseInt($('#levelDifficulty').val());
     level.spawnSpeed = parseInt($('#levelSpawnSpeed').val());
-    level.direction = directions[$('#levelStartDirection').find(":selected").text()];
+    level.direction = $('#levelStartDirection').find(":selected").val();
 }
 
 function saveLevel(){
     if($('#levelName').val().trim() && $('#levelDifficulty').val().trim() && $('#levelSpawnSpeed').val().trim() && level.startX != null && level.startY != null) {
-        console.log("saved");
         createLevel();
-        var customLevels = [];
-        
-        if(checkCookie("customLevels")){
-            customLevels = JSON.parse(getCookie("customLevels"));
+        if(selectedCustomLevel == -1) {
+            customLevels.push(level);
+        } else {
+            customLevels[selectedCustomLevel] = level;
         }
-
-        customLevels.push(level);
         setCookie("customLevels", JSON.stringify(customLevels), 7);
-        console.log(getCookie("customLevels"));
+        location.reload();
     } else {
         alert("invalid level settings");
     }
+}
+
+function loadLevels(){
+    var customLevelDiv = $('#customLevels');
+    customLevelDiv.empty();
+    customLevelDiv.show();
+    for(var i = 0; i < customLevels.length; i++){
+        var div = $('<div/>');
+        div.addClass("customLevelButtonDiv");
+        
+        var button = $('<a/>');
+        button.attr({class: 'btn customLevelButton', 'data-level': i});
+        button.text(i+1);
+        button.click(loadLevel);
+        div.append(button);
+
+        var name = $('<p/>');
+        name.text(customLevels[i].name);
+        div.append(name);
+        customLevelDiv.append(div);
+
+        var deleteButton = $('<button/>').text('Delete Level');
+        deleteButton.click(deleteLevel);
+        deleteButton.addClass("btn btn-danger");
+        deleteButton.css('font-size', '10px');
+        div.append(deleteButton);
+    }
+}
+
+function loadLevel(event){
+    $('#customLevels').hide();
+    var index = parseInt($(event.target).attr('data-level'));
+    level = customLevels[index];
+    selectedCustomLevel = index;
+
+    $('#levelName').val(level.name);
+    $('#levelDifficulty').val(level.difficulty);
+    $('#levelSpawnSpeed').val(level.spawnSpeed);
+    $('#levelStartDirection').find('option[value=' + level.startDirection + ']').prop('selected', true);
+    $('#levelStartX').text(level.startX);
+    $('#levelStartY').text(level.startY);
+
+    drawMap();
+}
+
+function deleteLevel(event){
+    customLevels.splice(parseInt($(event.target).parent().attr('data-level')), 1);
+    setCookie("customLevels", JSON.stringify(customLevels), 7);
+    loadLevels();
 }
 
 function getCookie(cname) {

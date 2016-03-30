@@ -58,15 +58,21 @@ span{
 
 #levelInfo{
     clear: both;
+    display: block;
+}
+
+#levelInfo > div:first-of-type{
+    display: inline-block;
+    float: left;
     width: 500px;
     padding-left: 35px;
 }
 
-#levelInfo input, .btn {
+#levelInfo input, #levelstartcoords {
     width: 40%;
 }
 
-#levelInfo > div {
+#levelInfo > div > div {
     margin: 15px;
 }
 
@@ -80,9 +86,70 @@ span{
 }
 
 #levelInfoControls .btn{
-    width: 30%;
+    width: 49%;
 }
 
+#levelStartX, #levelStartY{
+    font-size: 1em;
+}
+
+#customLevels{
+    width: 50%;
+    float: right;
+}
+
+.customLevelButtonDiv{
+    display: inline-block;
+    float: left;
+    text-align: center;
+    margin: 15px;
+    font-size: 2em;
+}
+
+.customLevelButtonDiv > .btn{
+    font-size: 1em;
+}
+
+.customLevelButtonDiv p{
+    text-align: center;
+}
+
+#overwriteLevel{
+    margin-top: 15px;
+    font-size: 1.5em;
+    visibility: hidden;
+}
+
+#selectedCustomLevel{
+    font-size: 1em;
+}
+
+.customLevelButton {
+    margin: 20px;
+    background: #3498db;
+    background-image: -webkit-linear-gradient(top, #3498db, #2b698f);
+    background-image: -moz-linear-gradient(top, #3498db, #2b698f);
+    background-image: -ms-linear-gradient(top, #3498db, #2b698f);
+    background-image: -o-linear-gradient(top, #3498db, #2b698f);
+    background-image: linear-gradient(to bottom, #3498db, #2b698f);
+    text-shadow: 1px 4px 7px #000000;
+    font-family: Arial;
+    color: #8f713c;
+    padding: 10px 20px 10px 20px;
+    border: solid black 2px;
+    text-decoration: none;
+}
+
+.customLevelButton:hover, a.hovered {
+    background: #3cb0fd;
+    color: #8f713c;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+}
 
 canvas{
     margin: 5px;
