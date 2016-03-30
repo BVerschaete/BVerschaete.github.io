@@ -7,7 +7,7 @@ function getValueFromPos(x, y){
     var indexWidth = Math.floor(x / game.tileSize);
 
     if(y < $("canvas").prop("height") && y >= 0){
-        return selectedLevel.board[indexHeight][indexWidth];
+        return game.selectedLevel.board[indexHeight][indexWidth];
     }else{
         return null;
     }
@@ -15,7 +15,7 @@ function getValueFromPos(x, y){
 
 //tekent de achtergrond adhv schema in levels.js
 function drawMap(){
-    var board = selectedLevel.board;
+    var board = game.selectedLevel.board;
     for(var i = 0; i < board.length; i++){
         for(var j = 0; j < board[i].length; j++) {
             game.context.drawImage(tiles[board[i][j]], j * game.tileSize, i * game.tileSize, game.tileSize, game.tileSize);
@@ -25,7 +25,7 @@ function drawMap(){
 
 //voegt het canvas toe aan de html pagina en update de margins en canvasgrootte naar de grootte van het geselecteerde level
 function addCanvas(){
-    var board = selectedLevel.board;
+    var board = game.selectedLevel.board;
     var width = game.tileSize * board[0].length;
     var height =  game.tileSize * board.length;
     var canvas = $('<canvas/>').prop({width: width, height: height});
@@ -51,9 +51,9 @@ function displayMoney() {
 function displayTime(){
     var timeField = $("#nextWaveTime");
     if(game.timeLastWaveSpawnEnds < Date.now()) {
-        var time = Math.ceil(selectedLevel.spawnSpeed - (Date.now() - game.timeLastWaveSpawnEnds) / 1000);
+        var time = Math.ceil(game.selectedLevel.spawnSpeed - (Date.now() - game.timeLastWaveSpawnEnds) / 1000);
         timeField.text(time);
     } else {
-        timeField.text(selectedLevel.spawnSpeed);
+        timeField.text(game.selectedLevel.spawnSpeed);
     }
 }

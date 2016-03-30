@@ -48,7 +48,7 @@ function updateLogic(){
     }
 
     //spawnt wave iedere 10 seconden
-    if((Date.now() - game.timeLastWaveSpawnEnds) > selectedLevel.spawnSpeed * 1000){
+    if((Date.now() - game.timeLastWaveSpawnEnds) > game.selectedLevel.spawnSpeed * 1000){
         spawnWave();
     }
 

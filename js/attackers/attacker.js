@@ -5,12 +5,12 @@ var attackers = [];
 
 function Attacker(){
     this.speed= 50 * (game.tileSize / 40); // snelheid relatief aan de snelheid bij een tileSize van 40
-    this.posX= selectedLevel.startX;
-    this.posY= selectedLevel.startY;
+    this.posX= game.selectedLevel.startX;
+    this.posY= game.selectedLevel.startY;
     this.locX= (this.posX * game.tileSize);
     this.locY= (this.posY * game.tileSize);
     this.oldNow = Date.now();
-    this.direction = selectedLevel.startDirection;
+    this.direction = game.selectedLevel.startDirection;
     this.health = this.maxHealth;
     this.scale = 0.8;
 }
@@ -23,7 +23,7 @@ Attacker.prototype.passableTiles = [1, 2, 3, 4, 5, 6];
 //beweegt een attacker volgens zijn pad
 Attacker.prototype.move = function() {
     // board[this.posY-1] != null is nodig want dit zal null zijn als de sprite in de bovenste rij is
-    var board = selectedLevel.board;
+    var board = game.selectedLevel.board;
     if(this.direction != directions.onder && board[this.posY-1] != null && this.passableTiles.indexOf(board[this.posY-1][this.posX]) >= 0){
         this.posY -= 1;
         this.direction = directions.boven;

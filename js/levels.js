@@ -47,7 +47,26 @@ var level0 = {
 //NA HET MAKEN VAN EEN LEVEL VERPLICHT TOEVOEGEN AAN ARRAY!!
 var standardLevels = [level0];
 var customLevels = [];
+var levels;
 
-var levels = standardLevels.concat(customLevels);
+$(function(){
+    if(checkCookie("customLevels")){
+        customLevels = JSON.parse(getCookie("customLevels"));
+    }
+    levels = standardLevels.concat(customLevels);
+});
 
-var selectedLevel = levels[sessionStorage.selectedLevel];
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
+
+function checkCookie(cname) {
+    return getCookie(cname) != "";
+}

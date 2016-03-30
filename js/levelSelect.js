@@ -26,3 +26,4 @@ $(function() {
         startButton.removeClass("disabled");
     });
 });
+

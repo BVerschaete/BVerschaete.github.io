@@ -18,7 +18,7 @@ function chooseWave(){
 }
 
 function createNormalWave(){
-    var aantalMonsters = 4 + game.currentWave * selectedLevel.difficulty;
+    var aantalMonsters = 4 + game.currentWave * game.selectedLevel.difficulty;
     var wave = new Wave();
     for(var i = 0; i < aantalMonsters; i++){
         wave.attackers.push(attackerCodes.normalAttacker);
@@ -29,7 +29,7 @@ function createNormalWave(){
 }
 
 function createTankWave(){
-    var aantalMonsters = 4 + Math.floor(game.currentWave/3) * selectedLevel.difficulty;
+    var aantalMonsters = 4 + Math.floor(game.currentWave/3) * game.selectedLevel.difficulty;
     var wave = new Wave();
     for(var i = 0; i < aantalMonsters; i++){
         wave.attackers.push(attackerCodes.strongAttacker);
@@ -40,7 +40,7 @@ function createTankWave(){
 }
 
 function createSpeedWave(){
-    var aantalMonsters = 4 + Math.floor(game.currentWave/3) * selectedLevel.difficulty;
+    var aantalMonsters = 4 + Math.floor(game.currentWave/3) * game.selectedLevel.difficulty;
     var wave = new Wave();
     for(var i = 0; i < aantalMonsters; i++){
         wave.attackers.push(attackerCodes.speedAttacker);

@@ -4,6 +4,7 @@
 //basiswaarden om een game te starten
 var game = {
     playerName: sessionStorage.playerName,
+    selectedLevel: null,
     canvas: null,
     context: null,
     tileSize: 50,
@@ -15,8 +16,10 @@ var game = {
 };
 
 function setup() {
+    game.selectedLevel = levels[sessionStorage.selectedLevel];
+
     //kijken of speler naam en level ingevoerd heeft
-    if(game.playerName && selectedLevel) {
+    if(game.playerName != null && game.selectedLevel) {
     //useDisqus();
 
         addCanvas();

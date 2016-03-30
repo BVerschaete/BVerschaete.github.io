@@ -24,6 +24,7 @@ function setup(){
     $("#sldTilesize").on("input", changeTileSize);
     $("#sldRows, #sldCols").on("input", changeBoardSize);
     $('#levelStartCoords').click(selectStartTile);
+    $('#save').click(saveLevel);
     gameLoop();
 }
 
@@ -55,7 +56,7 @@ function changeTileSize(event){
 }
 
 function placeTile(){
-    level.board[getMouseTileY()][getMouseTileX()] = selectedImage.getAttribute("data-id");
+    level.board[getMouseTileY()][getMouseTileX()] = parseInt(selectedImage.getAttribute("data-id"));
 }
 
 function selectTile(event){
@@ -66,7 +67,7 @@ function selectTile(event){
 function addImages(){
     // voorlopig zelf instellen hoeveel images er in zitten :(
     var images = $('#availableImages');
-    for(var i = 1; i <= 22; i++){
+    for(var i = 0; i <= 22; i++){
         var $img = $(tiles[i]);
         $img.attr("data-id", i); // het lukt niet met prop
         $img.click(selectTile);
@@ -209,13 +210,49 @@ function gameLoop() {
 
 function createLevel(){
     level.name = $('#levelName').val();
-    level.difficulty = $('#levelDifficulty').val();
-    level.spawnSpeed = $('#levelSpawnSpeed').val();
+    level.difficulty = parseInt($('#levelDifficulty').val());
+    level.spawnSpeed = parseInt($('#levelSpawnSpeed').val());
     level.direction = directions[$('#levelStartDirection').find(":selected").text()];
 }
 
 function saveLevel(){
-    
+    if($('#levelName').val().trim() && $('#levelDifficulty').val().trim() && $('#levelSpawnSpeed').val().trim() && level.startX != null && level.startY != null) {
+        console.log("saved");
+        createLevel();
+        var customLevels = [];
+        
+        if(checkCookie("customLevels")){
+            customLevels = JSON.parse(getCookie("customLevels"));
+        }
+
+        customLevels.push(level);
+        setCookie("customLevels", JSON.stringify(customLevels), 7);
+        console.log(getCookie("customLevels"));
+    } else {
+        alert("invalid level settings");
+    }
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
+
+function checkCookie(cname) {
+    return getCookie(cname) != "";
+}
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
 }
 
 $(setup);
