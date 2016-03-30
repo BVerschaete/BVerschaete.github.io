@@ -75,22 +75,24 @@ function toggleMouseInCanvas(){
 }
 
 function addCanvas(){
-    var canvas = $("canvs");
-    canvas.remove();
+    $("canvas").remove();
     var width = map.tileSize * board[0].length;
     var height = map.tileSize * board.length;
     var $canvas = $('<canvas/>').prop({width: width, height: height});
 
     $('#canvasContainer').append($canvas);
 
-    map.canvas = canvas[0];
+    map.canvas = $("canvas")[0];
     map.context = map.canvas.getContext("2d");
 
     map.context.fillStyle = 'white';
     map.context.fillRect(0, 0, $(map.canvas).prop("width"), $(map.canvas).prop("height"));
 
     $(map.canvas).mouseover(toggleMouseInCanvas);
-    $(map.canvas).mouseout(toggleMouseInCanvas);
+    $(map.canvas).mouseout(function(){
+        clearInterval(interval);
+        toggleMouseInCanvas();
+    });
     $(map.canvas).mousemove(getMousePosition);
     
     var interval;

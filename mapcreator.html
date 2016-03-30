@@ -39,16 +39,36 @@
                 <span id="atlCols">10</span>
             </div>
         </div>
-        <div id="availableImages">
+        <div id="tileSelect">
+            <div id="availableImages">
 
-        </div>
-
-        <div id="selectedImage">
-            <span>Selected image:</span>
-            <img src="" />
+            </div>
+            <div id="selectedImage">
+                <span>Selected image:</span>
+                <img src="" />
+            </div>
         </div>
         <div id="canvasContainer">
 
+        </div>
+        <div id="levelInfo" class="form-group">
+            <div><span class="levelLabel">Level name:</span><input class="form-control" type="text"></div>
+            <div><span class="levelLabel">Difficulty:</span><input class="form-control" min="0" max="4" type="number"></div>
+            <div><span class="levelLabel">Spawn speed:</span><input class="form-control" step="10" min="0" max="50" type="number"></div>
+            <div><span class="levelLabel">X: <span>0</span>Y: <span>0</span></span><button class="btn btn-primary form-control">Select the starting tile</button></div>
+            <div>
+                <span class="levelLabel">Starting Direction:</span><select class="form-control">
+                    <option value="0">Up</option>
+                    <option value="2">Down</option>
+                    <option value="3">Left</option>
+                    <option value="1">Right</option>
+                </select>
+            </div>
+            <div id="levelInfoControls">
+                <button class="btn btn-success">Save</button>
+                <button class="btn btn-warning">Load</button>
+                <button class="btn btn-danger">Delete</button>
+            </div>
         </div>
     </div>
 </body>

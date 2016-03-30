@@ -16,10 +16,6 @@ span{
     width: 200px;
 }
 
-input{
-    line-height: 50px;
-}
-
 #settings{
     margin-top: 15px;
     width: 50%;
@@ -27,7 +23,7 @@ input{
     padding-left: 50px;
 }
 
-#availableImages{
+#tileSelect{
     width: 50%;
     float: right;
 }
@@ -36,17 +32,17 @@ input{
     margin-top: 50px;
 }
 
-#availableImages img{
+#tileSelect img{
     width: 50px;
     height: 50px;
     margin-left: 5px;
     margin-top: 15px;
+    border: 2px solid black;
 }
 
 #selectedImage{
     margin-top: 50px;
-    width: 50%;
-    float: right;
+    float: Left;
 }
 
 #selectedImage img{
@@ -55,14 +51,38 @@ input{
 }
 
 #canvasContainer{
-    width: 100%;
-    clear: both;
     padding-left: 50px;
+    padding-top: 50px;
+    float: left;
 }
 
-img{
-    border: 2px solid black;
+#levelInfo{
+    clear: both;
+    width: 500px;
+    padding-left: 35px;
 }
+
+#levelInfo input, .btn {
+    width: 40%;
+}
+
+#levelInfo > div {
+    margin: 15px;
+}
+
+.form-control{
+    display: inline-block;
+    width: 40%;
+}
+
+.levelLabel{
+    width: 60%
+}
+
+#levelInfoControls .btn{
+    width: 30%;
+}
+
 
 canvas{
     margin: 5px;
