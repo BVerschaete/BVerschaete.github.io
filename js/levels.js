@@ -45,6 +45,9 @@ var level0 = {
 };
 
 //NA HET MAKEN VAN EEN LEVEL VERPLICHT TOEVOEGEN AAN ARRAY!!
-var levels = [level0];
+var standardLevels = [level0];
+var customLevels = [];
+
+var levels = standardLevels.concat(customLevels);
 
 var selectedLevel = levels[sessionStorage.selectedLevel];
