@@ -6,11 +6,22 @@ $(function() {
     var startButton = $("#startSelectedLevel");
     startButton.addClass("disabled");
 
-    for(var i = 0; i < levels.length; i++){
+    for(var i = 0; i < standardLevels.length; i++){
         var button = $('<a/>');
         button.attr({class: 'btn levelSelectButton', 'data-level': i});
         button.text(i+1);
-        $("#buttonContainer").append(button);
+        $("#standardLevelContainer").append(button);
+    }
+
+    if(customLevels.length != 0) {
+        for (var j = 0; j < customLevels.length; j++) {
+            var button2 = $('<a/>');
+            button2.attr({class: 'btn levelSelectButton', 'data-level': standardLevels.length + j});
+            button2.text(standardLevels.length + j + 1);
+            $('#customLevelContainer').append(button2);
+        }
+    } else {
+        $('#customLevelContainer').hide();
     }
 
     var selectedButton;
