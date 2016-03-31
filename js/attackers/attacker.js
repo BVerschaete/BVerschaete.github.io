@@ -21,21 +21,58 @@ Attacker.prototype.maxHealth = 100;
 Attacker.prototype.passableTiles = [1, 2, 3, 4, 5, 6];
 
 //beweegt een attacker volgens zijn pad
+//voor iedere tile andere move functionaliteit
 Attacker.prototype.move = function() {
-    // board[this.posY-1] != null is nodig want dit zal null zijn als de sprite in de bovenste rij is
     var board = game.selectedLevel.board;
-    if(this.direction != directions.onder && board[this.posY-1] != null && this.passableTiles.indexOf(board[this.posY-1][this.posX]) >= 0){
-        this.posY -= 1;
-        this.direction = directions.boven;
-    }else if(this.direction != directions.links && this.passableTiles.indexOf(board[this.posY][this.posX+1]) >= 0){
-        this.posX += 1;
-        this.direction = directions.rechts;
-    }else if(this.direction != directions.boven && board[this.posY+1] != null && this.passableTiles.indexOf(board[this.posY+1][this.posX]) >= 0){
-        this.posY += 1;
-        this.direction = directions.onder;
-    }else if(this.direction != directions.rechts && this.passableTiles.indexOf(board[this.posY][this.posX-1]) >= 0){
-        this.posX -= 1;
-        this.direction = directions.links;
+    var tile = this.passableTiles.indexOf(board[this.posY][this.posX]);
+    if(tile == 0){
+        if(this.direction == directions.rechts) {
+            this.posX += 1;
+            this.direction = directions.rechts;
+        } else {
+            this.posX -= 1;
+            this.direction = directions.links;
+        }
+    }else if(tile == 1) {
+        if (this.direction == directions.boven) {
+            this.posY -= 1;
+            this.direction = directions.boven;
+        } else {
+            this.posY += 1;
+            this.direction = directions.onder;
+        }
+    }else if(tile == 2) {
+        if (this.direction == directions.boven) {
+            this.posX -= 1;
+            this.direction = directions.links;
+        } else {
+            this.posY += 1;
+            this.direction = directions.onder;
+        }
+    } else if(tile == 3) {
+        if (this.direction == directions.rechts) {
+            this.posY -= 1;
+            this.direction = directions.boven;
+        } else {
+            this.posX -= 1;
+            this.direction = directions.links;
+        }
+    } else if(tile == 4) {
+        if (this.direction == directions.onder) {
+            this.posX += 1;
+            this.direction = directions.rechts;
+        } else {
+            this.posY -= 1;
+            this.direction = directions.boven;
+        }
+    } else if(tile == 5) {
+        if (this.direction == directions.boven) {
+            this.posX += 1;
+            this.direction = directions.rechts;
+        } else {
+            this.posY += 1;
+            this.direction = directions.onder;
+        }
     } else {
         deleteAttacker(this);
         game.attackersScore++;
