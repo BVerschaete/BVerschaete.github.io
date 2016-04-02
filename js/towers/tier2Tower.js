@@ -12,3 +12,4 @@ Tower2.prototype.fireRate = Tower.prototype.fireRate * 2;
 Tower2.prototype.damage = Tower.prototype.damage * 2;
 Tower2.prototype.cost = Tower.prototype.cost * 1.2;
 Tower2.prototype.maxUpgradeLevel = 6;
+Tower.prototype.displayName = "Tower Tier 2";

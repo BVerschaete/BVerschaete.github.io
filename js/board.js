@@ -42,6 +42,14 @@ function addCanvas(){
     game.context = game.canvas.getContext("2d");
 }
 
+function addTowerButtons(){
+    for(var i = 0; i < towerTypes.length; i ++){
+        var $button = $("<input>", {type: "button", class: "btn towerbutton", value: towerTypes[i].prototype.displayName + " (" + towerTypes[i].prototype.cost + " coins)"});
+        $button.attr("data-type", i);
+        $("#controls").append($button);
+    }
+}
+
 //toont het geld op het scherm
 function displayMoney() {
     $("#money").text(game.money);

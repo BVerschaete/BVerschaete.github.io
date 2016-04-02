@@ -85,6 +85,7 @@ Tower.prototype.fireRate = 500; // 1 keer per 1000 milliseconden
 Tower.prototype.damage = 10;
 Tower.prototype.cost = 60;
 Tower.prototype.maxUpgradeLevel = 5;
+Tower.prototype.displayName = "Tower Tier 1";
 
 //voert draw functie uit bij alle torens
 function drawTowers(){

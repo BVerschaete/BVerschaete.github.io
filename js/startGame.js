@@ -21,6 +21,7 @@ function setup() {
     //useDisqus();
 
         addCanvas();
+        addTowerButtons();
 
         $(game.canvas).mouseover(toggleMouseInCanvas);
         $(game.canvas).mouseout(toggleMouseInCanvas);
