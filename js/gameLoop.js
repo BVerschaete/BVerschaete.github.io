@@ -7,6 +7,7 @@ function renderingStep(){
     displayAttScore();
     displayMoney();
     displayTime();
+    displayCurrWave();
     
     //canvas updates
     drawMap();

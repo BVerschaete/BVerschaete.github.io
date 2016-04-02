@@ -57,3 +57,7 @@ function displayTime(){
         timeField.text(game.selectedLevel.spawnSpeed);
     }
 }
+
+function displayCurrWave(){
+    $("#currentWave").text(game.currentWave);
+}

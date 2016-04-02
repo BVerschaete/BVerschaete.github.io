@@ -50,7 +50,7 @@ function createSpeedWave(){
     return wave;
 }
 
-function spawnWaveNow(){
+function spawnWaveNow(event){
     event.stopPropagation();
     spawnWave();
 }
