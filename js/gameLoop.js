@@ -45,12 +45,6 @@ function updateLogic(){
         }
     }
 
-    for(i = 0; i < laserAttacks.length; i++){
-        laserAttacks[i].draw();
-        laserAttacks.splice(i, 1);
-        i--;
-    }
-
     //spawnt wave iedere 10 seconden
     if((Date.now() - game.timeLastWaveSpawnEnds) > game.selectedLevel.spawnSpeed * 1000){
         spawnWave();

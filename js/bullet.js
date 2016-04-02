@@ -52,4 +52,10 @@ function drawBullets(){
     for(var i = 0; i < bullets.length; i++){
         bullets[i].draw();
     }
+
+    for(i = 0; i < laserAttacks.length; i++){
+        laserAttacks[i].draw();
+        laserAttacks.splice(i, 1);
+        i--;
+    }
 }
