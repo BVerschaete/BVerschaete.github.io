@@ -27,6 +27,7 @@ article{
 
 .jumbotron{
     background-color:#6093CA;
+    float: left;
 }
 
 #username{
@@ -56,12 +57,24 @@ form{
     width: 100%;
 }
 
-#warning{
-    float: left;
-    margin: 0 auto;
+#screenshotDetails{
+    float: right;
+    margin-top: 5%;
+    margin-right: 20%;
+    height: 20%;
 }
 
-#screenshotDetails{
-    padding: 2px;
+#screenshotLarge{
+    border: solid black 3px;
+}
+
+#screenshots{
+    text-align: center;
+    margin-top: 10%;
+    background: rgba(0,0,0,0.1);
+}
+
+#screenshots > img{
+    margin: 45px 6%;
     border: solid black 1px;
 }
