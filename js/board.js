@@ -50,9 +50,12 @@ function addTowerButtons(){
     }
 }
 
-//toont het geld op het scherm
-function displayMoney() {
-    $("#money").text(game.money);
+function displayGameInfo(){
+    $("#attackersScore").text(game.attackersScore); // toont score attackers
+    $("#money").text(game.money); // toont het geld op het scherm
+    $("#currentWave").text(game.currentWave); // toont het nummer van de huidige wave
+
+    displayTime();
 }
 
 //toont timer voor volgende wave
@@ -64,8 +67,4 @@ function displayTime(){
     } else {
         timeField.text(game.selectedLevel.spawnSpeed);
     }
-}
-
-function displayCurrWave(){
-    $("#currentWave").text(game.currentWave);
 }

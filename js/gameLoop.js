@@ -4,10 +4,7 @@
 //update alles van het canvas en de GUI
 function renderingStep(){
     //gui updates
-    displayAttScore();
-    displayMoney();
-    displayTime();
-    displayCurrWave();
+    displayGameInfo();
     
     //canvas updates
     drawMap();
@@ -46,6 +43,12 @@ function updateLogic(){
             bullets.splice(i, 1);
             i--;
         }
+    }
+
+    for(i = 0; i < laserAttacks.length; i++){
+        laserAttacks[i].draw();
+        laserAttacks.splice(i, 1);
+        i--;
     }
 
     //spawnt wave iedere 10 seconden

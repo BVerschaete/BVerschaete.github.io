@@ -14,5 +14,7 @@ laserTower.prototype.maxUpgradeLevel = 6;
 laserTower.prototype.displayName = "Laser";
 
 laserTower.prototype.attack = function() {
-    console.log(1 + 1);
+    if(this.target !== null) {
+        laserAttacks.push(new LaserAttack(this, this.target));
+    }
 };

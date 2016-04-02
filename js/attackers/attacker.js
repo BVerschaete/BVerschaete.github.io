@@ -183,8 +183,3 @@ function checkDead(){
         }
     }
 }
-
-//Toont score attackers
-function displayAttScore(){
-    $("#attackersScore").text(game.attackersScore);
-}
