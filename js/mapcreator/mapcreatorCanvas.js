@@ -36,12 +36,20 @@ function addCanvasPlaceTileEventListeners(){
     });
 }
 
+function drawMap(){
+    for(var i = 0; i < level.board.length; i++){
+        for(var j = 0; j < level.board[i].length; j++) {
+            map.context.drawImage(tiles[level.board[i][j]], j * map.tileSize, i * map.tileSize, map.tileSize, map.tileSize);
+        }
+    }
+}
+
 
 function highlightTile(){
     if(mouse.inCanvas){
         map.context.globalAlpha = 0.4;
         map.context.fillStyle = mouse.color;
-        map.context.fillRect(getMouseTileX() * map.tileSize, getMouseTileY() * map.tileSize, map.tileSize, map.tileSize);
+        map.context.drawImage(selectedImage, getMouseTileX() * map.tileSize, getMouseTileY() * map.tileSize, map.tileSize, map.tileSize);
         map.context.globalAlpha  = 1;
     }
 }

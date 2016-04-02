@@ -60,3 +60,8 @@ form{
     float: left;
     margin: 0 auto;
 }
+
+#screenshotDetails{
+    padding: 2px;
+    border: solid black 1px;
+}

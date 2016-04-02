@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Map creator</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="libs/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" href="style/mapcreator.css">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+    <link rel="shortcut icon" href="favicon.ico">
+    <script src="libs/bootstrap.min.js"></script>
+    <script type="text/javascript" src="libs/jquery-2.2.2.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/allPages.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/constants.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/cookies.js"></script>
@@ -16,7 +18,6 @@
     <script type="text/javascript" charset="utf-8" src="js/mapcreator/mapcreatorLevel.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/mapcreator/mapcreatorMouse.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/mapcreator/mapcreatorLoop.js"></script>
-    <link rel="shortcut icon" href="favicon.ico">
 </head>
 <body>
     <div id="container">
@@ -30,7 +31,7 @@
             </div>
 
             <div>
-                <span class="sliderLabel">Aantal rijen: </span>
+                <span class="sliderLabel">Number of rows: </span>
                 <div class="sliderDiv">
                     <input id="sldRows" type="range" min="5" max="20" step="1" value="10"/>
                 </div>
@@ -38,7 +39,7 @@
             </div>
 
             <div>
-                <span class="sliderLabel">Aantal kolommen: </span>
+                <span class="sliderLabel">Number of columns: </span>
                 <div class="sliderDiv">
                     <input id="sldCols" type="range" min="5" max="20" step="1" value="10"/>
                 </div>
