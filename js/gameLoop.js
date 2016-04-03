@@ -17,7 +17,7 @@ function renderingStep(){
         towers[selectedTower].drawRange();
     }
     
-    drawBullets();
+    drawAttacks();
 }
 
 //update alle game variabelen
@@ -32,24 +32,6 @@ function updateLogic(){
         towers[i].attack();
     }
 
-    for(i = 0; i < bullets.length; i++)
-    {
-        bullets[i].move();
-
-        if (bullets[i].checkCollision()) {
-            bullets.splice(i, 1);
-            i--;
-        }else if(bullets[i].target.health <= 0){
-            bullets.splice(i, 1);
-            i--;
-        }
-    }
-
-    //spawnt wave iedere 10 seconden
-    if((Date.now() - game.timeLastWaveSpawnEnds) > game.selectedLevel.spawnSpeed * 1000){
-        spawnWave();
-    }
-
     checkDead();
 }
 
@@ -57,5 +39,6 @@ function updateLogic(){
 function gameLoop() {
     updateLogic();
     renderingStep();
+    removeAttacks(); // als dit in de updateLogic gebeurt worden de laserattacks niet getoond want ze worden meteen verwijdert
     window.requestAnimationFrame(gameLoop);
 }

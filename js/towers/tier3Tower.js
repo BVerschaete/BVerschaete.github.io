@@ -12,4 +12,4 @@ Tower3.prototype.fireRate = Tower.prototype.fireRate * 3;
 Tower3.prototype.damage = Tower.prototype.damage * 3;
 Tower3.prototype.cost = Tower.prototype.cost * 1.4;
 Tower3.prototype.maxUpgradeLevel = 7;
-Tower.prototype.displayName = "Tower Tier 3";
+Tower3.prototype.displayName = "Tower Tier 3";

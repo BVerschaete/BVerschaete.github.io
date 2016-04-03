@@ -15,6 +15,6 @@ laserTower.prototype.displayName = "Laser";
 
 laserTower.prototype.attack = function() {
     if(this.target !== null) {
-        laserAttacks.push(new LaserAttack(this, this.target));
+        attacks.push(new LaserAttack(this, this.target));
     }
 };

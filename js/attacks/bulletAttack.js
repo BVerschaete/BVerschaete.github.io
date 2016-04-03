@@ -1,8 +1,8 @@
 /**
  * Created by Gaben on 19/03/2016.
  */
-var bullets = [];
 var standaardAttackerSnelheid = new Attacker().speed;
+
 function Bullet(x,y,target,damage) {
     this.locX = x;
     this.locY = y;
@@ -47,15 +47,6 @@ Bullet.prototype.checkCollision = function() {
     return false;
 };
 
-//tekent alle bullets
-function drawBullets(){
-    for(var i = 0; i < bullets.length; i++){
-        bullets[i].draw();
-    }
-
-    for(i = 0; i < laserAttacks.length; i++){
-        laserAttacks[i].draw();
-        laserAttacks.splice(i, 1);
-        i--;
-    }
-}
+Bullet.prototype.update = function(){
+    this.move();
+};

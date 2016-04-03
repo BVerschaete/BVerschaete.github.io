@@ -64,7 +64,13 @@ function displayTime(){
     if(game.timeLastWaveSpawnEnds < Date.now()) {
         var time = Math.ceil(game.selectedLevel.spawnSpeed - (Date.now() - game.timeLastWaveSpawnEnds) / 1000);
         timeField.text(time);
+
+        //spawnt wave iedere 20 seconden
+        if((Date.now() - game.timeLastWaveSpawnEnds) > game.selectedLevel.spawnSpeed * 1000) {
+            spawnWave();
+        }
     } else {
         timeField.text(game.selectedLevel.spawnSpeed);
+
     }
 }
