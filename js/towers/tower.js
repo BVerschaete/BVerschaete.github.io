@@ -180,7 +180,7 @@ function enableUpgradeButton(){
         var upgradeButton = $('#upgradeTower');
         var upgradeCost = $('#upgradeCost');
         if (tower.level < tower.maxUpgradeLevel && tower.upgradeCost <= game.money) {
-            upgradeCost.text(tower.upgradeCost);
+            upgradeCost.text(tower.upgradeCost + " coins");
             upgradeButton.removeClass("disabled");
         } else {
             upgradeButton.addClass("disabled");
@@ -196,7 +196,7 @@ function enableUpgradeButton(){
 function enableSellButton(){
     var tower = towers[selectedTower];
     var $sellButton = $('#sellTower');
-    $sellButton.text("Sell (" + Math.floor(tower.value) + " coins)");
+    $('#sellPrice').text(Math.floor(tower.value) + " coins");
     $sellButton.removeClass("disabled");
 }
 
