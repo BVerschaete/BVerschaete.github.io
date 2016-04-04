@@ -15,10 +15,7 @@ function removeAttacks(){
     {
         attacks[i].update();
 
-        if (attacks[i].checkCollision()) {
-            attacks.splice(i, 1);
-            i--;
-        }else if(attacks[i].target.health <= 0){
+        if (attacks[i].checkCollision() || attacks[i].target.health <= 0) {
             attacks.splice(i, 1);
             i--;
         }

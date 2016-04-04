@@ -28,6 +28,13 @@ LaserAttack.prototype.checkCollision = function(){
 };
 
 LaserAttack.prototype.update = function(){
-    // hier damage doen (of aparte methode)
-    this.target.health -= this.tower.damage;
+    this.doDamage();
+};
+
+LaserAttack.prototype.doDamage = function(){
+    var now = Date.now();
+    var delta = now - this.tower.oldNow;
+
+    this.target.health -= (delta / 1000) * this.tower.damage;
+    this.tower.oldNow = now;
 };
