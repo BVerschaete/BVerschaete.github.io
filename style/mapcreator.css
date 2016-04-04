@@ -124,6 +124,14 @@ span{
     font-size: 1em;
 }
 
+#errorMessage{
+    clear: both;
+    color:red;
+    display: block;
+    font-size: 2em;
+    margin-left: 35px;
+}
+
 .customLevelButton {
     margin: 20px;
     background: #3498db;
