@@ -32,7 +32,9 @@ $(function() {
         selectedButton.toggleClass("hovered");
         var id = selectedButton.attr('data-level');
         var levelName = levels[id].name;
-        $('#levelInfo').text(levelName);
+        var levelInfo = $('#levelInfo');
+        levelInfo.text(levelName);
+        levelInfo.css('visibility', 'visible');
         sessionStorage.selectedLevel = id;
         startButton.removeClass("disabled");
     });

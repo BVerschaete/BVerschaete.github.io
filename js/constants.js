@@ -10,7 +10,7 @@ var directions = {
 
 var attackerCodes = {
     normalAttacker: 0,
-    strongAttacker: 1,
+    tankAttacker: 1,
     speedAttacker: 2
 };
 

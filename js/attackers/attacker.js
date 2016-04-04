@@ -3,21 +3,21 @@
  */
 var attackers = [];
 
-function Attacker(){
-    this.speed= 50 * (game.tileSize / 40); // snelheid relatief aan de snelheid bij een tileSize van 40
+function Attacker(speedFactor, maxHealthFactor){
+    this.speed= 50 * (game.tileSize / 40) * speedFactor; // snelheid relatief aan de snelheid bij een tileSize van 40
     this.posX= game.selectedLevel.startX;
     this.posY= game.selectedLevel.startY;
     this.locX= (this.posX * game.tileSize);
     this.locY= (this.posY * game.tileSize);
     this.oldNow = Date.now();
     this.direction = game.selectedLevel.startDirection;
+    this.maxHealth = 100 * maxHealthFactor;
     this.health = this.maxHealth;
     this.scale = 0.8;
 }
 
 Attacker.prototype.image = "dragon.png";
 Attacker.prototype.reward = 10;
-Attacker.prototype.maxHealth = 100;
 Attacker.prototype.passableTiles = [1, 2, 3, 4, 5, 6];
 
 //beweegt een attacker volgens zijn pad
@@ -163,7 +163,11 @@ function drawAttackers(){
 
 //voegt een attacker toe aan de array
 function addAttacker(attacker){
-    attackers.push(new attackerTypes[attacker]());
+    attackers.push(attacker);
+}
+
+function createAttacker(attackerCode, speedFactor, maxHealthFactor){
+    return new attackerTypes[attackerCode](speedFactor, maxHealthFactor);
 }
 
 //verwijdert een attacker uit de array

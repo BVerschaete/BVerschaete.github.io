@@ -5,48 +5,49 @@
 function Wave(){
     this.attackers = [];
     this.spawnSpeed = 0;
+    this.speedFactor = 1;
+    this.maxHealthFactor = 1;
 }
 //kiest adhv de hoeveelste wave het is, welke wave moet gespawned worden
 function chooseWave(){
+    var aantalMonsters;
+    var typeMonster;
+    var speedFactor;
+    var maxHealthFactor;
+
+    //moeilijkheid per level hier aanpassen
     if(game.currentWave%5 == 0 && game.currentWave != 0){
-        return createSpeedWave();
+        aantalMonsters = 4 + game.currentWave/5 * game.selectedLevel.difficulty;
+        speedFactor = Math.pow(1.10, game.currentWave/2.5 - 1);
+        maxHealthFactor = Math.pow(1.10, game.currentWave/2.5 - 1);
+
+        typeMonster = attackerCodes.speedAttacker;
     } else if(game.currentWave%3 == 0 && game.currentWave != 0){
-        return createTankWave();
+        aantalMonsters = 4 + game.currentWave/3 * game.selectedLevel.difficulty;
+        speedFactor = Math.pow(1.10, game.currentWave/1.5 - 1);
+        maxHealthFactor = Math.pow(1.10, game.currentWave/1.5 - 1);
+
+        typeMonster = attackerCodes.tankAttacker;
     } else{
-        return createNormalWave();
+        aantalMonsters = 4 + game.currentWave * game.selectedLevel.difficulty;
+        speedFactor = Math.pow(1.10, game.currentWave - 1);
+        maxHealthFactor = Math.pow(1.10, game.currentWave - 1);
+
+        typeMonster = attackerCodes.normalAttacker;
     }
+
+    return createWave(aantalMonsters, typeMonster, speedFactor, maxHealthFactor);
 }
 
-function createNormalWave(){
-    var aantalMonsters = 4 + game.currentWave * game.selectedLevel.difficulty;
+function createWave(aantalMonsters, typeMonster, speedFactor, maxHealthFactor){
     var wave = new Wave();
     for(var i = 0; i < aantalMonsters; i++){
-        wave.attackers.push(attackerCodes.normalAttacker);
+        wave.attackers.push(typeMonster);
     }
     game.currentWave += 1;
-    wave.spawnSpeed = new Attacker().speed;
-    return wave;
-}
-
-function createTankWave(){
-    var aantalMonsters = 4 + Math.floor(game.currentWave/3) * game.selectedLevel.difficulty;
-    var wave = new Wave();
-    for(var i = 0; i < aantalMonsters; i++){
-        wave.attackers.push(attackerCodes.strongAttacker);
-    }
-    game.currentWave += 1;
-    wave.spawnSpeed = new TankAttacker().speed;
-    return wave;
-}
-
-function createSpeedWave(){
-    var aantalMonsters = 4 + Math.floor(game.currentWave/3) * game.selectedLevel.difficulty;
-    var wave = new Wave();
-    for(var i = 0; i < aantalMonsters; i++){
-        wave.attackers.push(attackerCodes.speedAttacker);
-    }
-    game.currentWave += 1;
-    wave.spawnSpeed = new SpeedAttacker().speed;
+    wave.spawnSpeed = createAttacker(typeMonster, speedFactor, 1).speed;
+    wave.speedFactor = speedFactor;
+    wave.maxHealthFactor = maxHealthFactor;
     return wave;
 }
 
@@ -69,7 +70,8 @@ function spawnWave(){
 
     //pushes every attacker from wave to real attackers
     var loop = setInterval(function(){
-        addAttacker(wave.attackers[0]);
+        var attacker = createAttacker(wave.attackers[0], wave.speedFactor, wave.maxHealthFactor);
+        addAttacker(attacker);
         wave.attackers.splice(0, 1);
     },waitTime);
 
