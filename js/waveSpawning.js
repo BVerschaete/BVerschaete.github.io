@@ -38,6 +38,9 @@ function chooseWave(){
 
         typeMonster = attackerCodes.normalAttacker;
     }
+    
+    speedFactor *= game.selectedLevel.difficulty;
+    maxHealthFactor *= game.selectedLevel.difficulty;
 
     return createWave(aantalMonsters, typeMonster, speedFactor, maxHealthFactor);
 }
