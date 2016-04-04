@@ -22,7 +22,7 @@ function getMouseTileY(){
 
 var mouse = {
     inCanvas: false,
-    color: "white",
+    color: null,
     x: 0,
     y: 0
 };

@@ -46,12 +46,16 @@ function drawMap(){
 
 
 function highlightTile(){
-    if(mouse.inCanvas){
-        map.context.globalAlpha = 0.4;
-        map.context.fillStyle = mouse.color;
-        map.context.drawImage(selectedImage, getMouseTileX() * map.tileSize, getMouseTileY() * map.tileSize, map.tileSize, map.tileSize);
-        map.context.globalAlpha  = 1;
+    map.context.globalAlpha = 0.4;
+    if(mouse.inCanvas) {
+        if (mouse.color == null) {
+            map.context.drawImage(selectedImage, getMouseTileX() * map.tileSize, getMouseTileY() * map.tileSize, map.tileSize, map.tileSize);
+        } else {
+            map.context.fillStyle = mouse.color;
+            map.context.fillRect(getMouseTileX() * map.tileSize, getMouseTileY() * map.tileSize, map.tileSize, map.tileSize);
+        }
     }
+    map.context.globalAlpha  = 1;
 }
 
 function selectStartTile(){
@@ -66,7 +70,7 @@ function selectStartTile(){
         $('#levelStartY').text(level.startY);
         $canvas.off('click');
         addCanvasPlaceTileEventListeners();
-        mouse.color = "white";
+        mouse.color = null;
     });
 }
 
