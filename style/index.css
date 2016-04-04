@@ -68,13 +68,6 @@ form{
     border: solid black 3px;
 }
 
-#screenshots{
-    text-align: center;
-    margin-top: 10%;
-    background: rgba(0,0,0,0.1);
-}
-
-#screenshots > img{
-    margin: 45px 6%;
-    border: solid black 1px;
+figcaption{
+    color: darkgrey;
 }

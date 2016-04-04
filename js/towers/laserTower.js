@@ -1,21 +1,22 @@
 /**
  * Created by Gaben on 2/04/2016.
  */
-function laserTower(x,y) {
+function LaserTower(x,y) {
     Tower.call(this,x,y);
 }
 
-laserTower.prototype = Object.create(Tower.prototype);
-laserTower.prototype.image = "laserTower.png";
-laserTower.prototype.range = (game.tileSize * 1.5);
-laserTower.prototype.damage = 1;
-laserTower.prototype.cost = Tower.prototype.cost * 3;
-laserTower.prototype.maxUpgradeLevel = 6;
-laserTower.prototype.displayName = "Laser";
+LaserTower.prototype = Object.create(Tower.prototype);
+LaserTower.prototype.image = "laserTower.png";
+LaserTower.prototype.range = (game.tileSize * 1.5);
+LaserTower.prototype.damage = 1;
+LaserTower.prototype.cost = Tower.prototype.cost * 3;
+LaserTower.prototype.maxUpgradeLevel = 6;
+LaserTower.prototype.displayName = "Laser";
 
-laserTower.prototype.attack = function() {
-    if(this.target !== null) {
-        attacks.push(new LaserAttack(this, this.target));
+LaserTower.prototype.attack = function() {
+    var self = this;
+    if(self.target !== null) {
+        attacks.push(new LaserAttack(this, self.target));
     }
 };
 

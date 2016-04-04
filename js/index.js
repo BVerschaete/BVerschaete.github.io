@@ -18,27 +18,34 @@ function setup() {
     start.click(function () {
         sessionStorage.playerName = input.val();
     });
-    placePictures();
+
+    setPictures();
 }
 
-function placePictures(){
-    var screenshots = $('#screenshots');
+function setPictures(){
+    var screenshots = [];
     for(var i = 1; i <= 3; i++){
         var img = new Image();
         img.src = "img/site/front" + i + ".png";
-        img.width = "300";
-        img.height = "300";
-        $(img).click(changeImages);
-        screenshots.append(img);
+        screenshots.push(img);
     }
+    setPictureLoop(screenshots);
 }
 
-function changeImages(event){
-    $("#screenshotLarge")
-        .fadeOut(400, function() {
-            $("#screenshotLarge").attr('src', event.target.src);
-        })
-        .fadeIn(400);
+function setPictureLoop(screenshots){
+    var i = 0;
+    setInterval(function() {
+        if(i > screenshots.length - 1){
+            i = 0;
+        }
+        $("#screenshotLarge")
+            .fadeOut(800, function () {
+                $("#screenshotLarge").attr('src', screenshots[i-1].src);
+            })
+            .fadeIn(600);
+
+        i++;
+    }, 4000);
 }
 
 $(window).load(setup);

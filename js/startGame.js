@@ -7,7 +7,7 @@ var game = {
     selectedLevel: levels[sessionStorage.selectedLevel],
     canvas: null,
     context: null,
-    tileSize: 50,
+    tileSize: 60,
     attackersScore: 0,
     money: 400,
     currentWave: 0,

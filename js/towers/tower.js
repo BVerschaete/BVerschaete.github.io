@@ -11,6 +11,7 @@ function Tower(x, y){
     this.locY= y;
     this.oldNow = Date.now(); // tijdstip van laatste aanval
     this.level = 1;
+    this.target = null;
     this.upgradeCost = this.cost/2;
     this.sellRate = 0.75;
     this.value = this.cost * this.sellRate;
@@ -27,7 +28,7 @@ Tower.prototype.draw = function(){
 //returnt de eerste attacker in de array (dus het verst op de map) die binnen de range van de toren is
 Tower.prototype.findTarget = function(){
     this.target = null;
-
+    
     for (var i = 0; i < attackers.length; i++) {
         var distance = (attackers[i].locX - this.locX) * (attackers[i].locX - this.locX + game.tileSize) + (attackers[i].locY - this.locY) * (attackers[i].locY - this.locY + game.tileSize);
 
