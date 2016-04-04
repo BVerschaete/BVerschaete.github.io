@@ -21,9 +21,8 @@ function setup() {
     });
 
     input.keyup(function (event) {
-        console.log("ok");
         if (event.keyCode == 13) {
-            console.log("yay");
+            sessionStorage.playerName = input.val();
             window.location.href = "levelselect.html";
         }
     });
