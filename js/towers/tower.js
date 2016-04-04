@@ -12,6 +12,8 @@ function Tower(x, y){
     this.oldNow = Date.now(); // tijdstip van laatste aanval
     this.level = 1;
     this.upgradeCost = this.cost/2;
+    this.sellRate = 0.75;
+    this.value = this.cost * this.sellRate;
 }
 
 //basisfuncties van alle towers
@@ -75,6 +77,7 @@ Tower.prototype.upgrade = function(){
     this.level += 1;
     this.range = Math.floor(this.range * 1.125);
     this.damage = Math.floor(this.damage * 1.4);
+    this.value += this.upgradeCost * this.sellRate;
     this.upgradeCost *= 2;
 };
 
@@ -146,6 +149,15 @@ function upgradeSelectedTower(){
     }
 }
 
+function sellSelectedTower(){
+    event.stopPropagation();
+    var tower = towers[selectedTower];
+    game.money += tower.value;
+    towers.splice(selectedTower, 1);
+    selectedTower = -1;
+    displayInfo();
+}
+
 //toont info over geselecteerde toren
 function displaySelectedTowerInfo(){
     var tower = towers[selectedTower];
@@ -156,6 +168,7 @@ function displaySelectedTowerInfo(){
         $("#towerDamage").text(Math.floor(tower.damage));
         $("#towerRange").text(Math.floor(tower.range));
         enableUpgradeButton();
+        enableSellButton();
     }
 }
 
@@ -177,6 +190,13 @@ function enableUpgradeButton(){
             }
         }
     }
+}
+
+function enableSellButton(){
+    var tower = towers[selectedTower];
+    var $sellButton = $('#sellTower');
+    $sellButton.text("Sell (" + Math.floor(tower.value) + " coins)");
+    $sellButton.removeClass("disabled");
 }
 
 //toont de waarden van de volgende upgrade van de geselecteerde toren

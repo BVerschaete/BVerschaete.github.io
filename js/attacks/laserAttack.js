@@ -28,5 +28,6 @@ LaserAttack.prototype.checkCollision = function(){
 };
 
 LaserAttack.prototype.update = function(){
-    // hier moet de damage functie worden opgeroepen
+    // hier damage doen (of aparte methode)
+    this.target.health -= this.tower.damage;
 };

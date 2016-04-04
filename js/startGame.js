@@ -35,6 +35,8 @@ function setup() {
         upgradeTower.click(upgradeSelectedTower);
         upgradeTower.hover(showUpgradeInfo, hideUpgradeInfo);
 
+        $("#sellTower").click(sellSelectedTower);
+
         //clear placing and selecting tower, displayInfo here makes sure the towerInfo div isn't shown
         $("body").click(function () {
             currentTower = -1;
