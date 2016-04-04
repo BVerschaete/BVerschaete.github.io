@@ -1,7 +1,7 @@
 /**
  * Created by Gaben on 19/03/2016.
  */
-var standaardAttackerSnelheid = new Attacker().speed;
+var standaardAttackerSnelheid = new Attacker(1, 1).speed;
 
 function Bullet(x,y,target,damage) {
     this.locX = x;
