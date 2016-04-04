@@ -66,6 +66,8 @@ form{
 
 #screenshotLarge{
     border: solid black 3px;
+    width: 500px;
+    height: 500px;
 }
 
 figcaption{

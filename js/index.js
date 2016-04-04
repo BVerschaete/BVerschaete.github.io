@@ -7,8 +7,9 @@ function setup() {
     var start = $('#startGame');
     var input = $('#usernameInput');
     start.addClass("disabled");
+
     input.on('input', function () {
-        if (input.val().trim()) {
+        if (isValidName()) {
             start.removeClass("disabled");
         } else {
             start.addClass("disabled");
@@ -19,7 +20,20 @@ function setup() {
         sessionStorage.playerName = input.val();
     });
 
+    input.keyup(function (event) {
+        console.log("ok");
+        if (event.keyCode == 13) {
+            console.log("yay");
+            window.location.href = "levelselect.html";
+        }
+    });
+
     setPictures();
+}
+
+function isValidName(){
+    var input = $('#usernameInput');
+    return input.val().trim() != "";
 }
 
 function setPictures(){
