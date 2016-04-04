@@ -18,6 +18,8 @@ function setup(){
     if(checkCookie("customLevels")) {
         customLevels = JSON.parse(getCookie("customLevels"));
     }
+
+    $("[data-toggle=tooltip]").tooltip();
 }
 
 function addImages(){
