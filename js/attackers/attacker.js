@@ -87,40 +87,50 @@ Attacker.prototype.updatePosOnBoard = function(){
 
 //update zijn werkelijke positie
 Attacker.prototype.updatePosition = function(){
-    this.updatePosOnBoard();
     var now = Date.now();
     var timeDelta = now - this.oldNow;
     this.oldNow = now;
 
     if(this.direction === directions.boven){
-        if(this.passableTiles.indexOf(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY - (this.speed * timeDelta / 1000)))) == -1){
-            this.move();
-            this.locY = this.posY * game.tileSize;
+        if(this.passableTiles.indexOf(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY - (this.speed * timeDelta / 1000)))) !== this.passableTiles.indexOf(getValueFromPos(this.locX, this.locY)) || this.passableTiles.indexOf(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY - (this.speed * timeDelta / 1000)))) == -1){
+            this.locY -= this.speed * timeDelta / 1000;
             this.locX = Math.floor(this.locX);
+            this.updatePosOnBoard();
+            this.locY = this.posY * game.tileSize;
+            this.move();
         }else{
             this.locY -= this.speed * timeDelta / 1000;
         }
     }else if(this.direction === directions.rechts){
-        if(this.passableTiles.indexOf(getValueFromPos(Math.floor(this.locX) + game.tileSize, Math.floor(this.locY))) == -1){
-            this.move();
-            this.locX = this.posX * game.tileSize;
+        if(this.passableTiles.indexOf(getValueFromPos(this.locX + this.speed * timeDelta / 1000, Math.floor(this.locY))) !== this.passableTiles.indexOf(getValueFromPos(this.locX, this.locY)) || this.passableTiles.indexOf(getValueFromPos(Math.floor(this.locX + this.speed * timeDelta / 1000), Math.floor(this.locY))) == -1){
+            this.locX += this.speed * timeDelta / 1000;
             this.locY = Math.floor(this.locY);
+            this.updatePosOnBoard();
+            this.locX = this.posX * game.tileSize;
+            this.move();
         }else{
             this.locX += this.speed * timeDelta / 1000;
         }
     }else if(this.direction === directions.onder){
-        if(this.passableTiles.indexOf(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY  + game.tileSize))) == -1){
-            this.move();
-            this.locY = this.posY * game.tileSize;
+        if(this.passableTiles.indexOf(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY + this.speed * timeDelta / 1000))) !== this.passableTiles.indexOf(getValueFromPos(this.locX, this.locY)) || this.passableTiles.indexOf(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY + this.speed * timeDelta / 1000))) == -1){
+            this.locY += this.speed * timeDelta / 1000;
             this.locX = Math.floor(this.locX);
+            this.updatePosOnBoard();
+            this.locY = this.posY * game.tileSize;
+            this.move();
         }else{
             this.locY += this.speed * timeDelta / 1000;
         }
     }else if(this.direction === directions.links){
-        if(this.passableTiles.indexOf(getValueFromPos(Math.floor(this.locX - (this.speed * timeDelta / 1000)), Math.floor(this.locY))) == -1){
-            this.move();
-            this.locX = this.posX * game.tileSize;
+        if((this.locX - (this.speed * timeDelta / 1000) <= (this.posX - 1) * game.tileSize && this.passableTiles.indexOf(getValueFromPos(this.locX - (this.speed * timeDelta / 1000) + game.tileSize, Math.floor(this.locY))) !== this.passableTiles.indexOf(getValueFromPos(this.locX, this.locY))) || this.passableTiles.indexOf(getValueFromPos(this.locX - (this.speed * timeDelta / 1000), Math.floor(this.locY))) == -1){
+            console.log(this.locX + " <= " + (this.posX - 1) * game.tileSize );
+            console.log(this.locX - (this.speed * timeDelta / 1000) + game.tileSize);
+
+            this.locX -= this.speed * timeDelta / 1000;
             this.locY = Math.floor(this.locY);
+            this.updatePosOnBoard();
+            this.locX = this.posX * game.tileSize;
+            this.move();
         }else{
             this.locX -= this.speed * timeDelta / 1000;
         }
