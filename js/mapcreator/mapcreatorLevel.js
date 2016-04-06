@@ -41,24 +41,24 @@ function checkInputs(){
     var i = 0;
     $('#errorMessage').text("");
     if(!$('#levelName').val().trim()){
-        displayErrorMessage("Name can not be empty");
+        displayErrorMessage("*Name can not be empty");
         i++;
     }
 
     var levelDifficulty = $('#levelDifficulty').val();
     if(levelDifficulty < 1 || levelDifficulty > 3){
-        displayErrorMessage("Difficulty must be 1-3");
+        displayErrorMessage("*Difficulty must be 1-3");
         i++;
     }
 
     var levelSpawnSpeed = $('#levelSpawnSpeed').val();
     if(levelSpawnSpeed < 10 || levelSpawnSpeed > 50){
-        displayErrorMessage("Spawnspeed must be 10-50");
+        displayErrorMessage("*Spawnspeed must be 10-50");
         i++;
     }
 
     if(level.startX == null || level.startY == null){
-        displayErrorMessage("No start tile detected.");
+        displayErrorMessage("*No start tile detected.");
         i++;
     }
 
