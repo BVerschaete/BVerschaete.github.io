@@ -87,16 +87,17 @@ Attacker.prototype.updatePosOnBoard = function(){
 
 //update zijn werkelijke positie
 Attacker.prototype.updatePosition = function(){
+    this.updatePosOnBoard(); // dit moet zeker gebeuren !!!!
     var now = Date.now();
     var timeDelta = now - this.oldNow;
     this.oldNow = now;
 
     if(this.direction === directions.boven){
-        if(this.passableTiles.indexOf(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY - (this.speed * timeDelta / 1000)))) !== this.passableTiles.indexOf(getValueFromPos(this.locX, this.locY)) || this.passableTiles.indexOf(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY - (this.speed * timeDelta / 1000)))) == -1){
-            this.locY -= this.speed * timeDelta / 1000;
+        if(this.locY - (this.speed * timeDelta / 1000) <= (this.posY -1) * game.tileSize) return;
+        if((this.locY - (this.speed * timeDelta / 1000) <= (this.posY -1) * game.tileSize && this.passableTiles.indexOf(getValueFromPos(this.locX, this.locY - (this.speed * timeDelta / 1000) )) !== this.passableTiles.indexOf(getValueFromPos(this.locX, this.locY))) || this.passableTiles.indexOf(getValueFromPos(this.locX, this.locY - (this.speed * timeDelta / 1000))) == -1){
+            this.locY = (this.posY) * game.tileSize;
             this.locX = Math.floor(this.locX);
             this.updatePosOnBoard();
-            this.locY = this.posY * game.tileSize;
             this.move();
         }else{
             this.locY -= this.speed * timeDelta / 1000;
@@ -122,14 +123,10 @@ Attacker.prototype.updatePosition = function(){
             this.locY += this.speed * timeDelta / 1000;
         }
     }else if(this.direction === directions.links){
-        if((this.locX - (this.speed * timeDelta / 1000) <= (this.posX - 1) * game.tileSize && this.passableTiles.indexOf(getValueFromPos(this.locX - (this.speed * timeDelta / 1000) + game.tileSize, Math.floor(this.locY))) !== this.passableTiles.indexOf(getValueFromPos(this.locX, this.locY))) || this.passableTiles.indexOf(getValueFromPos(this.locX - (this.speed * timeDelta / 1000), Math.floor(this.locY))) == -1){
-            console.log(this.locX + " <= " + (this.posX - 1) * game.tileSize );
-            console.log(this.locX - (this.speed * timeDelta / 1000) + game.tileSize);
-
-            this.locX -= this.speed * timeDelta / 1000;
+        if((this.locX - (this.speed * timeDelta / 1000) <= (this.posX - 1) * game.tileSize && this.passableTiles.indexOf(getValueFromPos(this.locX - (this.speed * timeDelta / 1000) + game.tileSize, this.locY)) !== this.passableTiles.indexOf(getValueFromPos(this.locX, this.locY))) || this.passableTiles.indexOf(getValueFromPos(this.locX - (this.speed * timeDelta / 1000), this.locY)) == -1){
+            this.locX = (this.posX) * game.tileSize;
             this.locY = Math.floor(this.locY);
             this.updatePosOnBoard();
-            this.locX = this.posX * game.tileSize;
             this.move();
         }else{
             this.locX -= this.speed * timeDelta / 1000;
