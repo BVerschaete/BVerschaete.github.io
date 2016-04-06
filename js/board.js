@@ -8,9 +8,10 @@ function getValueFromPos(x, y){
 
     if(y < $("canvas").prop("height") && y >= 0){
         return game.selectedLevel.board[indexHeight][indexWidth];
-    }else{
-        return null;
     }
+    
+    return null;
+    
 }
 
 //tekent de achtergrond adhv schema in levels.js

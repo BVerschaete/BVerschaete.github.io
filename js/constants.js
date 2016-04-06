@@ -8,6 +8,13 @@ var directions = {
     links: 3
 };
 
+var debugDirections = {
+    0: "boven",
+    1: "rechts",
+    2: "onder",
+    3: "links"
+};
+
 var attackerCodes = {
     normalAttacker: 0,
     tankAttacker: 1,

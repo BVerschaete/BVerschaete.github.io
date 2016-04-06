@@ -18,7 +18,7 @@ LaserAttack.prototype.draw = function(){
     context.strokeStyle = 'red';
     context.beginPath();
     context.moveTo(this.tower.locX, this.tower.locY);
-    context.lineTo(this.target.locX + game.tileSize / 2, this.target.locY + game.tileSize / 2);
+    context.lineTo(this.target.locX, this.target.locY);
     context.stroke();
     context.lineWidth = 0;
 };

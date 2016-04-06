@@ -21,7 +21,7 @@ function createLevel(){
     level.name = $('#levelName').val();
     level.difficulty = parseInt($('#levelDifficulty').val());
     level.spawnSpeed = parseInt($('#levelSpawnSpeed').val());
-    level.direction = $('#levelStartDirection').find(":selected").val();
+    level.startDirection = parseInt($('#levelStartDirection').find(":selected").val());
 }
 
 function saveLevel(){

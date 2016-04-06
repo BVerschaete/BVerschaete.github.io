@@ -7,8 +7,8 @@ function Attacker(speedFactor, maxHealthFactor){
     this.speed= 50 * (game.tileSize / 40) * speedFactor; // snelheid relatief aan de snelheid bij een tileSize van 40
     this.posX= game.selectedLevel.startX;
     this.posY= game.selectedLevel.startY;
-    this.locX= (this.posX * game.tileSize);
-    this.locY= (this.posY * game.tileSize);
+    this.locX= (this.posX * game.tileSize) + game.tileSize/2;
+    this.locY= (this.posY * game.tileSize) + game.tileSize/2;
     this.oldNow = Date.now();
     this.direction = game.selectedLevel.startDirection;
     this.maxHealth = 100 * maxHealthFactor;
@@ -18,64 +18,48 @@ function Attacker(speedFactor, maxHealthFactor){
 
 Attacker.prototype.image = "dragon.png";
 Attacker.prototype.reward = 10;
-Attacker.prototype.passableTiles = [1, 2, 3, 4, 5, 6];
 
 //beweegt een attacker volgens zijn pad
-//voor iedere tile andere move functionaliteit
-Attacker.prototype.move = function() {
+//voor iedere tile andere changeDirection functionaliteit
+Attacker.prototype.changeDirection = function() {
     var board = game.selectedLevel.board;
-    var tile = this.passableTiles.indexOf(board[this.posY][this.posX]);
-    if(tile == 0){
+    var tile = board[this.posY][this.posX];
+    if(tile == 1){
         if(this.direction == directions.rechts) {
-            this.posX += 1;
             this.direction = directions.rechts;
         } else {
-            this.posX -= 1;
             this.direction = directions.links;
-        }
-    }else if(tile == 1) {
-        if (this.direction == directions.boven) {
-            this.posY -= 1;
-            this.direction = directions.boven;
-        } else {
-            this.posY += 1;
-            this.direction = directions.onder;
         }
     }else if(tile == 2) {
         if (this.direction == directions.boven) {
-            this.posX -= 1;
-            this.direction = directions.links;
-        } else {
-            this.posY += 1;
-            this.direction = directions.onder;
-        }
-    } else if(tile == 3) {
-        if (this.direction == directions.rechts) {
-            this.posY -= 1;
             this.direction = directions.boven;
         } else {
-            this.posX -= 1;
+            this.direction = directions.onder;
+        }
+    }else if(tile == 3) {
+        if (this.direction == directions.boven) {
             this.direction = directions.links;
+        } else {
+            this.direction = directions.onder;
         }
     } else if(tile == 4) {
-        if (this.direction == directions.onder) {
-            this.posX += 1;
-            this.direction = directions.rechts;
-        } else {
-            this.posY -= 1;
+        if (this.direction == directions.rechts) {
             this.direction = directions.boven;
+        } else {
+            this.direction = directions.links;
         }
     } else if(tile == 5) {
-        if (this.direction == directions.boven) {
-            this.posX += 1;
+        if (this.direction == directions.onder) {
             this.direction = directions.rechts;
         } else {
-            this.posY += 1;
+            this.direction = directions.boven;
+        }
+    } else if(tile == 6) {
+        if (this.direction == directions.boven) {
+            this.direction = directions.rechts;
+        } else {
             this.direction = directions.onder;
         }
-    } else {
-        deleteAttacker(this);
-        game.attackersScore++;
     }
 };
 
@@ -91,46 +75,51 @@ Attacker.prototype.updatePosition = function(){
     var now = Date.now();
     var timeDelta = now - this.oldNow;
     this.oldNow = now;
+    var checkTiles;
 
-    if(this.direction === directions.boven){
-        if(this.locY - (this.speed * timeDelta / 1000) <= (this.posY -1) * game.tileSize) return;
-        if((this.locY - (this.speed * timeDelta / 1000) <= (this.posY -1) * game.tileSize && this.passableTiles.indexOf(getValueFromPos(this.locX, this.locY - (this.speed * timeDelta / 1000) )) !== this.passableTiles.indexOf(getValueFromPos(this.locX, this.locY))) || this.passableTiles.indexOf(getValueFromPos(this.locX, this.locY - (this.speed * timeDelta / 1000))) == -1){
-            this.locY = (this.posY) * game.tileSize;
-            this.locX = Math.floor(this.locX);
-            this.updatePosOnBoard();
-            this.move();
-        }else{
-            this.locY -= this.speed * timeDelta / 1000;
+    if(getValueFromPos(this.locX, this.locY) == null){
+        deleteAttacker(this);
+        game.attackersScore++;
+    } else {
+
+        if (this.direction === directions.boven) {
+            checkTiles = [2, 4, 5];
+            if (getValueFromPos(this.locX, this.locY + game.tileSize / 2) == getValueFromPos(this.locX, this.locY) && getValueFromPos(this.locX, this.locY + game.tileSize) != getValueFromPos(this.locX, this.locY) && checkTiles.indexOf(getValueFromPos(this.locX, this.locY)) == -1 && getValueFromPos(this.locX, this.locY + game.tileSize) != null) {
+                this.locY = this.posY * game.tileSize + game.tileSize / 2;
+                this.updatePosOnBoard();
+                this.changeDirection();
+            } else {
+                this.locY -= this.speed * timeDelta / 1000;
+            }
+        } else if (this.direction === directions.rechts) {
+            checkTiles = [1, 5, 6];
+            if (getValueFromPos(this.locX - game.tileSize / 2, this.locY) == getValueFromPos(this.locX, this.locY) && getValueFromPos(this.locX - game.tileSize, this.locY) != getValueFromPos(this.locX, this.locY) && checkTiles.indexOf(getValueFromPos(this.locX, this.locY)) == -1 && getValueFromPos(this.locX - game.tileSize, this.locY) != null) {
+                this.locX = this.posX * game.tileSize + game.tileSize / 2;
+                this.updatePosOnBoard();
+                this.changeDirection();
+            } else {
+                this.locX += this.speed * timeDelta / 1000;
+            }
+        } else if (this.direction === directions.onder) {
+            checkTiles = [2, 3, 6];
+            if (getValueFromPos(this.locX, this.locY - game.tileSize / 2) == getValueFromPos(this.locX, this.locY) && getValueFromPos(this.locX, this.locY - game.tileSize) != getValueFromPos(this.locX, this.locY) && checkTiles.indexOf(getValueFromPos(this.locX, this.locY)) == -1 && getValueFromPos(this.locX, this.locY - game.tileSize) != null) {
+                this.locY = this.posY * game.tileSize + game.tileSize / 2;
+                this.updatePosOnBoard();
+                this.changeDirection();
+            } else {
+                this.locY += this.speed * timeDelta / 1000;
+            }
+        } else if (this.direction === directions.links) {
+            checkTiles = [1, 3, 4];
+            if (getValueFromPos(this.locX + game.tileSize / 2, this.locY) == getValueFromPos(this.locX, this.locY) && getValueFromPos(this.locX + game.tileSize, this.locY) != getValueFromPos(this.locX, this.locY) && checkTiles.indexOf(getValueFromPos(this.locX, this.locY)) == -1 && getValueFromPos(this.locX + game.tileSize, this.locY) != null) {
+                this.locX = this.posX * game.tileSize + game.tileSize / 2;
+                this.updatePosOnBoard();
+                this.changeDirection();
+            } else {
+                this.locX -= this.speed * timeDelta / 1000;
+            }
         }
-    }else if(this.direction === directions.rechts){
-        if(this.passableTiles.indexOf(getValueFromPos(this.locX + this.speed * timeDelta / 1000, Math.floor(this.locY))) !== this.passableTiles.indexOf(getValueFromPos(this.locX, this.locY)) || this.passableTiles.indexOf(getValueFromPos(Math.floor(this.locX + this.speed * timeDelta / 1000), Math.floor(this.locY))) == -1){
-            this.locX += this.speed * timeDelta / 1000;
-            this.locY = Math.floor(this.locY);
-            this.updatePosOnBoard();
-            this.locX = this.posX * game.tileSize;
-            this.move();
-        }else{
-            this.locX += this.speed * timeDelta / 1000;
-        }
-    }else if(this.direction === directions.onder){
-        if(this.passableTiles.indexOf(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY + this.speed * timeDelta / 1000))) !== this.passableTiles.indexOf(getValueFromPos(this.locX, this.locY)) || this.passableTiles.indexOf(getValueFromPos(Math.floor(this.locX), Math.floor(this.locY + this.speed * timeDelta / 1000))) == -1){
-            this.locY += this.speed * timeDelta / 1000;
-            this.locX = Math.floor(this.locX);
-            this.updatePosOnBoard();
-            this.locY = this.posY * game.tileSize;
-            this.move();
-        }else{
-            this.locY += this.speed * timeDelta / 1000;
-        }
-    }else if(this.direction === directions.links){
-        if((this.locX - (this.speed * timeDelta / 1000) <= (this.posX - 1) * game.tileSize && this.passableTiles.indexOf(getValueFromPos(this.locX - (this.speed * timeDelta / 1000) + game.tileSize, this.locY)) !== this.passableTiles.indexOf(getValueFromPos(this.locX, this.locY))) || this.passableTiles.indexOf(getValueFromPos(this.locX - (this.speed * timeDelta / 1000), this.locY)) == -1){
-            this.locX = (this.posX) * game.tileSize;
-            this.locY = Math.floor(this.locY);
-            this.updatePosOnBoard();
-            this.move();
-        }else{
-            this.locX -= this.speed * timeDelta / 1000;
-        }
+        
     }
 };
 
@@ -138,7 +127,7 @@ Attacker.prototype.updatePosition = function(){
 Attacker.prototype.drawImage = function(){
     var sprite = new Image();
     sprite.src = "img/attackers/" + this.image;
-    game.context.drawImage(sprite, (this.locX + game.tileSize * (1-this.scale) / 2), (this.locY + game.tileSize * (1-this.scale) / 2), (game.tileSize * this.scale), (game.tileSize * this.scale));
+    game.context.drawImage(sprite, (this.locX - game.tileSize/2 + game.tileSize * (1-this.scale) / 2), (this.locY - game.tileSize/2 + game.tileSize * (1-this.scale) / 2), (game.tileSize * this.scale), (game.tileSize * this.scale));
 };
 
 //tekent zijn health bar
@@ -157,7 +146,7 @@ Attacker.prototype.drawHealthBar = function(){
     }
 
     // de lengte en hoogt van de healthbar is relatief aan de grootte van de attacker en tilegrootte
-    context.fillRect(this.locX - verschil + spriteSize / 8, this.locY - verschil - barHeight - spriteSize / 10, ((spriteSize - spriteSize / 4) * this.health / this.maxHealth), barHeight);
+    context.fillRect(this.locX - game.tileSize/2 - verschil + spriteSize / 8, this.locY - game.tileSize/2 - verschil - barHeight - spriteSize / 10, ((spriteSize - spriteSize / 4) * this.health / this.maxHealth), barHeight);
 };
 
 //tekent een attacker op z'n geheel
