@@ -30,9 +30,9 @@ Tower.prototype.findTarget = function(){
     this.target = null;
     
     for (var i = 0; i < attackers.length; i++) {
-        var distance = (attackers[i].locX - this.locX) * (attackers[i].locX - this.locX + game.tileSize) + (attackers[i].locY - this.locY) * (attackers[i].locY - this.locY + game.tileSize);
+        var distance = Math.sqrt(Math.pow((attackers[i].locX - this.locX),2) + Math.pow((attackers[i].locY - this.locY), 2));
 
-        if (distance < this.range * this.range) {
+        if (distance < this.range) {
             this.target = attackers[i];
             return;
         }
