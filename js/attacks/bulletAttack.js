@@ -19,8 +19,8 @@ Bullet.prototype.move = function() {
     var xDist = this.target.locX - this.locX; //"+rectWidth/2" because we want bullet to go for center of enemy no top left corner
     var yDist = this.target.locY - this.locY;
     var dist = Math.sqrt(xDist * xDist + yDist * yDist);
-    this.locX += + this.speed * xDist / dist;
-    this.locY += + this.speed * yDist / dist;
+    this.locX += this.speed * xDist / dist;
+    this.locY += this.speed * yDist / dist;
 
 };
 
@@ -36,10 +36,10 @@ Bullet.prototype.draw = function() {
 
 //checkt wanneer bullet een attacker raakt
 Bullet.prototype.checkCollision = function() {
-    if(this.locX - this.r <= this.target.locX + game.tileSize * this.target.scale &&
-        this.locX + this.r >= this.target.locX + game.tileSize * (1 - this.target.scale) &&
-        this.locY - this.r <= this.target.locY + game.tileSize * this.target.scale &&
-        this.locY + this.r >= this.target.locY + game.tileSize * (1 - this.target.scale)) {
+    if(this.locX - this.r <= this.target.locX &&
+        this.locX + this.r >= this.target.locX &&
+        this.locY - this.r <= this.target.locY &&
+        this.locY + this.r >= this.target.locY) {
 
         this.target.health -= this.damage;
         return true;
