@@ -1,9 +1,9 @@
 /**
  * Created by Gaben on 2/04/2016.
  */
-function LaserAttack(tower, target){
+function LaserAttack(tower){
     this.tower = tower;
-    this.target = target;
+    this.target = tower.target;
 }
 
 /* ik denk dat het best is als een attack altijd een draw, checkCollision en update functie heeft

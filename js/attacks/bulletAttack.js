@@ -3,12 +3,12 @@
  */
 var standaardAttackerSnelheid = new Attacker(1, 1).speed;
 
-function Bullet(x,y,target,damage) {
-    this.locX = x;
-    this.locY = y;
-    this.target = target;
-    this.damage = damage;
-    this.speed = 1.5 * (game.tileSize / 40) * target.speed / standaardAttackerSnelheid;
+function Bullet(tower) {
+    this.locX = tower.xFire;
+    this.locY = tower.yFire;
+    this.target = tower.target;
+    this.damage = tower.damage;
+    this.speed = 1.5 * (game.tileSize / 40) * tower.target.speed / standaardAttackerSnelheid;
 }
 
 Bullet.prototype.r = game.tileSize / 10;

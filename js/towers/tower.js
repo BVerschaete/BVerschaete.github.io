@@ -53,7 +53,7 @@ Tower.prototype.attack = function(){
 
     if(this.target != null && delta >= this.fireRate){
         this.oldNow = now - (delta - this.fireRate);
-        attacks.push(new Bullet(this.xFire, this.yFire, this.target, this.damage));
+        attacks.push(new Bullet(this));
     }else if(this.target == null){
         this.oldNow = now - this.fireRate;
     }

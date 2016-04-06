@@ -15,7 +15,7 @@ LaserTower.prototype.displayName = "Laser";
 
 LaserTower.prototype.attack = function() {
     if(this.target !== null) {
-        attacks.push(new LaserAttack(this, this.target));
+        attacks.push(new LaserAttack(this));
     }
 };
 
@@ -23,9 +23,9 @@ LaserTower.prototype.findTarget = function(){
     var newTarget = null;
 
     for (var i = 0; i < attackers.length; i++) {
-        var distance = (attackers[i].locX - this.locX) * (attackers[i].locX - this.locX + game.tileSize) + (attackers[i].locY - this.locY) * (attackers[i].locY - this.locY + game.tileSize);
+        var distance = Math.sqrt(Math.pow((attackers[i].locX - this.locX),2) + Math.pow((attackers[i].locY - this.locY), 2));
 
-        if (distance < this.range * this.range) {
+        if (distance < this.range) {
             newTarget = attackers[i];
             i = attackers.length;
         }
