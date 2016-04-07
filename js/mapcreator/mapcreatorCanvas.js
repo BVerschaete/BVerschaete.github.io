@@ -39,7 +39,7 @@ function addCanvasPlaceTileEventListeners(){
 function drawMap(){
     for(var i = 0; i < level.board.length; i++){
         for(var j = 0; j < level.board[i].length; j++) {
-            map.context.drawImage(tiles[level.board[i][j]], j * map.tileSize, i * map.tileSize, map.tileSize, map.tileSize);
+            map.context.drawImage(tiles[level.board[i][j]].image, j * map.tileSize, i * map.tileSize, map.tileSize, map.tileSize);
         }
     }
 }

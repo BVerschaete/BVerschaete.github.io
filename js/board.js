@@ -19,7 +19,7 @@ function drawMap(){
     var board = game.selectedLevel.board;
     for(var i = 0; i < board.length; i++){
         for(var j = 0; j < board[i].length; j++) {
-            game.context.drawImage(tiles[board[i][j]], j * game.tileSize, i * game.tileSize, game.tileSize, game.tileSize);
+            game.context.drawImage(tiles[board[i][j]].image, j * game.tileSize, i * game.tileSize, game.tileSize, game.tileSize);
         }
     }
 }

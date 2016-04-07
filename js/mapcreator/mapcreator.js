@@ -25,8 +25,8 @@ function setup(){
 function addImages(){
     // voorlopig zelf instellen hoeveel images er in zitten :(
     var images = $('#availableImages');
-    for(var i = 0; i <= 22; i++){
-        var $img = $(tiles[i]);
+    for(var i = 0; i < 22; i++){
+        var $img = $(tiles[i].image);
         $img.attr("data-id", i); // het lukt niet met prop
         $img.click(selectTile);
         images.append($img);

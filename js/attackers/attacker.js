@@ -4,63 +4,27 @@
 var attackers = [];
 
 function Attacker(speedFactor, maxHealthFactor){
-    this.speed= 50 * (game.tileSize / 40) * speedFactor; // snelheid relatief aan de snelheid bij een tileSize van 40
-    this.posX= game.selectedLevel.startX;
-    this.posY= game.selectedLevel.startY;
-    this.locX= (this.posX * game.tileSize) + game.tileSize/2;
-    this.locY= (this.posY * game.tileSize) + game.tileSize/2;
+    this.speed = 50 * (game.tileSize / 40) * speedFactor; // snelheid relatief aan de snelheid bij een tileSize van 40
+    this.posX = game.selectedLevel.startX;
+    this.posY = game.selectedLevel.startY;
+    this.locX = (this.posX * game.tileSize) + game.tileSize/2;
+    this.locY = (this.posY * game.tileSize) + game.tileSize/2;
     this.oldNow = Date.now();
-    this.direction = game.selectedLevel.startDirection;
     this.maxHealth = 100 * maxHealthFactor;
     this.health = this.maxHealth;
-    this.scale = 0.8;
+    this.image = "dragon.png";
+    this.reward = 10;
 }
 
-Attacker.prototype.image = "dragon.png";
-Attacker.prototype.reward = 10;
+Attacker.prototype.scale = 0.8;
+Attacker.prototype.direction = game.selectedLevel.startDirection;
 
 //beweegt een attacker volgens zijn pad
 //voor iedere tile andere changeDirection functionaliteit
 Attacker.prototype.changeDirection = function() {
     var board = game.selectedLevel.board;
-    var tile = board[this.posY][this.posX];
-    if(tile == 1){
-        if(this.direction == directions.rechts) {
-            this.direction = directions.rechts;
-        } else {
-            this.direction = directions.links;
-        }
-    }else if(tile == 2) {
-        if (this.direction == directions.boven) {
-            this.direction = directions.boven;
-        } else {
-            this.direction = directions.onder;
-        }
-    }else if(tile == 3) {
-        if (this.direction == directions.boven) {
-            this.direction = directions.links;
-        } else {
-            this.direction = directions.onder;
-        }
-    } else if(tile == 4) {
-        if (this.direction == directions.rechts) {
-            this.direction = directions.boven;
-        } else {
-            this.direction = directions.links;
-        }
-    } else if(tile == 5) {
-        if (this.direction == directions.onder) {
-            this.direction = directions.rechts;
-        } else {
-            this.direction = directions.boven;
-        }
-    } else if(tile == 6) {
-        if (this.direction == directions.boven) {
-            this.direction = directions.rechts;
-        } else {
-            this.direction = directions.onder;
-        }
-    }
+    var tile = tiles[board[this.posY][this.posX]];
+    tile.changeDirection(this);
 };
 
 //update zijn positie op het bord
