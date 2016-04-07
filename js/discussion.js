@@ -9,7 +9,7 @@ function setup(){
 //alles voor disqus staat hier
 var disqus_config = function () {
     this.page.url = "http://bverschaete.github.io/";  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = ""; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    this.page.identifier = "discussionPage"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 };
 
 function useDisqus() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
