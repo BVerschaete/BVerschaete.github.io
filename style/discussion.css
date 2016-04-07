@@ -3,5 +3,7 @@ body{
 }
 
 #disqus_thread{
-    margin-top: 50px;
+    margin-top: 25%;
+    margin-right: 2.5%;
+    margin-left: 2.5%;
 }
