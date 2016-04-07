@@ -68,4 +68,9 @@ canvas {
     text-decoration: none;
     display: inline-block;
     font-size: 24px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
 }
