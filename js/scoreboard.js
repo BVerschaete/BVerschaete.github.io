@@ -40,4 +40,4 @@ function addTable(){
     $(document.body).append($table);
 }
 
-$(setup);
+$(window).load(setup);

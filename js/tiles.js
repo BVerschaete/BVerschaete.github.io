@@ -1,6 +1,7 @@
 /**
  * Created by Bastien on 07/04/2016.
  */
+//tile objecten, veranderen de richting van een attacker als hij erover passeert
 function Tile(src){
     var temp = new Image();
     temp.src = "img/tiles/" + src;

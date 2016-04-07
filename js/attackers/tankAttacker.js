@@ -3,7 +3,7 @@
  */
 function TankAttacker(speedFactor, maxHealthFactor){
     Attacker.call(this, speedFactor, maxHealthFactor);
-    this.speed = 30 * (game.tileSize / 40) * speedFactor; // snelheid relatief aan de snelheid bij een tileSize van 40
+    this.speed = 30 * (game.tileSize / 40) * speedFactor;
     this.maxHealth = 300 * maxHealthFactor;
     this.health = this.maxHealth;
     this.image = "dragonTank.png";

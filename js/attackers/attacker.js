@@ -20,20 +20,20 @@ Attacker.prototype.scale = 0.8;
 Attacker.prototype.direction = game.selectedLevel.startDirection;
 
 //beweegt een attacker volgens zijn pad
-//voor iedere tile andere changeDirection functionaliteit
+//verandert zijn direction via de huidige tile
 Attacker.prototype.changeDirection = function() {
     var board = game.selectedLevel.board;
     var tile = tiles[board[this.posY][this.posX]];
     tile.changeDirection(this);
 };
 
-//update zijn positie op het bord
+//update zijn positie op het bord (in de 'array')
 Attacker.prototype.updatePosOnBoard = function(){
     this.posX = Math.floor(this.locX / game.tileSize);
     this.posY = Math.floor(this.locY / game.tileSize);
 };
 
-//update zijn werkelijke positie
+//update zijn werkelijke positie en kijkt wanneer hij moet veranderen van richting
 Attacker.prototype.updatePosition = function(){
     this.updatePosOnBoard(); // dit moet zeker gebeuren !!!!
     var now = Date.now();
@@ -117,6 +117,7 @@ function addAttacker(attacker){
     attackers.push(attacker);
 }
 
+//maakt een nieuw attacker object aan met gegeven parameters
 function createAttacker(attackerCode, speedFactor, maxHealthFactor){
     return new attackerTypes[attackerCode](speedFactor, maxHealthFactor);
 }

@@ -2,7 +2,7 @@
  * Created by Bastien on 20/03/2016.
  */
 //kleine code bij het level select scherm om button te deactiveren en select kleuren aan te passen
-$(function() {
+function setup() {
     var startButton = $("#startSelectedLevel");
     startButton.addClass("disabled");
 
@@ -38,5 +38,7 @@ $(function() {
         sessionStorage.selectedLevel = id;
         startButton.removeClass("disabled");
     });
-});
+}
+
+$(window).load(setup);
 

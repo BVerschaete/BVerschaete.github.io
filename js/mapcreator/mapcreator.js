@@ -23,11 +23,11 @@ function setup(){
 }
 
 function addImages(){
-    // voorlopig zelf instellen hoeveel images er in zitten :(
+    // voorlopig zelf instellen hoeveel images er in zitten
     var images = $('#availableImages');
     for(var i = 0; i < 22; i++){
         var $img = $(tiles[i].image);
-        $img.attr("data-id", i); // het lukt niet met prop
+        $img.attr("data-id", i);
         $img.click(selectTile);
         images.append($img);
     }
@@ -40,4 +40,4 @@ function changeSelectedImage(){
     $("#selectedImage").find("img")[0].src = selectedImage.src;
 }
 
-$(setup);
+$(window).load(setup);

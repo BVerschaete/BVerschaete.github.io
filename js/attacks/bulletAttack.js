@@ -16,7 +16,7 @@ Bullet.prototype.r = game.tileSize / 10;
 //beweegt bullet naar zijn locX en locY
 Bullet.prototype.move = function() {
     //find unit vector
-    var xDist = this.target.locX - this.locX; //"+rectWidth/2" because we want bullet to go for center of enemy no top left corner
+    var xDist = this.target.locX - this.locX;
     var yDist = this.target.locY - this.locY;
     var dist = Math.sqrt(xDist * xDist + yDist * yDist);
     this.locX += this.speed * xDist / dist;

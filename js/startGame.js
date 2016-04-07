@@ -35,7 +35,7 @@ function setup() {
 
         $("#sellTower").click(sellSelectedTower);
 
-        //clear placing and selecting tower, displayInfo here makes sure the towerInfo div isn't shown
+        //als buiten het canvas geklikt wordt, worden alle selecties en info bladen verwijderd
         $("body").click(function () {
             currentTower = -1;
             selectedTower = -1;
