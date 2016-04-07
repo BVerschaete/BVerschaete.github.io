@@ -82,6 +82,8 @@ function spawnWave(){
         wave.attackers.splice(0, 1);
     },waitTime);
 
+    $('#startWave')[0].play();
+
     //stops the spawning after all attackers are removed from wave
     setTimeout(function(){
         clearInterval(loop);
