@@ -11,7 +11,7 @@ var game = {
     attackersScore: 0,
     money: 400,
     currentWave: 0,
-    timeLastWaveSpawnEnds: Date.now(),
+    timeLastWaveSpawnEnds: null,
     lives: 10
 };
 
@@ -43,8 +43,14 @@ function setup() {
             selectedTower = -1;
             displayInfo();
         });
-        
-        gameLoop();
+
+        drawMap();
+
+        $('#dimmer').find('> div').click(function(){
+            game.timeLastWaveSpawnEnds = Date.now();
+            gameLoop();
+            $('#dimmer').hide();
+        })
     } else {
         window.location.href = "index.html";
         alert("Please select a name and a level before going to the game.html page");
