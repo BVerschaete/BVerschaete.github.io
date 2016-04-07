@@ -13,7 +13,7 @@ function Attacker(speedFactor, maxHealthFactor){
     this.direction = game.selectedLevel.startDirection;
     this.maxHealth = 100 * maxHealthFactor;
     this.health = this.maxHealth;
-    this.scale = 0;
+    this.scale = 0.8;
 }
 
 Attacker.prototype.image = "dragon.png";

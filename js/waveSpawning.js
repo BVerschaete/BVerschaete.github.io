@@ -41,7 +41,7 @@ function chooseWave(){
     
     speedFactor *= game.selectedLevel.difficulty;
     maxHealthFactor *= game.selectedLevel.difficulty;
-    console.log(aantalMonsters);
+
     return createWave(aantalMonsters, typeMonster, speedFactor, maxHealthFactor);
 }
 
