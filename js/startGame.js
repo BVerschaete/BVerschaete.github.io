@@ -46,8 +46,10 @@ function setup() {
 
         $('#dimmer').find('> div').click(function(){
             game.timeLastWaveSpawnEnds = Date.now();
+            var $dimmer = $('#dimmer');
+            $dimmer.hide();
+            $dimmer.find('> div').off();
             gameLoop();
-            $('#dimmer').hide();
         })
     } else {
         window.location.href = "index.html";
@@ -55,8 +57,15 @@ function setup() {
     }
 }
 
-function checkGameOver(){
-    return game.attackersScore >= 4;
+function checkGameOver() {
+    if (game.attackersScore >= 4) {
+        var $dimmer = $('#dimmer');
+        var $button = $dimmer.find('>div');
+        $button.css("background", "rgba(255, 0, 0, 1");
+        $button.text("Game Over");
+        $dimmer.show();
+        return true;
+    }
 }
 
 $(window).load(setup);
