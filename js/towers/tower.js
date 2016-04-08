@@ -15,6 +15,13 @@ function Tower(x, y){
     this.upgradeCost = this.cost/2;
     this.sellRate = 0.75;
     this.value = this.cost * this.sellRate;
+    this.image = "tower1.png";
+    this.range = (game.tileSize/2) + (game.tileSize*1.5); //40*1.875 = 75, in functie van tileSize stellen om gemakkelijk spel te resizen-
+    this.fireRate = 500; // 1 keer per 1000 milliseconden
+    this.damage = 10;
+    this.cost = 60;
+    this.maxUpgradeLevel = 5;
+    this.displayName = "Tower Tier 1";
 }
 
 //basisfuncties van alle towers
@@ -81,15 +88,6 @@ Tower.prototype.upgrade = function(){
     this.value += this.upgradeCost * this.sellRate;
     this.upgradeCost *= 2;
 };
-
-//verschillen per tower functies komen hier;
-Tower.prototype.image = "tower1.png";
-Tower.prototype.range = (game.tileSize/2) + (game.tileSize*1.5); //40*1.875 = 75, in functie van tileSize stellen om gemakkelijk spel te resizen-
-Tower.prototype.fireRate = 500; // 1 keer per 1000 milliseconden
-Tower.prototype.damage = 10;
-Tower.prototype.cost = 60;
-Tower.prototype.maxUpgradeLevel = 5;
-Tower.prototype.displayName = "Tower Tier 1";
 
 //voert draw functie uit bij alle torens
 function drawTowers(){

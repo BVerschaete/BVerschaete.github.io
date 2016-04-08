@@ -14,10 +14,9 @@ function Attacker(speedFactor, maxHealthFactor){
     this.health = this.maxHealth;
     this.image = "dragon.png";
     this.reward = 10;
+    this.scale = 0.8;
+    this.direction = game.selectedLevel.startDirection;
 }
-
-Attacker.prototype.scale = 0.8;
-Attacker.prototype.direction = game.selectedLevel.startDirection;
 
 //beweegt een attacker volgens zijn pad
 //verandert zijn direction via de huidige tile

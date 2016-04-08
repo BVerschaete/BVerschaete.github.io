@@ -4,6 +4,7 @@
 
 //zorgt ervoor dat spelernaam wordt doorgegeven aan gamepagina
 function setup() {
+    scroll();
     var start = $('#startGame');
     var input = $('#usernameInput');
     start.addClass("disabled");
@@ -59,6 +60,29 @@ function setPictureLoop(screenshots){
 
         i++;
     }, 4000);
+}
+
+
+//speciale scroll/click-functionaliteit voor welkom-pagina, gebruikt van https://css-tricks.com/
+function scroll() {
+    $('a[href*="#"]:not([href="#"])').click(function(event) {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+            if (target.length) {
+                $('html, body').animate({
+                    scrollTop: target.offset().top
+                }, 1000);
+                setTimeout(function() {
+                    if($(event.target).prop("id") == "usernameLink") {
+                        $('#usernameInput').focus();
+                    }
+                }, 1005);
+                return false;
+            }
+        }
+    });
+
 }
 
 $(window).load(setup);

@@ -40,5 +40,7 @@ function gameLoop() {
     updateLogic();
     renderingStep();
     removeAttacks(); // als dit in de updateLogic gebeurt worden de laserattacks niet getoond want ze worden meteen verwijdert
-    window.requestAnimationFrame(gameLoop);
+    if(!checkGameOver()) {
+        window.requestAnimationFrame(gameLoop);
+    }
 }

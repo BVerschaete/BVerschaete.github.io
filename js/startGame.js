@@ -55,4 +55,8 @@ function setup() {
     }
 }
 
+function checkGameOver(){
+    return game.attackersScore >= 4;
+}
+
 $(window).load(setup);
