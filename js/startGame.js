@@ -8,11 +8,13 @@ var game = {
     canvas: null,
     context: null,
     tileSize: 60,
-    attackersScore: 0,
     money: 400,
     currentWave: 0,
+    attackersScore: 0,
+    lives: 10,
     timeLastWaveSpawnEnds: null,
-    lives: 10
+    paused: false,
+    timePauseStart: undefined
 };
 
 function setup() {
@@ -43,14 +45,22 @@ function setup() {
         });
 
         drawMap();
-
-        $('#dimmer').find('> div').click(function(){
+        var $button = $('#dimmer').find('> div');
+        $button.click(function(){
             game.timeLastWaveSpawnEnds = Date.now();
             var $dimmer = $('#dimmer');
             $dimmer.hide();
-            $dimmer.find('> div').off();
+            $button.off();
             gameLoop();
-        })
+        });
+
+        document.addEventListener("visibilitychange", function() {
+            if(document.visibilityState == "hidden"){
+                pauseGame();
+            } else {
+                resumeGame();
+            }
+        });
     } else {
         window.location.href = "index.html";
         alert("Please select a name and a level before going to the game.html page");
@@ -58,11 +68,14 @@ function setup() {
 }
 
 function checkGameOver() {
-    if (game.attackersScore >= 4) {
+    if (game.attackersScore >= 10) {
         var $dimmer = $('#dimmer');
         var $button = $dimmer.find('>div');
         $button.css("background", "rgba(255, 0, 0, 1");
         $button.text("Game Over");
+        $button.click(function(){
+            console.log("naar highscores");
+        });
         $dimmer.show();
         return true;
     }

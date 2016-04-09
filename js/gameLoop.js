@@ -40,7 +40,32 @@ function gameLoop() {
     updateLogic();
     renderingStep();
     removeAttacks(); // als dit in de updateLogic gebeurt worden de laserattacks niet getoond want ze worden meteen verwijdert
-    if(!checkGameOver()) {
+    if(!(checkGameOver() || game.paused)) {
         window.requestAnimationFrame(gameLoop);
     }
+}
+
+function pauseGame(){
+    game.paused = true;
+    if(currentWaveSpawning != null){
+        currentWaveSpawning.timer.pause();
+        currentWaveSpawning.loop.pause();
+    }
+    game.timePauseStart = Date.now();
+}
+
+function resumeGame(){
+    game.paused = false;
+    var timePaused = Date.now() - game.timePauseStart;
+    game.timeLastWaveSpawnEnds += timePaused;
+    for(var i = 0; i < attackers.length; i++){
+        attackers[i].oldNow += timePaused;
+    }
+
+    if(currentWaveSpawning != null){
+        currentWaveSpawning.loop.resume();
+        currentWaveSpawning.timer.resume();
+    }
+    
+    gameLoop();
 }

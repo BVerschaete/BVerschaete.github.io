@@ -7,7 +7,12 @@ function Wave(){
     this.spawnSpeed = 0;
     this.speedFactor = 1;
     this.maxHealthFactor = 1;
+    this.loop = undefined;
+    this.timer = undefined;
 }
+
+var currentWaveSpawning = null;
+
 //kiest adhv de hoeveelste wave het is, welke wave moet gespawned worden
 function chooseWave(){
     var aantalMonsters;
@@ -64,32 +69,91 @@ function spawnWaveNow(event){
 }
 
 function spawnWave(){
-    var wave = chooseWave();
+    currentWaveSpawning = chooseWave();
     toggleSpawn();
     
     //time between attackers
-    var waitTime = 1800 * game.tileSize / wave.spawnSpeed;
+    var waitTime = 1800 * game.tileSize / currentWaveSpawning.spawnSpeed;
     
     //time when to stop spawning attackers
-    var stopSpawnTime = wave.attackers.length * waitTime;
+    var stopSpawnTime = currentWaveSpawning.attackers.length * waitTime;
     
     game.timeLastWaveSpawnEnds = Date.now() + stopSpawnTime;
 
     //pushes every attacker from wave to real attackers
-    var loop = setInterval(function(){
-        var attacker = createAttacker(wave.attackers[0], wave.speedFactor, wave.maxHealthFactor);
+    currentWaveSpawning.loop = new IntervalTimer(function(){
+        var attacker = createAttacker(currentWaveSpawning.attackers[0], currentWaveSpawning.speedFactor, currentWaveSpawning.maxHealthFactor);
         addAttacker(attacker);
-        wave.attackers.splice(0, 1);
-    },waitTime);
+        currentWaveSpawning.attackers.splice(0, 1);
+    }, waitTime);
 
     $('#startWave')[0].play();
 
     //stops the spawning after all attackers are removed from wave
-    setTimeout(function(){
-        clearInterval(loop);
+    currentWaveSpawning.timer = new Timer(function(){
+        currentWaveSpawning.loop.stop();
         toggleSpawn();
+        currentWaveSpawning = null;
     }, stopSpawnTime);
 }
+
+//hulpfunctie voor het spawnen van attackers na een pause
+function IntervalTimer(callback, interval) {
+    var timerId, startTime, remaining = 0;
+    var state = 0; //  0 = idle, 1 = running, 2 = paused, 3= resumed
+
+    this.pause = function () {
+        if (state != 1) return;
+
+        remaining = interval - (Date.now() - startTime - 800);
+        clearInterval(timerId);
+        state = 2;
+    };
+
+    this.resume = function () {
+        if (state != 2) return;
+
+        state = 3;
+        setTimeout(this.timeoutCallback, remaining);
+    };
+
+    this.timeoutCallback = function () {
+        if (state != 3) return;
+
+        callback();
+
+        startTime = Date.now();
+        timerId = setInterval(callback, interval);
+        state = 1;
+    };
+
+    this.stop = function(){
+        clearInterval(timerId);
+    };
+
+    startTime = new Date();
+    timerId = setInterval(callback, interval);
+    state = 1;
+}
+
+//hulpfunctie voor het stoppen van spawnen van attackers na een pause
+function Timer(callback, delay) {
+    var timerId, start, remaining = delay;
+
+    this.pause = function() {
+        window.clearTimeout(timerId);
+        remaining -= Date.now() - start;
+    };
+
+    this.resume = function() {
+        start = Date.now();
+        window.clearTimeout(timerId);
+        timerId = window.setTimeout(callback, remaining);
+    };
+
+    this.resume();
+}
+
 
 //update de spawnbutton zodat hij gedisabled moet worden of niet
 function toggleSpawn(){
