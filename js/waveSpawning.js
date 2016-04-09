@@ -105,7 +105,7 @@ function IntervalTimer(callback, interval) {
     this.pause = function () {
         if (state != 1) return;
 
-        remaining = interval - (Date.now() - startTime - 800);
+        remaining = interval - (Date.now() - startTime);
         clearInterval(timerId);
         state = 2;
     };
