@@ -65,7 +65,6 @@ function setPictureLoop(screenshots){
     }, 4000);
 }
 
-
 //speciale scroll/click-functionaliteit voor welkom-pagina, gebruikt van https://css-tricks.com/
 function scroll() {
     $('a[href*="#"]:not([href="#"])').click(function(event) {
