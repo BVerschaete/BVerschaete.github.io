@@ -31,15 +31,15 @@ function chooseWave(){
     } else if(game.currentWave%3 == 0 && game.currentWave != 0){
         //speedAttackers iedere 3 waves
         aantalMonsters = 4 + game.currentWave/3 * game.selectedLevel.difficulty;
-        speedFactor = Math.pow(1.25, game.currentWave/3);
+        speedFactor = Math.pow(1.10, game.currentWave/3);
         maxHealthFactor = Math.pow(1.05, game.currentWave/3);
 
         typeMonster = attackerCodes.speedAttacker;
     } else{
         //normalAttackers rest van de waves
-        aantalMonsters = 4 + game.currentWave * game.selectedLevel.difficulty;
-        speedFactor = Math.pow(1.10, game.currentWave);
-        maxHealthFactor = Math.pow(1.10, game.currentWave);
+        aantalMonsters = 4 + Math.floor(game.currentWave/2) * game.selectedLevel.difficulty;
+        speedFactor = Math.pow(1.05, game.currentWave);
+        maxHealthFactor = Math.pow(1.05, game.currentWave);
 
         typeMonster = attackerCodes.normalAttacker;
     }
