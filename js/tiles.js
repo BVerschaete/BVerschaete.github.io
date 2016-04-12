@@ -83,7 +83,7 @@ var waterCornerLeftDown = new Tile("11.png");
 
 var waterLeft = new Tile("12.png");
 
-var waterCornerLeftTop = new Tile("12.png");
+var waterCornerLeftTop = new Tile("13.png");
 
 var waterUp = new Tile("14.png");
 
