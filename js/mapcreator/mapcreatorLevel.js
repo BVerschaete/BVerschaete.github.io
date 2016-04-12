@@ -103,6 +103,8 @@ function loadLevel(event){
     level = customLevels[index];
     selectedCustomLevel = index;
 
+    $("#atlRows").html(level.board.length);
+    $("#atlCols").html(level.board[0].length);
     $('#levelName').val(level.name);
     $('#levelDifficulty').val(level.difficulty);
     $('#levelSpawnSpeed').val(level.spawnSpeed);
@@ -110,6 +112,7 @@ function loadLevel(event){
     $('#levelStartX').text(level.startX);
     $('#levelStartY').text(level.startY);
 
+    addCanvas();
     drawMap();
 }
 
