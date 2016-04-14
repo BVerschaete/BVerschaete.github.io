@@ -48,7 +48,7 @@ Attacker.prototype.updatePosition = function(){
 
     var speed = this.speed * timeDelta / 1000;
 
-    if(getValueFromPos(this.locX, this.locY) == null){
+    if(getValueFromPos(this.locX, this.locY) == null || getValueFromPos(this.locX, this.locY) == 0){
         deleteAttacker(this);
         game.attackersScore++;
     } else {
