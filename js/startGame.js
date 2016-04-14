@@ -45,6 +45,8 @@ function setup() {
         });
 
         drawMap();
+
+        //startknop
         var $button = $('#dimmer').find('> div');
         $button.click(function(){
             game.timeLastWaveSpawnEnds = Date.now();
@@ -52,14 +54,13 @@ function setup() {
             $dimmer.hide();
             $button.off();
             gameLoop();
-        });
-
-        document.addEventListener("visibilitychange", function() {
-            if(document.visibilityState == "hidden"){
-                pauseGame();
-            } else {
-                resumeGame();
-            }
+            document.addEventListener("visibilitychange", function() {
+                if(document.visibilityState == "hidden"){
+                    pauseGame();
+                } else {
+                    resumeGame();
+                }
+            });
         });
     } else {
         window.location.href = "index.html";
