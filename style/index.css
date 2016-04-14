@@ -12,7 +12,6 @@ section{
 
 article{
     margin-left: 75px;
-    padding-top: 150px !important;
     width: 35%;
 }
 
@@ -28,6 +27,7 @@ article{
 .jumbotron{
     background-color:#6093CA;
     float: left;
+    padding-top: 50px;
 }
 
 #username{
