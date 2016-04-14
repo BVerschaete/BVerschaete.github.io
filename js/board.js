@@ -22,19 +22,19 @@ function isInMiddleOfSquare(attacker){
     var borderDown = centerTileY + game.tileSize/2;
     var borderLeft = centerTileX - game.tileSize/2;
     
-    if (attacker.direction == directions.boven) {
+    if (attacker.direction == directions.up) {
         if (attacker.locY - game.tileSize / 2 <= borderUp) {
             return true;
         }
-    } else if (attacker.direction == directions.rechts) {
+    } else if (attacker.direction == directions.right) {
         if (attacker.locX + game.tileSize / 2 >= borderRight) {
             return true;
         }
-    } else if (attacker.direction == directions.onder) {
+    } else if (attacker.direction == directions.down) {
         if (attacker.locY + game.tileSize / 2 >= borderDown) {
             return true;
         }
-    } else if (attacker.direction == directions.links) {
+    } else if (attacker.direction == directions.left) {
         if (attacker.locX - game.tileSize / 2 <= borderLeft) {
             return true;
         }

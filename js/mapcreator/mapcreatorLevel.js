@@ -9,7 +9,7 @@ var level = {
     difficulty: 0,
     spawnSpeed: 0,
     board: [],
-    startDirection: directions.rechts,
+    startDirection: directions.right,
     startX: null,
     startY: null
 };

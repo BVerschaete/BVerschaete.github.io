@@ -1,7 +1,7 @@
 /**
  * Created by Bastien on 10/02/1014.
  */
-//Level Template, CTRL-/ to uncomment, directions: 0=boven, 1 = rechts, 2 = beneden, 3 = links, zie ook "var levels" hieronder, spawnspeed in seconden
+//Level Template, CTRL-/ to uncomment, directions: 0=boven, 1 = right, 2 = beneden, 3 = left, zie ook "var levels" hieronder, spawnspeed in seconden
 // var levelName = {
 //     name: "customName",
 //     difficulty: 0,
@@ -39,7 +39,7 @@ var level0 = {
         [0, 0, 5, 1, 4, 0, 0, 5, 1, 1],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ],
-    startDirection: directions.rechts,
+    startDirection: directions.right,
     startX: 0,
     startY: 1
 };

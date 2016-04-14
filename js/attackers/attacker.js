@@ -62,13 +62,13 @@ Attacker.prototype.updatePosition = function(){
 };
 
 Attacker.prototype.move = function(speed){
-    if (this.direction === directions.boven) {
+    if (this.direction === directions.up) {
         this.locY -= speed;
-    } else if (this.direction === directions.rechts) {
+    } else if (this.direction === directions.right) {
         this.locX += speed;
-    } else if (this.direction === directions.onder) {
+    } else if (this.direction === directions.down) {
         this.locY += speed;
-    } else if (this.direction === directions.links) {
+    } else if (this.direction === directions.left) {
         this.locX -= speed;
     }
 };

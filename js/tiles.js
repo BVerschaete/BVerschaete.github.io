@@ -26,40 +26,40 @@ vertical.changeDirection = function(attacker){
 var cornerLeftDown = new Tile("3.png");
 
 cornerLeftDown.changeDirection = function(attacker){
-    if(attacker.direction == directions.boven) {
-        attacker.direction = directions.links;
+    if(attacker.direction == directions.up) {
+        attacker.direction = directions.left;
     } else {
-        attacker.direction = directions.onder;
+        attacker.direction = directions.down;
     }
 };
 
 var cornerLeftUp = new Tile("4.png");
 
 cornerLeftUp.changeDirection = function(attacker){
-    if(attacker.direction == directions.rechts) {
-        attacker.direction = directions.boven;
+    if(attacker.direction == directions.right) {
+        attacker.direction = directions.up;
     } else {
-        attacker.direction = directions.links;
+        attacker.direction = directions.left;
     }
 };
 
 var cornerRightUp = new Tile("5.png");
 
 cornerRightUp.changeDirection = function(attacker){
-    if(attacker.direction == directions.onder) {
-        attacker.direction = directions.rechts;
+    if(attacker.direction == directions.down) {
+        attacker.direction = directions.right;
     } else {
-        attacker.direction = directions.boven;
+        attacker.direction = directions.up;
     }
 };
 
 var cornerRightDown = new Tile("6.png");
 
 cornerRightDown.changeDirection = function(attacker){
-    if(attacker.direction == directions.boven) {
-        attacker.direction = directions.rechts;
+    if(attacker.direction == directions.up) {
+        attacker.direction = directions.right;
     } else {
-        attacker.direction = directions.onder;
+        attacker.direction = directions.down;
     }
 };
 
@@ -92,3 +92,102 @@ var waterSingleTop = new Tile("19.png");
 var waterSingleRight = new Tile("20.png");
 
 var waterSingleLeft = new Tile("21.png");
+
+var splitDown = new Tile("22.png");
+
+splitDown.changeDirection = function(attacker){
+    var kies = Math.random();
+    if(attacker.direction == directions.down) {
+        if(kies < 0.5) {
+            attacker.direction = directions.right;
+        } else {
+            attacker.direction = directions.left;
+        }
+    } else if(attacker.direction == directions.left || attacker.direction == directions.right) {
+        if(kies < 0.5) {
+            attacker.direction = directions.up;
+        }
+    }
+};
+
+var splitLeft = new Tile("23.png");
+
+splitLeft.changeDirection = function(attacker){
+    var kies = Math.random();
+    if(attacker.direction == directions.left) {
+        if(kies < 0.5) {
+            attacker.direction = directions.up;
+        } else {
+            attacker.direction = directions.down;
+        }
+    } else if(attacker.direction == directions.up || attacker.direction == directions.down) {
+        if(kies < 0.5) {
+            attacker.direction = directions.right;
+        }
+    }
+};
+
+var splitUp= new Tile("24.png");
+
+splitUp.changeDirection = function(attacker){
+    var kies = Math.random();
+    if(attacker.direction == directions.up) {
+        if(kies < 0.5) {
+            attacker.direction = directions.right;
+        } else {
+            attacker.direction = directions.left;
+        }
+    } else if(attacker.direction == directions.left || attacker.direction == directions.right) {
+        if(kies < 0.5) {
+            attacker.direction = directions.down;
+        }
+    }
+};
+
+var splitRight = new Tile("25.png");
+
+splitRight.changeDirection = function(attacker){
+    var kies = Math.random();
+    if(attacker.direction == directions.right) {
+        if(kies < 0.5) {
+            attacker.direction = directions.up;
+        } else {
+            attacker.direction = directions.down;
+        }
+    } else if(attacker.direction == directions.up || attacker.direction == directions.down) {
+        if(kies < 0.5) {
+            attacker.direction = directions.left;
+        }
+    }
+};
+
+var allDirections = new Tile("26.png");
+
+allDirections.changeDirection = function(attacker) {
+    var kies = Math.random();
+    if (attacker.direction == directions.up) {
+        if (kies < 0.33) {
+            attacker.direction = directions.right;
+        } else if (kies < 0.66) {
+            attacker.direction = directions.left;
+        }
+    } else if (attacker.direction == directions.right) {
+        if (kies < 0.33) {
+            attacker.direction = directions.up;
+        } else if (kies < 0.66) {
+            attacker.direction = directions.down;
+        }
+    } else if (attacker.direction == directions.down) {
+        if (kies < 0.33) {
+            attacker.direction = directions.right;
+        } else if (kies < 0.66) {
+            attacker.direction = directions.left;
+        }
+    } else if (attacker.direction == directions.left) {
+        if (kies < 0.33) {
+            attacker.direction = directions.up;
+        } else if (kies < 0.66) {
+            attacker.direction = directions.down;
+        }
+    }
+};

@@ -2,10 +2,10 @@
  * Created by basti on 24/03/2016.
  */
 var directions = {
-    boven: 0,
-    rechts: 1,
-    onder: 2,
-    links: 3
+    up: 0,
+    right: 1,
+    down: 2,
+    left: 3
 };
 
 var attackerCodes = {
@@ -36,5 +36,10 @@ var tiles = {
     18: waterSingleBottom,
     19: waterSingleTop,
     20: waterSingleRight,
-    21: waterSingleLeft
+    21: waterSingleLeft,
+    22: splitDown,
+    23: splitLeft,
+    24: splitUp,
+    25: splitRight,
+    26: allDirections
 };
