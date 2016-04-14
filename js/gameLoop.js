@@ -31,7 +31,8 @@ function updateLogic(){
         towers[i].findUnitVector();
         towers[i].attack();
     }
-
+    
+    spawnNextMonster();
     checkDead();
 }
 
@@ -47,10 +48,6 @@ function gameLoop() {
 
 function pauseGame(){
     game.paused = true;
-    if(currentWaveSpawning != null){
-        currentWaveSpawning.timer.pause();
-        currentWaveSpawning.loop.pause();
-    }
     game.timePauseStart = Date.now();
 }
 
@@ -58,13 +55,13 @@ function resumeGame(){
     game.paused = false;
     var timePaused = Date.now() - game.timePauseStart;
     game.timeLastWaveSpawnEnds += timePaused;
+
     for(var i = 0; i < attackers.length; i++){
         attackers[i].oldNow += timePaused;
     }
 
     if(currentWaveSpawning != null){
-        currentWaveSpawning.loop.resume();
-        currentWaveSpawning.timer.resume();
+        currentWaveSpawning.timeLastSpawned += timePaused;
     }
     
     gameLoop();

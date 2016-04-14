@@ -7,8 +7,8 @@ function Wave(){
     this.spawnSpeed = 0;
     this.speedFactor = 1;
     this.maxHealthFactor = 1;
-    this.loop = undefined;
-    this.timer = undefined;
+    this.timeLastSpawned = undefined;
+    this.waitTime = undefined;
 }
 
 var currentWaveSpawning = null;
@@ -58,8 +58,10 @@ function createWave(aantalMonsters, typeMonster, speedFactor, maxHealthFactor){
     }
     game.currentWave += 1;
     wave.spawnSpeed = createAttacker(typeMonster, speedFactor, 1).speed;
+    wave.waitTime = 1800 * game.tileSize / wave.spawnSpeed;
     wave.speedFactor = speedFactor;
     wave.maxHealthFactor = maxHealthFactor;
+    wave.timeLastSpawned = Date.now();
     return wave;
 }
 
@@ -72,88 +74,25 @@ function spawnWave(){
     currentWaveSpawning = chooseWave();
     toggleSpawn();
     
-    //time between attackers
-    var waitTime = 1800 * game.tileSize / currentWaveSpawning.spawnSpeed;
-    
-    //time when to stop spawning attackers
-    var stopSpawnTime = currentWaveSpawning.attackers.length * waitTime;
-    
-    game.timeLastWaveSpawnEnds = Date.now() + stopSpawnTime;
-
-    //pushes every attacker from wave to real attackers
-    currentWaveSpawning.loop = new IntervalTimer(function(){
-        var attacker = createAttacker(currentWaveSpawning.attackers[0], currentWaveSpawning.speedFactor, currentWaveSpawning.maxHealthFactor);
-        addAttacker(attacker);
-        currentWaveSpawning.attackers.splice(0, 1);
-    }, waitTime);
-
     $('#startWave')[0].play();
-
-    //stops the spawning after all attackers are removed from wave
-    currentWaveSpawning.timer = new Timer(function(){
-        currentWaveSpawning.loop.stop();
-        toggleSpawn();
-        currentWaveSpawning = null;
-    }, stopSpawnTime);
 }
 
-//hulpfunctie voor het spawnen van attackers na een pause
-function IntervalTimer(callback, interval) {
-    var timerId, startTime, remaining = 0;
-    var state = 0; //  0 = idle, 1 = running, 2 = paused, 3= resumed
-
-    this.pause = function () {
-        if (state != 1) return;
-
-        remaining = interval - (Date.now() - startTime);
-        clearInterval(timerId);
-        state = 2;
-    };
-
-    this.resume = function () {
-        if (state != 2) return;
-
-        state = 3;
-        setTimeout(this.timeoutCallback, remaining);
-    };
-
-    this.timeoutCallback = function () {
-        if (state != 3) return;
-
-        callback();
-
-        startTime = Date.now();
-        timerId = setInterval(callback, interval);
-        state = 1;
-    };
-
-    this.stop = function(){
-        clearInterval(timerId);
-    };
-
-    startTime = new Date();
-    timerId = setInterval(callback, interval);
-    state = 1;
+function spawnNextMonster(){
+    if(currentWaveSpawning != null){
+        game.timeLastWaveSpawnEnds = Date.now();
+        if(Date.now() - currentWaveSpawning.timeLastSpawned > currentWaveSpawning.waitTime){
+            currentWaveSpawning.timeLastSpawned = Date.now();
+            var attacker = createAttacker(currentWaveSpawning.attackers[0], currentWaveSpawning.speedFactor, currentWaveSpawning.maxHealthFactor);
+            addAttacker(attacker);
+            currentWaveSpawning.attackers.splice(0, 1);
+        }
+        
+        if(currentWaveSpawning.attackers.length == 0){
+            toggleSpawn();
+            currentWaveSpawning = null;
+        }
+    }
 }
-
-//hulpfunctie voor het stoppen van spawnen van attackers na een pause
-function Timer(callback, delay) {
-    var timerId, start, remaining = delay;
-
-    this.pause = function() {
-        window.clearTimeout(timerId);
-        remaining -= Date.now() - start;
-    };
-
-    this.resume = function() {
-        start = Date.now();
-        window.clearTimeout(timerId);
-        timerId = window.setTimeout(callback, remaining);
-    };
-
-    this.resume();
-}
-
 
 //update de spawnbutton zodat hij gedisabled moet worden of niet
 function toggleSpawn(){
