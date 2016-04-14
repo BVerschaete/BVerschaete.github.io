@@ -13,6 +13,7 @@ section{
 article{
     margin-left: 75px;
     width: 35%;
+    padding-top: 50px;
 }
 
 #usernameLink{
@@ -27,7 +28,6 @@ article{
 .jumbotron{
     background-color:#6093CA;
     float: left;
-    padding-top: 50px;
 }
 
 #username{
