@@ -14,21 +14,13 @@ var grass = new Tile("0.png");
 var horizontal = new Tile("1.png");
 
 horizontal.changeDirection = function(attacker){
-    if(attacker.direction == directions.rechts) {
-        attacker.direction = directions.rechts;
-    } else {
-        attacker.direction = directions.links;
-    }
+    return false;
 };
 
 var vertical = new Tile("2.png");
 
 vertical.changeDirection = function(attacker){
-    if(attacker.direction == directions.boven) {
-        attacker.direction = directions.boven;
-    } else {
-        attacker.direction = directions.onder;
-    }
+    return false;
 };
 
 var cornerLeftDown = new Tile("3.png");

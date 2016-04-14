@@ -16,6 +16,7 @@ function Attacker(speedFactor, maxHealthFactor){
     this.reward = 10;
     this.scale = 0.8;
     this.direction = game.selectedLevel.startDirection;
+    this.hasChangedDirection = false;
 }
 
 //beweegt een attacker volgens zijn pad
@@ -23,13 +24,19 @@ function Attacker(speedFactor, maxHealthFactor){
 Attacker.prototype.changeDirection = function() {
     var board = game.selectedLevel.board;
     var tile = tiles[board[this.posY][this.posX]];
+    this.hasChangedDirection = true;
     tile.changeDirection(this);
 };
 
 //update zijn positie op het bord (in de 'array')
 Attacker.prototype.updatePosOnBoard = function(){
-    this.posX = Math.floor(this.locX / game.tileSize);
-    this.posY = Math.floor(this.locY / game.tileSize);
+    var newPosX = Math.floor(this.locX / game.tileSize);
+    var newPosY = Math.floor(this.locY / game.tileSize);
+    if(newPosX != this.posX || newPosY != this.posY){
+        this.hasChangedDirection = false;
+        this.posX = newPosX;
+        this.posY = newPosY;
+    }
 };
 
 //update zijn werkelijke positie en kijkt wanneer hij moet veranderen van richting
@@ -38,42 +45,31 @@ Attacker.prototype.updatePosition = function(){
     var now = Date.now();
     var timeDelta = now - this.oldNow;
     this.oldNow = now;
-    var checkTiles;
+
+    var speed = this.speed * timeDelta / 1000;
 
     if(getValueFromPos(this.locX, this.locY) == null){
         deleteAttacker(this);
         game.attackersScore++;
     } else {
-        if (this.direction === directions.boven) {
-            checkTiles = [2, 4, 5];
-            if (getValueFromPos(this.locX, this.locY + game.tileSize / 2) == getValueFromPos(this.locX, this.locY) && getValueFromPos(this.locX, this.locY + game.tileSize) != getValueFromPos(this.locX, this.locY) && checkTiles.indexOf(getValueFromPos(this.locX, this.locY)) == -1 && getValueFromPos(this.locX, this.locY + game.tileSize) != null) {
+        if(isInMiddleOfSquare(this)) {
+            if(!this.hasChangedDirection) {
                 this.changeDirection();
-            } else {
-                this.locY -= this.speed * timeDelta / 1000;
-            }
-        } else if (this.direction === directions.rechts) {
-            checkTiles = [1, 5, 6];
-            if (getValueFromPos(this.locX - game.tileSize / 2, this.locY) == getValueFromPos(this.locX, this.locY) && getValueFromPos(this.locX - game.tileSize, this.locY) != getValueFromPos(this.locX, this.locY) && checkTiles.indexOf(getValueFromPos(this.locX, this.locY)) == -1 && getValueFromPos(this.locX - game.tileSize, this.locY) != null) {
-                this.changeDirection();
-            } else {
-                this.locX += this.speed * timeDelta / 1000;
-            }
-        } else if (this.direction === directions.onder) {
-            checkTiles = [2, 3, 6];
-            if (getValueFromPos(this.locX, this.locY - game.tileSize / 2) == getValueFromPos(this.locX, this.locY) && getValueFromPos(this.locX, this.locY - game.tileSize) != getValueFromPos(this.locX, this.locY) && checkTiles.indexOf(getValueFromPos(this.locX, this.locY)) == -1 && getValueFromPos(this.locX, this.locY - game.tileSize) != null) {
-                this.changeDirection();
-            } else {
-                this.locY += this.speed * timeDelta / 1000;
-            }
-        } else if (this.direction === directions.links) {
-            checkTiles = [1, 3, 4];
-            if (getValueFromPos(this.locX + game.tileSize / 2, this.locY) == getValueFromPos(this.locX, this.locY) && getValueFromPos(this.locX + game.tileSize, this.locY) != getValueFromPos(this.locX, this.locY) && checkTiles.indexOf(getValueFromPos(this.locX, this.locY)) == -1 && getValueFromPos(this.locX + game.tileSize, this.locY) != null) {
-                this.changeDirection();
-            } else {
-                this.locX -= this.speed * timeDelta / 1000;
             }
         }
+        this.move(speed);
+    }
+};
 
+Attacker.prototype.move = function(speed){
+    if (this.direction === directions.boven) {
+        this.locY -= speed;
+    } else if (this.direction === directions.rechts) {
+        this.locX += speed;
+    } else if (this.direction === directions.onder) {
+        this.locY += speed;
+    } else if (this.direction === directions.links) {
+        this.locX -= speed;
     }
 };
 

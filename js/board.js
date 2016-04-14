@@ -11,7 +11,36 @@ function getValueFromPos(x, y){
     }
     
     return null;
+}
+
+function isInMiddleOfSquare(attacker){
+    var centerTileX = attacker.posX*game.tileSize + game.tileSize/2;
+    var centerTileY = attacker.posY*game.tileSize + game.tileSize/2;
+
+    var borderUp = centerTileY - game.tileSize/2;
+    var borderRight = centerTileX + game.tileSize/2;
+    var borderDown = centerTileY + game.tileSize/2;
+    var borderLeft = centerTileX - game.tileSize/2;
     
+    if (attacker.direction == directions.boven) {
+        if (attacker.locY - game.tileSize / 2 <= borderUp) {
+            return true;
+        }
+    } else if (attacker.direction == directions.rechts) {
+        if (attacker.locX + game.tileSize / 2 >= borderRight) {
+            return true;
+        }
+    } else if (attacker.direction == directions.onder) {
+        if (attacker.locY + game.tileSize / 2 >= borderDown) {
+            return true;
+        }
+    } else if (attacker.direction == directions.links) {
+        if (attacker.locX - game.tileSize / 2 <= borderLeft) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 //tekent de achtergrond adhv schema in levels.js
