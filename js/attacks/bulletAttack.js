@@ -12,6 +12,7 @@ function Bullet(tower) {
 }
 
 Bullet.prototype.r = game.tileSize / 10;
+Bullet.prototype.color = "#FF0000";
 
 //beweegt bullet naar zijn locX en locY
 Bullet.prototype.move = function() {
@@ -28,7 +29,7 @@ Bullet.prototype.move = function() {
 Bullet.prototype.draw = function() {
     var context = game.context;
 
-    context.fillStyle = 'red';
+    context.fillStyle = this.color;
     context.beginPath();
     context.arc(this.locX, this.locY, this.r, 0, 2 * Math.PI);
     context.fill();

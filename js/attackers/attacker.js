@@ -17,6 +17,7 @@ function Attacker(speedFactor, maxHealthFactor){
     this.scale = 0.8;
     this.direction = game.selectedLevel.startDirection;
     this.hasChangedDirection = false;
+    this.conditions = [];
 }
 
 //beweegt een attacker volgens zijn pad
@@ -97,6 +98,27 @@ Attacker.prototype.drawHealthBar = function(){
 
     // de lengte en hoogt van de healthbar is relatief aan de grootte van de attacker en tilegrootte
     context.fillRect(this.locX - game.tileSize/2 - verschil + spriteSize / 8, this.locY - game.tileSize/2 - verschil - barHeight - spriteSize / 10, ((spriteSize - spriteSize / 4) * this.health / this.maxHealth), barHeight);
+};
+
+Attacker.prototype.addCondition = function (condition) {
+    for (var i = 0; i < this.conditions.length; i++) {
+        if (this.conditions[i].constructor.name == condition.constructor.name) {
+            this.conditions[i].stop();
+            this.conditions.splice(i, 1);
+            i--;
+        }
+    }
+    this.conditions.push(condition);
+};
+
+Attacker.prototype.updateConditions = function () {
+    for (var i = 0; i < this.conditions.length; i++) {
+        if (this.conditions[i].checkStop()) {
+            this.conditions[i].stop();
+            this.conditions.splice(i, 1);
+            i--;
+        }
+    }
 };
 
 //tekent een attacker op z'n geheel

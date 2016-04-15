@@ -25,6 +25,7 @@ Tower.prototype.damage = 10;
 Tower.prototype.cost = 60;
 Tower.prototype.maxUpgradeLevel = 5;
 Tower.prototype.displayName = "Tower Tier 1";
+Tower.prototype.attackType = Bullet;
 
 //basisfuncties van alle towers
 //gemeenschappelijke draw-functie
@@ -62,7 +63,7 @@ Tower.prototype.attack = function(){
 
     if(this.target != null && delta >= this.fireRate){
         this.oldNow = now - (delta - this.fireRate);
-        attacks.push(new Bullet(this));
+        attacks.push(new this.attackType(this));
     }else if(this.target == null){
         this.oldNow = now - this.fireRate;
     }

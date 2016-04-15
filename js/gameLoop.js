@@ -24,6 +24,7 @@ function renderingStep(){
 function updateLogic(){
     for(var i = 0; i < attackers.length; i++) {
         attackers[i].updatePosition();
+        attackers[i].updateConditions();
     }
 
     for(i = 0; i < towers.length; i++) {
