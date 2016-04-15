@@ -82,7 +82,9 @@ function spawnNextMonster(){
         game.timeLastWaveSpawnEnds = Date.now();
         if(Date.now() - currentWaveSpawning.timeLastSpawned > currentWaveSpawning.waitTime){
             currentWaveSpawning.timeLastSpawned = Date.now();
-            var attacker = createAttacker(currentWaveSpawning.attackers[0], currentWaveSpawning.speedFactor, currentWaveSpawning.maxHealthFactor);
+            var attacker = createAttacker(currentWaveSpawning.attackers[0]);
+            attacker.speed *= currentWaveSpawning.speedFactor;
+            attacker.maxHealth *= currentWaveSpawning.maxHealthFactor;
             addAttacker(attacker);
             currentWaveSpawning.attackers.splice(0, 1);
         }

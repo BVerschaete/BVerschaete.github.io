@@ -1,10 +1,10 @@
 /**
  * Created by basti on 24/03/2016.
  */
-function SpeedAttacker(speedFactor, maxHealthFactor){
-    Attacker.call(this, speedFactor, maxHealthFactor);
+function SpeedAttacker(){
+    Attacker.call(this);
     this.speed = 90 * (game.tileSize / 40);
-    this.maxHealth = 50 * maxHealthFactor;
+    this.maxHealth = 50;
     this.health = this.maxHealth;
     this.image = "dragonSpeed.png";
     this.reward = 20;

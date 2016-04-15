@@ -3,14 +3,14 @@
  */
 var attackers = [];
 
-function Attacker(speedFactor, maxHealthFactor){
-    this.speed = 50 * (game.tileSize / 40) * speedFactor; // snelheid relatief aan de snelheid bij een tileSize van 40
+function Attacker(){
+    this.speed = 50 * (game.tileSize / 40); // snelheid relatief aan de snelheid bij een tileSize van 40
     this.posX = game.selectedLevel.startX;
     this.posY = game.selectedLevel.startY;
     this.locX = (this.posX * game.tileSize) + game.tileSize/2;
     this.locY = (this.posY * game.tileSize) + game.tileSize/2;
     this.oldNow = Date.now();
-    this.maxHealth = 100 * maxHealthFactor;
+    this.maxHealth = 100;
     this.health = this.maxHealth;
     this.image = "dragon.png";
     this.reward = 10;
@@ -135,8 +135,8 @@ function addAttacker(attacker){
 }
 
 //maakt een nieuw attacker object aan met gegeven parameters
-function createAttacker(attackerCode, speedFactor, maxHealthFactor){
-    return new attackerTypes[attackerCode](speedFactor, maxHealthFactor);
+function createAttacker(attackerCode){
+    return new attackerTypes[attackerCode]();
 }
 
 //verwijdert een attacker uit de array
