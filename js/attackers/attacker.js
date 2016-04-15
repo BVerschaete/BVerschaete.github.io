@@ -4,7 +4,6 @@
 var attackers = [];
 
 function Attacker(){
-    this.speed = 50 * (game.tileSize / 40); // snelheid relatief aan de snelheid bij een tileSize van 40
     this.posX = game.selectedLevel.startX;
     this.posY = game.selectedLevel.startY;
     this.locX = (this.posX * game.tileSize) + game.tileSize/2;
@@ -19,6 +18,8 @@ function Attacker(){
     this.hasChangedDirection = false;
     this.conditions = [];
 }
+
+Attacker.prototype.speed = 50 * (game.tileSize / 40); // snelheid relatief aan de snelheid bij een tileSize van 40
 
 //beweegt een attacker volgens zijn pad
 //verandert zijn direction via de huidige tile

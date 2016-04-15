@@ -1,7 +1,7 @@
 /**
  * Created by Gaben on 19/03/2016.
  */
-var standaardAttackerSnelheid = new Attacker().speed;
+var standaardAttackerSnelheid = Attacker.prototype.speed;
 
 function Bullet(tower) {
     this.locX = tower.xFire;
