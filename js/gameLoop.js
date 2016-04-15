@@ -23,8 +23,8 @@ function renderingStep(){
 //update alle game variabelen
 function updateLogic(){
     for(var i = 0; i < attackers.length; i++) {
-        attackers[i].updatePosition();
         attackers[i].updateConditions();
+        attackers[i].updatePosition();
     }
 
     for(i = 0; i < towers.length; i++) {
