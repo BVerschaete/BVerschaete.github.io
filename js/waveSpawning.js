@@ -85,6 +85,7 @@ function spawnNextMonster(){
             var attacker = createAttacker(currentWaveSpawning.attackers[0]);
             attacker.speed *= currentWaveSpawning.speedFactor;
             attacker.maxHealth *= currentWaveSpawning.maxHealthFactor;
+            attacker.health = attacker.maxHealth;
             addAttacker(attacker);
             currentWaveSpawning.attackers.splice(0, 1);
         }
