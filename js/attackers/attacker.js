@@ -121,6 +121,16 @@ Attacker.prototype.updateConditions = function () {
     }
 };
 
+Attacker.prototype.hasCondition = function(condition){
+    for(var i = 0; i < this.conditions.length; i++){
+        if(this.conditions[i] instanceof condition){
+            return true;
+        }
+    }
+    
+    return false;
+};
+
 //tekent een attacker op z'n geheel
 function drawAttackers(){
     for(var i = 0; i < attackers.length; i++){

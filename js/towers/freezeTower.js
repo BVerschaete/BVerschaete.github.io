@@ -21,7 +21,7 @@ FreezeTower.prototype.findTarget = function(){
     for (var i = 0; i < attackers.length; i++) {
         var distance = Math.sqrt(Math.pow((attackers[i].locX - this.locX),2) + Math.pow((attackers[i].locY - this.locY), 2));
 
-        if (distance < this.range && attackers[i].conditions.length == 0) {
+        if (distance < this.range && !attackers[i].hasCondition(this.attackType.prototype.condition)) {
             this.target = attackers[i];
             return;
         }

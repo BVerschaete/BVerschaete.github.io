@@ -38,7 +38,7 @@ Tower.prototype.draw = function(){
 //returnt de eerste attacker in de array (dus het verst op de map) die binnen de range van de toren is
 Tower.prototype.findTarget = function(){
     this.target = null;
-    
+
     for (var i = 0; i < attackers.length; i++) {
         var distance = Math.sqrt(Math.pow((attackers[i].locX - this.locX),2) + Math.pow((attackers[i].locY - this.locY), 2));
 

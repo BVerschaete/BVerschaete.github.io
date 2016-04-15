@@ -6,10 +6,11 @@ function FreezeBullet(tower) {
 }
 
 FreezeBullet.prototype = Object.create(Bullet.prototype);
+FreezeBullet.prototype.condition = FreezeCondition;
 FreezeBullet.prototype.color = "#0000FF";
 
 FreezeBullet.prototype.update = function () {
     this.move();
-    if (this.checkCollision()) this.target.addCondition(new FreezeCondition(this.target));
+    if (this.checkCollision()) this.target.addCondition(new this.condition(this.target));
 };
 
