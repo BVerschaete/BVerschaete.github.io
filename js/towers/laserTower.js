@@ -12,10 +12,11 @@ LaserTower.prototype.damage = 50; // damage per second
 LaserTower.prototype.cost = Tower.prototype.cost * 3;
 LaserTower.prototype.maxUpgradeLevel = 6;
 LaserTower.prototype.displayName = "Laser";
+LaserTower.prototype.attackType = LaserAttack;
 
 LaserTower.prototype.attack = function() {
     if(this.target !== null) {
-        attacks.push(new LaserAttack(this));
+        attacks.push(new this.attackType(this));
     }
 };
 

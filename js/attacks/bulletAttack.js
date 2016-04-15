@@ -8,7 +8,17 @@ function Bullet(tower) {
     this.locY = tower.yFire;
     this.target = tower.target;
     this.damage = tower.damage;
-    this.speed = 1.5 * (game.tileSize / 40) * tower.target.speed / standaardAttackerSnelheid;
+    this.speed = 0;
+
+    this.setSpeed = function(){
+        if(tower.target.speed > standaardAttackerSnelheid) {
+            this.speed = 1.5 * (game.tileSize / 40) * tower.target.speed / standaardAttackerSnelheid;
+        } else {
+            this.speed = 1.5 * (game.tileSize / 40);
+        }
+    };
+
+    this.setSpeed();
 }
 
 Bullet.prototype.r = game.tileSize / 10;

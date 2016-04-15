@@ -14,3 +14,16 @@ FreezeTower.prototype.cost = Tower.prototype.cost * 2;
 FreezeTower.prototype.maxUpgradeLevel = 6;
 FreezeTower.prototype.displayName = "Freeze Tower";
 FreezeTower.prototype.attackType = FreezeBullet;
+
+FreezeTower.prototype.findTarget = function(){
+    this.target = null;
+
+    for (var i = 0; i < attackers.length; i++) {
+        var distance = Math.sqrt(Math.pow((attackers[i].locX - this.locX),2) + Math.pow((attackers[i].locY - this.locY), 2));
+
+        if (distance < this.range && attackers[i].conditions.length == 0) {
+            this.target = attackers[i];
+            return;
+        }
+    }
+};
