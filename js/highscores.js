@@ -12,9 +12,10 @@ function setup(){
         $("#levels").append(button);
     }
 
-    if(sessionStorage.playedLevel != null){
+    if(sessionStorage.playedLevel === undefined){
         setupTable(sessionStorage.playedLevel);
         $('a[data-level=' + sessionStorage.playedLevel + ']').addClass("hovered");
+        sessionStorage.playedLevel = undefined;
     } else {
         setupTable(0);
         $('a[data-level=0]').addClass("hovered");
@@ -28,9 +29,10 @@ function changeTable(event){
     setupTable(level);
 }
 
-function setupTable(level){
+function setupTable(levelNumber){
     players = [];
     $('tbody').empty();
+    var level = parseInt(levelNumber);
     $('#title').text("Highscores (Level " + (level+1) + ")");
     var myFirebaseRef = new Firebase("https://popping-fire-3131.firebaseio.com/");
     var playerTable = myFirebaseRef.child('Highscores').child(level).child('Players');

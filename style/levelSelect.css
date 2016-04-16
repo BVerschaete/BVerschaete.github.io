@@ -44,8 +44,9 @@ h1{
     font-size: 2em;
     display: block;
     visibility: hidden;
-    margin: 15px 40%;
+    margin-top: 15px;
+    margin-bottom: 15px;
     height: 40px;
     background: rgba(205, 205, 201, 0.4);
-    width: 20%;
+    width: 100%;
 }

@@ -75,27 +75,32 @@ function checkGameOver() {
         $button.css("background", "rgba(255, 0, 0, 1");
         $button.text("Game Over");
         $button.click(function(){
-            window.location.href = "highscores.html";
-            sessionStorage.playedLevel = levels.indexOf(game.selectedLevel);
+            if(game.selectedLevel.customLevel) {
+                window.location.href = "highscores.html";
+            } else {
+                sessionStorage.playedLevel = standardLevels.indexOf(game.selectedLevel);
+                pushScore();
+            }
         });
         $dimmer.show();
-        if(!game.selectedLevel.customLevel) {
-            pushScore();
-        }
         return true;
     }
 }
 
 function pushScore(){
     var myFirebaseRef = new Firebase("https://popping-fire-3131.firebaseio.com/");
-    var playerTable = myFirebaseRef.child('Players');
+    var playerTable = myFirebaseRef.child('Highscores');
+    console.log(levels.indexOf(game.selectedLevel));
+    var level = playerTable.child(levels.indexOf(game.selectedLevel));
+    var selectedHighscoreList = level.child('Players');
     
     var player = {
         name: game.playerName,
         score: game.currentWave
     };
     
-    playerTable.push(player);
+    selectedHighscoreList.push(player);
+    window.location.href = "highscores.html";
 }
 
 $(window).load(setup);
