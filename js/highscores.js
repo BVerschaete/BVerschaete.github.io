@@ -12,7 +12,7 @@ function setup(){
         $("#levels").append(button);
     }
 
-    if(sessionStorage.playedLevel === undefined){
+    if(sessionStorage.playedLevel === undefined || sessionStorage.playedLevel === null){
         setupTable(sessionStorage.playedLevel);
         $('a[data-level=' + sessionStorage.playedLevel + ']').addClass("hovered");
         sessionStorage.playedLevel = undefined;

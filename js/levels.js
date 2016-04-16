@@ -45,30 +45,8 @@ var level0 = {
     customLevel: false
 };
 
-var level1 = {
-    name: "Learning the ropes as well",
-    difficulty: 1,
-    spawnSpeed: 20,
-    board:  [
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [1, 3, 0, 19, 0, 0, 6, 1, 3, 0],
-        [0, 2, 0, 16, 0, 6, 4, 0, 2, 0],
-        [0, 2, 0, 16, 0, 2, 0, 0, 2, 0],
-        [6, 4, 0, 18, 0, 2, 0, 0, 2, 0],
-        [2, 0, 0, 0, 0, 2, 0, 0, 2, 0],
-        [5, 3, 0, 0, 0, 2, 0, 6, 4, 0],
-        [0, 5, 3, 0, 6, 4, 0, 2, 0, 0],
-        [0, 0, 5, 1, 4, 0, 0, 5, 1, 1],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    ],
-    startDirection: directions.right,
-    startX: 0,
-    startY: 1,
-    customLevel: false
-};
-
 //NA HET MAKEN VAN EEN LEVEL VERPLICHT TOEVOEGEN AAN ARRAY!!
-var standardLevels = [level0, level1];
+var standardLevels = [level0];
 var customLevels = [];
 
 if(checkCookie("customLevels")){
