@@ -11,11 +11,11 @@ function setup(){
         button.click(changeTable);
         $("#levels").append(button);
     }
+
+    setupTable(0);
+    $('a[data-level=0]').addClass("hovered");
     
-    if(sessionStorage.playedLevel == undefined || sessionStorage.playedLevel == null){
-        setupTable(0);
-        $('a[data-level=0]').addClass("hovered");
-    } else {
+    if(sessionStorage.playedLevel != undefined || sessionStorage.playedLevel != null){
         $('.hovered').removeClass("hovered");
         setupTable(sessionStorage.playedLevel);
         $('a[data-level=' + sessionStorage.playedLevel + ']').addClass("hovered");
