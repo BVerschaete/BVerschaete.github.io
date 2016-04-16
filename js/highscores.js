@@ -1,22 +1,24 @@
 /**
  * Created by Gaben on 24/03/2016.
  */
+var players = [];
 
 function setup(){
     var myFirebaseRef = new Firebase("https://popping-fire-3131.firebaseio.com/");
     var playerTable = myFirebaseRef.child('Players');
 
     playerTable.once("value", function(snapshot) {
-        var players = [];
         snapshot.forEach(function(childSnapshot){
             players.push(childSnapshot.val());
         });
 
-        fillTable(players);
+        fillTable();
     });
 }
 
-function fillTable(players){
+function fillTable(){
+    players.sort(comparator);
+    
     for(var i = 0; i < players.length; i++) {
         var $player = $('<tr>');
         var $playerName = $('<td>');
@@ -30,8 +32,14 @@ function fillTable(players){
         $player.append($playerPlace);
         $player.append($playerName);
         $player.append($playerScore);
+
         $('tbody').append($player);
     }
 }
+
+function comparator(a, b){
+    return parseInt(b.score) - parseInt(a.score);
+}
+
 
 $(window).load(setup);
