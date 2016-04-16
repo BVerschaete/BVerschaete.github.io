@@ -75,11 +75,24 @@ function checkGameOver() {
         $button.css("background", "rgba(255, 0, 0, 1");
         $button.text("Game Over");
         $button.click(function(){
-            console.log("naar highscores");
+            window.location.href = "highscores.html";
         });
         $dimmer.show();
+        pushScore();
         return true;
     }
+}
+
+function pushScore(){
+    var myFirebaseRef = new Firebase("https://popping-fire-3131.firebaseio.com/");
+    var playerTable = myFirebaseRef.child('Players');
+    
+    var player = {
+        name: game.playerName,
+        score: game.currentWave
+    };
+    
+    playerTable.push(player);
 }
 
 $(window).load(setup);

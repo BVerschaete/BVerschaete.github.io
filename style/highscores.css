@@ -1,0 +1,16 @@
+table{
+    margin-top: 50px;
+}
+
+td{
+    width: 100px;
+    border: solid black 1px;
+}
+
+thead td {
+    background: rgba(0, 255, 0, 0.5);
+}
+
+tbody td{
+    background: rgba(255, 0, 0, 0.5);
+}
