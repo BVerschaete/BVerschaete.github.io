@@ -2,11 +2,6 @@ body{
     background-color: #6093CA !important;
 }
 
-span{
-    font-size: 1.5em;
-    display: inline-block;
-}
-
 .sliderDiv{
     width: 100px;
     display: inline-block;
@@ -30,6 +25,11 @@ span{
 
 #container{
     margin-top: 50px;
+}
+
+#container span {
+    font-size: 1.5em;
+    display: inline-block;
 }
 
 #tileSelect img{
@@ -165,8 +165,4 @@ canvas{
     -moz-user-select: none;
     user-select: none;
     border: solid black 2px;
-}
-
-nav{
-    height: 50px;
 }

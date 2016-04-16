@@ -41,7 +41,8 @@ var level0 = {
     ],
     startDirection: directions.right,
     startX: 0,
-    startY: 1
+    startY: 1,
+    customLevel: false
 };
 
 //NA HET MAKEN VAN EEN LEVEL VERPLICHT TOEVOEGEN AAN ARRAY!!

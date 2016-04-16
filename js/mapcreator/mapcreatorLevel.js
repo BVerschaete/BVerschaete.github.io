@@ -11,7 +11,8 @@ var level = {
     board: [],
     startDirection: directions.right,
     startX: null,
-    startY: null
+    startY: null,
+    customLevel: true
 };
 
 var customLevels = [];

@@ -76,9 +76,12 @@ function checkGameOver() {
         $button.text("Game Over");
         $button.click(function(){
             window.location.href = "highscores.html";
+            sessionStorage.playedLevel = levels.indexOf(game.selectedLevel);
         });
         $dimmer.show();
-        pushScore();
+        if(!game.selectedLevel.customLevel) {
+            pushScore();
+        }
         return true;
     }
 }
