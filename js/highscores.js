@@ -21,10 +21,13 @@ function fillTable(players){
         var $player = $('<tr>');
         var $playerName = $('<td>');
         var $playerScore = $('<td>');
+        var $playerPlace = $('<td>');
 
+        $playerPlace.text(i+1);
         $playerName.text(players[i]["name"]);
         $playerScore.text(players[i]["score"]);
 
+        $player.append($playerPlace);
         $player.append($playerName);
         $player.append($playerScore);
         $('tbody').append($player);
