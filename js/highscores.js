@@ -51,7 +51,10 @@ function fillTable(){
     players.sort(comparator);
 
     if(players.length > 0) {
-        for (var i = 0; i < players.length; i++) {
+
+        var aantal = players.length > 10 ? 10 : players.length;
+
+        for (var i = 0; i < aantal; i++) {
             var $player = $('<tr>');
             var $playerName = $('<td>');
             var $playerScore = $('<td>');
