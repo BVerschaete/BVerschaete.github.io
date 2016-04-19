@@ -71,10 +71,10 @@ function setup() {
 function checkGameOver() {
     if (game.attackersScore >= 10) {
         var $dimmer = $('#dimmer');
-        var $button = $dimmer.find('>div');
-        $button.css("background", "rgba(255, 0, 0, 1");
-        $button.text("Game Over");
-        $button.click(function(){
+        var $stop = $('#startStop');
+        $stop.css("background", "rgba(255, 0, 0, 1");
+        $stop.text("Game Over");
+        $stop.click(function(){
             if(game.selectedLevel.customLevel) {
                 window.location.href = "highscores.html";
             } else {
@@ -82,15 +82,38 @@ function checkGameOver() {
                 pushScore();
             }
         });
+
+        var $playAgain = $('#playAgain');
+        $playAgain.show();
+        $playAgain.click(function(){
+            $stop.off();
+            restartGame();
+            $dimmer.hide();
+        });
+
+
         $dimmer.show();
         return true;
     }
 }
 
+function restartGame(){
+    attackers=[];
+    towers=[];
+    attacks=[];
+    game.money = 400;
+    game.currentWave = 0;
+    game.attackersScore = 0;
+    game.lives = 10;
+    game.timeLastWaveSpawnEnds = null;
+    game.paused = false;
+    game.timePauseStart = undefined;
+    resumeGame();
+}
+
 function pushScore(){
     var myFirebaseRef = new Firebase("https://popping-fire-3131.firebaseio.com/");
     var playerTable = myFirebaseRef.child('Highscores');
-    console.log(levels.indexOf(game.selectedLevel));
     var level = playerTable.child(levels.indexOf(game.selectedLevel));
     var selectedHighscoreList = level.child('Players');
     
