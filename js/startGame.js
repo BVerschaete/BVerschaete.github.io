@@ -100,14 +100,15 @@ function restartGame(){
     attackers=[];
     towers=[];
     attacks=[];
+    currentWaveSpawning = null;
     game.money = 400;
     game.currentWave = 0;
     game.attackersScore = 0;
     game.lives = 10;
-    game.timeLastWaveSpawnEnds = null;
+    game.timeLastWaveSpawnEnds = Date.now();
     game.paused = false;
     game.timePauseStart = undefined;
-    resumeGame();
+    gameLoop();
 }
 
 function pushScore(){
