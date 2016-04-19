@@ -10,7 +10,6 @@ var game = {
     tileSize: 60,
     money: 400,
     currentWave: 0,
-    attackersScore: 0,
     lives: 10,
     timeLastWaveSpawnEnds: null,
     paused: false,
@@ -69,7 +68,7 @@ function setup() {
 }
 
 function checkGameOver() {
-    if (game.attackersScore >= 10) {
+    if (game.lives <= 0) {
         var $dimmer = $('#dimmer');
         var $stop = $('#startStop');
         $stop.css("background", "rgba(255, 0, 0, 1");
@@ -114,15 +113,19 @@ function restartGame(){
 function pushScore(){
     var myFirebaseRef = new Firebase("https://popping-fire-3131.firebaseio.com/");
     var playerTable = myFirebaseRef.child('Highscores');
-    var level = playerTable.child(levels.indexOf(game.selectedLevel));
-    var selectedHighscoreList = level.child('Players');
-    
-    var player = {
-        name: game.playerName,
-        score: game.currentWave
-    };
-    
-    selectedHighscoreList.push(player);
+
+    if(playerTable.hasChild(levels.indexOf(game.selectedLevel))) {
+
+        var level = playerTable.child(levels.indexOf(game.selectedLevel));
+        var selectedHighscoreList = level.child('Players');
+
+        var player = {
+            name: game.playerName,
+            score: game.currentWave
+        };
+
+        selectedHighscoreList.push(player);
+    }
     window.location.href = "highscores.html";
 }
 

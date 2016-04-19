@@ -52,7 +52,7 @@ Attacker.prototype.updatePosition = function(){
 
     if(getValueFromPos(this.locX, this.locY) == null || getValueFromPos(this.locX, this.locY) == 0){
         deleteAttacker(this);
-        game.attackersScore++;
+        game.lives--;
     } else {
         if(isInMiddleOfSquare(this)) {
             if(!this.hasChangedDirection) {

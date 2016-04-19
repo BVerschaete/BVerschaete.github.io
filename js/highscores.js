@@ -1,8 +1,8 @@
 /**
  * Created by Gaben on 24/03/2016.
  */
-var players = [];
-
+var players = [],
+    tableFilled = false;
 function setup(){
     for(var i = 0; i < standardLevels.length; i++){
         var button = $('<a>');
@@ -32,6 +32,7 @@ function changeTable(event){
 
 function setupTable(levelNumber){
     players = [];
+    tableFilled = false;
     $('tbody').empty();
     var level = parseInt(levelNumber);
     $('#title').text("Highscores (Level " + (level+1) + ")");
@@ -48,32 +49,38 @@ function setupTable(levelNumber){
 }
 
 function fillTable(){
-    players.sort(comparator);
+    if(!tableFilled) {
+        tableFilled = true;
+        players.sort(comparator);
 
-    if(players.length > 0) {
-        for (var i = 0; i < players.length; i++) {
-            var $player = $('<tr>');
-            var $playerName = $('<td>');
-            var $playerScore = $('<td>');
-            var $playerPlace = $('<td>');
+        if (players.length > 0) {
 
-            $playerPlace.text(i + 1);
-            $playerName.text(players[i]["name"]);
-            $playerScore.text(players[i]["score"]);
+            var aantal = players.length > 10 ? 10 : players.length;
 
-            $player.append($playerPlace);
-            $player.append($playerName);
-            $player.append($playerScore);
-            $('tbody').append($player);
+            for (var i = 0; i < aantal; i++) {
+                var $player = $('<tr>');
+                var $playerName = $('<td>');
+                var $playerScore = $('<td>');
+                var $playerPlace = $('<td>');
+
+                $playerPlace.text(i + 1);
+                $playerName.text(players[i]["name"]);
+                $playerScore.text(players[i]["score"]);
+
+                $player.append($playerPlace);
+                $player.append($playerName);
+                $player.append($playerScore);
+                $('tbody').append($player);
+            }
+        } else {
+            var $messageRow = $('<tr>');
+            var $message = $('<td>');
+            $message.attr('colspan', 3);
+            $message.text("Be the first to play this level!");
+
+            $messageRow.append($message);
+            $('tbody').append($messageRow);
         }
-    } else {
-        var $messageRow = $('<tr>');
-        var $message = $('<td>');
-        $message.attr('colspan', 3);
-        $message.text("Be the first to play this level!");
-
-        $messageRow.append($message);
-        $('tbody').append($messageRow);
     }
 }
 
