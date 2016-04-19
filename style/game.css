@@ -40,6 +40,10 @@ legend > h2{
     font-size: 2em;
 }
 
+#towerInfo button{
+    color: black;
+}
+
 #gameInfo{
     margin-right: 50px;
     margin-top: 50px;
