@@ -5,27 +5,27 @@ var players = [],
     tableFilled = false;
 function setup(){
     for(var i = 0; i < standardLevels.length; i++){
-        var button = $('<a>');
-        button.attr({class: 'btn levelSelectButton', 'data-level': i});
-        button.text(i+1);
+        var naam = "standardLevel" + i;
+        var button = $('<input>');
+        var label = $('<label>');
+        button.attr({id: naam, type: "radio", class: 'levelSelectButton', 'data-level': i, naam: "level"});
         button.click(changeTable);
-        $("#levels").append(button);
+        label.text(i+1);
+        label.attr({for: naam});
+        label.css('text-align', 'center');
+        $("#levels").append(button, label);
     }
 
     setupTable(0);
-    $('a[data-level=0]').addClass("hovered");
     
     if(sessionStorage.playedLevel != undefined || sessionStorage.playedLevel != null){
-        $('.hovered').removeClass("hovered");
+        $('.hovered').removeClass("checked");
         setupTable(sessionStorage.playedLevel);
-        $('a[data-level=' + sessionStorage.playedLevel + ']').addClass("hovered");
         sessionStorage.playedLevel = undefined;
     }
 }
 
 function changeTable(event){
-    $('.hovered').removeClass("hovered");
-    $(event.target).addClass("hovered");
     var level = $(event.target).attr('data-level');
     setupTable(level);
 }

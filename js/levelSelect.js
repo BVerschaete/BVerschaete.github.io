@@ -4,32 +4,38 @@
 //kleine code bij het level select scherm om button te deactiveren en select kleuren aan te passen
 function setup() {
     var startButton = $("#startSelectedLevel");
+    var naam;
+    var button;
+    var label;
     startButton.addClass("disabled");
 
     for(var i = 0; i < standardLevels.length; i++){
-        var button = $('<a/>');
-        button.attr({class: 'btn levelSelectButton', 'data-level': i});
-        button.text(i+1);
-        $("#standardLevelContainer").append(button);
+        naam = "standardLevel" + i;
+        button = $('<input>');
+        label = $('<label>');
+        button.attr({id: naam, type: "radio", class: 'levelSelectButton', 'data-level': i, name: "level"});
+        label.text(i+1);
+        label.attr({for: naam});
+        $("#standardLevelContainer").append(button, label);
     }
 
     if(customLevels.length != 0) {
         for (var j = 0; j < customLevels.length; j++) {
-            var button2 = $('<a/>');
-            button2.attr({class: 'btn levelSelectButton', 'data-level': standardLevels.length + j});
-            button2.text(standardLevels.length + j + 1);
-            $('#customLevelContainer').append(button2);
+            naam = "customLevel" + i;
+            button = $('<input>');
+            label = $('<label>');
+            button.attr({id: naam, type: "radio", class: 'levelSelectButton', 'data-level': standardLevels.length + j, name: "level"});
+            label.text(j+1);
+            label.attr({for: naam});
+            $('#customLevelContainer').append(button, label);
         }
     } else {
         $('#customLevelContainer').hide();
     }
-
     var selectedButton;
 
     $('.levelSelectButton').click(function (event) {
-        $('.hovered').removeClass("hovered");
         selectedButton = $(event.target);
-        selectedButton.toggleClass("hovered");
         var id = selectedButton.attr('data-level');
         var levelName = levels[id].name;
         var levelInfo = $('#levelInfo');

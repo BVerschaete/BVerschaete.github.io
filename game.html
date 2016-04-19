@@ -43,7 +43,7 @@
     <div id="gameInfo">
         <div>
             <p>Current wave: <span id="currentWave">0</span></p>
-            <p>Next wave: <span id="nextWaveTime">0</span></p>
+            <p id="btnSpawnWave">Next wave: <span id="nextWaveTime">0</span></p>
             <p><img src="img/lives.png">Lives: <span id="lives">0</span></p>
             <p><img src="img/coin.png">Money: <span id="money">200</span></p>
         </div>
@@ -60,14 +60,14 @@
             <button class="btn" id="sellTower">Sell</button>
         </div>
     </div>
-    <div style="clear: both"></div> <!--Nodig om controls down container te plaatsen-->
+    <div style="clear: both"></div> <!--Nodig om controls onder container te plaatsen-->
 </div>
-<div id="controls">
-    <h2>Controls</h2>
-    <input type="button" class="btn" value="Spawn Wave" id="btnSpawnWave"/>
-</div>
+<fieldset id="controls">
+    <legend><h2>Controls</h2></legend>
+</fieldset>
 <div id="dimmer">
     <div>
+        <span>Game Over</span>
         <div id="startStop">Start Game</div>
         <div id="playAgain">Play again</div>
     </div>

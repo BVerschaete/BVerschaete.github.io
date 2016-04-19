@@ -99,6 +99,14 @@ function spawnNextMonster(){
 
 //update de spawnbutton zodat hij gedisabled moet worden of niet
 function toggleSpawn(){
-    var btnSpawn = $("#btnSpawnWave")[0];
-    btnSpawn.disabled = !btnSpawn.disabled;
+    var btnSpawn = $("#btnSpawnWave");
+    if(btnSpawn.prop('data-disabled')) {
+        btnSpawn.prop('data-disabled', false);
+        btnSpawn.css({color: "green", cursor: "pointer"});
+        btnSpawn.click(spawnWaveNow);
+    } else {
+        btnSpawn.prop('data-disabled', true);
+        btnSpawn.css({color: "red", cursor: "default"});
+        btnSpawn.off();
+    }
 }

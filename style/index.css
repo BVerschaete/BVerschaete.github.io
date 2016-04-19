@@ -1,7 +1,3 @@
-body{
-    background-color: #6093CA !important;
-}
-
 section{
     margin-top: 50px;
     height: calc(100vh - (50px)); /*vult de pagina zonder header*/
@@ -24,8 +20,8 @@ article{
 }
 
 .jumbotron{
-    background-color:#6093CA;
     float: left;
+    background: url(../img/background.png) repeat; !important;
 }
 
 #username{
@@ -50,7 +46,7 @@ form{
     float: right;
     margin-top: 5%;
     margin-right: 20%;
-    height: 40%;
+    height: auto;
     width: 20%;
 }
 

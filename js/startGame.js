@@ -22,12 +22,23 @@ function setup() {
         addCanvas();
         addTowerButtons();
 
+        $("input:checkbox").on('click', function() {
+            var $box = $(this);
+            if ($box.is(":checked")) {
+                var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                $(group).prop("checked", false);
+                $box.prop("checked", true);
+            } else {
+                $box.prop("checked", false);
+                currentTower = -1;
+            }
+        });
+
         $(game.canvas).mouseover(toggleMouseInCanvas);
         $(game.canvas).mouseout(toggleMouseInCanvas);
         $(game.canvas).mousemove(getMousePosition);
         $(game.canvas).click(displayInfo);
         $(game.canvas).click(placeTower);
-        $(".towerbutton").click(selectTowerToBuild);
         $("#btnSpawnWave").click(spawnWaveNow);
 
         var upgradeTower = $("#upgradeTower");
@@ -40,6 +51,7 @@ function setup() {
         $("body").click(function () {
             currentTower = -1;
             selectedTower = -1;
+            $("input:checkbox").prop("checked", false);
             displayInfo();
         });
 
@@ -71,8 +83,10 @@ function checkGameOver() {
     if (game.lives <= 0) {
         var $dimmer = $('#dimmer');
         var $stop = $('#startStop');
+        var $gameOverTitle = $dimmer.find('span');
+        $gameOverTitle.css('display', 'inline-block');
         $stop.css("background", "rgba(255, 0, 0, 1");
-        $stop.text("Game Over");
+        $stop.text("Go to highscores");
         $stop.click(function(){
             if(game.selectedLevel.customLevel) {
                 window.location.href = "highscores.html";
@@ -109,7 +123,7 @@ function restartGame(){
     game.paused = false;
     game.timePauseStart = undefined;
 
-    if($('#btnSpawnWave')[0].disabled){
+    if($('#btnSpawnWave').prop('data-disabled')){
         toggleSpawn();
     }
 

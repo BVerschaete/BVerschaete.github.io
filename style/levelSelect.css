@@ -3,33 +3,97 @@ body{
     text-align: center;
 }
 
-.levelSelectButton {
-    margin: 20px;
-    background: #3498db;
-    background-image: -webkit-linear-gradient(top, #3498db, #2b698f);
-    background-image: -moz-linear-gradient(top, #3498db, #2b698f);
-    background-image: -ms-linear-gradient(top, #3498db, #2b698f);
-    background-image: -o-linear-gradient(top, #3498db, #2b698f);
-    background-image: linear-gradient(to bottom, #3498db, #2b698f);
-    text-shadow: 1px 4px 7px #000000;
-    font-family: Arial;
-    color: #8f713c;
-    font-size: 40px;
-    padding: 10px 20px 10px 20px;
-    border: solid black 2px;
-    text-decoration: none;
+label{
+    cursor: pointer;
 }
 
-.levelSelectButton:hover, a.hovered {
-    background: #3cb0fd;
-    color: #8f713c;
-    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-    text-decoration: none;
+.levelSelectButton[type='radio'] {
+    display: none;
 }
+
+/* -------------------
+  radio Specific Style
+-------------------- */
+.levelSelectButton[type='radio'] + label {
+    font-family: Arial, sans-serif;
+    z-index: 10;
+    margin: 0 10px 10px 0;
+    width: 55px;
+    height: 55px;
+    line-height: 55px;
+    position: relative;
+    font-size: 44px;
+    letter-spacing: 0;
+    color: #0e0e0e;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+    font-weight: bold;
+    background-image: -moz-linear-gradient(#111111, #000000);
+    background-image: -webkit-linear-gradient(#111111, #000000);
+    background-image: linear-gradient(#111111, #000000);
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 3px rgba(255, 255, 255, 0.2);
+    -webkit-box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 3px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+.levelSelectButton[type='radio'] + label:after {
+    top: 2.4px;
+    left: -25.0px;
+    width: 50px;
+    height: 50.0px;
+    z-index: -1;
+    content: '';
+    cursor: pointer;
+    margin-left: 49.5%;
+    display: block;
+    position: absolute;
+    background-image: -moz-linear-gradient(#444444, #373738);
+    background-image: -webkit-linear-gradient(#444444, #373738);
+    background-image: linear-gradient(#444444, #373738);
+    -moz-box-shadow: inset 0 2px 1px -1px rgba(255, 255, 255, 0.2), inset 0 -2px 1px -1px rgba(0, 0, 0, 0.2), 0 12px 12px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: inset 0 2px 1px -1px rgba(255, 255, 255, 0.2), inset 0 -2px 1px -1px rgba(0, 0, 0, 0.2), 0 12px 12px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 2px 1px -1px rgba(255, 255, 255, 0.2), inset 0 -2px 1px -1px rgba(0, 0, 0, 0.2), 0 12px 12px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3);
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+
+/* -------------------
+  Hover States
+-------------------- */
+.levelSelectButton[type='radio'] + label:hover {
+    color: #AEAEAE;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+
+.levelSelectButton[type='radio'] + label:hover:after {
+    background-image: -moz-linear-gradient(#545454, #373738);
+    background-image: -webkit-linear-gradient(#545454, #373738);
+    background-image: linear-gradient(#545454, #373738);
+}
+
+/* -------------------
+  Active States
+-------------------- */
+.levelSelectButton[type='radio']:checked + label {
+    color: #00ccff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3), 0 0px 30px rgba(0, 255, 255, 0.7);
+    -moz-box-shadow: 0 -1px 0 rgba(0, 193, 255, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 20px rgba(0, 193, 255, 0.1), 0 0 30px rgba(0, 193, 255, 0.1);
+    -webkit-box-shadow: 0 -1px 0 rgba(0, 193, 255, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 20px rgba(0, 193, 255, 0.1), 0 0 30px rgba(0, 193, 255, 0.1);
+    box-shadow: 0 -1px 0 rgba(0, 193, 255, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 20px rgba(0, 193, 255, 0.1), 0 0 30px rgba(0, 193, 255, 0.1);
+}
+
+.levelSelectButton[type='radio']:checked + label:after {
+    background-image: -moz-linear-gradient(#262627, #2d2d2e);
+    background-image: -webkit-linear-gradient(#262627, #2d2d2e);
+    background-image: linear-gradient(#262627, #2d2d2e);
+    -moz-box-shadow: inset 0 5px 6px rgba(0, 0, 0, 0.3), inset 0 0 4px rgba(0, 0, 0, 0.9), 0 0 0 black;
+    -webkit-box-shadow: inset 0 5px 6px rgba(0, 0, 0, 0.3), inset 0 0 4px rgba(0, 0, 0, 0.9), 0 0 0 black;
+    box-shadow: inset 0 5px 6px rgba(0, 0, 0, 0.3), inset 0 0 4px rgba(0, 0, 0, 0.9), 0 0 0 black;
+}
+
 
 #buttonContainer{
     margin-top: 50px;
