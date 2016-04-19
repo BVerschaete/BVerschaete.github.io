@@ -83,7 +83,7 @@ function checkGameOver() {
         });
 
         var $playAgain = $('#playAgain');
-        $playAgain.show();
+        $playAgain.css('display', 'inline-block');
         $playAgain.click(function(){
             $stop.off();
             restartGame();
@@ -108,6 +108,11 @@ function restartGame(){
     game.timeLastWaveSpawnEnds = Date.now();
     game.paused = false;
     game.timePauseStart = undefined;
+
+    if($('#btnSpawnWave')[0].disabled){
+        toggleSpawn();
+    }
+
     gameLoop();
 }
 

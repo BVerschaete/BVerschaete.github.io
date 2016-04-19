@@ -64,7 +64,8 @@ canvas {
     width: 195px;
     background: rgba(76, 175, 80, 1);
     border: none;
-    padding: 15px 32px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -82,7 +83,8 @@ canvas {
     width: 195px;
     background: rgba(204, 255, 51, 1);
     border: none;
-    padding: 15px 32px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     text-align: center;
     text-decoration: none;
     font-size: 24px;
