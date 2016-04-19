@@ -93,11 +93,10 @@ function displayTime(){
     var timeField = $("#nextWaveTime");
     if(game.timeLastWaveSpawnEnds < Date.now()) {
         var time = Math.ceil(game.selectedLevel.spawnSpeed - (Date.now() - game.timeLastWaveSpawnEnds) / 1000);
-        timeField.text(time);
-        
-        if((Date.now() - game.timeLastWaveSpawnEnds) > game.selectedLevel.spawnSpeed * 1000) {
-            spawnWave();
+        if(time < 0){
+            time = 0;
         }
+        timeField.text(time);
     } else {
         timeField.text(game.selectedLevel.spawnSpeed);
 
