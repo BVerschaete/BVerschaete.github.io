@@ -75,7 +75,7 @@ function addCanvas(){
 function addTowerButtons(){
     for(var i = 0; i < towerTypes.length; i ++){
         var buttonid = "towerButton" + i;
-        var $button = $("<input>", {id: buttonid, type: "checkbox", class: "towerbutton", "data-type": i, name: "towerButton"});
+        var $button = $("<input>", {id: buttonid, type: "radio", class: "towerbutton", "data-type": i, name: "towerButton"});
         var $label = $("<label>" , {for: buttonid});
         $label.text(towerTypes[i].prototype.displayName + " (" + towerTypes[i].prototype.cost + " coins)");
         $button.click(selectTowerToBuild);

@@ -132,7 +132,7 @@ legend > h2{
     color: green;
 }
 
-#container a, input[type='checkbox'] + label {
+#container a, input[type='radio'] + label {
     text-align: center;
     display: inline-block;
     text-decoration: none;
@@ -161,14 +161,14 @@ fieldset h2 {
     padding: 0 5px 0 10px;
 }
 
-.towerbutton[type='checkbox'] {
+.towerbutton[type='radio'] {
     display: none;
 }
 
 /* -------------------
-  checkbox Specific Style
+  radio Specific Style
 -------------------- */
-.towerbutton[type='checkbox'] + label {
+.towerbutton[type='radio'] + label {
     font-family: Arial, sans-serif;
     z-index: 10;
     margin: 0 10px 10px 0;
@@ -192,7 +192,7 @@ fieldset h2 {
     box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 3px rgba(255, 255, 255, 0.2);
 }
 
-.towerbutton[type='checkbox'] + label:after {
+.towerbutton[type='radio'] + label:after {
     top: 2.4px;
     left: -25.0px;
     width: 150px;
@@ -217,12 +217,12 @@ fieldset h2 {
 /* -------------------
   Hover States
 -------------------- */
-.towerbutton[type='checkbox'] + label:hover {
+.towerbutton[type='radio'] + label:hover {
     color: #AEAEAE;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
 }
 
-.towerbutton[type='checkbox'] + label:hover:after {
+.towerbutton[type='radio'] + label:hover:after {
     background-image: -moz-linear-gradient(#545454, #373738);
     background-image: -webkit-linear-gradient(#545454, #373738);
     background-image: linear-gradient(#545454, #373738);
@@ -231,7 +231,7 @@ fieldset h2 {
 /* -------------------
   Active States
 -------------------- */
-.towerbutton[type='checkbox']:checked + label {
+.towerbutton[type='radio']:checked + label {
     color: #00ccff;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3), 0 0px 30px rgba(0, 255, 255, 0.7);
     -moz-box-shadow: 0 -1px 0 rgba(0, 193, 255, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 20px rgba(0, 193, 255, 0.1), 0 0 30px rgba(0, 193, 255, 0.1);
@@ -239,7 +239,7 @@ fieldset h2 {
     box-shadow: 0 -1px 0 rgba(0, 193, 255, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 20px rgba(0, 193, 255, 0.1), 0 0 30px rgba(0, 193, 255, 0.1);
 }
 
-.towerbutton[type='checkbox']:checked + label:after {
+.towerbutton[type='radio']:checked + label:after {
     background-image: -moz-linear-gradient(#262627, #2d2d2e);
     background-image: -webkit-linear-gradient(#262627, #2d2d2e);
     background-image: linear-gradient(#262627, #2d2d2e);
