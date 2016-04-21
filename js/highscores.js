@@ -19,7 +19,6 @@ function setup(){
     setupTable(0);
     
     if(sessionStorage.playedLevel != undefined || sessionStorage.playedLevel != null){
-        $('.hovered').removeClass("checked");
         setupTable(sessionStorage.playedLevel);
         sessionStorage.playedLevel = undefined;
     }
@@ -33,6 +32,8 @@ function changeTable(event){
 function setupTable(levelNumber){
     players = [];
     tableFilled = false;
+    $('.hovered').prop('checked', false);
+    $('.levelSelectButton[data-level=' + levelNumber +']').prop('checked', true);
     $('tbody').empty();
     var level = parseInt(levelNumber);
     $('#title').text("Highscores (Level " + (level+1) + ")");
