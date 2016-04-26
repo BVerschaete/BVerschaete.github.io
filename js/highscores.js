@@ -17,11 +17,6 @@ function setup(){
     }
 
     setupTable(0);
-    
-    if(sessionStorage.playedLevel != undefined || sessionStorage.playedLevel != null){
-        setupTable(sessionStorage.playedLevel);
-        sessionStorage.playedLevel = undefined;
-    }
 }
 
 function changeTable(event){
@@ -30,13 +25,15 @@ function changeTable(event){
 }
 
 function setupTable(levelNumber){
-    players = [];
-    tableFilled = false;
     $('.hovered').prop('checked', false);
     $('.levelSelectButton[data-level=' + levelNumber +']').prop('checked', true);
     $('tbody').empty();
     var level = parseInt(levelNumber);
+    console.log(levelNumber);
     $('#title').text("Highscores (Level " + (level+1) + ")");
+
+    tableFilled = false;
+
     var myFirebaseRef = new Firebase("https://popping-fire-3131.firebaseio.com/");
     var playerTable = myFirebaseRef.child('Highscores').child(level).child('Players');
 
@@ -85,6 +82,7 @@ function fillTable(){
     }
 }
 
+//wordt als argument meegegeven bij de array.sort functie om de highscores te sorteren op score
 function comparator(a, b){
     return parseInt(b.score) - parseInt(a.score);
 }

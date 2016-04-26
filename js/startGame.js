@@ -46,12 +46,12 @@ function setup() {
         drawMap();
 
         //startknop
-        var $button = $('#dimmer').find('> div');
-        $button.click(function(){
+        var $start = $('#dimmer').find('> div');
+        $start.one('click', function(){
             game.timeLastWaveSpawnEnds = Date.now();
             var $dimmer = $('#dimmer');
             $dimmer.hide();
-            $button.off();
+            $start.off();
             gameLoop();
             document.addEventListener("visibilitychange", function() {
                 if(document.visibilityState == "hidden"){
@@ -75,7 +75,7 @@ function checkGameOver() {
         $gameOverTitle.css('display', 'inline-block');
         $stop.css("background", "rgba(255, 0, 0, 1");
         $stop.text("Go to highscores");
-        $stop.click(function(){
+        $stop.one('click', function(){
             if(game.selectedLevel.customLevel) {
                 window.location.href = "highscores.html";
             } else {
@@ -86,7 +86,7 @@ function checkGameOver() {
 
         var $playAgain = $('#playAgain');
         $playAgain.css('display', 'inline-block');
-        $playAgain.click(function(){
+        $playAgain.one('click', function(){
             $stop.off();
             restartGame();
             $dimmer.hide();
@@ -122,19 +122,17 @@ function pushScore(){
     var myFirebaseRef = new Firebase("https://popping-fire-3131.firebaseio.com/");
     var playerTable = myFirebaseRef.child('Highscores');
 
-    if(playerTable.hasChild(levels.indexOf(game.selectedLevel))) {
+    var level = playerTable.child(levels.indexOf(game.selectedLevel));
+    var selectedHighscoreList = level.child('Players');
 
-        var level = playerTable.child(levels.indexOf(game.selectedLevel));
-        var selectedHighscoreList = level.child('Players');
+    var player = {
+        name: game.playerName,
+        score: game.currentWave
+    };
 
-        var player = {
-            name: game.playerName,
-            score: game.currentWave
-        };
-
-        selectedHighscoreList.push(player);
-    }
-    window.location.href = "highscores.html";
+    selectedHighscoreList.push(player, function(){
+        window.location.href = "highscores.html";
+    });
 }
 
 $(window).load(setup);
