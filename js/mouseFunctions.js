@@ -84,13 +84,11 @@ function displayInfo() {
     var tower = towers[i];
     var towerInfo = $('#towerInfo');
     if(tower){
-        if(currentTower == -1){
-            selectedTower = i;
-            displaySelectedTowerInfo();
-            towerInfo.css('visibility', 'visible');
-        } else {
-            currentTower = -1;
-        }
+        currentTower = -1;
+        $("input:radio").prop("checked", false);
+        selectedTower = i;
+        displaySelectedTowerInfo();
+        towerInfo.css('visibility', 'visible');
     } else {
         selectedTower = -1;
         towerInfo.css('visibility', 'hidden');

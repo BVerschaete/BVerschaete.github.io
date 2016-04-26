@@ -39,7 +39,7 @@ function setup() {
         $("body").click(function () {
             currentTower = -1;
             selectedTower = -1;
-            $("input:checkbox").prop("checked", false);
+            $("input:radio").prop("checked", false);
             displayInfo();
         });
 
@@ -103,6 +103,8 @@ function restartGame(){
     towers=[];
     attacks=[];
     currentWaveSpawning = null;
+    selectedTower = -1;
+    currentTower = -1;
     game.money = 400;
     game.currentWave = 0;
     game.attackersScore = 0;
@@ -114,6 +116,7 @@ function restartGame(){
     if($('#btnSpawnWave').prop('data-disabled')){
         toggleSpawn();
     }
+    $("input:radio").prop("checked", false);
 
     gameLoop();
 }
