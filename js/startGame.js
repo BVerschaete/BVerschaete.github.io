@@ -74,7 +74,13 @@ function checkGameOver() {
         var $gameOverTitle = $dimmer.find('span');
         $gameOverTitle.css('display', 'inline-block');
         $stop.css("background", "rgba(255, 0, 0, 1");
-        $stop.text("Go to highscores");
+        
+        if(game.selectedLevel.customLevel) {
+            $stop.text("Go to highscores");
+        } else {
+            $stop.text("Submit score");
+        }
+
         $stop.one('click', function(){
             if(game.selectedLevel.customLevel) {
                 window.location.href = "highscores.html";

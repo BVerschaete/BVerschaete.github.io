@@ -1,5 +1,11 @@
+img{
+    margin: 10% auto auto;
+    width: 60%;
+    display: block;
+}
+
 #disqus_thread{
-    margin-top: 25%;
+    margin-top: 10%;
     margin-right: 2.5%;
     margin-left: 2.5%;
 }

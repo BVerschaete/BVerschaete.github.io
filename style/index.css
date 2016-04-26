@@ -20,7 +20,7 @@ article{
 }
 
 .jumbotron{
-    float: left;
+    display: inline-block;
     background: url(../img/background.png) repeat; !important;
 }
 
@@ -44,7 +44,6 @@ form{
 
 #screenshotDetails{
     float: right;
-    margin-top: 5%;
     margin-right: 20%;
     height: auto;
     width: 20%;
@@ -58,4 +57,11 @@ form{
 
 figcaption{
     color: darkgrey;
+}
+
+#logo{
+    margin-left: 60px;
+    margin-top: 8%;
+    width: 40%;
+    display: block;
 }
