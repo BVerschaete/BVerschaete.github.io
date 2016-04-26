@@ -41,7 +41,7 @@ function isValidName(){
 
 function setPictures(){
     var screenshots = [];
-    for(var i = 1; i <= 3; i++){
+    for(var i = 1; i <= 4; i++){
         var img = new Image();
         img.src = "img/site/front" + i + ".png";
         screenshots.push(img);

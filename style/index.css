@@ -21,7 +21,7 @@ article{
 
 .jumbotron{
     display: inline-block;
-    background: url(../img/background.png) repeat; !important;
+    background: url(../img/background.png) repeat;
 }
 
 #username{
@@ -44,19 +44,15 @@ form{
 
 #screenshotDetails{
     float: right;
-    margin-right: 20%;
+    margin-right: 15%;
     height: auto;
-    width: 20%;
+    width: 25%;
 }
 
 #screenshotLarge{
     border: solid black 3px;
     height: 100%;
     width: 100%;
-}
-
-figcaption{
-    color: darkgrey;
 }
 
 #logo{
