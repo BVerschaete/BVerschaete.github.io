@@ -79,7 +79,6 @@ function checkGameOver() {
             if(game.selectedLevel.customLevel) {
                 window.location.href = "highscores.html";
             } else {
-                sessionStorage.playedLevel = standardLevels.indexOf(game.selectedLevel);
                 pushScore();
             }
         });
