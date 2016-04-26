@@ -113,6 +113,34 @@ function selectTowerToBuild(event){
     selectedTower = -1;
     //custom attribuut van iedere button die zegt welke soort tower er moet geplaatst worden
     currentTower = event.target.getAttribute("data-type");
+    displayCurrentTowerInfo();
+}
+
+function displayCurrentTowerInfo(){
+    var tower = new towerTypes[currentTower]();
+
+    var $towerDamage = $("#towerDamage");
+    var $towerFreeze = $("#towerFreeze");
+
+    if(tower instanceof FreezeTower){
+        $towerDamage.parent().css('display', 'none');
+        $towerFreeze.parent().css('display', 'block');
+        $towerFreeze.text(parseInt(FreezeCondition.prototype.speedMultiplier * 100) + "%");
+    } else {
+        $towerDamage.parent().css('display', 'block');
+        $towerFreeze.parent().css('display', 'none');
+        $towerDamage.text(Math.floor(tower.damage));
+    }
+
+    $("#towerInfo").css('visibility', 'visible');
+    $("#towerImg").attr("src", "img/towers/" + tower.image);
+    $("#towerRange").text(Math.floor(tower.range));
+    $("#upgradeCost").text(tower.upgradeCost + " coins");
+    $('#sellPrice').text(Math.floor(tower.value) + " coins");
+
+    $("#towerLevel").parent().css('display', 'none');
+    $("#upgradeTower").css('display', 'none');
+    $("#sellTower").css('display', 'none');
 }
 
 //kijkt of toren op deze plaats staat, met een dubbel zo grote straal, zodat omtrek van geplaatste tower ook meegerekend wordt
@@ -164,13 +192,33 @@ function sellSelectedTower(){
 function displaySelectedTowerInfo(){
     var tower = towers[selectedTower];
     if(tower) {
-        $("#towerInfo").css('visibility', 'visible');
+
+        var $towerLevel = $("#towerLevel");
+        var $towerDamage = $("#towerDamage");
+        var $towerFreeze = $("#towerFreeze");
+
+        if(tower instanceof FreezeTower){
+            $towerDamage.parent().css('display', 'none');
+            $towerFreeze.parent().css('display', 'block');
+            $towerFreeze.text(parseInt(FreezeCondition.prototype.speedMultiplier * 100) + "%");
+        } else {
+            $towerDamage.parent().css('display', 'block');
+            $towerFreeze.parent().css('display', 'none');
+            $towerDamage.text(Math.floor(tower.damage));
+        }
+
+        $towerLevel.parent().css('display', 'block');
+        $("#upgradeCost").parent().css('display', 'block');
+        $("#sellPrice").parent().css('display', 'block');
+        $("#upgradeTower").css('display', 'inline-block');
+        $("#sellTower").css('display', 'inline-block');
+
         $("#towerImg").attr("src", "img/towers/" + tower.image);
-        $("#towerLevel").text(tower.level);
-        $("#towerDamage").text(Math.floor(tower.damage));
+        $towerLevel.text(tower.level);
         $("#towerRange").text(Math.floor(tower.range));
         enableUpgradeButton();
         enableSellButton();
+        $("#towerInfo").css('visibility', 'visible');
     }
 }
 
