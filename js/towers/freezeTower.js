@@ -11,7 +11,7 @@ FreezeTower.prototype.range = (game.tileSize * 2); //100
 FreezeTower.prototype.fireRate = Tower.prototype.fireRate * 2;
 FreezeTower.prototype.damage = 0;
 FreezeTower.prototype.cost = Tower.prototype.cost * 2;
-FreezeTower.prototype.maxUpgradeLevel = 6;
+FreezeTower.prototype.maxUpgradeLevel = 1;
 FreezeTower.prototype.displayName = "Freeze Tower";
 FreezeTower.prototype.attackType = FreezeBullet;
 

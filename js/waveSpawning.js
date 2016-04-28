@@ -21,7 +21,13 @@ function chooseWave(){
     var maxHealthFactor;
 
     //moeilijkheid per level hier aanpassen
-    if(game.currentWave%5 == 0 && game.currentWave != 0){
+    if(game.currentWave%10 == 0 && game.currentWave != 0){
+        aantalMonsters = 1;
+        speedFactor = 1;
+        maxHealthFactor = game.currentWave/10;
+        
+        typeMonster = attackerCodes.bossAttacker;
+    } else if(game.currentWave%5 == 0 && game.currentWave != 0){
         //tankAttackers iedere 5 waves
         aantalMonsters = 4 + game.currentWave/5 * game.selectedLevel.difficulty;
         speedFactor = Math.pow(1.05, game.currentWave/5);
@@ -32,20 +38,21 @@ function chooseWave(){
         //speedAttackers iedere 3 waves
         aantalMonsters = 4 + game.currentWave/3 * game.selectedLevel.difficulty;
         speedFactor = Math.pow(1.10, game.currentWave/3);
-        maxHealthFactor = Math.pow(1.05, game.currentWave/3);
+        maxHealthFactor = Math.pow(1.07, game.currentWave/3);
 
         typeMonster = attackerCodes.speedAttacker;
     } else{
         //normalAttackers rest van de waves
         aantalMonsters = 4 + Math.floor(game.currentWave/2) * game.selectedLevel.difficulty;
         speedFactor = Math.pow(1.05, game.currentWave);
-        maxHealthFactor = Math.pow(1.05, game.currentWave);
+        maxHealthFactor = Math.pow(1.07, game.currentWave);
 
         typeMonster = attackerCodes.normalAttacker;
     }
-    
-    speedFactor *= game.selectedLevel.difficulty;
-    maxHealthFactor *= game.selectedLevel.difficulty;
+
+    if(speedFactor >=2){
+        speedFactor = 2;
+    }
 
     return createWave(aantalMonsters, typeMonster, speedFactor, maxHealthFactor);
 }
@@ -57,7 +64,7 @@ function createWave(aantalMonsters, typeMonster, speedFactor, maxHealthFactor){
         wave.attackers.push(typeMonster);
     }
     game.currentWave += 1;
-    wave.spawnSpeed = Attacker.prototype.speed * speedFactor;
+    wave.spawnSpeed = attackerTypes[typeMonster].prototype.speed * speedFactor;
     wave.waitTime = 1800 * game.tileSize / wave.spawnSpeed;
     wave.speedFactor = speedFactor;
     wave.maxHealthFactor = maxHealthFactor;

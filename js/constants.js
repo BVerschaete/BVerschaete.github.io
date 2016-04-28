@@ -11,7 +11,8 @@ var directions = {
 var attackerCodes = {
     normalAttacker: 0,
     tankAttacker: 1,
-    speedAttacker: 2
+    speedAttacker: 2,
+    bossAttacker: 3
 };
 
 var tiles = {

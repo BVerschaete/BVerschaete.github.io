@@ -3,11 +3,11 @@
  */
 function SpeedAttacker(){
     Attacker.call(this);
-    this.speed = 90 * (game.tileSize / 40);
-    this.maxHealth = 50;
+    this.maxHealth = 75;
     this.health = this.maxHealth;
     this.image = "dragonSpeed.png";
     this.reward = 20;
 }
 
 SpeedAttacker.prototype = Object.create(Attacker.prototype);
+SpeedAttacker.prototype.speed = 90 * (game.tileSize / 40);
