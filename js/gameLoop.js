@@ -68,6 +68,10 @@ function resumeGame(){
     if(currentWaveSpawning != null){
         currentWaveSpawning.timeLastSpawned += timePaused;
     }
+
+    for(i = 0; i < towers.length; i++){
+        towers[i].oldNow += timePaused;
+    }
     
     gameLoop();
 }

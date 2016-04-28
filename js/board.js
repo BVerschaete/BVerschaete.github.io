@@ -59,8 +59,14 @@ function addCanvas(){
     var width = game.tileSize * board[0].length;
     var height =  game.tileSize * board.length;
     var canvas = $('<canvas/>').prop({width: width, height: height});
-
-    //geen vragen bij stellen, het werkt
+    canvas.mouseover(toggleMouseInCanvas);
+    canvas.mouseout(toggleMouseInCanvas);
+    canvas.mousemove(getMousePosition);
+    canvas.click(displayInfo);
+    canvas.click(placeTower);
+    
+    
+    //geen vragen bij stellen, het werkt, zorgt ervoor dat het canvas gecentreerd wordt
     var gameInfo = $('#gameInfo');
     var marginLeftPercentage = 100*(((window.innerWidth - canvas.prop('width'))/2) - gameInfo.width() - parseInt(gameInfo.css('marginRight')))/window.innerWidth;
 

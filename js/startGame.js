@@ -13,6 +13,7 @@ var game = {
     lives: 10,
     timeLastWaveSpawnEnds: null,
     paused: false,
+    manualPaused: false,
     timePauseStart: undefined
 };
 
@@ -21,12 +22,6 @@ function setup() {
     if(game.playerName != null && game.selectedLevel) {
         addCanvas();
         addTowerButtons();
-
-        $(game.canvas).mouseover(toggleMouseInCanvas);
-        $(game.canvas).mouseout(toggleMouseInCanvas);
-        $(game.canvas).mousemove(getMousePosition);
-        $(game.canvas).click(displayInfo);
-        $(game.canvas).click(placeTower);
         $("#btnSpawnWave").click(spawnWaveNow);
 
         var upgradeTower = $("#upgradeTower");
@@ -46,24 +41,40 @@ function setup() {
         drawMap();
 
         //startknop
-        var $start = $('#dimmer').find('> div');
+        var $start = $('#dimmer').find('div');
         $start.one('click', function(){
             game.timeLastWaveSpawnEnds = Date.now();
             var $dimmer = $('#dimmer');
             $dimmer.hide();
-            $start.off();
             gameLoop();
             document.addEventListener("visibilitychange", function() {
-                if(document.visibilityState == "hidden"){
-                    pauseGame();
-                } else {
-                    resumeGame();
+                if (!game.manualPaused) {
+                    if (document.visibilityState == "hidden") {
+                        pauseGame();
+                    } else {
+                        resumeGame();
+                    }
                 }
             });
         });
+        
+        $('#pauseResume').click(pauseResume);
     } else {
         window.location.href = "index.html";
         alert("Please select a name and a level before going to the game.html page");
+    }
+}
+
+function pauseResume(event){
+    var $button = $(event.target);
+    if(game.paused){
+        $button.text("Pause Game");
+        game.manualPaused = false;
+        resumeGame();
+    } else {
+        $button.text("Resume Game");
+        game.manualPaused = true;
+        pauseGame();
     }
 }
 
