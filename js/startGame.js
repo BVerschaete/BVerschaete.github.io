@@ -14,7 +14,8 @@ var game = {
     timeLastWaveSpawnEnds: null,
     paused: false,
     manualPaused: false,
-    timePauseStart: undefined
+    timePauseStart: undefined,
+    pushedScore: false
 };
 
 function setup() {
@@ -88,17 +89,13 @@ function checkGameOver() {
         
         if(game.selectedLevel.customLevel) {
             $stop.text("Go to highscores");
+            $stop.one('click', function(){
+                window.location.href = "highscores.html";
+            });
         } else {
             $stop.text("Submit score");
+            $stop.one('click', pushScore);
         }
-
-        $stop.one('click', function(){
-            if(game.selectedLevel.customLevel) {
-                window.location.href = "highscores.html";
-            } else {
-                pushScore();
-            }
-        });
 
         var $playAgain = $('#playAgain');
         $playAgain.css('display', 'inline-block');
@@ -137,7 +134,7 @@ function restartGame(){
     gameLoop();
 }
 
-function pushScore(){
+function pushScore() {
     var myFirebaseRef = new Firebase("https://popping-fire-3131.firebaseio.com/");
     var playerTable = myFirebaseRef.child('Highscores');
 
@@ -148,10 +145,12 @@ function pushScore(){
         name: game.playerName,
         score: game.currentWave
     };
-
-    selectedHighscoreList.push(player, function(){
-        window.location.href = "highscores.html";
-    });
+    if (!game.pushedScore) {
+        selectedHighscoreList.push(player, function () {
+            window.location.href = "highscores.html";
+        });
+        game.pushedScore = true;
+    }
 }
 
 $(window).load(setup);
