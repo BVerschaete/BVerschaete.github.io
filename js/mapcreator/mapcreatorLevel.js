@@ -9,10 +9,12 @@ var level = {
     difficulty: 0,
     spawnSpeed: 0,
     board: [],
-    startDirection: directions.right,
+    backupBoard: [],
+    startDirection: directions.up, // dezelfde richting als het eerste element in de select
     startX: null,
     startY: null,
-    customLevel: true
+    customLevel: true,
+    attackers: []
 };
 
 var customLevels = [];
@@ -23,6 +25,11 @@ function createLevel(){
     level.difficulty = parseInt($('#levelDifficulty').val());
     level.spawnSpeed = parseInt($('#levelSpawnSpeed').val());
     level.startDirection = parseInt($('#levelStartDirection').find(":selected").val());
+}
+
+function changeStartDirection() {
+    level.startDirection = parseInt($('#levelStartDirection').find(":selected").val());
+    console.log(level.startDirection);
 }
 
 function saveLevel(){

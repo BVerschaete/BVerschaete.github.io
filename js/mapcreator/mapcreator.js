@@ -9,10 +9,14 @@ function setup(){
     addCanvas();
     $("#sldTilesize").on("input", changeTileSize);
     $("#sldRows, #sldCols").on("input", changeBoardSize);
+    $("#sldRows, #sldCols").on("mousedown", backupBoard);
     $('#levelStartCoords').click(selectStartTile);
     $('#save').click(saveLevel);
     $('#load').click(loadLevels);
     $('#clear').click(clearBoard);
+    $("#restoreBoard").click(restoreBoard);
+    $("#spawnAttacker").click(addAttacker);
+    $("#levelStartDirection").on("change", changeStartDirection);
     gameLoop();
 
     if(checkCookie("customLevels")) {
