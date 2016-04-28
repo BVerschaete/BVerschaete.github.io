@@ -8,7 +8,7 @@ function setup(){
         var naam = "standardLevel" + i;
         var button = $('<input>');
         var label = $('<label>');
-        button.attr({id: naam, type: "radio", class: 'levelSelectButton', 'data-level': i, naam: "level"});
+        button.attr({id: naam, type: "radio", class: 'levelSelectButton', 'data-level': i, name: "level"});
         button.click(changeTable);
         label.text(i+1);
         label.attr({for: naam});
@@ -29,7 +29,7 @@ function setupTable(levelNumber){
     $('.levelSelectButton[data-level=' + levelNumber +']').prop('checked', true);
     $('tbody').empty();
     players = [];
-    
+
     var level = parseInt(levelNumber);
     
     $('#title').text("Highscores (Level " + (level+1) + ")");
