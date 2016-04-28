@@ -28,8 +28,10 @@ function setupTable(levelNumber){
     $('.hovered').prop('checked', false);
     $('.levelSelectButton[data-level=' + levelNumber +']').prop('checked', true);
     $('tbody').empty();
+    players = [];
+    
     var level = parseInt(levelNumber);
-    console.log(levelNumber);
+    
     $('#title').text("Highscores (Level " + (level+1) + ")");
 
     tableFilled = false;
