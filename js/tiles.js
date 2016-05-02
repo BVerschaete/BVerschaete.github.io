@@ -8,7 +8,7 @@ function Tile(src){
     this.image = temp;
     this.changeDirection = null;
 }
-$(function(){
+function createTiles() {
     var grass = new Tile("0.png");
 
     var horizontal = new Tile("1.png");
@@ -191,7 +191,7 @@ $(function(){
             }
         }
     };
-    
+
     tiles = {
         0: grass,
         1: horizontal,
@@ -221,4 +221,6 @@ $(function(){
         25: splitRight,
         26: allDirections
     };
-});
+}
+
+createTiles();

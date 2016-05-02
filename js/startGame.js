@@ -16,7 +16,13 @@ var game = {
     paused: false,
     manualPaused: false,
     timePauseStart: undefined,
-    pushedScore: false
+    pushedScore: false,
+    mouse: {
+        canPlaceTowerHere: false,
+        inCanvas: false,
+        x: 0,
+        y: 0
+    }
 };
 
 function setup() {
@@ -39,7 +45,7 @@ function setup() {
             $("input:radio").prop("checked", false);
             displayInfo();
         });
-        
+
         drawMap();
 
         //startknop
@@ -61,10 +67,11 @@ function setup() {
         });
         
         $('#pauseResume').click(pauseResume);
-    } else {
-        window.location.href = "index.html";
-        alert("Please select a name and a level before going to the game.html page");
     }
+    //else {
+    //     window.location.href = "index.html";
+    //     alert("Please select a name and a level before going to the game.html page");
+    // }
 }
 
 function pauseResume(event){

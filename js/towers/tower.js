@@ -101,6 +101,7 @@ function drawTowers(){
 
 //voegt toren toe aan toren-array
 function addTower(){
+    var mouse = game.mouse;
     if(currentTower != -1) {
         towers.push(new towerTypes[currentTower](mouse.x, mouse.y));
     }

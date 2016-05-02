@@ -1,8 +1,9 @@
 /**
  * Created by Gaben on 24/03/2016.
  */
-var players = [],
-    tableFilled = false;
+var players = [];
+var tableFilled = false;
+
 function setup(){
     for(var i = 0; i < standardLevels.length; i++){
         var naam = "standardLevel" + i;

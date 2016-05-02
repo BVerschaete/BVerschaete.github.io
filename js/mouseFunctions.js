@@ -1,23 +1,18 @@
 /**
  * Created by Gaben on 17/03/2016.
  */
-var mouse = {
-    canPlaceTowerHere: false,
-    inCanvas: false,
-    x: 0,
-    y: 0
-};
 
 //zoekt x en y coordinaten van muis
 function getMousePosition(event) {
     var rect = game.canvas.getBoundingClientRect();
 
-    mouse.x = event.clientX - rect.left - parseInt($(game.canvas).css("padding-left"));
-    mouse.y = event.clientY - rect.top - parseInt($(game.canvas).css("padding-top"));
+    game.mouse.x = event.clientX - rect.left - parseInt($(game.canvas).css("padding-left"));
+    game.mouse.y = event.clientY - rect.top - parseInt($(game.canvas).css("padding-top"));
 }
 
 //tekent 'ghost' tower en als er een tower geselecteerd is om te bouwen
 function drawRadius(){
+    var mouse = game.mouse;
     if(mouse.inCanvas) {
         var context = game.context;
         var boardValueLinksBoven = getValueFromPos(mouse.x-(game.tileSize/4), mouse.y-(game.tileSize/4));
@@ -64,12 +59,14 @@ function drawRadius(){
 }
 
 function toggleMouseInCanvas(){
+    var mouse = game.mouse;
     mouse.inCanvas = !mouse.inCanvas;
 }
 
 //plaatst tower bij muisklik
 function placeTower(event) {
     event.stopPropagation();
+    var mouse = game.mouse;
 
     if (mouse.canPlaceTowerHere && currentTower != -1) {
         addTower(mouse.x, mouse.y);
@@ -80,6 +77,7 @@ function placeTower(event) {
 //toont info als er tower geselecteert wordt, cleart de doorzichtige tower placement als je bezig bent met towers plaatsen dmv currentTower = -1
 function displayInfo() {
     event.stopPropagation();
+    var mouse = game.mouse;
     var i = towerOnLocationSelect(mouse.x, mouse.y);
     var tower = towers[i];
     var towerInfo = $('#towerInfo');
