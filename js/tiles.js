@@ -2,10 +2,11 @@
  * Created by Bastien on 07/04/2016.
  */
 
+var tiles;
+
 /**
  * tile objecten, veranderen de richting van een attacker als hij erover passeert
  */
-
 function Tile(src){
     var temp = new Image();
     temp.src = "img/tiles/" + src;
@@ -201,35 +202,35 @@ function createTiles() {
         }
     };
 
-    tiles = {
-        0: grass,
-        1: horizontal,
-        2: vertical,
-        3: cornerLeftDown,
-        4: cornerLeftUp,
-        5: cornerRightUp,
-        6: cornerRightDown,
-        7: waterCornerRightUp,
-        8: waterRight,
-        9: waterCornerRightDown,
-        10: waterDown,
-        11: waterCornerLeftDown,
-        12: waterLeft,
-        13: waterCornerLeftTop,
-        14: waterUp,
-        15: waterMiddle,
-        16: waterSingleVertical,
-        17: waterSingleHorizontal,
-        18: waterSingleBottom,
-        19: waterSingleTop,
-        20: waterSingleRight,
-        21: waterSingleLeft,
-        22: splitDown,
-        23: splitLeft,
-        24: splitUp,
-        25: splitRight,
-        26: allDirections
-    };
+    tiles = [
+        grass,
+        horizontal,
+        vertical,
+        cornerLeftDown,
+        cornerLeftUp,
+        cornerRightUp,
+        cornerRightDown,
+        waterCornerRightUp,
+        waterRight,
+        waterCornerRightDown,
+        waterDown,
+        waterCornerLeftDown,
+        waterLeft,
+        waterCornerLeftTop,
+        waterUp,
+        waterMiddle,
+        waterSingleVertical,
+        waterSingleHorizontal,
+        waterSingleBottom,
+        waterSingleTop,
+        waterSingleRight,
+        waterSingleLeft,
+        splitDown,
+        splitLeft,
+        splitUp,
+        splitRight,
+        allDirections
+    ];
 }
 
 createTiles();

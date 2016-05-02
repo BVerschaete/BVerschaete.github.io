@@ -14,5 +14,3 @@ var attackerCodes = {
     speedAttacker: 2,
     bossAttacker: 3
 };
-
-var tiles;
