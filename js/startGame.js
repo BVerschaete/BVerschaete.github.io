@@ -22,7 +22,9 @@ var game = {
         inCanvas: false,
         x: 0,
         y: 0
-    }
+    },
+    currentTower: -1, //het type tower om te plaatsen
+    selectedTower: -1
 };
 
 function setup() {

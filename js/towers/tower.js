@@ -2,8 +2,6 @@
  * Created by Bastien on 19/03/2016.
  */
 var towers = [];
-var currentTower = -1; //het type tower om te plaatsen
-var selectedTower = -1; // de index van de geselecteerde toren in de towers array
 
 //basis toren
 function Tower(x, y){
@@ -102,8 +100,8 @@ function drawTowers(){
 //voegt toren toe aan toren-array
 function addTower(){
     var mouse = game.mouse;
-    if(currentTower != -1) {
-        towers.push(new towerTypes[currentTower](mouse.x, mouse.y));
+    if(game.currentTower != -1) {
+        towers.push(new towerTypes[game.currentTower](mouse.x, mouse.y));
     }
 }
 
@@ -111,14 +109,14 @@ function addTower(){
 function selectTowerToBuild(event){
     event.stopPropagation();
     //verandert de geselecteerde toren terug op 1 zodat de towerInfo en select cirkel worden uitgeschakeld
-    selectedTower = -1;
+    game.selectedTower = -1;
     //custom attribuut van iedere button die zegt welke soort tower er moet geplaatst worden
-    currentTower = event.target.getAttribute("data-type");
+    game.currentTower = event.target.getAttribute("data-type");
     displayCurrentTowerInfo();
 }
 
 function displayCurrentTowerInfo(){
-    var tower = new towerTypes[currentTower]();
+    var tower = new towerTypes[game.currentTower]();
 
     var $towerDamage = $("#towerDamage");
     var $towerFreeze = $("#towerFreeze");
@@ -169,7 +167,7 @@ function towerOnLocation(x1, y1, r){
 //upgrade de geselecteerde toren en past towerinfo aan
 function upgradeSelectedTower(){
     event.stopPropagation();
-    var tower = towers[selectedTower];
+    var tower = towers[game.selectedTower];
     if(tower){
         if(tower.level < tower.maxUpgradeLevel && tower.upgradeCost <= game.money) {
             game.money -= tower.upgradeCost;
@@ -182,16 +180,16 @@ function upgradeSelectedTower(){
 
 function sellSelectedTower(){
     event.stopPropagation();
-    var tower = towers[selectedTower];
+    var tower = towers[game.selectedTower];
     game.money += tower.value;
-    towers.splice(selectedTower, 1);
-    selectedTower = -1;
+    towers.splice(game.selectedTower, 1);
+    game.selectedTower = -1;
     displayInfo();
 }
 
 //toont info over geselecteerde toren
 function displaySelectedTowerInfo(){
-    var tower = towers[selectedTower];
+    var tower = towers[game.selectedTower];
     if(tower) {
 
         var $towerLevel = $("#towerLevel");
@@ -225,7 +223,7 @@ function displaySelectedTowerInfo(){
 
 //kijkt wanneer upgrade mogelijk is en activeert button.
 function enableUpgradeButton(){
-    var tower = towers[selectedTower];
+    var tower = towers[game.selectedTower];
     if(tower) {
         var upgradeButton = $('#upgradeTower');
         var upgradeCost = $('#upgradeCost');
@@ -244,7 +242,7 @@ function enableUpgradeButton(){
 }
 
 function enableSellButton(){
-    var tower = towers[selectedTower];
+    var tower = towers[game.selectedTower];
     var $sellButton = $('#sellTower');
     $('#sellPrice').text(Math.floor(tower.value) + " coins");
     $sellButton.removeClass("disabled");
@@ -252,7 +250,7 @@ function enableSellButton(){
 
 //toont de waarden van de volgende upgrade van de geselecteerde toren
 function showUpgradeInfo(){
-    var tower = towers[selectedTower];
+    var tower = towers[game.selectedTower];
     if(tower) {
         if(tower.level < tower.maxUpgradeLevel) {
             $("#towerLevel").text(tower.level + " ==> " + (tower.level + 1));
@@ -264,7 +262,7 @@ function showUpgradeInfo(){
 
 //toont terug de gewone waarden van de geselecteerde toren
 function hideUpgradeInfo(){
-    var tower = towers[selectedTower];
+    var tower = towers[game.selectedTower];
     if(tower) {
         $("#towerLevel").text(tower.level);
         $("#towerDamage").text(tower.damage);

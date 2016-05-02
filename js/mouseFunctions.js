@@ -20,7 +20,7 @@ function drawRadius(){
         var boardValueLinksOnder = getValueFromPos(mouse.x-(game.tileSize/4), mouse.y+(game.tileSize/4));
         var boardValueRechtsOnder = getValueFromPos(mouse.x+(game.tileSize/4), mouse.y+(game.tileSize/4));
 
-        var canPlace =( (game.money >= towerTypes[currentTower].prototype.cost) &&
+        var canPlace =( (game.money >= towerTypes[game.currentTower].prototype.cost) &&
                         (boardValueLinksBoven === 0 && boardValueLinksBoven !== null) &&
                         (boardValueRechtsBoven === 0 && boardValueRechtsBoven !== null) &&
                         (boardValueLinksOnder === 0 && boardValueLinksOnder !== null) &&
@@ -37,7 +37,7 @@ function drawRadius(){
 
         function drawCircle() {
             context.beginPath();
-            var range = towerTypes[currentTower].prototype.range;
+            var range = towerTypes[game.currentTower].prototype.range;
             context.arc(mouse.x, mouse.y, range, 0, 2 * Math.PI);
             // globalAlpha = transparancy
             context.globalAlpha = 0.4;
@@ -47,7 +47,7 @@ function drawRadius(){
 
         function drawTower(){
             var sprite = new Image();
-            sprite.src = "img/towers/" + towerTypes[currentTower].prototype.image;
+            sprite.src = "img/towers/" + towerTypes[game.currentTower].prototype.image;
             context.globalAlpha = 0.4;
             context.drawImage(sprite, mouse.x - game.tileSize/4, mouse.y - game.tileSize/4, game.tileSize/2, game.tileSize/2);
             context.globalAlpha = 1;
@@ -68,9 +68,9 @@ function placeTower(event) {
     event.stopPropagation();
     var mouse = game.mouse;
 
-    if (mouse.canPlaceTowerHere && currentTower != -1) {
+    if (mouse.canPlaceTowerHere && game.currentTower != -1) {
         addTower(mouse.x, mouse.y);
-        game.money -= towerTypes[currentTower].prototype.cost;
+        game.money -= towerTypes[game.currentTower].prototype.cost;
     }
 }
 
@@ -82,13 +82,13 @@ function displayInfo() {
     var tower = towers[i];
     var towerInfo = $('#towerInfo');
     if(tower){
-        currentTower = -1;
+        game.currentTower = -1;
         $("input:radio").prop("checked", false);
-        selectedTower = i;
+        game.selectedTower = i;
         displaySelectedTowerInfo();
         towerInfo.css('visibility', 'visible');
     } else {
-        selectedTower = -1;
+        game.selectedTower = -1;
         towerInfo.css('visibility', 'hidden');
     }
 }

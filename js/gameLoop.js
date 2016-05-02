@@ -11,10 +11,10 @@ function renderingStep(){
     drawAttackers();
     drawTowers();
     
-    if (currentTower != -1) {
+    if (game.currentTower != -1) {
         drawRadius();
-    }else if(selectedTower != -1){
-        towers[selectedTower].drawRange();
+    }else if(game.selectedTower != -1){
+        towers[game.selectedTower].drawRange();
     }
     
     drawAttacks();
