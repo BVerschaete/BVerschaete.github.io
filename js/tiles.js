@@ -1,13 +1,22 @@
 /**
  * Created by Bastien on 07/04/2016.
  */
-//tile objecten, veranderen de richting van een attacker als hij erover passeert
+
+/**
+ * tile objecten, veranderen de richting van een attacker als hij erover passeert
+ */
+
 function Tile(src){
     var temp = new Image();
     temp.src = "img/tiles/" + src;
     this.image = temp;
     this.changeDirection = null;
 }
+
+/**
+ * Alle mogelijke tile objecten worden hierin aangemaakt en aan het tiles-object toegevoegd
+ * iedere tile heeft een functie om de richting van een attacker aan te passen als hij erover passeert
+ */
 function createTiles() {
     var grass = new Tile("0.png");
 
