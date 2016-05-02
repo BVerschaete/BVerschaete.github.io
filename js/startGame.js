@@ -10,6 +10,7 @@ var game = {
     tileSize: 60,
     money: 400,
     currentWave: 0,
+    currentWaveSpawning: null,
     lives: 10,
     timeLastWaveSpawnEnds: null,
     paused: false,

@@ -11,8 +11,6 @@ function Wave(){
     this.waitTime = undefined;
 }
 
-var currentWaveSpawning = null;
-
 //kiest adhv de hoeveelste wave het is, welke wave moet gespawned worden
 function chooseWave(){
     var aantalMonsters;
@@ -78,28 +76,30 @@ function spawnWaveNow(event){
 }
 
 function spawnWave(){
-    currentWaveSpawning = chooseWave();
+    game.currentWaveSpawning = chooseWave();
     toggleSpawn();
     
     $('#startWave')[0].play();
 }
 
 function spawnNextMonster(){
-    if(currentWaveSpawning != null){
+    var wave = game.currentWaveSpawning;
+    
+    if(wave != null){
         game.timeLastWaveSpawnEnds = Date.now();
-        if(Date.now() - currentWaveSpawning.timeLastSpawned > currentWaveSpawning.waitTime){
-            currentWaveSpawning.timeLastSpawned = Date.now();
-            var attacker = createAttacker(currentWaveSpawning.attackers[0]);
-            attacker.speed *= currentWaveSpawning.speedFactor;
-            attacker.maxHealth *= currentWaveSpawning.maxHealthFactor;
+        if(Date.now() - wave.timeLastSpawned > wave.waitTime){
+            wave.timeLastSpawned = Date.now();
+            var attacker = createAttacker(wave.attackers[0]);
+            attacker.speed *= wave.speedFactor;
+            attacker.maxHealth *= wave.maxHealthFactor;
             attacker.health = attacker.maxHealth;
             addAttacker(attacker);
-            currentWaveSpawning.attackers.splice(0, 1);
+            wave.attackers.splice(0, 1);
         }
         
-        if(currentWaveSpawning.attackers.length == 0){
+        if(wave.attackers.length == 0){
             toggleSpawn();
-            currentWaveSpawning = null;
+            game.currentWaveSpawning = null;
         }
     }
 }

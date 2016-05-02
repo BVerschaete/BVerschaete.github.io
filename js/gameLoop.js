@@ -33,7 +33,7 @@ function updateLogic(){
         towers[i].attack();
     }
     
-    if((Date.now() - game.timeLastWaveSpawnEnds) > game.selectedLevel.spawnSpeed * 1000 && currentWaveSpawning == null) {
+    if((Date.now() - game.timeLastWaveSpawnEnds) > game.selectedLevel.spawnSpeed * 1000 && game.currentWaveSpawning == null) {
         spawnWave();
     }
     
@@ -65,8 +65,8 @@ function resumeGame(){
         attackers[i].oldNow += timePaused;
     }
 
-    if(currentWaveSpawning != null){
-        currentWaveSpawning.timeLastSpawned += timePaused;
+    if(game.currentWaveSpawning != null){
+        game.currentWaveSpawning.timeLastSpawned += timePaused;
     }
 
     for(i = 0; i < towers.length; i++){
