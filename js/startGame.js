@@ -39,7 +39,7 @@ function setup() {
             $("input:radio").prop("checked", false);
             displayInfo();
         });
-
+        
         drawMap();
 
         //startknop
