@@ -85,6 +85,9 @@ function setup() {
     }
 }
 
+/**
+ * Stelt basiswaarden in voor de game
+ */
 function setupGameVariable(){
     game.currentWaveSpawning = undefined;
     game.selectedTower = -1;
@@ -115,6 +118,9 @@ function pauseResumeButton(event){
     }
 }
 
+/**
+ * zorgt ervoor dat het spel gepauzeerd wordt bij het verwisselen van tabblad
+ */
 function pauseResumeDocument(){
     if (!game.manualPaused) {
         if (document.visibilityState == "hidden") {
@@ -126,7 +132,7 @@ function pauseResumeDocument(){
 }
 
 /**
- * kijkt iedere loop of de levens op 0 staan, zoja, toon het dimmer scherm met een highscores en herstart knop
+ * kijkt iedere loop of de levens op 0 staan en zet zo het spel stop
  */
 function checkGameOver() {
     if (game.lives <= 0) {
@@ -138,6 +144,10 @@ function checkGameOver() {
 
 }
 
+/**
+ * zorgt dat het dimmer scherm getoond wordt en dat het spel niet meer kan gepauzeerd en hervat worden
+ * voegt functionaliteit toe aan de knoppen op het dimmerscherm
+ */
 function gameOver(){
     document.removeEventListener("visibilitychange", pauseResumeDocument);
     var $dimmer = $('#dimmer');
@@ -150,23 +160,18 @@ function gameOver(){
     //tekst aanpassen naargeling het moet gepushed worden of niet
     if(game.selectedLevel.customLevel) {
         $stop.text("Go to highscores");
-        $stop.one('click', function(event){
-            event.stopPropagation();
+        $stop.one('click', function(){
             window.location.href = "highscores.html";
         });
     } else {
         $stop.text("Submit score");
-        $stop.one('click', function(event){
-            event.stopPropagation();
-            pushScore();
-        });
+        $stop.one('click', pushScore);
     }
 
     //speel opnieuw en verwijder nodige event listeners
     var $playAgain = $('#playAgain');
     $playAgain.css('display', 'inline-block');
-    $playAgain.one('click', function(event){
-        event.stopPropagation();
+    $playAgain.one('click', function(){
         $stop.off();
         $dimmer.hide();
         restartGame();
@@ -216,7 +221,7 @@ function pushScore() {
     };
 
     selectedHighscoreList.push(player, function () {
-        //window.location.href = "highscores.html";
+        window.location.href = "highscores.html";
     });
 }
 
