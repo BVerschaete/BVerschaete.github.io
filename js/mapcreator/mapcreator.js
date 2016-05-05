@@ -3,6 +3,9 @@
  */
 var selectedImage;
 
+/**
+ * Voeg images en canvas toe, samen met eventlisteners
+ */
 function setup(){
     level.board = generateBoard($("#sldRows").val(), $("#sldCols").val());
     addImages();
@@ -26,8 +29,10 @@ function setup(){
     $("[data-toggle=tooltip]").tooltip();
 }
 
+/**
+ * Voor iedere tile een image maken
+ */
 function addImages(){
-    // voorlopig zelf instellen hoeveel images er in zitten
     var images = $('#availableImages');
     for(var i = 0; i <= 26; i++){
         var $img = $(tiles[i].image);
@@ -40,6 +45,9 @@ function addImages(){
     changeSelectedImage();
 }
 
+/**
+ * Update de vergrootte versie met de geselecteerde image
+ */
 function changeSelectedImage(){
     $("#selectedImage").find("img")[0].src = selectedImage.src;
 }

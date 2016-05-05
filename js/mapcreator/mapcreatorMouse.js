@@ -1,6 +1,11 @@
 /**
  * Created by Bastien on 31/03/2016.
  */
+
+/**
+ * Simpele versie van de muis van gewone spel
+ */
+
 function getValueFromPos(x, y){
     var indexHeight = Math.floor(y / map.tileSize);
     var indexWidth = Math.floor(x / map.tileSize);

@@ -1,6 +1,12 @@
 /**
  * Created by Bastien on 31/03/2016.
  */
+
+/**
+ * Bij het updaten van de grootte van het canvas
+ * moet het vorige canvas verwijderd worden
+ * en een groter of kleiner canvas geplaatst worden
+ */
 function addCanvas(){
     $("canvas").remove();
     var width = map.tileSize * level.board[0].length;
@@ -22,6 +28,9 @@ function addCanvas(){
     addCanvasPlaceTileEventListeners();
 }
 
+/**
+ * Functie om tiles te plaatsen als de muis ingedrukt blijft gehouden worden
+ */
 function addCanvasPlaceTileEventListeners(){
     var interval;
     $(map.canvas).on('mousedown',function(event) {
@@ -36,6 +45,9 @@ function addCanvasPlaceTileEventListeners(){
     });
 }
 
+/**
+ * Tekent de map
+ */
 function drawMap(){
     for(var i = 0; i < level.board.length; i++){
         for(var j = 0; j < level.board[i].length; j++) {
@@ -44,7 +56,9 @@ function drawMap(){
     }
 }
 
-
+/**
+ * Toont met een witte schemering op welke tile de muis staat
+ */
 function highlightTile(){
     map.context.globalAlpha = 0.4;
     if(mouse.inCanvas) {
@@ -58,6 +72,9 @@ function highlightTile(){
     map.context.globalAlpha  = 1;
 }
 
+/**
+ * Selecteren van een start tile zodat het level weet waar de attackers moeten beginnen met spawnen
+ */
 function selectStartTile(){
     var $canvas = $(map.canvas);
     $canvas.off('mousedown');
@@ -74,6 +91,9 @@ function selectStartTile(){
     });
 }
 
+/**
+ * Toont met groene scherming op welke tile de attackers starten
+ */
 function colorStartingTile(){
     if(level.startX != null && level.startY != null) {
         map.context.globalAlpha = 0.4;

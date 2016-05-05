@@ -4,6 +4,14 @@
 /**
  * Created by Bastien on 31/03/2016.
  */
+
+
+var customLevels = [];
+var selectedCustomLevel = -1;
+
+/**
+ * Variabelen van het customLevel
+ */
 var level = {
     name: "Custom Level",
     difficulty: 0,
@@ -17,21 +25,27 @@ var level = {
     attackers: []
 };
 
-var customLevels = [];
-var selectedCustomLevel = -1;
-
+/**
+ * Zet de waarden van de inputs in de level variabele
+ */
 function createLevel(){
     level.name = $('#levelName').val();
     level.difficulty = parseInt($('#levelDifficulty').val());
     level.spawnSpeed = parseInt($('#levelSpawnSpeed').val());
-    level.startDirection = parseInt($('#levelStartDirection').find(":selected").val());
+    changeStartDirection();
 }
 
+/**
+ * Verandert de startdirection, aparte functie omdat dit moet aangepast
+ * worden wanneer er geklikt wordt in de lijst
+ */
 function changeStartDirection() {
     level.startDirection = parseInt($('#levelStartDirection').find(":selected").val());
-    console.log(level.startDirection);
 }
 
+/**
+ * Als alle inputs in orde zijn, sla het level op in de cookie
+ */
 function saveLevel(){
     if(checkInputs()) {
         createLevel();
@@ -41,10 +55,16 @@ function saveLevel(){
             customLevels[selectedCustomLevel] = level;
         }
         setCookie("customLevels", JSON.stringify(customLevels), 7);
+        
+        //Herlaad de pagina zodat bij het laden van een level alles is aangepast
+        //En er geen spam-levels kunnen worden aangemaakt
         location.reload();
     }
 }
 
+/**
+ * Kijkt of alle inputs in orde zijn, toon anders een error message
+ */
 function checkInputs(){
     var i = 0;
     $('#errorMessage').text("");
@@ -73,11 +93,17 @@ function checkInputs(){
     return i == 0;
 }
 
+/**
+ * Algemene functie om error berichten te tonen
+ */
 function displayErrorMessage(message){
     var errorMessage = $('#errorMessage');
     errorMessage.html(errorMessage.html() + '<br>' + message);
 }
 
+/**
+ * Laad alle custom levels om een level te editen
+ */
 function loadLevels(){
     var customLevelDiv = $('#customLevels');
     customLevelDiv.empty();
@@ -105,6 +131,9 @@ function loadLevels(){
     }
 }
 
+/**
+ * Laad de waarden van het geselecteerde level in de level variabele
+ */
 function loadLevel(event){
     $('#customLevels').hide();
     var index = parseInt($(event.target).attr('data-level'));
@@ -124,6 +153,9 @@ function loadLevel(event){
     drawMap();
 }
 
+/**
+ * Verwijder een custom level
+ */
 function deleteLevel(event){
     customLevels.splice(parseInt($(event.target).parent().attr('data-level')), 1);
     setCookie("customLevels", JSON.stringify(customLevels), 7);

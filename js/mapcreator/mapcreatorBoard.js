@@ -1,11 +1,15 @@
 /**
  * Created by Bastien on 31/03/2016.
  */
-var map = { tileSize: 50,
+var map = {
+    tileSize: 50,
     canvas: null,
     context: null
 };
 
+/**
+ * Maakt een array aan met aantal rijen en kolommen
+ */
 function generateBoard(rows, cols){
     var b = [];
 
@@ -19,10 +23,17 @@ function generateBoard(rows, cols){
     return b;
 }
 
+/**
+ * Backup bord als men geen vooruitgang wil kwijtgraken bij het veranderen van de tilesize
+ * als er al iets op het bord staat
+ */
 function backupBoard() {
     level.backupBoard = level.board;
 }
 
+/**
+ * Herstelt het bord naar de vorige versie
+ */
 function restoreBoard() {
     if (confirm("The board will be restored. Are you sure?")) {
         level.board = level.backupBoard;
@@ -33,39 +44,60 @@ function restoreBoard() {
     }
 }
 
+/**
+ * Update het scherm met waarden van de sliders
+ */
 function displaySliderValues() {
     $("#atlRows").html($("#sldRows").val());
     $("#atlCols").html($("#sldCols").val());
     $("#tileSize").html(map.tileSize);
 }
 
+/**
+ * Update de grootte van het bord naar de waarde van de sliders
+ */
 function changeBoardSize(){
     level.board = generateBoard($("#sldRows").val(), $("#sldCols").val());
     displaySliderValues();
     addCanvas();
-    console.log("changing board size")
 }
 
+/**
+ * Update de grootte van de tiles
+ */
 function changeTileSize(event){
     map.tileSize = event.target.value;
     displaySliderValues();
     addCanvas();
 }
 
+/**
+ * Verandert het cijfer in de array adhv de waarde van de geselecteerde afbeelding
+ * en de positie van de muis
+ */
 function placeTile(){
     level.board[getMouseTileY()][getMouseTileX()] = parseInt(selectedImage.getAttribute("data-id"));
 }
 
+/**
+ * Selecteer een image
+ */
 function selectTile(event){
     selectedImage = event.target;
     changeSelectedImage();
 }
 
+/**
+ * Verwijder alle geplaatste tiles van het bord
+ */
 function clearBoard(){
     changeBoardSize();
     drawMap();
 }
 
+/**
+ * Idem als functie in het gewone spel
+ */
 function isInMiddleOfSquare(attacker) {
     var centerTileX = attacker.posX * map.tileSize + map.tileSize / 2;
     var centerTileY = attacker.posY * map.tileSize + map.tileSize / 2;
