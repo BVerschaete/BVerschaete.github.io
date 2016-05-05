@@ -4,10 +4,10 @@
 function BossAttacker(){
     Attacker.call(this);
     this.scale = 1.5;
-    this.maxHealth = 1000;
+    this.maxHealth = 2500;
     this.health = this.maxHealth;
     this.image = "dragonBoss.png";
-    this.reward = 200;
+    this.reward = 400;
 }
 
 BossAttacker.prototype = Object.create(Attacker.prototype);
