@@ -1,7 +1,11 @@
 /**
  * Created by Gaben on 16/03/2016.
  */
-// waarde van element in board[][] teruggeven voor corresponderende x en y waarde
+
+/**
+ * waarde van element in board[][] teruggeven voor corresponderende x en y waarde
+ * null teruggeven als we buiten het canvas gaan
+ */
 function getValueFromPos(x, y){
     var indexHeight = Math.floor(y / game.tileSize);
     var indexWidth = Math.floor(x / game.tileSize);
@@ -13,6 +17,9 @@ function getValueFromPos(x, y){
     return null;
 }
 
+/**
+ * Kijkt wanneer een gegeven attacker het midden van een tile gepasseerd is
+ */
 function isInMiddleOfSquare(attacker){
     var centerTileX = attacker.posX*game.tileSize + game.tileSize/2;
     var centerTileY = attacker.posY*game.tileSize + game.tileSize/2;
@@ -43,7 +50,9 @@ function isInMiddleOfSquare(attacker){
     return false;
 }
 
-//tekent de achtergrond adhv schema in levels.js
+/**
+ * tekent de achtergrond adhv schema in levels.js
+ */
 function drawMap(){
     var board = game.selectedLevel.board;
     for(var i = 0; i < board.length; i++){
@@ -53,7 +62,9 @@ function drawMap(){
     }
 }
 
-//voegt het canvas toe aan de html pagina en update de margins en canvasgrootte naar de grootte van het geselecteerde level
+/**
+ * voegt het canvas toe aan de html pagina en update de margins en canvasgrootte naar de grootte van het geselecteerde level
+ */
 function addCanvas(){
     var board = game.selectedLevel.board;
     var width = game.tileSize * board[0].length;
@@ -78,6 +89,9 @@ function addCanvas(){
     game.context = game.canvas.getContext("2d");
 }
 
+/**
+ * Voegt voor ieder toren een button toe met juiste tekst
+ */
 function addTowerButtons(){
     for(var i = 0; i < towerTypes.length; i ++){
         var buttonid = "towerButton" + i;
@@ -89,6 +103,9 @@ function addTowerButtons(){
     }
 }
 
+/**
+ * Zorgt ervoor dat de waarden in game info geupdate worden
+ */
 function displayGameInfo(){
     $("#lives").text(game.lives); // toont score attackers
     $("#money").text(Math.floor(game.money)); // toont het geld op het scherm
@@ -97,7 +114,10 @@ function displayGameInfo(){
     displayTime();
 }
 
-//toont timer voor volgende wave
+/**
+ * toont timer voor volgende wave
+ * Zet timer op 0 als timer kleiner zou worden dan 0 (vooral belangrijk voor latere waves)
+ */
 function displayTime(){
     var timeField = $("#nextWaveTime");
     if(game.timeLastWaveSpawnEnds < Date.now()) {

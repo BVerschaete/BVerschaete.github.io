@@ -6,7 +6,9 @@ function setup(){
     useDisqus();
 }
 
-//alles voor disqus staat hier
+/**
+ * alles voor disqus comments staat hier
+ */
 var disqus_config = function () {
     this.page.url = "http://bverschaete.github.io/";  // Replace PAGE_URL with your page's canonical URL variable
     this.page.identifier = "discussionPage"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable

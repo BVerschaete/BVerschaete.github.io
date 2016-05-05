@@ -3,6 +3,9 @@
  */
 var players = [];
 
+/**
+ * Maakt knoppen aan voor ieder standaard level en zet de table inhoud op het eerste level
+ */
 function setup(){
     for(var i = 0; i < standardLevels.length; i++){
         var naam = "standardLevel" + i;
@@ -19,11 +22,20 @@ function setup(){
     setupTable(0);
 }
 
+/**
+ * functie voor het opzetten table bij een klik op een level knop
+ */
 function changeTable(event){
     var level = $(event.target).attr('data-level');
     setupTable(level);
 }
 
+/**
+ * Verandert titel van de table en vult de playerArray met spelers vanuit de Firebase database
+ * met behulp van Firebase library
+ * 
+ * Players moeten in tabel zitten zodat ze gemakkelijk te sorteren zijn
+ */
 function setupTable(levelNumber){
     $('.hovered').prop('checked', false);
     $('.levelSelectButton[data-level=' + levelNumber +']').prop('checked', true);
@@ -46,6 +58,9 @@ function setupTable(levelNumber){
     });
 }
 
+/**
+ * Sorteer tabel en maak een rij voor iedere speler in de tabel
+ */
 function fillTable(){
     players.sort(comparator);
 
@@ -80,7 +95,12 @@ function fillTable(){
     
 }
 
-//wordt als argument meegegeven bij de array.sort functie om de highscores te sorteren op score
+/**
+ * wordt als argument meegegeven bij de array.sort functie om de highscores te sorteren op score
+ * a en b zijn player objecten, de scores van objecten a en b worden vergeleken
+ * aan iedere twee objecten a en b wordt een waarde meegegeven (in dit geval het verschil tussen de scores)
+ * zodat de sort functie weet welke speler waar moet adhv alle objecten met elkaar te vergelijken
+ */
 function comparator(a, b){
     return parseInt(b.score) - parseInt(a.score);
 }

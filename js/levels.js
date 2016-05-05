@@ -34,7 +34,7 @@ function createLevels() {
     var level0 = {
         name: "Learning the ropes",
         difficulty: 1,
-        spawnSpeed: 20,
+        spawnSpeed: 30,
         board: [
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [1, 3, 0, 19, 0, 0, 6, 1, 3, 0],
@@ -56,7 +56,7 @@ function createLevels() {
     var level1 = {
         name: "Choices... And Water!",
         difficulty: 1,
-        spawnSpeed: 20,
+        spawnSpeed: 25,
         board: [
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 19, 0, 6, 1, 1, 1, 1, 1, 1],

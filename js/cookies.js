@@ -1,7 +1,10 @@
 /**
  * Created by Bastien on 31/03/2016.
  */
-//alle functies om cookies te lezen en schrijven
+
+/**
+ * alle functies om cookies te lezen en schrijven, code online te vinden
+ */
 function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
