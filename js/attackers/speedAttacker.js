@@ -3,7 +3,7 @@
  */
 function SpeedAttacker(){
     Attacker.call(this);
-    this.maxHealth = 125;
+    this.maxHealth = 90;
     this.health = this.maxHealth;
     this.image = "dragonSpeed.png";
     this.reward = 20;
