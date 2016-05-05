@@ -20,6 +20,9 @@ LaserTower.prototype.attack = function() {
     }
 };
 
+/**
+ * Aangepaste findTarget code zodat hij op hetzelfde target zou blijven zolang dat target in range is
+ */
 LaserTower.prototype.findTarget = function(){
     var newTarget = null;
 

@@ -15,6 +15,9 @@ FreezeTower.prototype.maxUpgradeLevel = 1;
 FreezeTower.prototype.displayName = "Freeze Tower";
 FreezeTower.prototype.attackType = FreezeBullet;
 
+/**
+ * Aangepaste findTarget code die ook zoekt achter attackers die nog niet geslowed zijn
+ */
 FreezeTower.prototype.findTarget = function(){
     this.target = null;
 

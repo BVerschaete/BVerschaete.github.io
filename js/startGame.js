@@ -50,6 +50,8 @@ function setup() {
 
         var upgradeTower = $("#upgradeTower");
         upgradeTower.click(upgradeSelectedTower);
+        
+        //toon upgrade info als erover gehoverd wordt, en verberg ze weer als de hover weg is
         upgradeTower.hover(showUpgradeInfo, hideUpgradeInfo);
 
         $("#sellTower").click(sellSelectedTower);

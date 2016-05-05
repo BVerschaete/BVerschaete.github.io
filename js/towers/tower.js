@@ -3,7 +3,9 @@
  */
 var towers = [];
 
-//basis toren
+/**
+ * basis toren
+ */
 function Tower(x, y){
     this.locX= x;
     this.locY= y;
@@ -15,7 +17,9 @@ function Tower(x, y){
     this.value = this.cost * this.sellRate;
 }
 
-//verschillen per tower functies komen hier
+/**
+ * verschillen per tower functies komen hier
+ */
 Tower.prototype.image = "tower1.png";
 Tower.prototype.range = (game.tileSize/2) + (game.tileSize*1.5); //40*1.875 = 75, in functie van tileSize stellen om gemakkelijk spel te resizen-
 Tower.prototype.fireRate = 500; // 1 keer per 1000 milliseconden
@@ -25,15 +29,18 @@ Tower.prototype.maxUpgradeLevel = 5;
 Tower.prototype.displayName = "Tower Tier 1";
 Tower.prototype.attackType = Bullet;
 
-//basisfuncties van alle towers
-//gemeenschappelijke draw-functie
+/**
+ * basisfuncties van alle towers
+ */
 Tower.prototype.draw = function(){
     var sprite = new Image();
     sprite.src = "img/towers/" + this.image;
     game.context.drawImage(sprite, this.locX - game.tileSize/4, this.locY - game.tileSize/4, game.tileSize/2, game.tileSize/2);
 };
 
-//returnt de eerste attacker in de array (dus het verst op de map) die binnen de range van de toren is
+/**
+ * returnt de eerste attacker in de array (dus het verst op de map) die binnen de range van de toren is
+ */
 Tower.prototype.findTarget = function(){
     this.target = null;
 
@@ -47,14 +54,22 @@ Tower.prototype.findTarget = function(){
     }
 };
 
-//berekent de +x en +y die een bullet-object moet optellen bij zijn huidige waarden om richting de aanvaller te gaan.
+/**
+ * berekent de +x en +y die een bullet-object moet optellen bij zijn huidige waarden om richting de aanvaller te gaan.
+ */
 Tower.prototype.findUnitVector = function() {
-    if (!this.target) return false; //if there is no target, dont bother calculating unit vector
-    this.xFire = this.locX; //+ game.tileSize * xDist / dist; //where turret ends and bullets start
-    this.yFire = this.locY; //+ game.tileSize * yDist / dist;
+    //Als er geen target is moet vector niet berekent worden
+    if (!this.target) {
+        return false;
+    }
+    
+    this.xFire = this.locX;
+    this.yFire = this.locY;
 };
 
-//valt het huidig target aan met een bullet
+/**
+ * valt het huidig target aan met een bullet
+ */
 Tower.prototype.attack = function(){
     var now = Date.now();
     var delta = now - this.oldNow;
@@ -67,7 +82,9 @@ Tower.prototype.attack = function(){
     }
 };
 
-//tekent de range van de tower op het canvas
+/**
+ * tekent de range van de tower op het canvas
+ */
 Tower.prototype.drawRange = function(){
     var context = game.context;
     var range = this.range;
@@ -75,13 +92,14 @@ Tower.prototype.drawRange = function(){
     context.fillStyle = 'white';
     context.beginPath();
     context.arc(this.locX, this.locY, range, 0, 2 * Math.PI);
-    // globalAlpha = transparancy
     context.globalAlpha = 0.4;
     context.fill();
     context.globalAlpha = 1;
 };
 
-//upgrade de waarden van deze tower
+/**
+ * upgrade de waarden van deze tower
+ */
 Tower.prototype.upgrade = function(){
     this.level += 1;
     this.range = Math.floor(this.range * 1.125);
@@ -90,14 +108,18 @@ Tower.prototype.upgrade = function(){
     this.upgradeCost *= 2;
 };
 
-//voert draw functie uit bij alle torens
+/**
+ * voert draw functie uit bij alle torens
+ */
 function drawTowers(){
     for(var i = 0; i < towers.length; i++){
         towers[i].draw();
     }
 }
 
-//voegt toren toe aan toren-array
+/**
+ * voegt toren toe aan toren-array
+ */
 function addTower(){
     var mouse = game.mouse;
     if(game.currentTower != -1) {
@@ -105,22 +127,32 @@ function addTower(){
     }
 }
 
-//door op knop te klikken, selecteren welke toren er gebouwd moet worden
+/**
+ * door op knop te klikken, selecteren welke toren er gebouwd moet worden
+ */
 function selectTowerToBuild(event){
     event.stopPropagation();
-    //verandert de geselecteerde toren terug op 1 zodat de towerInfo en select cirkel worden uitgeschakeld
+    
+    //verandert de geselecteerde toren terug op -1 zodat de towerInfo en select cirkel worden uitgeschakeld
     game.selectedTower = -1;
+    
     //custom attribuut van iedere button die zegt welke soort tower er moet geplaatst worden
     game.currentTower = event.target.getAttribute("data-type");
+    
     displayCurrentTowerInfo();
 }
 
+/**
+ * Toont info voor de basiswaarden van een tower
+ * als er op een towerknop geklikt wordt
+ */
 function displayCurrentTowerInfo(){
     var tower = new towerTypes[game.currentTower]();
 
     var $towerDamage = $("#towerDamage");
     var $towerFreeze = $("#towerFreeze");
 
+    //freezetower doet geen damage, maar heeft wel een freeze %
     if(tower instanceof FreezeTower){
         $towerDamage.parent().css('display', 'none');
         $towerFreeze.parent().css('display', 'block');
@@ -142,17 +174,23 @@ function displayCurrentTowerInfo(){
     $("#sellTower").css('display', 'none');
 }
 
-//kijkt of toren op deze plaats staat, met een dubbel zo grote straal, zodat omtrek van geplaatste tower ook meegerekend wordt
+/**
+ * kijkt of toren op deze plaats staat, met een dubbel zo grote straal, zodat omtrek van geplaatste tower ook meegerekend wordt
+ */
 function towerOnLocationPlace(x1, y1){
     return towerOnLocation(x1, y1, game.tileSize/2);
 }
 
-//kijkt of toren op deze plaats staat, en zoja welkeen, met een gewone straal
+/**
+ * kijkt of toren op deze plaats staat, en zoja welkeen, met een gewone straal
+ */
 function towerOnLocationSelect(x1, y1){
     return towerOnLocation(x1, y1, game.tileSize/4);
 }
 
-//bij klik, kijkt functie of er op de plaats van de coordinaten een toren staat
+/**
+ * bij klik, kijkt functie of er op de plaats van de coordinaten een toren staat
+ */
 function towerOnLocation(x1, y1, r){
     for (var i = 0; i < towers.length; i++) {
         var x0 = towers[i].locX;
@@ -164,7 +202,9 @@ function towerOnLocation(x1, y1, r){
     return -1;
 }
 
-//upgrade de geselecteerde toren en past towerinfo aan
+/**
+ * upgrade de geselecteerde toren en past towerinfo aan
+ */
 function upgradeSelectedTower(){
     event.stopPropagation();
     var tower = towers[game.selectedTower];
@@ -178,6 +218,9 @@ function upgradeSelectedTower(){
     }
 }
 
+/**
+ * Verkoop de geselecteerde toren
+ */
 function sellSelectedTower(){
     event.stopPropagation();
     var tower = towers[game.selectedTower];
@@ -187,11 +230,12 @@ function sellSelectedTower(){
     displayInfo();
 }
 
-//toont info over geselecteerde toren
+/**
+ * toont info over geselecteerde toren op het veld
+ */
 function displaySelectedTowerInfo(){
     var tower = towers[game.selectedTower];
     if(tower) {
-
         var $towerLevel = $("#towerLevel");
         var $towerDamage = $("#towerDamage");
         var $towerFreeze = $("#towerFreeze");
@@ -221,7 +265,9 @@ function displaySelectedTowerInfo(){
     }
 }
 
-//kijkt wanneer upgrade mogelijk is en activeert button.
+/**
+ * kijkt wanneer upgrade mogelijk is en activeert button
+ */
 function enableUpgradeButton(){
     var tower = towers[game.selectedTower];
     if(tower) {
@@ -241,6 +287,10 @@ function enableUpgradeButton(){
     }
 }
 
+/**
+ * Dit moet gebeuren als we een toren op het veld selecteren
+ * en geen toren van een button
+ */
 function enableSellButton(){
     var tower = towers[game.selectedTower];
     var $sellButton = $('#sellTower');
@@ -248,7 +298,9 @@ function enableSellButton(){
     $sellButton.removeClass("disabled");
 }
 
-//toont de waarden van de volgende upgrade van de geselecteerde toren
+/**
+ * toont de waarden van de volgende upgrade van de geselecteerde toren
+ */
 function showUpgradeInfo(){
     var tower = towers[game.selectedTower];
     if(tower) {
@@ -260,7 +312,9 @@ function showUpgradeInfo(){
     }
 }
 
-//toont terug de gewone waarden van de geselecteerde toren
+/**
+ * toont terug de gewone waarden van de geselecteerde toren
+ */
 function hideUpgradeInfo(){
     var tower = towers[game.selectedTower];
     if(tower) {

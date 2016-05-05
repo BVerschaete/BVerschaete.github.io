@@ -1,8 +1,12 @@
 /**
  * Created by Gaben on 19/03/2016.
  */
-var standaardAttackerSnelheid = Attacker.prototype.speed;
 
+/**
+ * Constructor voor Bullet object
+ * snelheid aanpassen aan het target als het target
+ * sneller gaat dan de standaard snelheid
+ */
 function Bullet(tower) {
     this.locX = tower.xFire;
     this.locY = tower.yFire;
@@ -11,6 +15,7 @@ function Bullet(tower) {
     this.speed = 0;
 
     this.setSpeed = function(){
+        var standaardAttackerSnelheid = Attacker.prototype.speed;
         if(tower.target.speed > standaardAttackerSnelheid) {
             this.speed = 1.5 * (game.tileSize / 40) * tower.target.speed / standaardAttackerSnelheid;
         } else {
@@ -24,7 +29,9 @@ function Bullet(tower) {
 Bullet.prototype.r = game.tileSize / 10;
 Bullet.prototype.color = "#FF0000";
 
-//beweegt bullet naar zijn locX en locY
+/**
+ * beweegt bullet naar zijn locX en locY
+ */
 Bullet.prototype.move = function() {
     //find unit vector
     var xDist = this.target.locX - this.locX;
@@ -35,7 +42,9 @@ Bullet.prototype.move = function() {
 
 };
 
-//tekent bullet
+/**
+ * tekent bullet
+ */
 Bullet.prototype.draw = function() {
     var context = game.context;
 
@@ -45,7 +54,9 @@ Bullet.prototype.draw = function() {
     context.fill();
 };
 
-//checkt wanneer bullet een attacker raakt
+/**
+ * checkt wanneer bullet een attacker raakt
+ */
 Bullet.prototype.checkCollision = function() {
     if(this.locX - this.r <= this.target.locX &&
         this.locX + this.r >= this.target.locX &&
@@ -58,6 +69,9 @@ Bullet.prototype.checkCollision = function() {
     return false;
 };
 
+/**
+ * Update functie voor alle soorten attacks die dan gemeenschappelijk kunnen uitgevoerd worden
+ */
 Bullet.prototype.update = function(){
     this.move();
 };

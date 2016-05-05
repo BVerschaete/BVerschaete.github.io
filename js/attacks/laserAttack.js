@@ -6,12 +6,12 @@ function LaserAttack(tower){
     this.target = tower.target;
 }
 
-/* ik denk dat het best is als een attack altijd een draw, checkCollision en update functie heeft
-    dit zijn dan ook de methodes die worden opgeroepen in de gameloop
-    hier is checkCollision altijd true omdat het een continu laser is, bij een schiet laser zou dit anders zijn
-    de laserattack wordt iedere keer verwijdert doordat een tower elke gameloop opnieuw een laserattack pusht wanneer een attacker binnen range is
+/**
+ * attack heeft altijd een draw, checkCollision en update functie
+ * dit zijn dan ook de methodes die worden opgeroepen in de gameloop
+ * hier is checkCollision altijd true omdat het een continu laser is, bij een schiet laser zou dit anders zijn
+ * de laserattack wordt iedere keer verwijdert doordat een tower elke gameloop opnieuw een laserattack pusht wanneer een attacker binnen range is
  */
-
 LaserAttack.prototype.draw = function(){
     var context = game.context;
     context.lineWidth = 5;
