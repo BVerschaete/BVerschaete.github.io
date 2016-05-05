@@ -2,7 +2,6 @@
  * Created by Gaben on 24/03/2016.
  */
 var players = [];
-var tableFilled = false;
 
 function setup(){
     for(var i = 0; i < standardLevels.length; i++){
@@ -35,8 +34,6 @@ function setupTable(levelNumber){
     
     $('#title').text("Highscores (Level " + (level+1) + ")");
 
-    tableFilled = false;
-
     var myFirebaseRef = new Firebase("https://popping-fire-3131.firebaseio.com/");
     var playerTable = myFirebaseRef.child('Highscores').child(level).child('Players');
 
@@ -50,39 +47,37 @@ function setupTable(levelNumber){
 }
 
 function fillTable(){
-    if(!tableFilled) {
-        tableFilled = true;
-        players.sort(comparator);
+    players.sort(comparator);
 
-        if (players.length > 0) {
+    if (players.length > 0) {
 
-            var aantal = players.length > 10 ? 10 : players.length;
+        var aantal = players.length > 10 ? 10 : players.length;
 
-            for (var i = 0; i < aantal; i++) {
-                var $player = $('<tr>');
-                var $playerName = $('<td>');
-                var $playerScore = $('<td>');
-                var $playerPlace = $('<td>');
+        for (var i = 0; i < aantal; i++) {
+            var $player = $('<tr>');
+            var $playerName = $('<td>');
+            var $playerScore = $('<td>');
+            var $playerPlace = $('<td>');
 
-                $playerPlace.text(i + 1);
-                $playerName.text(players[i]["name"]);
-                $playerScore.text(players[i]["score"]);
+            $playerPlace.text(i + 1);
+            $playerName.text(players[i]["name"]);
+            $playerScore.text(players[i]["score"]);
 
-                $player.append($playerPlace);
-                $player.append($playerName);
-                $player.append($playerScore);
-                $('tbody').append($player);
-            }
-        } else {
-            var $messageRow = $('<tr>');
-            var $message = $('<td>');
-            $message.attr('colspan', 3);
-            $message.text("Be the first to play this level!");
-
-            $messageRow.append($message);
-            $('tbody').append($messageRow);
+            $player.append($playerPlace);
+            $player.append($playerName);
+            $player.append($playerScore);
+            $('tbody').append($player);
         }
+    } else {
+        var $messageRow = $('<tr>');
+        var $message = $('<td>');
+        $message.attr('colspan', 3);
+        $message.text("Be the first to play this level!");
+
+        $messageRow.append($message);
+        $('tbody').append($messageRow);
     }
+    
 }
 
 //wordt als argument meegegeven bij de array.sort functie om de highscores te sorteren op score
