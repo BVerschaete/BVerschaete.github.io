@@ -2,7 +2,9 @@
  * Created by Gaben on 17/03/2016.
  */
 
-//zoekt x en y coordinaten van muis
+/**
+ * zoekt x en y coordinaten van muis op het canvas
+ */
 function getMousePosition(event) {
     var rect = game.canvas.getBoundingClientRect();
 
@@ -10,7 +12,10 @@ function getMousePosition(event) {
     game.mouse.y = event.clientY - rect.top - parseInt($(game.canvas).css("padding-top"));
 }
 
-//tekent 'ghost' tower en als er een tower geselecteerd is om te bouwen
+/**
+ * tekent 'ghost' tower en als er een tower geselecteerd is om te bouwen
+ * verandert de cirkel in het rood als de toren op een plaats komt die niet mag
+ */
 function drawRadius(){
     var mouse = game.mouse;
     if(mouse.inCanvas) {
@@ -39,7 +44,6 @@ function drawRadius(){
             context.beginPath();
             var range = towerTypes[game.currentTower].prototype.range;
             context.arc(mouse.x, mouse.y, range, 0, 2 * Math.PI);
-            // globalAlpha = transparancy
             context.globalAlpha = 0.4;
             context.fill();
             context.globalAlpha = 1;
@@ -58,12 +62,17 @@ function drawRadius(){
     }
 }
 
+/**
+ * toggled wannner muis in en uit het canvas gaat, nodig om te kijken wanneer er moet getekend worden rond de muis
+ */
 function toggleMouseInCanvas(){
     var mouse = game.mouse;
     mouse.inCanvas = !mouse.inCanvas;
 }
 
-//plaatst tower bij muisklik
+/**
+ * plaatst tower bij muisklik
+ */
 function placeTower(event) {
     event.stopPropagation();
     var mouse = game.mouse;
@@ -74,7 +83,9 @@ function placeTower(event) {
     }
 }
 
-//toont info als er tower geselecteert wordt, cleart de doorzichtige tower placement als je bezig bent met towers plaatsen dmv currentTower = -1
+/**
+ * toont info als er tower geselecteert wordt, cleart de doorzichtige tower placement als je bezig bent met towers plaatsen d.m.v. currentTower = -1
+ */
 function displayInfo() {
     event.stopPropagation();
     var mouse = game.mouse;
@@ -82,6 +93,7 @@ function displayInfo() {
     var tower = towers[i];
     var towerInfo = $('#towerInfo');
     if(tower){
+        //zorgt ervoor dat de button van de geselecteerde tower wordt uitgeschakeld
         game.currentTower = -1;
         $("input:radio").prop("checked", false);
         game.selectedTower = i;

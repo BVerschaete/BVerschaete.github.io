@@ -27,6 +27,9 @@ var standardLevels = [];
 var customLevels = [];
 var levels = [];
 
+/**
+ * Maakt standaardlevels aan en vult de arrays
+ */
 function createLevels() {
     var level0 = {
         name: "Learning the ropes",
@@ -74,6 +77,7 @@ function createLevels() {
     //NA HET MAKEN VAN EEN LEVEL VERPLICHT TOEVOEGEN AAN ARRAY!!
     standardLevels.push(level0, level1);
 
+    //als er custom levels gemaakt zijn (deze staan in cookie) dan moeten ze geladen worden
     if(checkCookie("customLevels")){
         customLevels = JSON.parse(getCookie("customLevels"));
     }

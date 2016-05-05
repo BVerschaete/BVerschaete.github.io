@@ -183,7 +183,6 @@ function gameOver(){
 
 /**
  * Verwijder alle towers, attackers en kogels, zet daarna de game variabelen op hun beginwaarden.
- * TODO Het opstellen van de globale variabele game kan desnoods nog in een aparte functie gezet worden
  */
 function restartGame(){
     attackers=[];

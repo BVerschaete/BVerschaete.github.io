@@ -1,7 +1,10 @@
 /**
  * Created by basti on 24/03/2016.
  */
-//spawnt X aantal monsters
+
+/**
+ * Wave object
+ */
 function Wave(){
     this.attackers = [];
     this.spawnSpeed = 0;
@@ -11,7 +14,9 @@ function Wave(){
     this.waitTime = undefined;
 }
 
-//kiest adhv de hoeveelste wave het is, welke wave moet gespawned worden
+/**
+ * kiest adhv de hoeveelste wave het is, welke wave moet gespawned worden
+ */
 function chooseWave(){
     var aantalMonsters;
     var typeMonster;
@@ -48,6 +53,7 @@ function chooseWave(){
         typeMonster = attackerCodes.normalAttacker;
     }
 
+    //maximaalsnelheid van * 2, voorkomt overdreven snelheid in latere levels
     if(speedFactor >=2){
         speedFactor = 2;
     }
@@ -55,7 +61,9 @@ function chooseWave(){
     return createWave(aantalMonsters, typeMonster, speedFactor, maxHealthFactor);
 }
 
-//stelt een wave op met gegeven parameters
+/**
+ * stelt een wave op met gegeven parameters
+ */
 function createWave(aantalMonsters, typeMonster, speedFactor, maxHealthFactor){
     var wave = new Wave();
     for(var i = 0; i < aantalMonsters; i++){
@@ -67,14 +75,21 @@ function createWave(aantalMonsters, typeMonster, speedFactor, maxHealthFactor){
     wave.speedFactor = speedFactor;
     wave.maxHealthFactor = maxHealthFactor;
     wave.timeLastSpawned = Date.now();
+    
     return wave;
 }
 
+/**
+ * spawnt een wave als er op de timer wordt geklikt
+ */
 function spawnWaveNow(event){
     event.stopPropagation();
     spawnWave();
 }
 
+/**
+ * zet de spawnende wave van de game op een nieuwe wave, speelt het geluid af en toggled de klikbaarheid van de timer
+ */
 function spawnWave(){
     game.currentWaveSpawning = chooseWave();
     toggleSpawn();
@@ -82,6 +97,10 @@ function spawnWave(){
     $('#startWave')[0].play();
 }
 
+/**
+ * als de verstreken tijd tussen het spawnen van het vorige monster groter is dan de wachttijd tussen attackers en er monsters moeten gespawned worden
+ * moeten het volgende monster gespawned worden
+ */
 function spawnNextMonster(){
     var wave = game.currentWaveSpawning;
     
@@ -104,7 +123,9 @@ function spawnNextMonster(){
     }
 }
 
-//update de spawnbutton zodat hij gedisabled moet worden of niet
+/**
+ * update de spawnbutton zodat hij gedisabled moet worden of niet
+ */
 function toggleSpawn(){
     var btnSpawn = $("#btnSpawnWave");
     if(btnSpawn.prop('data-disabled')) {

@@ -2,12 +2,13 @@
  * Created by Bastien on 02/04/2016.
  */
 
-//zorgt ervoor dat spelernaam wordt doorgegeven aan gamepagina
+/**
+ * zorgt ervoor dat spelernaam wordt doorgegeven aan gamepagina
+ */
 function setup() {
     //voor de cookie pop up
     window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"Got it!","learnMore":"More info","link":null,"theme":"dark-floating"};
     
-    scroll();
     var start = $('#startGame');
     var input = $('#usernameInput');
     start.addClass("disabled");
@@ -31,14 +32,21 @@ function setup() {
         }
     });
 
+    scroll();
     setPictures();
 }
 
+/**
+ * Kijkt of de ingegeven naam geldig is, kan desnoods aangepast worden voor specifiekere restricties
+ */
 function isValidName(){
-    var input = $('#usernameInput');
-    return input.val().trim() != "";
+    var naam = $('#usernameInput').val();
+    return naam.trim() != "";
 }
 
+/**
+ * Zorgt dat de foto's op de startpagina ingesteld worden en loopen
+ */
 function setPictures(){
     var screenshots = [];
     for(var i = 1; i <= 4; i++){
@@ -65,7 +73,10 @@ function setPictureLoop(screenshots){
     }, 4000);
 }
 
-//speciale scroll/click-functionaliteit voor welkom-pagina, gebruikt van https://css-tricks.com/
+/**
+ * speciale scroll/click-functionaliteit voor welkom-pagina, gebruikt van https://css-tricks.com/
+ * maakt een animatie als er op een 'a' tag geklikt wordt waarbij de href gelijk is aan '#...', behalve '#' zelf
+ */
 function scroll() {
     $('a[href*="#"]:not([href="#"])').click(function(event) {
         if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
