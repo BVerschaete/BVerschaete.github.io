@@ -45,7 +45,7 @@ table {
 th {
     color:#D5DDE5;;
     background:#1b1e24;
-    border-bottom:4px solid #9ea7af;
+    border-bottom:1px solid #9ea7af;
     border-right: 1px solid #343a45;
     font-size:23px;
     font-weight: 100;
@@ -74,8 +74,6 @@ tr {
 }
 
 tr:hover td {
-    background:#4E5066;
-    color:#FFFFFF;
     border-top: 1px solid #22262e;
     border-bottom: 1px solid #22262e;
 }
@@ -90,10 +88,6 @@ tr:last-child {
 
 tr:nth-child(odd) td {
     background:#EBEBEB;
-}
-
-tr:nth-child(odd):hover td {
-    background:#4E5066;
 }
 
 tr:last-child td:first-child {
@@ -120,6 +114,18 @@ td:last-child {
 
 label{
     cursor: pointer;
+}
+
+tbody > tr:first-of-type > td{
+    background: gold;
+}
+
+tbody > tr:nth-of-type(2) > td{
+    background: #CCC2C2;
+}
+
+tbody > tr:nth-of-type(3) > td{
+    background: #cd7f32;
 }
 
 .levelSelectButton[type='radio'] {
