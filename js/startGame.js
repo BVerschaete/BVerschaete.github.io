@@ -25,7 +25,7 @@ var game = {
     paused: false,
     manualPaused: false,
     timePauseStart: undefined,
-    pushedScore: false,
+    gameOver: false,
     mouse: {
         canPlaceTowerHere: false,
         inCanvas: false,
@@ -65,7 +65,7 @@ function setup() {
         drawMap();
 
         //startknop
-        //de .one() zorgt ervoor dat deze functie maar 1x uitgevoerd wordt
+        //de .one() zorgt ervoor dat deze functie maar 1x uitgevoerd wordt en daarna de event listener wordt verwijderd
         //functie start de gameLoop en voegt eventlisteners aan het document toe om het spel te pauzeren en opnieuw te starten
         var $start = $('#dimmer').find('div');
         $start.one('click', function(){
@@ -73,18 +73,10 @@ function setup() {
             var $dimmer = $('#dimmer');
             $dimmer.hide();
             gameLoop();
-            document.addEventListener("visibilitychange", function() {
-                if (!game.manualPaused) {
-                    if (document.visibilityState == "hidden") {
-                        pauseGame();
-                    } else {
-                        resumeGame();
-                    }
-                }
-            });
+            document.addEventListener("visibilitychange", pauseResumeDocument);
         });
         
-        $('#pauseResume').click(pauseResume);
+        $('#pauseResume').click(pauseResumeButton);
     }
     else {
         window.location.href = "index.html";
@@ -95,7 +87,7 @@ function setup() {
 /**
  * zorgt ervoor dat de tekst en functie van de pauze/herstart knop omgewisselt wordt
  */
-function pauseResume(event){
+function pauseResumeButton(event){
     var $button = $(event.target);
     if(game.paused){
         $button.text("Pause Game");
@@ -108,42 +100,65 @@ function pauseResume(event){
     }
 }
 
+function pauseResumeDocument(){
+    if (!game.manualPaused) {
+        if (document.visibilityState == "hidden") {
+            pauseGame();
+        } else {
+            resumeGame();
+        }
+    }
+}
+
 /**
  * kijkt iedere loop of de levens op 0 staan, zoja, toon het dimmer scherm met een highscores en herstart knop
  */
 function checkGameOver() {
     if (game.lives <= 0) {
-        var $dimmer = $('#dimmer');
-        var $stop = $('#startStop');
-        var $gameOverTitle = $dimmer.find('span');
-        $gameOverTitle.css('display', 'inline-block');
-        $stop.css("background", "rgba(255, 0, 0, 1");
-
-        //als het een customLevel is, moeten highscores niet gepushed worden naar de database
-        //tekst aanpassen naargeling het moet gepushed worden ofnie
-        if(game.selectedLevel.customLevel) {
-            $stop.text("Go to highscores");
-            $stop.one('click', function(){
-                window.location.href = "highscores.html";
-            });
-        } else {
-            $stop.text("Submit score");
-            $stop.one('click', pushScore);
-        }
-
-        //speel opnieuw en verwijder event listeners
-        var $playAgain = $('#playAgain');
-        $playAgain.css('display', 'inline-block');
-        $playAgain.one('click', function(){
-            $stop.off();
-            restartGame();
-            $dimmer.hide();
-        });
-
-
-        $dimmer.show();
-        return true;
+        gameOver();
+        game.gameOver = true;
+    } else {
+        game.gameOver = false;
     }
+
+}
+
+function gameOver(){
+    document.removeEventListener("visibilitychange", pauseResumeDocument);
+    var $dimmer = $('#dimmer');
+    var $stop = $('#startStop');
+    var $gameOverTitle = $dimmer.find('span');
+    $gameOverTitle.css('display', 'inline-block');
+    $stop.css("background", "rgba(255, 0, 0, 1");
+
+    //als het een customLevel is, moeten highscores niet gepushed worden naar de database
+    //tekst aanpassen naargeling het moet gepushed worden of niet
+    if(game.selectedLevel.customLevel) {
+        $stop.text("Go to highscores");
+        $stop.one('click', function(event){
+            event.stopPropagation();
+            window.location.href = "highscores.html";
+        });
+    } else {
+        $stop.text("Submit score");
+        $stop.one('click', function(event){
+            event.stopPropagation();
+            pushScore();
+        });
+    }
+
+    //speel opnieuw en verwijder nodige event listeners
+    var $playAgain = $('#playAgain');
+    $playAgain.css('display', 'inline-block');
+    $playAgain.one('click', function(event){
+        event.stopPropagation();
+        $stop.off();
+        $dimmer.hide();
+        restartGame();
+    });
+
+
+    $dimmer.show();
 }
 
 /**
@@ -162,6 +177,7 @@ function restartGame(){
     game.attackersScore = 0;
     game.lives = 10;
     game.timeLastWaveSpawnEnds = Date.now();
+    game.gameOver = false;
     game.paused = false;
     game.timePauseStart = undefined;
 
@@ -169,7 +185,10 @@ function restartGame(){
     if($('#btnSpawnWave').prop('data-disabled')){
         toggleSpawn();
     }
+
     $("input:radio").prop("checked", false);
+
+    document.addEventListener("visibilitychange", pauseResumeDocument);
 
     gameLoop();
 }
@@ -189,14 +208,10 @@ function pushScore() {
         name: game.playerName,
         score: game.currentWave
     };
-    
-    //Extra veiligheid zodat highscre maximaal 1x gepushed wordt
-    if (!game.pushedScore) {
-        selectedHighscoreList.push(player, function () {
-            window.location.href = "highscores.html";
-        });
-        game.pushedScore = true;
-    }
+
+    selectedHighscoreList.push(player, function () {
+        //window.location.href = "highscores.html";
+    });
 }
 
 $(window).load(setup);

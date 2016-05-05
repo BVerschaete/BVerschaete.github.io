@@ -43,10 +43,11 @@ function updateLogic(){
 
 //loop van de volledige game
 function gameLoop() {
-    updateLogic();
-    renderingStep();
-    removeAttacks(); // als dit in de updateLogic gebeurt worden de laserattacks niet getoond want ze worden meteen verwijdert
-    if(!(checkGameOver() || game.paused)) {
+    if(!(game.gameOver || game.paused)) {
+        updateLogic();
+        renderingStep();
+        removeAttacks(); // als dit in de updateLogic gebeurt worden de laserattacks niet getoond want ze worden meteen verwijdert
+        checkGameOver();
         window.requestAnimationFrame(gameLoop);
     }
 }
