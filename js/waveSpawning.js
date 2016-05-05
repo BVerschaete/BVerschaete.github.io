@@ -99,7 +99,7 @@ function spawnNextMonster(){
         
         if(wave.attackers.length == 0){
             toggleSpawn();
-            game.currentWaveSpawning = null;
+            game.currentWaveSpawning = undefined;
         }
     }
 }

@@ -33,7 +33,7 @@ function updateLogic(){
         towers[i].attack();
     }
     
-    if((Date.now() - game.timeLastWaveSpawnEnds) > game.selectedLevel.spawnSpeed * 1000 && game.currentWaveSpawning == null) {
+    if((Date.now() - game.timeLastWaveSpawnEnds) > game.selectedLevel.spawnSpeed * 1000 && game.currentWaveSpawning == undefined) {
         spawnWave();
     }
     

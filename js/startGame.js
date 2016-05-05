@@ -14,26 +14,26 @@
 var game = {
     playerName: sessionStorage.playerName,
     selectedLevel: levels[sessionStorage.selectedLevel],
-    canvas: null,
-    context: null,
-    tileSize: 60,
-    money: 400,
-    currentWave: 0,
-    currentWaveSpawning: null,
-    lives: 10,
-    timeLastWaveSpawnEnds: null,
-    paused: false,
-    manualPaused: false,
-    timePauseStart: undefined,
-    gameOver: false,
     mouse: {
         canPlaceTowerHere: false,
         inCanvas: false,
         x: 0,
         y: 0
     },
-    currentTower: -1,
-    selectedTower: -1
+    tileSize: 60,
+    canvas: undefined,
+    context: undefined,
+    money: undefined,
+    currentWave: undefined,
+    currentWaveSpawning: undefined,
+    lives: undefined,
+    timeLastWaveSpawnEnds: undefined,
+    paused: undefined,
+    manualPaused: undefined,
+    timePauseStart: undefined,
+    gameOver: undefined,
+    currentTower: undefined,
+    selectedTower: undefined
 };
 
 /**
@@ -43,6 +43,7 @@ var game = {
 function setup() {
     //kijken of speler naam en level ingevoerd heeft
     if(game.playerName != null && game.selectedLevel) {
+        setupGameVariable();
         addCanvas();
         addTowerButtons();
         $("#btnSpawnWave").click(spawnWaveNow);
@@ -82,6 +83,20 @@ function setup() {
         window.location.href = "index.html";
         alert("Please select a name and a level before going to the game.html page");
     }
+}
+
+function setupGameVariable(){
+    game.currentWaveSpawning = undefined;
+    game.selectedTower = -1;
+    game.currentTower = -1;
+    game.money = 400;
+    game.currentWave = 0;
+    game.attackersScore = 0;
+    game.lives = 10;
+    game.timeLastWaveSpawnEnds = Date.now();
+    game.gameOver = false;
+    game.paused = false;
+    game.timePauseStart = undefined;
 }
 
 /**
@@ -169,17 +184,8 @@ function restartGame(){
     attackers=[];
     towers=[];
     attacks=[];
-    game.currentWaveSpawning = null;
-    game.selectedTower = -1;
-    game.currentTower = -1;
-    game.money = 400;
-    game.currentWave = 0;
-    game.attackersScore = 0;
-    game.lives = 10;
-    game.timeLastWaveSpawnEnds = Date.now();
-    game.gameOver = false;
-    game.paused = false;
-    game.timePauseStart = undefined;
+
+    setupGameVariable();
 
     //deselect alle knoppen en start de loop opnieuw
     if($('#btnSpawnWave').prop('data-disabled')){
