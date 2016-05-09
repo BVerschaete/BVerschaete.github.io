@@ -108,6 +108,7 @@ function setupGameVariable(){
  * zorgt ervoor dat de tekst en functie van de pauze/herstart knop omgewisselt wordt
  */
 function pauseResumeButton(event){
+    event.stopPropagation();
     var $button = $(event.target);
     if(game.paused){
         $button.text("Pause Game");
