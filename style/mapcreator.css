@@ -128,31 +128,66 @@
     margin-left: 35px;
 }
 
-.customLevelButton {
-    margin: 20px;
-    background: #3498db;
-    background-image: -webkit-linear-gradient(top, #3498db, #2b698f);
-    background-image: -moz-linear-gradient(top, #3498db, #2b698f);
-    background-image: -ms-linear-gradient(top, #3498db, #2b698f);
-    background-image: -o-linear-gradient(top, #3498db, #2b698f);
-    background-image: linear-gradient(to bottom, #3498db, #2b698f);
-    text-shadow: 1px 4px 7px #000000;
-    font-family: Arial;
-    color: #8f713c;
-    padding: 10px 20px 10px 20px;
-    border: solid black 2px;
-    text-decoration: none;
+.levelButton {
+    display: none;
 }
 
-.customLevelButton:hover, a.hovered {
-    background: #3cb0fd;
-    color: #8f713c;
-    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-    text-decoration: none;
+.levelButton + label {
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    z-index: 10;
+    margin: 20px 10px 10px 0;
+    width: 55px;
+    height: 55px;
+    line-height: 55px;
+    position: relative;
+    font-size: 44px;
+    letter-spacing: 0;
+    color: #0e0e0e;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+    font-weight: bold;
+    background-image: -moz-linear-gradient(#111111, #000000);
+    background-image: -webkit-linear-gradient(#111111, #000000);
+    background-image: linear-gradient(#111111, #000000);
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 3px rgba(255, 255, 255, 0.2);
+    -webkit-box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 3px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+.levelButton + label:after {
+    top: 2.4px;
+    left: -25.0px;
+    width: 50px;
+    height: 50.0px;
+    z-index: -1;
+    content: '';
+    cursor: pointer;
+    margin-left: 49.5%;
+    display: block;
+    position: absolute;
+    background-image: -moz-linear-gradient(#444444, #373738);
+    background-image: -webkit-linear-gradient(#444444, #373738);
+    background-image: linear-gradient(#444444, #373738);
+    -moz-box-shadow: inset 0 2px 1px -1px rgba(255, 255, 255, 0.2), inset 0 -2px 1px -1px rgba(0, 0, 0, 0.2), 0 12px 12px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: inset 0 2px 1px -1px rgba(255, 255, 255, 0.2), inset 0 -2px 1px -1px rgba(0, 0, 0, 0.2), 0 12px 12px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 2px 1px -1px rgba(255, 255, 255, 0.2), inset 0 -2px 1px -1px rgba(0, 0, 0, 0.2), 0 12px 12px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3);
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.levelButton + label:hover {
+    color: #AEAEAE;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+
+.levelButton + label:hover:after {
+    background-image: -moz-linear-gradient(#545454, #373738);
+    background-image: -webkit-linear-gradient(#545454, #373738);
+    background-image: linear-gradient(#545454, #373738);
 }
 
 canvas{

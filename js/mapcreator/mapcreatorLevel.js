@@ -112,11 +112,13 @@ function loadLevels(){
         var div = $('<div/>');
         div.addClass("customLevelButtonDiv");
 
-        var button = $('<a/>');
-        button.attr({class: 'btn customLevelButton', 'data-level': i});
-        button.text(i+1);
+        var button = $('<input>');
+        var label = $('<label>');
+        button.attr({class: 'levelButton', 'type': 'button', 'data-level': i, 'id': "level" + i});
+        label.text(i+1);
+        label.attr('for', "level" + i);
         button.click(loadLevel);
-        div.append(button);
+        div.append(button, label);
 
         var name = $('<p/>');
         name.text(customLevels[i].name);

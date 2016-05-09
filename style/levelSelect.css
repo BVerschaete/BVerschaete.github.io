@@ -7,14 +7,11 @@ label{
     cursor: pointer;
 }
 
-.levelSelectButton[type='radio'] {
+.levelSelectButton {
     display: none;
 }
 
-/* -------------------
-  radio Specific Style
--------------------- */
-.levelSelectButton[type='radio'] + label {
+.levelSelectButton + label {
     font-family: Arial, sans-serif;
     z-index: 10;
     margin: 20px 10px 10px 0;
@@ -38,7 +35,7 @@ label{
     box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 3px rgba(255, 255, 255, 0.2);
 }
 
-.levelSelectButton[type='radio'] + label:after {
+.levelSelectButton + label:after {
     top: 2.4px;
     left: -25.0px;
     width: 50px;
@@ -60,24 +57,18 @@ label{
     border-radius: 2px;
 }
 
-/* -------------------
-  Hover States
--------------------- */
-.levelSelectButton[type='radio'] + label:hover {
+.levelSelectButton + label:hover {
     color: #AEAEAE;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
 }
 
-.levelSelectButton[type='radio'] + label:hover:after {
+.levelSelectButton + label:hover:after {
     background-image: -moz-linear-gradient(#545454, #373738);
     background-image: -webkit-linear-gradient(#545454, #373738);
     background-image: linear-gradient(#545454, #373738);
 }
 
-/* -------------------
-  Active States
--------------------- */
-.levelSelectButton[type='radio']:checked + label {
+.levelSelectButton:checked + label {
     color: #00ccff;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3), 0 0px 30px rgba(0, 255, 255, 0.7);
     -moz-box-shadow: 0 -1px 0 rgba(0, 193, 255, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 20px rgba(0, 193, 255, 0.1), 0 0 30px rgba(0, 193, 255, 0.1);
@@ -85,7 +76,7 @@ label{
     box-shadow: 0 -1px 0 rgba(0, 193, 255, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 20px rgba(0, 193, 255, 0.1), 0 0 30px rgba(0, 193, 255, 0.1);
 }
 
-.levelSelectButton[type='radio']:checked + label:after {
+.levelSelectButton:checked + label:after {
     background-image: -moz-linear-gradient(#262627, #2d2d2e);
     background-image: -webkit-linear-gradient(#262627, #2d2d2e);
     background-image: linear-gradient(#262627, #2d2d2e);
