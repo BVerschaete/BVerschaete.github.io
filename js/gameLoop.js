@@ -37,6 +37,8 @@ function updateLogic(){
         towers[i].findUnitVector();
         towers[i].attack();
     }
+
+    moveAttacks();
     
     //spawnt een wave als de verstreken tijd tussen het eindigen van spawnen van de vorige wave groter is dan de wachttijd van het level
     //en als de vorige wave al gedaan is met spawnen (vooral voor latere levels belangrijk)
@@ -46,6 +48,9 @@ function updateLogic(){
     
     spawnNextMonster();
     checkDead();
+
+    //Kijkt of er attacks een attacker geraakt hebben
+    removeAttacks();
 }
 
 /**
@@ -55,7 +60,6 @@ function gameLoop() {
     if(!(game.gameOver || game.paused)) {
         updateLogic();
         renderingStep();
-        removeAttacks(); // als dit in de updateLogic gebeurt worden de laserattacks niet getoond want ze worden meteen verwijdert
         checkGameOver();
         window.requestAnimationFrame(gameLoop);
     }
