@@ -71,22 +71,35 @@ function toggleMouseInCanvas(){
 }
 
 /**
- * plaatst tower bij muisklik
+ * Wordt uitgevoerd wanneer er op het canvas geklikt wordt.
+ * Plaatst een tower of toont info van de geklikte tower
  */
-function placeTower(event) {
+function canvasClicked(event) {
     event.stopPropagation();
     var mouse = game.mouse;
 
     if (mouse.canPlaceTowerHere && game.currentTower != -1) {
-        addTower(mouse.x, mouse.y);
-        game.money -= towerTypes[game.currentTower].prototype.cost;
+        placeTower();
+    } else {
+        displayInfo();
     }
+}
+
+/**
+ * plaatst tower bij muisklik
+ */
+function placeTower() {
+    var mouse = game.mouse;
+    addTower(mouse.x, mouse.y);
+    console.log("placed");
+    game.money -= towerTypes[game.currentTower].prototype.cost;
 }
 
 /**
  * toont info als er tower geselecteert wordt, cleart de doorzichtige tower placement als je bezig bent met towers plaatsen d.m.v. currentTower = -1
  */
 function displayInfo() {
+    console.log("display info");
     event.stopPropagation();
     var mouse = game.mouse;
     var i = towerOnLocationSelect(mouse.x, mouse.y);

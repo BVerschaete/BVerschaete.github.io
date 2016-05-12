@@ -73,8 +73,7 @@ function addCanvas(){
     canvas.mouseover(toggleMouseInCanvas);
     canvas.mouseout(toggleMouseInCanvas);
     canvas.mousemove(getMousePosition);
-    canvas.click(displayInfo);
-    canvas.click(placeTower);
+    canvas.click(canvasClicked);
     
     
     //geen vragen bij stellen, het werkt, zorgt ervoor dat het canvas gecentreerd wordt
