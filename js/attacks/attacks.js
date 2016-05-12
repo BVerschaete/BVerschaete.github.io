@@ -11,10 +11,13 @@ function drawAttacks(){
     }
 }
 
-function moveAttacks(){
+function updateAttacks(){
     for(var i = 0; i < attacks.length; i++){
         attacks[i].update();
     }
+    
+    //Kijkt of er attacks een attacker geraakt hebben
+    removeAttacks();
 }
 
 //verwijdert een attack als hij botst met een attacker of attacker dood is

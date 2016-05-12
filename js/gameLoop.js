@@ -38,7 +38,7 @@ function updateLogic(){
         towers[i].attack();
     }
 
-    moveAttacks();
+    updateAttacks();
     
     //spawnt een wave als de verstreken tijd tussen het eindigen van spawnen van de vorige wave groter is dan de wachttijd van het level
     //en als de vorige wave al gedaan is met spawnen (vooral voor latere levels belangrijk)
@@ -48,9 +48,6 @@ function updateLogic(){
     
     spawnNextMonster();
     checkDead();
-
-    //Kijkt of er attacks een attacker geraakt hebben
-    removeAttacks();
 }
 
 /**
