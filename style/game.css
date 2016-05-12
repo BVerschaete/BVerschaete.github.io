@@ -122,15 +122,23 @@ legend > h2{
 #dimmer > div {
     margin-top: 15%;
     display: inline-block;
-    width: 200px;
+    width: 400px;
 }
 
-#dimmer span {
+#dimmer p {
     color: red;
     margin-bottom: 15%;
     font-size: 4em;
     display: none;
     text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
+#score {
+    display: block;
+    margin-bottom: 75px;
+    font-size: 2em;
+    text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+    visibility: hidden;
 }
 
 #btnSpawnWave:hover{

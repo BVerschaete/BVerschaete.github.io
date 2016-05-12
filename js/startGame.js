@@ -102,7 +102,7 @@ function setupGameVariable(){
     game.money = 400;
     game.currentWave = 0;
     game.attackersScore = 0;
-    game.lives = 10;
+    game.lives = 1;
     game.timeLastWaveSpawnEnds = Date.now();
     game.gameOver = false;
     game.paused = false;
@@ -160,9 +160,12 @@ function gameOver(){
     document.removeEventListener("visibilitychange", pauseResumeDocument);
     var $dimmer = $('#dimmer');
     var $stop = $('#startStop');
-    var $gameOverTitle = $dimmer.find('span');
+    var $gameOverTitle = $dimmer.find('p');
+    var $score = $('#score');
     $gameOverTitle.css('display', 'inline-block');
     $stop.css("background", "rgba(255, 0, 0, 1");
+    $score.css('visibility', 'visible');
+    $score.find('span').text(game.currentWave);
 
     //als het een customLevel is, moeten highscores niet gepushed worden naar de database
     //tekst aanpassen naargeling het moet gepushed worden of niet
