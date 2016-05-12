@@ -39,7 +39,6 @@ Bullet.prototype.move = function() {
     var dist = Math.sqrt(xDist * xDist + yDist * yDist);
     this.locX += this.speed * xDist / dist;
     this.locY += this.speed * yDist / dist;
-
 };
 
 /**

@@ -11,11 +11,19 @@ function drawAttacks(){
     }
 }
 
+function updateAttacks(){
+    for(var i = 0; i < attacks.length; i++){
+        attacks[i].update();
+    }
+    
+    //Kijkt of er attacks een attacker geraakt hebben
+    removeAttacks();
+}
+
 //verwijdert een attack als hij botst met een attacker of attacker dood is
 function removeAttacks(){
     for(var i = 0; i < attacks.length; i++)
     {
-        attacks[i].update();
         if (attacks[i].checkCollision() || attacks[i].target.health <= 0) {
             attacks.splice(i, 1);
             i--;

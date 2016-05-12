@@ -3,6 +3,7 @@
  */
 function LaserTower(x,y) {
     Tower.call(this,x,y);
+    this.changedTarget = true;
 }
 
 LaserTower.prototype = Object.create(Tower.prototype);
@@ -15,8 +16,9 @@ LaserTower.prototype.displayName = "Laser";
 LaserTower.prototype.attackType = LaserAttack;
 
 LaserTower.prototype.attack = function() {
-    if(this.target !== null) {
+    if(this.target !== null && this.changedTarget) {
         attacks.push(new this.attackType(this));
+        this.changedTarget = false;
     }
 };
 
@@ -37,6 +39,7 @@ LaserTower.prototype.findTarget = function(){
 
     if(this.target !== newTarget && newTarget !== null){
         this.target = newTarget;
+        this.changedTarget = true;
         this.oldNow = Date.now();
 
     }else if(newTarget === null){

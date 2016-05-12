@@ -46,23 +46,8 @@ function setup() {
         setupGameVariable();
         addCanvas();
         addTowerButtons();
-        $("#btnSpawnWave").click(spawnWaveNow);
 
-        var upgradeTower = $("#upgradeTower");
-        upgradeTower.click(upgradeSelectedTower);
-        
-        //toon upgrade info als erover gehoverd wordt, en verberg ze weer als de hover weg is
-        upgradeTower.hover(showUpgradeInfo, hideUpgradeInfo);
-
-        $("#sellTower").click(sellSelectedTower);
-
-        //als buiten het canvas geklikt wordt, worden alle selecties en info bladen verwijderd
-        $("body").click(function () {
-            game.currentTower = -1;
-            game.selectedTower = -1;
-            $("input:radio").prop("checked", false);
-            displayInfo();
-        });
+        addControlEventListeners();
 
         //Map moet al 1x getekend worden voor er op start wordt geklikt, zodat het spel mooi lijkt
         drawMap();
@@ -87,6 +72,26 @@ function setup() {
     }
 }
 
+function addControlEventListeners(){
+    $("#btnSpawnWave").click(spawnWaveNow);
+
+    var upgradeTower = $("#upgradeTower");
+    upgradeTower.click(upgradeSelectedTower);
+
+    //toon upgrade info als erover gehoverd wordt, en verberg ze weer als de hover weg is
+    upgradeTower.hover(showUpgradeInfo, hideUpgradeInfo);
+
+    $("#sellTower").click(sellSelectedTower);
+
+    //als buiten het canvas geklikt wordt, worden alle selecties en info bladen verwijderd
+    $("body").click(function () {
+        game.currentTower = -1;
+        game.selectedTower = -1;
+        $("input:radio").prop("checked", false);
+        displayInfo();
+    });
+}
+
 /**
  * Stelt basiswaarden in voor de game
  */
@@ -97,7 +102,7 @@ function setupGameVariable(){
     game.money = 400;
     game.currentWave = 0;
     game.attackersScore = 0;
-    game.lives = 10;
+    game.lives = 1;
     game.timeLastWaveSpawnEnds = Date.now();
     game.gameOver = false;
     game.paused = false;
@@ -155,9 +160,12 @@ function gameOver(){
     document.removeEventListener("visibilitychange", pauseResumeDocument);
     var $dimmer = $('#dimmer');
     var $stop = $('#startStop');
-    var $gameOverTitle = $dimmer.find('span');
+    var $gameOverTitle = $dimmer.find('p');
+    var $score = $('#score');
     $gameOverTitle.css('display', 'inline-block');
     $stop.css("background", "rgba(255, 0, 0, 1");
+    $score.css('visibility', 'visible');
+    $score.find('span').text(game.currentWave);
 
     //als het een customLevel is, moeten highscores niet gepushed worden naar de database
     //tekst aanpassen naargeling het moet gepushed worden of niet

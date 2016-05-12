@@ -24,7 +24,9 @@ LaserAttack.prototype.draw = function(){
 };
 
 LaserAttack.prototype.checkCollision = function(){
-    return true;
+    //doet hier functie als checkOutOfRange
+    return distanceToTarget(this.target, this.tower) > this.tower.range;
+
 };
 
 LaserAttack.prototype.update = function(){
@@ -38,3 +40,9 @@ LaserAttack.prototype.doDamage = function(){
     this.target.health -= (delta / 1000) * this.tower.damage;
     this.tower.oldNow = now;
 };
+
+function distanceToTarget(target, tower){
+    var xDist = target.locX - tower.locX;
+    var yDist = target.locY - tower.locY;
+    return Math.sqrt(xDist * xDist + yDist * yDist);
+}
