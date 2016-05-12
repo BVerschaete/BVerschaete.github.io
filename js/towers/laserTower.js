@@ -17,7 +17,6 @@ LaserTower.prototype.attackType = LaserAttack;
 
 LaserTower.prototype.attack = function() {
     if(this.target !== null && this.changedTarget) {
-        console.log('push');
         attacks.push(new this.attackType(this));
         this.changedTarget = false;
     }
