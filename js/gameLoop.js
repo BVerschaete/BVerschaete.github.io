@@ -81,6 +81,10 @@ function resumeGame(){
 
     for(var i = 0; i < attackers.length; i++){
         attackers[i].oldNow += timePaused;
+
+        for (var j = 0; j < attackers[i].conditions.length; j++) {
+            attackers[i].conditions[j].startTime += timePaused;
+        }
     }
 
     if(game.currentWaveSpawning != null){

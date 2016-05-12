@@ -7,7 +7,7 @@
  */
 function FreezeCondition(attacker) {
     this.startTime = Date.now();
-    this.duration = 2000; // 2 seconde
+    this.duration = 2000; // in milliseconden
     this.target = attacker;
     this.applyCondition();
 }
