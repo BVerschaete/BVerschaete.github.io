@@ -70,6 +70,10 @@ function gameLoop() {
 function pauseGame(){
     game.paused = true;
     game.timePauseStart = Date.now();
+    $('#btnSpawnWave').off();
+    $("#upgradeTower").off();
+    $("#sellTower").off();
+    $("body").off();
 }
 
 /**
@@ -91,6 +95,7 @@ function resumeGame(){
     for(i = 0; i < towers.length; i++){
         towers[i].oldNow += timePaused;
     }
-    
+
+    addControlEventListeners();
     gameLoop();
 }

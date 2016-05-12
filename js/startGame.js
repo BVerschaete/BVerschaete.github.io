@@ -46,23 +46,8 @@ function setup() {
         setupGameVariable();
         addCanvas();
         addTowerButtons();
-        $("#btnSpawnWave").click(spawnWaveNow);
 
-        var upgradeTower = $("#upgradeTower");
-        upgradeTower.click(upgradeSelectedTower);
-        
-        //toon upgrade info als erover gehoverd wordt, en verberg ze weer als de hover weg is
-        upgradeTower.hover(showUpgradeInfo, hideUpgradeInfo);
-
-        $("#sellTower").click(sellSelectedTower);
-
-        //als buiten het canvas geklikt wordt, worden alle selecties en info bladen verwijderd
-        $("body").click(function () {
-            game.currentTower = -1;
-            game.selectedTower = -1;
-            $("input:radio").prop("checked", false);
-            displayInfo();
-        });
+        addControlEventListeners();
 
         //Map moet al 1x getekend worden voor er op start wordt geklikt, zodat het spel mooi lijkt
         drawMap();
@@ -85,6 +70,26 @@ function setup() {
         window.location.href = "index.html";
         alert("Please select a name and a level before going to the game.html page");
     }
+}
+
+function addControlEventListeners(){
+    $("#btnSpawnWave").click(spawnWaveNow);
+
+    var upgradeTower = $("#upgradeTower");
+    upgradeTower.click(upgradeSelectedTower);
+
+    //toon upgrade info als erover gehoverd wordt, en verberg ze weer als de hover weg is
+    upgradeTower.hover(showUpgradeInfo, hideUpgradeInfo);
+
+    $("#sellTower").click(sellSelectedTower);
+
+    //als buiten het canvas geklikt wordt, worden alle selecties en info bladen verwijderd
+    $("body").click(function () {
+        game.currentTower = -1;
+        game.selectedTower = -1;
+        $("input:radio").prop("checked", false);
+        displayInfo();
+    });
 }
 
 /**
