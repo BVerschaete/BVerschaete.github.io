@@ -91,7 +91,6 @@ function canvasClicked(event) {
 function placeTower() {
     var mouse = game.mouse;
     addTower(mouse.x, mouse.y);
-    console.log("placed");
     game.money -= towerTypes[game.currentTower].prototype.cost;
 }
 
@@ -99,7 +98,6 @@ function placeTower() {
  * toont info als er tower geselecteert wordt, cleart de doorzichtige tower placement als je bezig bent met towers plaatsen d.m.v. currentTower = -1
  */
 function displayInfo() {
-    console.log("display info");
     event.stopPropagation();
     var mouse = game.mouse;
     var i = towerOnLocationSelect(mouse.x, mouse.y);
