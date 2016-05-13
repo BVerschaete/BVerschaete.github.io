@@ -102,7 +102,7 @@ function setupGameVariable(){
     game.money = 400;
     game.currentWave = 0;
     game.attackersScore = 0;
-    game.lives = 1;
+    game.lives = 10;
     game.timeLastWaveSpawnEnds = Date.now();
     game.gameOver = false;
     game.paused = false;
