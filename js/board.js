@@ -96,7 +96,7 @@ function addTowerButtons(){
         var buttonid = "towerButton" + i;
         var $button = $("<input>", {id: buttonid, type: "radio", class: "towerbutton", "data-type": i, name: "towerButton"});
         var $label = $("<label>" , {for: buttonid});
-        $label.text(towerTypes[i].prototype.displayName + " (" + towerTypes[i].prototype.cost + " coins)");
+        $label.text(towerTypes[i].prototype.displayName);
         $button.click(selectTowerToBuild);
         $("#controls").append($button, $label);
     }

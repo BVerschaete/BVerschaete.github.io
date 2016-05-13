@@ -130,12 +130,19 @@ function pauseResumeButton(event){
  * zorgt ervoor dat het spel gepauzeerd wordt bij het verwisselen van tabblad
  */
 function pauseResumeDocument(){
-    if (!game.manualPaused) {
+    /* dit werkt maar tablad wisselen zorgt voor lag en snellere bullets...
+
+     if (!game.manualPaused) {
         if (document.visibilityState == "hidden") {
             pauseGame();
+     $("#pauseResume").click();
         } else {
             resumeGame();
         }
+     }*/
+
+    if (!game.manualPaused && document.visibilityState == "hidden") {
+        $("#pauseResume").click();
     }
 }
 
