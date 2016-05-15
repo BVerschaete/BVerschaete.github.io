@@ -166,7 +166,7 @@ function displayCurrentTowerInfo(){
     $("#towerInfo").css('visibility', 'visible');
     $("#towerImg").attr("src", "img/towers/" + tower.image);
     $("#towerRange").text(Math.floor(tower.range));
-    $("#upgradeCost").text(tower.upgradeCost + " coins");
+    $("#upgradeCost").text(tower.cost + " coins");
     $('#sellPrice').text(Math.floor(tower.value) + " coins");
 
     $("#towerLevel").parent().css('display', 'none');

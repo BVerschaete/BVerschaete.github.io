@@ -12,8 +12,8 @@
  * selectedTower: de geselecteerde tower op het veld
  */
 var game = {
-    playerName: sessionStorage.playerName,
-    selectedLevel: levels[sessionStorage.selectedLevel],
+    playerName: sessionStorage.getItem('playerName'),
+    selectedLevel: levels[sessionStorage.getItem('selectedLevel')],
     mouse: {
         canPlaceTowerHere: false,
         inCanvas: false,
@@ -229,7 +229,7 @@ function pushScore() {
     var myFirebaseRef = new Firebase("https://popping-fire-3131.firebaseio.com/");
     var playerTable = myFirebaseRef.child('Highscores');
 
-    var level = playerTable.child(levels.indexOf(game.selectedLevel));
+    var level = playerTable.child(sessionStorage.getItem('selectedLevel'));
     var selectedHighscoreList = level.child('Players');
 
     var player = {
@@ -238,6 +238,7 @@ function pushScore() {
     };
 
     selectedHighscoreList.push(player, function () {
+        sessionStorage.setItem('playedLevel', sessionStorage.getItem('selectedLevel'));
         window.location.href = "highscores.html";
     });
 }
