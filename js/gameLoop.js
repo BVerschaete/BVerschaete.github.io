@@ -34,7 +34,6 @@ function updateLogic(){
 
     for(i = 0; i < towers.length; i++) {
         towers[i].findTarget();
-        towers[i].findUnitVector();
         towers[i].attack();
     }
 

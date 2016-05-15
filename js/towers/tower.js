@@ -55,19 +55,6 @@ Tower.prototype.findTarget = function(){
 };
 
 /**
- * berekent de +x en +y die een bullet-object moet optellen bij zijn huidige waarden om richting de aanvaller te gaan.
- */
-Tower.prototype.findUnitVector = function() {
-    //Als er geen target is moet vector niet berekent worden
-    if (!this.target) {
-        return false;
-    }
-    
-    this.xFire = this.locX;
-    this.yFire = this.locY;
-};
-
-/**
  * valt het huidig target aan met een bullet
  */
 Tower.prototype.attack = function(){
