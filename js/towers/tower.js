@@ -153,7 +153,8 @@ function displayCurrentTowerInfo(){
     $("#towerInfo").css('visibility', 'visible');
     $("#towerImg").attr("src", "img/towers/" + tower.image);
     $("#towerRange").text(Math.floor(tower.range));
-    $("#upgradeCost").text(tower.cost + " coins");
+    $('#buyPrice').text(tower.cost + " coins").parent().css('display', 'inline-block'); // zet de tekst en maakt het zichtbaar
+    $("#upgradeCost").text(tower.upgradeCost + " coins");
     $('#sellPrice').text(Math.floor(tower.value) + " coins");
 
     $("#towerLevel").parent().css('display', 'none');
@@ -242,6 +243,7 @@ function displaySelectedTowerInfo(){
         $("#sellPrice").parent().css('display', 'block');
         $("#upgradeTower").css('display', 'inline-block');
         $("#sellTower").css('display', 'inline-block');
+        $('#buyPrice').parent().css('display', 'none');
 
         $("#towerImg").attr("src", "img/towers/" + tower.image);
         $towerLevel.text(tower.level);
