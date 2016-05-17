@@ -75,7 +75,7 @@ function createWave(aantalMonsters, typeMonster, speedFactor, maxHealthFactor){
         wave.attackers.push(typeMonster);
     }
     game.currentWave += 1;
-    wave.waitTime = 1800 * (attackerTypes[typeMonster].prototype.speed * speedFactor);
+    wave.waitTime = 1800 * game.tileSize / (attackerTypes[typeMonster].prototype.speed * speedFactor);
     wave.speedFactor = speedFactor;
     wave.maxHealthFactor = maxHealthFactor;
     wave.timeLastSpawned = Date.now();
