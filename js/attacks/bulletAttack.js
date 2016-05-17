@@ -8,8 +8,8 @@
  * sneller gaat dan de standaard snelheid
  */
 function Bullet(tower) {
-    this.locX = tower.xFire;
-    this.locY = tower.yFire;
+    this.locX = tower.locX;
+    this.locY = tower.locY;
     this.target = tower.target;
     this.damage = tower.damage;
     this.speed = 0;
