@@ -27,7 +27,7 @@ function setup() {
     //knoppen voor custom levels
     if(customLevels.length != 0) {
         for (var j = 0; j < customLevels.length; j++) {
-            naam = "customLevel" + i;
+            naam = "customLevel" + j;
             button = $('<input>');
             label = $('<label>');
             button.attr({id: naam, type: "radio", class: 'levelSelectButton', 'data-level': standardLevels.length + j, name: "level"});

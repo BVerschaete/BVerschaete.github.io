@@ -4,6 +4,13 @@
 
 /**
  * Wave object
+ * Uitleg variabelen:
+ * attackers: een array die attacker objecten bevat, deze worden uiteindelijk gepusht naar de globale attacker array
+ * spawnSpeed: de wachttijd tussen elke wave
+ * speedFactor: wordt gebruikt om de attackers sneller te maken naarmate je een hogere wave bereikt
+ * maxHealthFactor: laat de attackers meer maximum health hebben naarmate je een hogere wave bereikt
+ * timeLastSpawned: het tijdstip waarop de laatste nieuwe attacker gespawnd werd
+ * waitTime: de wachttijd tussen elke attacker spawn
  */
 function Wave(){
     this.attackers = [];
