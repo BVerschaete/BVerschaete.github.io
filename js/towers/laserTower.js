@@ -37,12 +37,26 @@ LaserTower.prototype.findTarget = function(){
         }
     }
 
-    if(this.target !== newTarget && newTarget !== null){
-        this.target = newTarget;
-        this.changedTarget = true;
-        this.oldNow = Date.now();
+    if(this.target !== null && this.target.health > 0){
+        if(distanceToTarget(this.target, this) > this.range && newTarget !== null){
+            this.setTarget(newTarget);
+        }
+        else if(newTarget === null){
+            this.target = null;
+        }
+    }else{
+        if(newTarget !== null){
+            this.setTarget(newTarget);
 
-    }else if(newTarget === null){
-        this.target = null;
+        }
     }
+};
+
+/**
+ * Stelt een target in voor de tower
+ */
+LaserTower.prototype.setTarget = function(target){
+    this.target = target;
+    this.changedTarget = true;
+    this.oldNow = Date.now();
 };
