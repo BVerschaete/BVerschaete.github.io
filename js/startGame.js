@@ -73,7 +73,11 @@ function setup() {
 }
 
 function addControlEventListeners(){
-    $("#btnSpawnWave").click(spawnWaveNow);
+    //mag enkel toegevoegd worden wanneer de button enabled is
+    var $btnSpawnWave = $('#btnSpawnWave');
+    if(!($btnSpawnWave.prop('data-disabled'))){
+        $btnSpawnWave.click(spawnWaveNow);
+    }
 
     var upgradeTower = $("#upgradeTower");
     upgradeTower.click(upgradeSelectedTower);

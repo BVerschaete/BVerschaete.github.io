@@ -93,7 +93,7 @@ function spawnWaveNow(event){
 function spawnWave(){
     game.currentWaveSpawning = chooseWave();
     toggleSpawn();
-    
+
     $('#startWave')[0].play();
 }
 

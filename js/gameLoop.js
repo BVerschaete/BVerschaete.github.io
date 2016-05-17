@@ -38,7 +38,7 @@ function updateLogic(){
     }
 
     updateAttacks();
-    
+
     //spawnt een wave als de verstreken tijd tussen het eindigen van spawnen van de vorige wave groter is dan de wachttijd van het level
     //en als de vorige wave al gedaan is met spawnen (vooral voor latere levels belangrijk)
     if((Date.now() - game.timeLastWaveSpawnEnds) > game.selectedLevel.spawnSpeed * 1000 && game.currentWaveSpawning == undefined) {
