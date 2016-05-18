@@ -72,9 +72,7 @@ function fillTable(){
     players.sort(comparator);
 
     if (players.length > 0) {
-        var aantal = players.length > 10 ? 10 : players.length;
-
-        for (var i = 0; i < aantal; i++) {
+        for (var i = 0; i < players.length; i++) {
             var $player = $('<tr>');
             var $playerName = $('<td>');
             var $playerScore = $('<td>');
@@ -88,37 +86,6 @@ function fillTable(){
             $player.append($playerName);
             $player.append($playerScore);
             $('tbody').append($player);
-        }
-
-        //Als je niet bij de top 10 zit, toont dit in de laatste rij op welke plaats je bent geeindigd.
-        if(sessionStorage.getItem('playedLevel') != null){
-            //sessionStorage.removeItem('playedLevel');
-            var playerName = sessionStorage.getItem('playerName');
-            var index = 0;
-            for(i = 0; i < players.length; i++){
-                if(players[i]["name"] == playerName){
-                    index = i;
-                }
-            }
-
-            if(index > 9){
-                var $myPlayer = $('<tr>');
-                var $myPlayerName = $('<td>');
-                var $myPlayerScore = $('<td>');
-                var $myPlayerPlace = $('<td>');
-
-                $myPlayerPlace.text(index + 1);
-                $myPlayerName.text(players[index]["name"]);
-                $myPlayerScore.text(players[index]["score"]);
-
-                $myPlayer.append($myPlayerPlace);
-                $myPlayer.append($myPlayerName);
-                $myPlayer.append($myPlayerScore);
-
-                $myPlayer.children().css('font-weight', 'bold');
-
-                $('tbody').append($myPlayer);
-            }
         }
 
     } else {
