@@ -22,13 +22,17 @@ function setup() {
     });
 
     start.click(function () {
-        sessionStorage.playerName = input.val();
+        if(isValidName()) {
+            sessionStorage.playerName = input.val();
+        }
     });
 
     input.keyup(function (event) {
         if (event.keyCode == 13) {
-            sessionStorage.playerName = input.val();
-            window.location.href = "levelselect.html";
+            if(isValidName()) {
+                sessionStorage.playerName = input.val();
+                window.location.href = "levelselect.html";
+            }
         }
     });
 
